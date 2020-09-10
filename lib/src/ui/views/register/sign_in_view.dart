@@ -2,6 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/src/blocs/blocs.dart';
+import 'package:schedule/src/common/constants/registration_constaint.dart';
+import 'package:schedule/src/common/themes/theme_color.dart';
+import 'package:schedule/src/common/widgets/base_button.dart';
+import 'package:schedule/src/common/widgets/base_text_form.dart';
 import 'package:schedule/src/utils/multi_screen/flutter_screen_util.dart';
 import 'package:schedule/src/utils/utils.dart';
 import 'package:toast/toast.dart';
@@ -82,50 +86,10 @@ class _SignInViewState extends State<SignInView> {
                               SizedBox(
                                 height: ScUtil.getInstance().setHeight(30),
                               ),
-                              TextFormField(
+                              BaseTextForm(
                                 controller: _accountController,
-                                style: TextStyle(
-                                    color: Colors.blue[800],
-                                    fontSize: ScUtil.getInstance().setSp(32),
-                                    fontFamily: "MR"),
-                                cursorColor: Colors.blue[800],
-                                decoration: InputDecoration(
-                                    errorStyle: TextStyle(
-                                        fontSize:
-                                            ScUtil.getInstance().setSp(24),
-                                        color: Colors.redAccent,
-                                        fontFamily: "MR"),
-                                    errorMaxLines: 2,
-                                    labelText: 'KMA Account',
-                                    labelStyle: TextStyle(
-                                        fontSize:
-                                            ScUtil.getInstance().setSp(32),
-                                        color: Colors.blue[800],
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: "MR"),
-                                    prefixIcon: Icon(Icons.account_circle,
-                                        color: Colors.blue[800]),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.blue[800],
-                                            width: ScUtil.getInstance()
-                                                .setWidth(3)),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(8.0))),
-                                    errorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.redAccent,
-                                            width: ScUtil.getInstance()
-                                                .setWidth(3)),
-                                        borderRadius:
-                                            BorderRadius.all(Radius.circular(8.0))),
-                                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue[800], width: ScUtil.getInstance().setWidth(3)), borderRadius: BorderRadius.all(Radius.circular(8.0)))),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return "Trường này không được bỏ trống";
-                                  }
-                                  return null;
-                                },
+                                labelText: RegistrationConstant.account,
+                                iconData: Icons.account_circle,
                               ),
                               SizedBox(
                                 height: ScUtil.getInstance().setHeight(20),
@@ -133,52 +97,11 @@ class _SignInViewState extends State<SignInView> {
                               Stack(
                                 alignment: AlignmentDirectional.centerEnd,
                                 children: <Widget>[
-                                  TextFormField(
+                                  BaseTextForm(
                                     controller: _passwordController,
-                                    style: TextStyle(
-                                        color: Colors.blue[800],
-                                        fontSize:
-                                            ScUtil.getInstance().setSp(32),
-                                        fontFamily: "MR"),
-                                    cursorColor: Colors.blue[800],
                                     obscureText: !isShow,
-                                    decoration: InputDecoration(
-                                        errorStyle: TextStyle(
-                                            fontSize:
-                                                ScUtil.getInstance().setSp(24),
-                                            color: Colors.redAccent,
-                                            fontFamily: "MR"),
-                                        errorMaxLines: 2,
-                                        labelText: 'Password',
-                                        labelStyle: TextStyle(
-                                            fontSize:
-                                                ScUtil.getInstance().setSp(32),
-                                            color: Colors.blue[800],
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: "MR"),
-                                        prefixIcon: Icon(Icons.lock,
-                                            color: Colors.blue[800]),
-                                        enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.blue[800],
-                                                width: ScUtil.getInstance()
-                                                    .setWidth(3)),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(8.0))),
-                                        errorBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.redAccent,
-                                                width: ScUtil.getInstance()
-                                                    .setWidth(3)),
-                                            borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue[800], width: ScUtil.getInstance().setWidth(3)), borderRadius: BorderRadius.all(Radius.circular(8.0)))),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return "Trường này không được bỏ trống";
-                                      }
-                                      return null;
-                                    },
-//                                  onChanged: (value) => model.password = value,
+                                    labelText: RegistrationConstant.password,
+                                    iconData: Icons.lock,
                                   ),
                                   IconButton(
                                     icon: Icon(
@@ -199,23 +122,10 @@ class _SignInViewState extends State<SignInView> {
                               ),
                               state is RegisterLoadingState
                                   ? _loadingUI(state)
-                                  : RaisedButton(
-                                      color: Colors.blue[800],
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5))),
-                                      textColor: Colors.white,
-                                      onPressed: () =>
-                                          _setOnClickLoginButton(state),
-                                      child: Text(
-                                        "LOGIN",
-                                        style: TextStyle(
-                                            fontSize:
-                                                ScUtil.getInstance().setSp(34),
-                                            fontFamily: 'MR',
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    )
+                                  : BaseButton(onPressed: () =>
+                                  _setOnClickLoginButton(state),
+                              title: RegistrationConstant.loginBtn,
+                              color: ThemeColor.primaryColor)
                             ],
                           ),
                         ),
@@ -248,7 +158,9 @@ class _SignInViewState extends State<SignInView> {
 
   _loadingUI(RegisterState state) {
     return Container(
-      child: LoadingWidget(color: Colors.blue,),
+      child: LoadingWidget(
+        color: Colors.blue,
+      ),
     );
   }
 
