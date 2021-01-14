@@ -57,6 +57,8 @@ dependencies:
 
   crypto: ^2.1.5
 
+  get_it: ^5.0.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
