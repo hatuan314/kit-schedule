@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:schedule/route.dart';
+import 'file:///D:/Flutter/kit-schedule/lib/presentation/route.dart';
 import 'package:schedule/src/common/themes/theme_data.dart';
 
 class MyApp extends StatelessWidget {

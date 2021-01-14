@@ -5,7 +5,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:schedule/src/blocs/blocs.dart';
 import 'package:schedule/src/service/database/database.dart';
 
-import 'app.dart';
+import 'presentation/app.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
