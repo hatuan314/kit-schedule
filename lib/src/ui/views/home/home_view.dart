@@ -13,7 +13,7 @@ class HomeView extends StatelessWidget {
     // TODO: implement build
     return BlocListener<HomeBloc, HomeState>(
       listener: (context, state) {
-        if (state is HomeOnChangeTabState) if (state.selectIndex == 3)
+        if (state is DrawerChangeState) if (state.selectIndex == 3)
           _warningSignOutDialog(context);
         if (state is SignOutFailureState) _errorSignOutDialog(context);
       },
@@ -94,9 +94,9 @@ class HomeView extends StatelessWidget {
                       ),
                     ],
                     selectedIndex:
-                        state is HomeOnChangeTabState ? state.selectIndex : 0,
+                        state is Drawer ? state.selectIndex : 0,
                     onTabChange: (index) => BlocProvider.of<HomeBloc>(context)
-                      ..add(OnTabChangeEvent(index))),
+                      ..add(OnTabDrawerEvent(index))),
               ),
             ),
           ),
@@ -174,7 +174,7 @@ class HomeView extends StatelessWidget {
   }
 
   _btnCancelDialogOnPress(BuildContext context) {
-    BlocProvider.of<HomeBloc>(context)..add(OnTabChangeEvent(0));
+    BlocProvider.of<HomeBloc>(context)..add(OnTabDrawerEvent(0));
     Navigator.of(context).pop();
   }
 

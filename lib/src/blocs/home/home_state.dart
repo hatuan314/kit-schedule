@@ -16,8 +16,8 @@ class HomeInitialState extends HomeState {
   List<Object> get props => null;
 }
 
-class HomeOnChangeTabState extends HomeState {
-  HomeOnChangeTabState(int selectIndex) : super(selectIndex);
+class DrawerChangeState extends HomeState {
+  DrawerChangeState(int selectIndex) : super(selectIndex);
 
   List<Object> get props => [this.selectIndex];
 }

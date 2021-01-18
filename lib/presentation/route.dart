@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:schedule/common/router_list.dart';
+import 'package:schedule/presentation/screen/home_screen/home_screen.dart';
+import 'package:schedule/presentation/screen/todo_screen/todo_screen.dart';
 import 'package:schedule/src/blocs/blocs.dart';
 import 'package:schedule/src/blocs/search/search_bloc.dart';
 import 'package:schedule/src/models/model.dart';
@@ -15,9 +18,15 @@ RouteFactory router() {
 
     if (currentRoot == 1) {
       currentRoot = 2;
-      return CupertinoPageRoute(builder: (context) {
+      /*return CupertinoPageRoute(builder: (context) {
         ScUtil.init(context, pWidth: 750, pHeight: 640);
         return SplashView();
+      });*/
+      CupertinoPageRoute(builder: (context) {
+        return BlocProvider(
+          create: (context) => HomeBloc(),
+          child: HomeScreen(),
+        );
       });
     }
 
@@ -33,7 +42,18 @@ RouteFactory router() {
             child: SignInView(),
           );
         });
-      case '/home':
+      case RouterList.home:
+        return CupertinoPageRoute(builder: (context) {
+          return BlocProvider(
+            create: (context) => HomeBloc(),
+            child: HomeScreen(),
+          );
+        });
+      case RouterList.todo:
+        return CupertinoPageRoute(builder: (context) {
+          return TodoScreen();
+        });
+        /*case '/home':
         return CupertinoPageRoute(builder: (context) {
           ScUtil.init(context, pWidth: 750, pHeight: 640);
           return MultiBlocProvider(providers: [
@@ -54,7 +74,7 @@ RouteFactory router() {
             ),
           ], child: HomeView());
 //            child: SchoolSchedulePageView());
-        });
+        });*/
       case '/todo-detail':
         PersonalSchedule schedule =
             PersonalSchedule.fromJson(settings.arguments);

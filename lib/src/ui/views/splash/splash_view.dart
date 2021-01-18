@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:schedule/common/router_list.dart';
 import 'package:schedule/src/service/services.dart';
 import 'package:schedule/src/ui/views/splash/box.dart';
 import 'package:schedule/src/utils/multi_screen/flutter_screen_util.dart';
@@ -77,7 +78,7 @@ class _SplashViewState extends State<SplashView> {
     try {
       var flag = await _shareService.getIsSaveData();
       if (flag == true)
-        Navigator.pushReplacementNamed(context, '/home');
+        Navigator.pushReplacementNamed(context, RouterList.home);
       else
         Navigator.pushReplacementNamed(context, '/sign-in');
     } catch (e) {
