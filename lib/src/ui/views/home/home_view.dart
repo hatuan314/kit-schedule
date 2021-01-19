@@ -2,6 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:schedule/presentation/screen/home_screen/calendar/calendar_view.dart';
 import 'package:schedule/src/blocs/home/home_bloc.dart';
 import 'package:schedule/src/utils/multi_screen/flutter_screen_util.dart';
 
@@ -13,18 +14,18 @@ class HomeView extends StatelessWidget {
     // TODO: implement build
     return BlocListener<HomeBloc, HomeState>(
       listener: (context, state) {
-        if (state is DrawerChangeState) if (state.selectIndex == 3)
+        if (state is TabChangeState) if (state.selectIndex == 3)
           _warningSignOutDialog(context);
         if (state is SignOutFailureState) _errorSignOutDialog(context);
       },
       child: BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
-        Widget _currentTab = CalendarTabView();
+        Widget _currentTab = CalendarView();
         if (state.selectIndex == 2)
           _currentTab = CreateTodoTabView();
         else if (state.selectIndex == 1)
           _currentTab = SearchView();
         else
-          _currentTab = CalendarTabView();
+          _currentTab = CalendarView();
         return Scaffold(
           backgroundColor: Color(0xffFCFAF3),
           body: _currentTab,

@@ -54,6 +54,7 @@ dependencies:
   flutter_rounded_date_picker: ^1.0.4
   # Dialog
   awesome_dialog: ^0.1.3
+  get_it: ^5.0.4
 
   crypto: ^2.1.5
   flutter_screenutil: ^4.0.2+5

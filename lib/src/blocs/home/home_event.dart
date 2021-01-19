@@ -17,5 +17,3 @@ class OnTabDrawerEvent extends HomeEvent {
 }
 
 class SignOutOnPressEvent extends HomeEvent {}
-
-class AddTodoEvent extends HomeEvent {}

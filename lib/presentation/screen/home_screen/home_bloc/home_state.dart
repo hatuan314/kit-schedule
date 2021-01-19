@@ -1,25 +1,46 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:schedule/domain/entities/animation_entities.dart';
 abstract class HomeState extends Equatable{
-  final int selectIndex;
 
-  HomeState(this.selectIndex);
 }
 
 class HomeInitialState extends HomeState {
-  HomeInitialState(int selectIndex) : super(selectIndex);
+  final AnimationEntity animationEntity;
 
-  List<Object> get props => null;
+  HomeInitialState({this.animationEntity});
+  List<Object> get props => [animationEntity];
 }
 
 class HomeOnChangeTabState extends HomeState {
-  HomeOnChangeTabState(int selectIndex) : super(selectIndex);
-
-  List<Object> get props => [this.selectIndex];
+  @override
+  // TODO: implement props
+  List<Object> get props => [];
+}
+class AddTodoState extends HomeState {
+  @override
+  // TODO: implement props
+  List<Object> get props => [];
+}
+class HomeLoadingState extends HomeState {
+  @override
+  // TODO: implement props
+  List<Object> get props => [];
 }
 
+class SwitchDrawerState extends HomeState {
+  @override
+  // TODO: implement props
+  List<Object> get props => [];
+}
+class OpenDrawerState extends HomeState {
+  @override
+  // TODO: implement props
+  List<Object> get props => [];
+}
+
+
 class SignOutSuccessState extends HomeState {
-  SignOutSuccessState(int selectIndex) : super(selectIndex);
 
   @override
   // TODO: implement props
@@ -27,7 +48,6 @@ class SignOutSuccessState extends HomeState {
 }
 
 class SignOutFailureState extends HomeState {
-  SignOutFailureState(int selectIndex) : super(selectIndex);
 
   @override
   // TODO: implement props

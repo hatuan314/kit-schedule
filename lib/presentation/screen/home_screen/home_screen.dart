@@ -1,9 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/common/assets_constance.dart';
 import 'package:schedule/common/router_list.dart';
 import 'package:schedule/common/themes/theme_color.dart';
 import 'package:schedule/common/themes/theme_text.dart';
+import 'package:schedule/presentation/screen/home_screen/home_bloc/home_bloc.dart';
+import 'package:schedule/presentation/screen/home_screen/home_bloc/home_event.dart';
+import 'package:schedule/presentation/screen/home_screen/home_bloc/home_state.dart';
+import 'package:schedule/presentation/screen/home_screen/home_screen_constance.dart';
 import 'package:schedule/presentation/screen/home_screen/widgets/AccountWidget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,20 +16,24 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
-    with TickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   bool isCollapsed = true;
   double screenWidth, screenHeight;
-  final Duration duration = const Duration(milliseconds: 500);
   AnimationController _controller;
   AppBar appBar = AppBar();
   double borderRadius = 0.0;
-
+  int currentScreen=0;
+  final Duration duration =
+      const Duration(milliseconds: HomeScreenConstance.animationDuration);
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: duration);
+    _controller = AnimationController(
+        vsync: this,
+        duration: const Duration(
+            milliseconds: HomeScreenConstance.animationDuration));
+    BlocProvider.of<HomeBloc>(context).add(HomeInitEvent(animationController: _controller));
   }
 
   @override
@@ -39,15 +48,34 @@ class _HomeScreenState extends State<HomeScreen>
     Size size = MediaQuery.of(context).size;
     screenHeight = size.height;
     screenWidth = size.width;
+    return BlocConsumer<HomeBloc, HomeState>(
+      listener: (BuildContext context, state) {
+        if(state is AddTodoState){
+            Navigator.pushNamed(context, RouterList.todo);
+        } else if(state is SwitchDrawerState){
+          if (isCollapsed) {
+            _controller.forward();
+            borderRadius = 16.0;
+          }else{
+             _controller.reverse();
+             borderRadius = 0.0;
+             isCollapsed = false;
+           }
+          isCollapsed = !isCollapsed;
+        }
+      },
+      builder: (BuildContext context, state) {
+        if (state is HomeInitialState) return body();
+        return Container();
+      },
+    );
+  }
+
+  Widget body() {
     return WillPopScope(
       onWillPop: () async {
         if (!isCollapsed) {
-          setState(() {
-
-            _controller.reverse();
-            borderRadius = 0.0;
-            isCollapsed = !isCollapsed;
-          });
+          BlocProvider.of<HomeBloc>(context).add(SwitchDrawerEvent());
           return false;
         } else
           return true;
@@ -98,43 +126,22 @@ class _HomeScreenState extends State<HomeScreen>
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       ListTile(
-                        leading: Icon(AssetsConstance.scheduleIcon),
-                        title: Text('January', style: ThemeText.menuItemTextStyle),
-                        onTap: (){
-                          setState(() {
-                            if (isCollapsed) {
-                              _controller.forward();
-                              borderRadius = 16.0;
-                            } else {
-                              _controller.reverse();
-
-                              borderRadius = 0.0;
-                            }
-                            isCollapsed = !isCollapsed;
-                          });
+                        leading: Icon(AssetsConstance.scheduleIcon,color: ThemeColor.secondColor),
+                        title:
+                            Text('Schedule', style: ThemeText.menuItemTextStyle),
+                        onTap: () {
+                          BlocProvider.of<HomeBloc>(context).add(SwitchDrawerEvent());
                         },
                       ),
                       SizedBox(height: 10),
                       ListTile(
-                        leading: Icon(AssetsConstance.todoIcon),
+                        leading: Icon(AssetsConstance.todoIcon,color: Colors.white),
                         title: Text('Todo', style: ThemeText.menuItemTextStyle),
-                        onTap: (){
-                          setState(() {
-                            if (isCollapsed) {
-                              _controller.forward();
-                              borderRadius = 16.0;
-                            } else {
-                              _controller.reverse();
-
-                              borderRadius = 0.0;
-                            }
-                            isCollapsed = !isCollapsed;
-                          });
-                          Navigator.pushNamed(context, RouterList.todo);
+                        onTap: () {
+                          BlocProvider.of<HomeBloc>(context).add(AddTodoEvent());
                         },
                       ),
                       SizedBox(height: 10),
-
                     ],
                   ),
                 ],
@@ -142,8 +149,6 @@ class _HomeScreenState extends State<HomeScreen>
         ),
       ),
     );
-    // ),
-    // )
   }
 
   Widget dashboard(context) {
@@ -154,39 +159,38 @@ class _HomeScreenState extends State<HomeScreen>
         animationDuration: duration,
         color: Theme.of(context).scaffoldBackgroundColor,
         elevation: 8,
-        child: ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-          child: Scaffold(
+        child: GestureDetector(
+          onTap: (){
+            BlocProvider.of<HomeBloc>(context).add(UserTapEvent());
+          },
+          child: ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+            child: Scaffold(
               appBar: AppBar(
-                title: Text('Schedule'),
+                title: Text('January'),
                 leading: IconButton(
                     icon: AnimatedIcon(
                       icon: AnimatedIcons.menu_close,
                       progress: _controller,
                     ),
                     onPressed: () {
-                      setState(() {
-                        if (isCollapsed) {
-                          _controller.forward();
-                          borderRadius = 16.0;
-                        } else {
-                          _controller.reverse();
-                          borderRadius = 0.0;
-                        }
-
-                        isCollapsed = !isCollapsed;
-                      });
+                      BlocProvider.of<HomeBloc>(context).add(SwitchDrawerEvent());
                     }),
               ),
-              body: Center(
-                child: Text('texttt'),
+              body: RaisedButton(
+                child: Text('Button',style: ThemeText.textStyle,),
+                onPressed: () {
+                  print('clicked');
+                },
+
+              ),//CalendarTabView(),
+              floatingActionButton: FloatingActionButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, RouterList.todo);
+                },
+                child: Icon(Icons.add),
+                backgroundColor: Colors.red,
               ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                Navigator.pushNamed(context, RouterList.todo);
-              },
-              child: Icon(Icons.add),
-              backgroundColor: Colors.red,
             ),
           ),
         ),

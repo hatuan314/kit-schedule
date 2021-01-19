@@ -14,7 +14,7 @@ class AccountWidget extends StatelessWidget {
       children: [
         Container(
           decoration: new BoxDecoration(
-            color: Colors.orange,
+            color: Colors.white,
             shape: BoxShape.circle,
           ),
           child: Icon(
