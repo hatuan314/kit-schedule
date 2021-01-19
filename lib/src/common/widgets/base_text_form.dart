@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:schedule/src/common/themes/theme_text.dart';
+import 'package:schedule/common/themes/theme_text.dart';
 import 'package:schedule/src/utils/multi_screen/flutter_screen_util.dart';
 
 class BaseTextForm extends TextFormField {
