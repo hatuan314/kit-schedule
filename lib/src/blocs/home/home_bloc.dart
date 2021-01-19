@@ -16,7 +16,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
     // TODO: implement mapEventToState
     if (event is OnTabDrawerEvent) {
-      yield DrawerChangeState(event.selectIndex);
+      yield TabChangeState(0);
     } else if (event is SignOutOnPressEvent) {
       ShareService shareService = ShareService();
       try {
@@ -28,9 +28,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         yield SignOutFailureState(0);
       }
     }
-    else if(event is AddTodoEvent)
-      {
 
-      }
   }
 }

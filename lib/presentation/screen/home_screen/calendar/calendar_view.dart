@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:schedule/src/blocs/calendar/calendar_bloc.dart';
+import 'package:schedule/src/blocs/schedules/schedule_bloc.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../../../../../blocs/blocs.dart';
-import '../../../../../utils/convert.dart';
-import '../../../../../utils/utils.dart';
 
 class CalendarView extends StatefulWidget {
   final CalendarLoadDataSuccessState state;
@@ -39,25 +39,25 @@ class _CalendarViewState extends State<CalendarView> {
             todayColor: Color.fromRGBO(66, 165, 245, 0.6),
             markersColor: Colors.blue[600],
             markersMaxAmount: 1,
-//          markersPositionBottom: ScUtil.getInstance().setHeight(20),
+//          markersPositionBottom: ScreenUtil().setHeight(20),
             outsideDaysVisible: true,
             weekendStyle: TextStyle(color: Colors.redAccent),
             selectedStyle: TextStyle(color: Colors.white),
             todayStyle: TextStyle(color: Colors.white)),
         headerStyle: HeaderStyle(
           titleTextStyle: TextStyle(
-              fontSize: ScUtil.getInstance().setSp(32),
+              fontSize: ScreenUtil().setSp(32),
               fontFamily: 'MR',
               fontWeight: FontWeight.w500),
           formatButtonVisible: false,
           centerHeaderTitle: true,
           leftChevronIcon: Icon(
             Icons.arrow_back_ios,
-            size: ScUtil.getInstance().setHeight(18),
+            size: ScreenUtil().setHeight(18),
           ),
           rightChevronIcon: Icon(
             Icons.arrow_forward_ios,
-            size: ScUtil.getInstance().setHeight(18),
+            size: ScreenUtil().setHeight(18),
           ),
         ),
         onDaySelected: (selectDay, events) =>
