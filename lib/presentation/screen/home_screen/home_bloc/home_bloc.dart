@@ -47,6 +47,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     yield HomeInitialState(animationEntity: animationEntity);
   }
 
+
   Stream<HomeState> mapAddTodoEventToState() async* {
     yield SwitchDrawerState();
     yield AddTodoState();
