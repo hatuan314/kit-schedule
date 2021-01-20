@@ -71,13 +71,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.5"
-  cupertino_date_textbox:
-    dependency: "direct main"
-    description:
-      name: cupertino_date_textbox
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0+3"
   cupertino_icons:
     dependency: "direct main"
     description:
