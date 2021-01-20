@@ -44,6 +44,7 @@ class RegisterShowPasswordState extends RegisterState {
   final bool isShow;
 
   RegisterShowPasswordState(this.isShow);
+
   @override
   // TODO: implement props
   List<Object> get props => [this.isShow];

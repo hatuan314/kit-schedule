@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:schedule/presentation/screen/home_screen/calendar/schedule_view.dart';
 import 'package:schedule/src/blocs/blocs.dart';
-import 'package:schedule/src/ui/views/home/tabs/calendar-tab/schedule_view.dart';
-import 'package:schedule/src/ui/views/home/tabs/calendar-tab/calendar_view.dart';
 import 'package:schedule/src/utils/utils.dart';
 
-class CalendarTabView extends StatelessWidget {
+class CalendarView extends StatelessWidget {
+  final CalendarLoadDataSuccessState state;
+
+  const CalendarView({Key key, this.state}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
