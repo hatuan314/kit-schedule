@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/common/assets_constance.dart';
 import 'package:schedule/common/router_list.dart';
 import 'package:schedule/common/themes/theme_color.dart';
 import 'package:schedule/common/themes/theme_text.dart';
+import 'package:schedule/presentation/screen/home_screen/calendarView/schedule-widget.dart';
 import 'package:schedule/presentation/screen/home_screen/home_bloc/home_bloc.dart';
 import 'package:schedule/presentation/screen/home_screen/home_bloc/home_event.dart';
 import 'package:schedule/presentation/screen/home_screen/home_bloc/home_state.dart';
@@ -22,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   AnimationController _controller;
   AppBar appBar = AppBar();
   double borderRadius = 0.0;
-  int currentScreen=0;
+  int currentScreen = 0;
   final Duration duration =
       const Duration(milliseconds: HomeScreenConstance.animationDuration);
 
@@ -33,7 +35,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         vsync: this,
         duration: const Duration(
             milliseconds: HomeScreenConstance.animationDuration));
-    BlocProvider.of<HomeBloc>(context).add(HomeInitEvent(animationController: _controller));
+    BlocProvider.of<HomeBloc>(context)
+        .add(HomeInitEvent(animationController: _controller));
   }
 
   @override
@@ -50,18 +53,23 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     screenWidth = size.width;
     return BlocConsumer<HomeBloc, HomeState>(
       listener: (BuildContext context, state) {
-        if(state is AddTodoState){
-            Navigator.pushNamed(context, RouterList.todo);
-        } else if(state is SwitchDrawerState){
+        if (state is AddTodoState) {
+          Navigator.pushNamed(context, RouterList.todo);
+        } else if (state is SwitchDrawerState) {
           if (isCollapsed) {
             _controller.forward();
             borderRadius = 16.0;
-          }else{
-             _controller.reverse();
-             borderRadius = 0.0;
-             isCollapsed = false;
-           }
+          } else {
+            _controller.reverse();
+            borderRadius = 0.0;
+          }
           isCollapsed = !isCollapsed;
+        } else if (state is UserTapState) {
+          if (!isCollapsed) {
+            _controller.reverse();
+            borderRadius = 0.0;
+            isCollapsed = true;
+          }
         }
       },
       builder: (BuildContext context, state) {
@@ -126,19 +134,23 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       ListTile(
-                        leading: Icon(AssetsConstance.scheduleIcon,color: ThemeColor.secondColor),
-                        title:
-                            Text('Schedule', style: ThemeText.menuItemTextStyle),
+                        leading: Icon(AssetsConstance.scheduleIcon,
+                            color: ThemeColor.secondColor),
+                        title: Text('Schedule',
+                            style: ThemeText.menuItemTextStyle),
                         onTap: () {
-                          BlocProvider.of<HomeBloc>(context).add(SwitchDrawerEvent());
+                          BlocProvider.of<HomeBloc>(context)
+                              .add(SwitchDrawerEvent());
                         },
                       ),
                       SizedBox(height: 10),
                       ListTile(
-                        leading: Icon(AssetsConstance.todoIcon,color: Colors.white),
+                        leading:
+                            Icon(AssetsConstance.todoIcon, color: Colors.white),
                         title: Text('Todo', style: ThemeText.menuItemTextStyle),
                         onTap: () {
-                          BlocProvider.of<HomeBloc>(context).add(AddTodoEvent());
+                          BlocProvider.of<HomeBloc>(context)
+                              .add(AddTodoEvent());
                         },
                       ),
                       SizedBox(height: 10),
@@ -160,30 +172,31 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         color: Theme.of(context).scaffoldBackgroundColor,
         elevation: 8,
         child: GestureDetector(
-          onTap: (){
-            BlocProvider.of<HomeBloc>(context).add(UserTapEvent());
+          onTap: () {
+            if (!isCollapsed) {
+              BlocProvider.of<HomeBloc>(context).add(UserTapEvent());
+            }
           },
           child: ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
             child: Scaffold(
-              appBar: AppBar(
-                title: Text('January'),
-                leading: IconButton(
-                    icon: AnimatedIcon(
-                      icon: AnimatedIcons.menu_close,
-                      progress: _controller,
-                    ),
-                    onPressed: () {
-                      BlocProvider.of<HomeBloc>(context).add(SwitchDrawerEvent());
-                    }),
-              ),
-              body: RaisedButton(
-                child: Text('Button',style: ThemeText.textStyle,),
-                onPressed: () {
-                  print('clicked');
-                },
-
-              ),//CalendarTabView(),
+              body: Container(
+                child: Stack(
+                  children: [
+                    ScheduleWidget(drawerController: _controller,),
+                    (isCollapsed)
+                        ? SizedBox(
+                            width: 0,
+                            height: 0,
+                          )
+                        : Container(
+                            color: Colors.transparent,
+                            width: ScreenUtil().screenWidth,
+                            height: ScreenUtil().screenHeight,
+                          ),
+                  ],
+                ),
+              ), //CalendarTabView(),
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
                   Navigator.pushNamed(context, RouterList.todo);

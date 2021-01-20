@@ -3,12 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/src/blocs/calendar/calendar_bloc.dart';
 import 'package:schedule/src/blocs/schedules/schedule_bloc.dart';
-import 'package:table_calendar/table_calendar.dart';
+import 'package:schedule/utils/table_calendar-2.3.3/table_calendar.dart';
 
 
 class CalendarView extends StatefulWidget {
   final CalendarLoadDataSuccessState state;
-
   const CalendarView({Key key, this.state}) : super(key: key);
   @override
   _CalendarViewState createState() => _CalendarViewState();
@@ -60,8 +59,8 @@ class _CalendarViewState extends State<CalendarView> {
             size: ScreenUtil().setHeight(18),
           ),
         ),
-        onDaySelected: (selectDay, events) =>
-            _onDaySelected(selectDay, events, context),
+       /* onDaySelected: (selectDay, events) => ///todo : ondayselected
+            _onDaySelected(selectDay, events, context),*/
       ),
     );
   }
