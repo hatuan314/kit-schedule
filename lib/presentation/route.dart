@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/common/router_list.dart';
+import 'package:schedule/injection.dart';
 import 'package:schedule/presentation/screen/home_screen/home_screen.dart';
 import 'package:schedule/presentation/screen/todo_screen/todo_screen.dart';
 import 'package:schedule/src/blocs/blocs.dart';
@@ -23,8 +24,8 @@ RouteFactory router() {
         return SplashView();
       });*/
       CupertinoPageRoute(builder: (context) {
-        return BlocProvider(
-          create: (context) => HomeBloc(),
+        return BlocProvider<HomeBloc>(
+          create: (context) => getIt<HomeBloc>(),
           child: HomeScreen(),
         );
       });
@@ -44,8 +45,8 @@ RouteFactory router() {
         });
       case RouterList.home:
         return CupertinoPageRoute(builder: (context) {
-          return BlocProvider(
-            create: (context) => HomeBloc(),
+          return BlocProvider<HomeBloc>(
+            create: (context) => getIt<HomeBloc>(),
             child: HomeScreen(),
           );
         });

@@ -13,15 +13,15 @@ abstract class HomeState extends Equatable {
 class HomeInitialState extends HomeState {
   HomeInitialState(int selectIndex) : super(selectIndex);
 
+
   List<Object> get props => null;
 }
 
-class DrawerChangeState extends HomeState {
-  DrawerChangeState(int selectIndex) : super(selectIndex);
+class TabChangeState extends HomeState {
+  TabChangeState(int selectIndex) : super(selectIndex);
 
-  List<Object> get props => [this.selectIndex];
+  List<Object> get props => [];
 }
-
 class SignOutSuccessState extends HomeState {
   SignOutSuccessState(int selectIndex) : super(selectIndex);
 }
