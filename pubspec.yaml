@@ -58,8 +58,8 @@ dependencies:
 
   crypto: ^2.1.5
   flutter_screenutil: ^4.0.2+5
+  cupertino_date_textbox: ^1.0.0+3
 
-  get_it: ^5.0.4
 
 dev_dependencies:
   flutter_test:
