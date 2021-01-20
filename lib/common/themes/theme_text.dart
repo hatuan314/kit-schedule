@@ -12,6 +12,10 @@ class ThemeText {
 
   static TextStyle textStyle = TextStyle(
       color: ThemeColor.primaryColor,
+      fontSize: ScreenUtil().setSp(18),
+      fontWeight: FontWeight.w500);
+  static TextStyle titleStyle =  TextStyle(
+      color: ThemeColor.secondColor,
       fontSize: ScreenUtil().setSp(32),
       fontWeight: FontWeight.w500);
 
