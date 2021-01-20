@@ -14,7 +14,7 @@ description: A new Flutter application.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
   flutter:
@@ -24,9 +24,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   # DateFormat
-  intl: ^0.16.1
+  intl: ">=0.15.0 <0.18.0"
   # Table Calendar
-  table_calendar: ^2.2.3
+  #table_calendar: ^2.3.3
   # shared_preferences
   shared_preferences: ^0.5.6
   # Date Format
@@ -58,7 +58,7 @@ dependencies:
 
   crypto: ^2.1.5
   flutter_screenutil: ^4.0.2+5
-  cupertino_date_textbox: ^1.0.0+3
+  simple_gesture_detector: ^0.1.5
 
 
 dev_dependencies:

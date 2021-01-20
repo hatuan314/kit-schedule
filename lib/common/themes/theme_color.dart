@@ -10,4 +10,16 @@ class ThemeColor {
   static const Color menuBackgroundColor = const Color.fromRGBO(48, 48, 48, 1);
   static const Color highLightTextColor = const Color.fromRGBO(249, 170, 51, 1);
 
+  static const Color todayBackgroundColor = Colors.red;
+  static const Color todayTextColor = Colors.white;
+
+  static const Color weekendDayBackgroundColor = Colors.red;
+  static const Color weekendTextColor = Colors.white;
+
+  static const Color selectedDayBackgroundColor = Colors.red;
+  static const Color selectedDayTextColor = Colors.white;
+
+
+
+
 }

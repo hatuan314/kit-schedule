@@ -65,6 +65,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   Stream<HomeState>mapUserTapEventToState() async*{
     yield UserTapState();
+    yield HomeInitialState();
   }
 }
 
