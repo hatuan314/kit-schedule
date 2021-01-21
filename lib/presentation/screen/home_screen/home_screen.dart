@@ -126,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   ),
                   Divider(
                     thickness: 1,
-                    color: Color(0xff818181),
+                    color: ThemeColor.dividerColor,
                   ),
                   Column(
                     mainAxisSize: MainAxisSize.min,
@@ -181,6 +181,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
             child: Scaffold(
               body: Container(
+
                 child: Stack(
                   children: [
                     ScheduleWidget(drawerController: _controller,),

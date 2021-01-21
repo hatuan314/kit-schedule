@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:schedule/common/themes/theme_color.dart';
+import 'package:schedule/presentation/screen/home_screen/calendarView/widgets/event_item_widget.dart';
 import 'package:schedule/presentation/screen/home_screen/home_bloc/home_bloc.dart';
 import 'package:schedule/presentation/screen/home_screen/home_bloc/home_event.dart';
 import 'package:schedule/utils/table_calendar-2.3.3/table_calendar.dart';
@@ -8,12 +11,15 @@ class ScheduleWidget extends StatefulWidget {
   final AnimationController drawerController;
 
   const ScheduleWidget({Key key, this.drawerController}) : super(key: key);
+
   @override
   _ScheduleWidgetState createState() => _ScheduleWidgetState();
 }
 
-class _ScheduleWidgetState extends State<ScheduleWidget>  with TickerProviderStateMixin{
-
+class _ScheduleWidgetState extends State<ScheduleWidget>
+    with TickerProviderStateMixin {
+  double distance;
+  double initial;
   final Map<DateTime, List> _holidays = {
     DateTime(2020, 1, 1): ['New Year\'s Day'],
     DateTime(2020, 1, 6): ['Epiphany'],
@@ -34,6 +40,10 @@ class _ScheduleWidgetState extends State<ScheduleWidget>  with TickerProviderSta
     _events = {
       _selectedDay.subtract(Duration(days: 30)): [
         'Event A0',
+        'Event A0',
+        'Event A0',
+        'Event A0',
+        'Event A0',
         'Event B0',
         'Event C0'
       ],
@@ -42,16 +52,29 @@ class _ScheduleWidgetState extends State<ScheduleWidget>  with TickerProviderSta
         'Event A2',
         'Event B2',
         'Event C2',
-        'Event D2'
+        'Event D2',
+        'Event D2',
+        'Event D2',
+        'Event D2',
+        'Event D2',
+        'Event D2',
+        'Event D2',
       ],
       _selectedDay.subtract(Duration(days: 16)): ['Event A3', 'Event B3'],
       _selectedDay.subtract(Duration(days: 10)): [
+        'Event A4',
+        'Event A4',
+        'Event A4',
         'Event A4',
         'Event B4',
         'Event C4'
       ],
       _selectedDay.subtract(Duration(days: 4)): [
         'Event A5',
+        'Event B5',
+        'Event B5',
+        'Event B5',
+        'Event B5',
         'Event B5',
         'Event C5'
       ],
@@ -64,22 +87,42 @@ class _ScheduleWidgetState extends State<ScheduleWidget>  with TickerProviderSta
         'Event D8'
       ],
       _selectedDay.add(Duration(days: 3)):
-      Set.from(['Event A9', 'Event A9', 'Event B9']).toList(),
+          Set.from(['Event A9', 'Event A9', 'Event B9']).toList(),
       _selectedDay.add(Duration(days: 7)): [
         'Event A10',
         'Event B10',
+        'Event B10',
+        'Event B10',
         'Event C10'
       ],
-      _selectedDay.add(Duration(days: 11)): ['Event A11', 'Event B11'],
+      _selectedDay.add(Duration(days: 11)): [
+        'Event A11',
+        'Event B11',
+        'Event B11',
+        'Event B11',
+        'Event B11'
+      ],
       _selectedDay.add(Duration(days: 17)): [
         'Event A12',
+        'Event B12',
         'Event B12',
         'Event C12',
         'Event D12'
       ],
-      _selectedDay.add(Duration(days: 22)): ['Event A13', 'Event B13'],
+      _selectedDay.add(Duration(days: 22)): [
+        'Event A13',
+        'Event B13',
+        'Event B13',
+        'Event B13',
+        'Event B13',
+        'Event B13'
+      ],
       _selectedDay.add(Duration(days: 26)): [
         'Event A14',
+        'Event B14',
+        'Event B14',
+        'Event B14',
+        'Event B14',
         'Event B14',
         'Event C14'
       ],
@@ -123,42 +166,43 @@ class _ScheduleWidgetState extends State<ScheduleWidget>  with TickerProviderSta
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Colors.white,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            // Switch out 2 lines below to play with TableCalendar's settings
-            //-----------------------
-            //_buildTableCalendar(),
-             _buildTableCalendarWithBuilders(),
-            const SizedBox(height: 8.0),
-            //_buildButtons(),
-            const SizedBox(height: 8.0),
-            Expanded(child: _buildEventList()),
-          ],
-        ),
+      body: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          // Switch out 2 lines below to play with TableCalendar's settings
+          //-----------------------
+          //_buildTableCalendar(),
+          _buildTableCalendarWithBuilders(),
+          const SizedBox(height: 8.0),
+          //_buildButtons(),
+          const SizedBox(height: 8.0),
+          Expanded(child: _buildEventList()),
+        ],
       ),
     );
   }
 
-  Widget drawerNavigationWidget()
-  {
+  Widget drawerNavigationWidget() {
     return IconButton(
         icon: AnimatedIcon(
           icon: AnimatedIcons.menu_close,
+          color: ThemeColor.secondColor,
           progress: widget.drawerController,
         ),
         onPressed: () {
           BlocProvider.of<HomeBloc>(context).add(SwitchDrawerEvent());
         });
   }
-  Widget searchWidget()
-  {
+
+  Widget searchWidget() {
     final dateTime = _events.keys.elementAt(_events.length - 2);
 
     return IconButton(
-        icon: Icon(Icons.search,color: Colors.black,size: 30,),
+        icon: Icon(
+          Icons.search,
+          color: ThemeColor.secondColor,
+          size: 30,
+        ),
         onPressed: () {
           _calendarController.setSelectedDay(
             DateTime(dateTime.year, dateTime.month, dateTime.day),
@@ -166,6 +210,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>  with TickerProviderSta
           );
         });
   }
+
   // Simple TableCalendar configuration (using Styles)
   /*Widget _buildTableCalendar() {
     return TableCalendar(
@@ -218,14 +263,25 @@ class _ScheduleWidgetState extends State<ScheduleWidget>  with TickerProviderSta
         CalendarFormat.week: '',
       },
       calendarStyle: CalendarStyle(
+        highlightToday: false,
         outsideDaysVisible: false,
+        //selectedStyle: TextStyle().copyWith(color: ThemeColor.selectedDayBackgroundColor),
         weekendStyle: TextStyle().copyWith(color: Colors.red),
-        holidayStyle: TextStyle().copyWith(color: Colors.white),
+        weekdayStyle: TextStyle().copyWith(color: ThemeColor.weekDayTextColor),
+        eventDayStyle:
+            TextStyle().copyWith(color: ThemeColor.eventdayTextColor),
+        //outsideStyle: TextStyle().copyWith(color: Colors.lightBlue),
       ),
       daysOfWeekStyle: DaysOfWeekStyle(
-        weekendStyle: TextStyle().copyWith(color: Colors.blue[600]),
+        weekdayStyle: TextStyle().copyWith(color: ThemeColor.thirdColor),
+        weekendStyle: TextStyle().copyWith(color: ThemeColor.weekendTextColor),
       ),
       headerStyle: HeaderStyle(
+        headerMargin: EdgeInsets.symmetric(horizontal: 10),
+        titleTextStyle: TextStyle().copyWith(
+            fontSize: 18.sp,
+            fontWeight: FontWeight.bold,
+            color: ThemeColor.secondColor),
         drawerWidgetVisible: true,
         searchWidgetVisible: true,
         formatButtonVisible: false,
@@ -239,7 +295,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>  with TickerProviderSta
             opacity: Tween(begin: 0.0, end: 1.0).animate(_animationController),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: ThemeColor.selectedDayBackgroundColor,
                 borderRadius: new BorderRadius.circular(10.0),
               ),
               margin: const EdgeInsets.all(4.0),
@@ -248,21 +304,25 @@ class _ScheduleWidgetState extends State<ScheduleWidget>  with TickerProviderSta
               height: 100,
               child: Text(
                 '${date.day}',
-                style: TextStyle().copyWith(fontSize: 16.0),
+                style: TextStyle().copyWith(
+                    fontSize: 16.0, color: ThemeColor.selectedDayTextColor),
               ),
             ),
           );
         },
         todayDayBuilder: (context, date, _) {
           return Container(
+            decoration: BoxDecoration(
+              borderRadius: new BorderRadius.circular(10.0),
+            ),
             margin: const EdgeInsets.all(4.0),
             padding: const EdgeInsets.only(top: 5.0, left: 6.0),
-            color: Colors.red,
             width: 100,
             height: 100,
             child: Text(
               '${date.day}',
-              style: TextStyle().copyWith(fontSize: 16.0),
+              style: TextStyle()
+                  .copyWith(fontSize: 16.0, color: ThemeColor.todayTextColor),
             ),
           );
         },
@@ -310,8 +370,8 @@ class _ScheduleWidgetState extends State<ScheduleWidget>  with TickerProviderSta
         color: _calendarController.isSelected(date)
             ? Colors.brown[500]
             : _calendarController.isToday(date)
-            ? Colors.brown[300]
-            : Colors.blue[400],
+                ? Colors.brown[300]
+                : Colors.blue[400],
       ),
       width: 16.0,
       height: 16.0,
@@ -340,7 +400,6 @@ class _ScheduleWidgetState extends State<ScheduleWidget>  with TickerProviderSta
 
     return Column(
       children: <Widget>[
-
         RaisedButton(
           child: Text(
               'Set day ${dateTime.day}-${dateTime.month}-${dateTime.year}'),
@@ -356,21 +415,60 @@ class _ScheduleWidgetState extends State<ScheduleWidget>  with TickerProviderSta
   }
 
   Widget _buildEventList() {
-    return ListView(
-      children: _selectedEvents
-          .map((event) => Container(
-        decoration: BoxDecoration(
-          border: Border.all(width: 0.8),
-          borderRadius: BorderRadius.circular(12.0),
-        ),
-        margin:
-        const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-        child: ListTile(
-          title: Text(event.toString()),
-          onTap: () => print('$event tapped!'),
-        ),
-      ))
-          .toList(),
+    return Container(
+      width: ScreenUtil().screenWidth,
+      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      decoration: BoxDecoration(
+          color: ThemeColor.secondColor,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
+      child: Column(
+
+        children: [
+          GestureDetector(
+            onPanStart: (DragStartDetails details) {
+              initial = details.globalPosition.dy;
+            },
+            onPanUpdate: (DragUpdateDetails details) {
+              distance = details.globalPosition.dy - initial;
+            },
+            onPanEnd: (DragEndDetails details) {
+              initial = 0.0;
+              print(distance);
+              if(distance<-20)
+                {
+                  setState(() {
+                    _calendarController.setCalendarFormat(CalendarFormat.twoWeeks);
+                  });
+                } else if(distance>20)
+                  {
+                    setState(() {
+                      _calendarController.setCalendarFormat(CalendarFormat.month);
+                    });
+                  }
+
+              //+ve distance signifies a drag from left to right(start to end)
+              //-ve distance signifies a drag from right to left(end to start)
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 20.sp),
+              width: ScreenUtil().screenWidth,
+              child: Text(
+                'Events',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp),
+              ),
+            ),
+          ),
+
+          Expanded(
+            child: ListView.builder(
+              itemCount: _selectedEvents.length,
+              itemBuilder: (context, position) {
+                return EventItemWidget();
+              },
+            ),
+          )
+        ],
+      ),
     );
   }
 }
