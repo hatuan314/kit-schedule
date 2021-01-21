@@ -4,9 +4,9 @@ import 'package:schedule/data/model/personal_schedule_model.dart';
 
 import '../../../src/service/database/database.dart';
 
-class PersonalLocalDataSource {
+class PersonalScheduleLocalDataSource {
   /// Add Personal Schedule Data
-  Future insertPersonalScheduleProvider(PersonalScheduleModel schedule) async {
+  Future insertPersonalSchedule(PersonalScheduleModel schedule) async {
     final sql = '''INSERT INTO ${DatabaseCreator.personaScheduleTable}
     (date, timer, schedule_name, note) VALUES (?, ?, ?, ?)''';
 
@@ -25,7 +25,7 @@ class PersonalLocalDataSource {
     }
   }
   /// Select All Personal Schedules
-  Future<List<PersonalScheduleModel>> selectAllPersonalScheduleProvider() async {
+  Future<List<PersonalScheduleModel>> selectAllPersonalSchedule() async {
     final dateSql =
     '''SELECT * FROM ${DatabaseCreator.personaScheduleTable} ORDER BY date ASC''';
     final scheduleData = await db.rawQuery(dateSql);
@@ -39,7 +39,7 @@ class PersonalLocalDataSource {
   }
 
   /// Select All Personal Schedules Of Date
-  Future<List<PersonalScheduleModel>> selectAllPersonalScheduleOfDateProvider(
+  Future<List<PersonalScheduleModel>> selectAllPersonalScheduleOfDate(
       String date) async {
     final sql =
     '''SELECT * FROM ${DatabaseCreator.personaScheduleTable} WHERE date = ?''';
@@ -54,7 +54,7 @@ class PersonalLocalDataSource {
   }
 
   /// Update A Personal Schedule Data
-  Future<int> updatePersonalScheduleDataProvider(
+  Future<int> updatePersonalScheduleData(
       PersonalScheduleModel schedule) async {
 //    debugPrint('ProviderOffline - updatePersonalScheduleData - scheduleId: {${schedule.id}}');
     final data = await db.update(
@@ -64,7 +64,7 @@ class PersonalLocalDataSource {
   }
 
   /// Delete Personal Schedule Data
-  Future<int> deletePersonalScheduleProvider(String id) async {
+  Future<int> deletePersonalSchedule(String id) async {
     final data = await db.delete(DatabaseCreator.personaScheduleTable,
         where: 'id = ?', whereArgs: [id]);
     return data;
