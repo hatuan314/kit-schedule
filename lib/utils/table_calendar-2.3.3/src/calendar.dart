@@ -376,6 +376,7 @@ class _TableCalendarState extends State<TableCalendar>
         children: <Widget>[
           //          (widget.headerVisible != null)? _buildHeader() : Container(width: 0,height: 0,),
           if (widget.headerVisible) _buildHeader(),
+
           Padding(
             padding: widget.calendarStyle.contentPadding,
             child: _buildCalendarContent(),

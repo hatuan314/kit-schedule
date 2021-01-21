@@ -28,4 +28,8 @@ class ThemeText {
       fontWeight: FontWeight.normal,
       fontSize: HomeScreenConstance.menuItemTextSize,
       color: Colors.white);
+  static TextStyle dayOfWeekStyle = TextStyle(
+      fontWeight: FontWeight.normal,
+      fontSize: HomeScreenConstance.dayOfWeekTextSize,
+      color: Colors.red);
 }
