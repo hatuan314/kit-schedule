@@ -8,15 +8,20 @@ class TodoTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final int maxLine;
+  final TextInputAction textInputAction;
+  final Function onEditingComplete;
+  final bool autofocus;
   final Function(String) validate;
 
-  const TodoTextField(
-      {Key key,
-      @required this.widget,
-      @required this.controller,
-      @required this.hintText,
-      this.maxLine,
-      this.validate})
+  const TodoTextField({Key key,
+    @required this.widget,
+    @required this.controller,
+    @required this.hintText,
+    this.autofocus,
+    this.onEditingComplete,
+    this.textInputAction,
+    this.maxLine,
+    this.validate})
       : super(key: key);
 
   @override
@@ -37,6 +42,9 @@ class TodoTextField extends StatelessWidget {
                   borderSide: BorderSide(color: ThemeColor.primaryColor),
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                 )),
+            autofocus: autofocus,
+            textInputAction:textInputAction,
+            onEditingComplete: onEditingComplete,
             maxLines: maxLine,
             validator: validate,
           ),

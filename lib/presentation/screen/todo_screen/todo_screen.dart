@@ -24,6 +24,7 @@ class _TodoScreenState extends State<TodoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final node = FocusScope.of(context);
     return Scaffold(
       backgroundColor: ThemeColor.secondColor,
       appBar: AppBar(
@@ -54,6 +55,9 @@ class _TodoScreenState extends State<TodoScreen> {
                       child: Column(
                         children: [
                           TodoTextField(
+                            autofocus: true,
+                            textInputAction: TextInputAction.next,
+                            onEditingComplete: () => node.nextFocus(),
                             controller: _titleController,
                             widget: Icon(
                                 Icons.note, size: AppConstance.iconSize),
@@ -69,6 +73,9 @@ class _TodoScreenState extends State<TodoScreen> {
                             height: ScreenUtil().setHeight(20),
                           ),
                           TodoTextField(
+                            autofocus: false,
+                            textInputAction: TextInputAction.next,
+                            onEditingComplete: () => node.unfocus(),
                             controller: _noteController,
                             widget: Icon(
                               Icons.sticky_note_2,
