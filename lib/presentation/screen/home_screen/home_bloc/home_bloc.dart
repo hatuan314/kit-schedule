@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/domain/entities/animation_entities.dart';
-import 'package:schedule/domain/usecases/HomeUseCase.dart';
+import 'package:schedule/domain/use_cases/HomeUseCase.dart';
 import 'package:schedule/presentation/screen/home_screen/home_bloc/home_event.dart';
 import 'package:schedule/presentation/screen/home_screen/home_bloc/home_state.dart';
 import 'package:schedule/src/service/share_service.dart';

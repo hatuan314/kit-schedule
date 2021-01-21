@@ -12,6 +12,7 @@ class PersonalScheduleModel extends PersonalSchedule {
 
   factory PersonalScheduleModel.fromJson(Map<String, dynamic> data) {
     return PersonalScheduleModel(
+        id: data['id'],
         title: data['title'],
         note: data['note'],
         date: data['date'],
