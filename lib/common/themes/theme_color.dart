@@ -21,6 +21,9 @@ class ThemeColor {
 
   static const Color selectedDayBackgroundColor = Color.fromRGBO(253, 147, 113, 1);
   static const Color selectedDayTextColor = Colors.white;
+  static const Color signUpEmailButtonColor = Colors.blueAccent;
+  static const Color signUpButtonColor = Colors.white;
+  static const Color signInButtonColor = Colors.blueAccent;
 
   static const Color weekDayTextColorBackgroundColor = Color.fromRGBO(253, 147, 113, 1);
   static const Color weekDayTextColor = Colors.white;

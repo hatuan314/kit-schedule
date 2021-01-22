@@ -4,4 +4,6 @@ class RouterList{
   static const String schedule = '/schedule';
   static const String todo = '/todo';
   static const String search = '/search';
+  static const String welcome = '/welcome';
+  static const String login = '/login';
 }
