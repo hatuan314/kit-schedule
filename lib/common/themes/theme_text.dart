@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/common/themes/theme_color.dart';
 import 'package:schedule/presentation/screen/home_screen/home_screen_constance.dart';
-import 'package:schedule/src/utils/utils.dart';
 
 class ThemeText {
   static TextStyle LoginStyle = TextStyle(
@@ -26,7 +25,7 @@ class ThemeText {
 
   static TextStyle titleStyle =  TextStyle(
       color: ThemeColor.secondColor,
-      fontSize: ScreenUtil().setSp(32),
+      fontSize: ScreenUtil().setSp(24),
       fontWeight: FontWeight.w500);
 
   static TextStyle errorTextStyle = TextStyle(
@@ -42,4 +41,8 @@ class ThemeText {
       fontWeight: FontWeight.normal,
       fontSize: HomeScreenConstance.menuItemTextSize,
       color: Colors.white);
+  static TextStyle dayOfWeekStyle = TextStyle(
+      fontWeight: FontWeight.normal,
+      fontSize: HomeScreenConstance.dayOfWeekTextSize,
+      color: Colors.red);
 }

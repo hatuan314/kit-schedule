@@ -6,7 +6,6 @@ import 'package:schedule/injection.dart';
 import 'package:schedule/presentation/screen/home_screen/home_screen.dart';
 import 'package:schedule/presentation/screen/todo_screen/todo_screen.dart';
 import 'package:schedule/src/blocs/blocs.dart';
-import 'package:schedule/src/blocs/search/search_bloc.dart';
 import 'package:schedule/src/models/model.dart';
 import 'package:schedule/src/ui/views/views.dart';
 import 'package:schedule/src/utils/utils.dart';

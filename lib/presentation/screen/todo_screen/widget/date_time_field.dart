@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/common/themes/theme_text.dart';
+import 'package:schedule/presentation/screen/todo_screen/todo_screen_constance.dart';
 
 class DateTimeField extends StatelessWidget {
   final Widget widget;
@@ -17,7 +18,7 @@ class DateTimeField extends StatelessWidget {
     return Row(
       children: [
         widget,
-        SizedBox(width: ScreenUtil().setWidth(20),),
+        SizedBox(width: TodoScreenConstance.spaceSizeBox1,),
         Expanded(
           child: Text(dateTime,style: ThemeText.textStyle,)
         ),
