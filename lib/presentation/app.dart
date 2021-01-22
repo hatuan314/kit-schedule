@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
 
           debugShowCheckedModeBanner: false,
           theme: defaultThemeData(),
-          initialRoute: RouterList.home,
+          initialRoute: RouterList.welcome,
           routes: {
             RouterList.home: (context) =>
                 BlocProvider<HomeBloc>(
@@ -45,6 +45,8 @@ class MyApp extends StatelessWidget {
                   getIt<SearchBloc>()
                     ..add(SearchInitEvent()),
                   child: SearchScreen(),),
+            RouterList.welcome: (context)=> SignInView(),
+            RouterList.login: (context)=> LoginScreen(),
           },
         ));
   }
