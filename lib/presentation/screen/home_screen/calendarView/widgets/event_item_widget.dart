@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:schedule/presentation/screen/home_screen/calendarView/widgets/TimeDurationWidget.dart';
 import 'package:schedule/presentation/screen/home_screen/calendarView/widgets/colonWidget.dart';
 
 class EventItemWidget extends StatelessWidget {
-  const EventItemWidget({
-    Key key,
-  }) : super(key: key);
+  final String startTime;
+  final String endTime;
+  final String title;
+  final String note;
+
+  const EventItemWidget({Key key, this.startTime, this.endTime, this.title, this.note}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,23 +18,7 @@ class EventItemWidget extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 5.0),
         child: Row(
           children: [
-            Column(
-              children: [
-                Text(
-                  "07:00",
-                  style: TextStyle(
-                      fontSize: 16.sp, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "09:30",
-                  style: TextStyle(
-                      fontSize: 16.sp, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
+            TimeDuration(startTime: startTime, endTime: endTime),
             Container(
 //                        height: 60.h,
                 margin: EdgeInsets.symmetric(horizontal: 20),
@@ -39,13 +27,13 @@ class EventItemWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Nguyên lý hệ điều hành-2-20 (A15C310)',
-                      //maxLines: 2,
+                  Text(title,
+                      maxLines: 2,
                       style: TextStyle(
                           fontWeight: FontWeight.w600,
-                          fontSize: 16.sp)),
+                          fontSize: 18.sp)),
                   Text(
-                    '102_TA2',
+                    note,
                     style: TextStyle(fontSize: 14.sp),
                   )
                 ],

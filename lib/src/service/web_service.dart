@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:schedule/src/service/services.dart';
@@ -8,7 +7,7 @@ class WebService {
   Dio setupDio({String accessToken, String contentType}) {
     Dio dio = Dio(BaseOptions(
       headers: {'header': '167.179.115.162:5000'},
-      baseUrl: 'http://167.179.115.162:5000/api/schedule/guest',
+      baseUrl: 'http://167.179.115.162:5000/api/chedule/guest',
       contentType: contentType,
       connectTimeout: 50000,
       receiveTimeout: 50000,

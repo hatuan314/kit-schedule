@@ -20,6 +20,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
     with TickerProviderStateMixin {
   double distance;
   double initial;
+  ScrollController scrollController = ScrollController();
   final Map<DateTime, List> _holidays = {
     DateTime(2020, 1, 1): ['New Year\'s Day'],
     DateTime(2020, 1, 6): ['Epiphany'],
@@ -36,7 +37,6 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
   void initState() {
     super.initState();
     final _selectedDay = DateTime.now();
-
     _events = {
       _selectedDay.subtract(Duration(days: 30)): [
         'Event A0',
@@ -135,6 +135,20 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
       vsync: this,
       duration: const Duration(milliseconds: 400),
     );
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      scrollController.addListener(() {
+        ///scrolling
+        BlocProvider.of<HomeBloc>(context).add(ScrollEvent());
+      });
+      scrollController.position.isScrollingNotifier.addListener(() {
+        if(!scrollController.position.isScrollingNotifier.value) {
+          /// scroll stop
+          BlocProvider.of<HomeBloc>(context).add(ScrollStopEvent());
+        } else {
+          ///print('scroll is started');
+        }
+      });
+    });
 
     _animationController.forward();
   }
@@ -266,10 +280,10 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
         highlightToday: false,
         outsideDaysVisible: false,
         //selectedStyle: TextStyle().copyWith(color: ThemeColor.selectedDayBackgroundColor),
-        weekendStyle: TextStyle().copyWith(color: Colors.red),
+        weekendStyle: TextStyle().copyWith(color: ThemeColor.weekendTextColor),
         weekdayStyle: TextStyle().copyWith(color: ThemeColor.weekDayTextColor),
         eventDayStyle:
-            TextStyle().copyWith(color: ThemeColor.eventdayTextColor),
+            TextStyle().copyWith(color: ThemeColor.eventDayTextColor),
         //outsideStyle: TextStyle().copyWith(color: Colors.lightBlue),
       ),
       daysOfWeekStyle: DaysOfWeekStyle(
@@ -434,12 +448,12 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
             onPanEnd: (DragEndDetails details) {
               initial = 0.0;
               print(distance);
-              if(distance<-20)
+              if(distance<-5)
                 {
                   setState(() {
                     _calendarController.setCalendarFormat(CalendarFormat.twoWeeks);
                   });
-                } else if(distance>20)
+                } else if(distance>5)
                   {
                     setState(() {
                       _calendarController.setCalendarFormat(CalendarFormat.month);
@@ -461,9 +475,14 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
 
           Expanded(
             child: ListView.builder(
+              controller: scrollController,
               itemCount: _selectedEvents.length,
               itemBuilder: (context, position) {
-                return EventItemWidget();
+                return EventItemWidget(
+                  startTime: '7:00',
+                  endTime: '9:00',
+                  title: 'Nguyên lý hệ điều hànhđiều hànhđiều hànhđiều hànhđiều hànhđiều hành',
+                  note: 'note',);
               },
             ),
           )

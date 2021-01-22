@@ -20,7 +20,7 @@ class Convert {
   static Map<String, String> endTimeLessonMap = {
     '1': '07:45',
     '2': '08:35',
-    '3': '09:25',
+    '3': '09:30',
     '4': '10:20',
     '5': '11:10',
     '6': '12:55',

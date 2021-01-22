@@ -10,7 +10,6 @@ class CalendarView extends StatelessWidget {
   const CalendarView({Key key, this.state}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return BlocBuilder<CalendarBloc, CalendarState>(
       builder: (context, state) {
         if (state is CalendarLoadingDataState)
