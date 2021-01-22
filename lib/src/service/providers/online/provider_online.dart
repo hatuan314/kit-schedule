@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:schedule/src/models/account_model.dart';
 import 'package:schedule/src/service/services.dart';
-import 'package:schedule/src/service/web_service.dart';
+import 'file:///C:/Users/BTThanh/Documents/DevProject/KitProject/kit-schedule/lib/data/data_sources/web_service.dart';
 
 class ProviderOnline {
   final WebService _service = WebService();

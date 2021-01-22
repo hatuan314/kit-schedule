@@ -3,18 +3,20 @@ import 'package:schedule/domain/entities/personal_schedule.dart';
 
 class PersonalScheduleModel extends PersonalSchedule {
   PersonalScheduleModel(
-      {@required String title,
+      {@required String id,
+      @required String title,
       @required String note,
       @required String date,
       @required String times})
-      : super(title: title, note: note, date: date, times: times);
+      : super(id: id, title: title, note: note, date: date, times: times);
 
   factory PersonalScheduleModel.fromJson(Map<String, dynamic> data) {
     return PersonalScheduleModel(
+        id: data['id'].toString(),
         title: data['title'],
         note: data['note'],
         date: data['date'],
-        times: data['time']);
+        times: data['times']);
   }
 
   toJson() {
