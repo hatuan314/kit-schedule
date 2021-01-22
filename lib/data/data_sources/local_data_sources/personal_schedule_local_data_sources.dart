@@ -1,14 +1,14 @@
 
 import 'package:flutter/material.dart';
+import 'package:schedule/data/data_sources/database.dart';
 import 'package:schedule/data/model/personal_schedule_model.dart';
 
-import '../../../src/service/database/database.dart';
 
 class PersonalScheduleLocalDataSource {
   /// Add Personal Schedule Data
   Future insertPersonalSchedule(PersonalScheduleModel schedule) async {
     final sql = '''INSERT INTO ${DatabaseCreator.personaScheduleTable}
-    (date, timer, schedule_name, note) VALUES (?, ?, ?, ?)''';
+    (title, note,date, times) VALUES (?, ?, ?, ?)''';
 
     List<dynamic> params = [
       schedule.title,
@@ -21,10 +21,10 @@ class PersonalScheduleLocalDataSource {
       DatabaseCreator.databaseLog(
           'Add Personal Schedule', sql, null, result, params);
     } catch (e) {
-      debugPrint('ProviderOffline - addScheduleLessonProvider - error {$e}');
+      debugPrint('Personal Local Data source - addScheduleLessonProvider - error {$e}');
     }
   }
-  /// Select All Personal Schedules
+  /// Select All Personal Schedules+
   Future<List<PersonalScheduleModel>> selectAllPersonalSchedule() async {
     final dateSql =
     '''SELECT * FROM ${DatabaseCreator.personaScheduleTable} ORDER BY date ASC''';
@@ -46,8 +46,12 @@ class PersonalScheduleLocalDataSource {
     List<dynamic> params = [date];
     final scheduleData = await db.rawQuery(sql, params);
     List<PersonalScheduleModel> schedules = [];
+    int i = 0;
     for (final node in scheduleData) {
+      print('debug point i =  $i');
+      print('node data : $node');
       PersonalScheduleModel schedule = PersonalScheduleModel.fromJson(node);
+      i++;
       schedules.add(schedule);
     }
     return schedules;

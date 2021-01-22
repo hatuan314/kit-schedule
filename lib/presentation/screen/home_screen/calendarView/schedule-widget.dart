@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:schedule/common/router_list.dart';
 import 'package:schedule/common/themes/theme_color.dart';
 import 'package:schedule/presentation/screen/home_screen/calendarView/widgets/event_item_widget.dart';
 import 'package:schedule/presentation/screen/home_screen/home_bloc/home_bloc.dart';
@@ -196,7 +198,6 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
 
   Widget searchWidget() {
     final dateTime = _events.keys.elementAt(_events.length - 2);
-
     return IconButton(
         icon: Icon(
           Icons.search,
@@ -204,10 +205,11 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
           size: 30,
         ),
         onPressed: () {
-          _calendarController.setSelectedDay(
-            DateTime(dateTime.year, dateTime.month, dateTime.day),
-            runCallback: true,
-          );
+          Navigator.pushNamed(context, RouterList.search);
+          // _calendarController.setSelectedDay(
+          //   DateTime(dateTime.year, dateTime.month, dateTime.day),
+          //   runCallback: true,
+          // );
         });
   }
 

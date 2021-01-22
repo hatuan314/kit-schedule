@@ -53,7 +53,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
         note: event.note,
         times: DateFormat('kk:mm').format(_time),
         date: DateFormat('yyyy-MM-dd').format(_date));
-    print('create todo : ${schedule.toString()}');
+    await useCase.createTodo(schedule);
     yield TodoCreateSuccess();
   }
 }

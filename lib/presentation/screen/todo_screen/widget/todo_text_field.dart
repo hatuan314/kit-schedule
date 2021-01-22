@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:schedule/common/app_constance.dart';
+import 'package:schedule/common/themes/theme_border.dart';
 import 'package:schedule/common/themes/theme_color.dart';
 import 'package:schedule/common/themes/theme_text.dart';
+import 'package:schedule/presentation/screen/todo_screen/todo_screen_constance.dart';
 
 class TodoTextField extends StatelessWidget {
   final Widget widget;
@@ -30,7 +33,7 @@ class TodoTextField extends StatelessWidget {
       children: [
         widget,
         SizedBox(
-          width: ScreenUtil().setWidth(20),
+          width: TodoScreenConstance.spaceSizeBox1,
         ),
         Expanded(
           child: TextFormField(
@@ -38,10 +41,7 @@ class TodoTextField extends StatelessWidget {
             decoration: InputDecoration(
                 hintText: hintText,
                 hintStyle: ThemeText.textStyle,
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: ThemeColor.primaryColor),
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                )),
+                border: ThemBorder.outlineInputBorder),
             autofocus: autofocus,
             textInputAction:textInputAction,
             onEditingComplete: onEditingComplete,

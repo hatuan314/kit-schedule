@@ -56,10 +56,10 @@ class DatabaseCreator {
     final appNotiSql = '''CREATE TABLE $personaScheduleTable
     (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
+      title TEXT,
+      note TEXT,
       date TEXT,
-      timer TEXT,
-      schedule_name TEXT,
-      note TEXT
+      times TEXT
     )''';
 
     await db.execute(appNotiSql);

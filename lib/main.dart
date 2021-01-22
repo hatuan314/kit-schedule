@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:schedule/data/data_sources/database.dart';
 import 'package:schedule/injection.dart';
-import 'package:schedule/src/blocs/blocs.dart';
-import 'package:schedule/src/service/database/database.dart';
-
+import 'package:schedule/presentation/bloc/simple_bloc_delegate.dart';
 import 'presentation/app.dart';
 
 Future main() async {
