@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/common/app_constance.dart';
 import 'package:schedule/common/themes/theme_color.dart';
 import 'package:schedule/common/themes/theme_text.dart';
@@ -30,25 +29,21 @@ class _TodoScreenState extends State<TodoScreen> {
       appBar: AppBar(
         title: Text(
           TodoScreenConstance.appBarTitle,
-          style: ThemeText.titleStyle,
+          style: ThemeText.titleStyle.copyWith(fontSize: TodoScreenConstance.titleSize),
         ),
       ),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(
-              vertical: ScreenUtil().setHeight(40),
-              horizontal: ScreenUtil().setWidth(20)),
+              vertical: TodoScreenConstance.paddingVertical,
+              horizontal: TodoScreenConstance.paddingHorizontal),
           child: BlocConsumer<TodoBloc, TodoState>(
             listener: (context, state) {
               if (state is TodoCreateSuccess)
                 Navigator.pop(context);
-              return SizedBox();
             },
-            // ignore: missing_return
             builder: (context, state) {
-              if (state is TodoInitState)
-                return SizedBox();
-              else if (state is TodoSelectSuccess) {
+              if (state is TodoSelectSuccess) {
                 return SingleChildScrollView(
                   child: Form(
                       key: formKey,
@@ -61,7 +56,7 @@ class _TodoScreenState extends State<TodoScreen> {
                             controller: _titleController,
                             widget: Icon(
                                 Icons.note, size: AppConstance.iconSize),
-                            hintText: 'Title',
+                            hintText: TodoScreenConstance.hinTextTitle,
                             validate: (value) {
                               if (value == null || value.isEmpty)
                                 return TodoScreenConstance.errorNote;
@@ -70,7 +65,7 @@ class _TodoScreenState extends State<TodoScreen> {
                             },
                           ),
                           SizedBox(
-                            height: ScreenUtil().setHeight(20),
+                            height: TodoScreenConstance.spaceSizeBox1,
                           ),
                           TodoTextField(
                             autofocus: false,
@@ -81,11 +76,11 @@ class _TodoScreenState extends State<TodoScreen> {
                               Icons.sticky_note_2,
                               size: AppConstance.iconSize,
                             ),
-                            hintText: 'Note',
-                            maxLine: 5,
+                            hintText: TodoScreenConstance.hinTextNote,
+                            maxLine: TodoScreenConstance.maxLine,
                           ),
                           SizedBox(
-                            height: ScreenUtil().setHeight(20),
+                            height: TodoScreenConstance.spaceSizeBox1
                           ),
                           SelectDateTime(
                             dateTime: state.date,
@@ -98,7 +93,7 @@ class _TodoScreenState extends State<TodoScreen> {
                                 size: AppConstance.iconSize),
                           ),
                           SizedBox(
-                            height: ScreenUtil().setHeight(20),
+                            height: TodoScreenConstance.spaceSizeBox1,
                           ),
                           SelectDateTime(
                             dateTime: state.time,
@@ -111,16 +106,17 @@ class _TodoScreenState extends State<TodoScreen> {
                                 Icons.timer, size: AppConstance.iconSize),
                           ),
                           SizedBox(
-                            height: ScreenUtil().setHeight(50),
+                            height: TodoScreenConstance.spaceSizeBox2,
                           ),
                           SizedBox(
-                            height: ScreenUtil().setHeight(50),
+                            height: TodoScreenConstance.sizeBoxButtonHeight,
                             width: double.infinity,
                             child: RaisedButton(
                               onPressed: _createTodo,
                               child: Text(
                                 TodoScreenConstance.createTodo,
-                                style: ThemeText.textStyle,
+                                style: ThemeText.textStyle.copyWith(
+                                    color: ThemeColor.secondColor),
                               ),
                               color: Colors.lightBlue,
                             ),
@@ -128,7 +124,8 @@ class _TodoScreenState extends State<TodoScreen> {
                         ],
                       )),
                 );
-              }else return SizedBox();
+              } else
+                return SizedBox();
             },
           ),
         ),
