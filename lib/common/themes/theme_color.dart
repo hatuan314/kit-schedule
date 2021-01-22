@@ -18,6 +18,9 @@ class ThemeColor {
 
   static const Color selectedDayBackgroundColor = Colors.red;
   static const Color selectedDayTextColor = Colors.white;
+  static const Color signUpEmailButtonColor = Colors.blueAccent;
+  static const Color signUpButtonColor = Colors.white;
+  static const Color signInButtonColor = Colors.blueAccent;
 
 
 

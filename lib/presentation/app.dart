@@ -8,6 +8,9 @@ import 'package:schedule/presentation/route.dart';
 import 'package:schedule/presentation/screen/home_screen/home_bloc/home_bloc.dart';
 import 'package:schedule/presentation/screen/home_screen/home_screen.dart';
 import 'package:schedule/presentation/screen/todo_screen/todo_screen.dart';
+import 'package:schedule/src/ui/views/register/infor.dart';
+import 'package:schedule/src/ui/views/register/login_screen.dart';
+import 'package:schedule/src/ui/views/register/sign_in_view.dart';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -16,15 +19,15 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
         designSize: Size(375,667),
         child: MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: defaultThemeData(),
-      initialRoute: RouterList.home,
-      routes: {
-        RouterList.home: (context) => BlocProvider<HomeBloc>(
-          create: (_) => getIt<HomeBloc>(),
-          child: HomeScreen(),
+            debugShowCheckedModeBanner: false,
+            theme: defaultThemeData(),
+            initialRoute: RouterList.home,
+            routes: {
+              RouterList.home: (context) => BlocProvider<HomeBloc>(
+                create: (_) => getIt<HomeBloc>(),
+                   child: LoginScreen(),
         ),
-        RouterList.todo:  (context) =>   TodoScreen()
+            RouterList.todo:  (context) =>   TodoScreen()
 
 
       },
