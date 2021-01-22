@@ -38,7 +38,9 @@ class BaseTextForm extends TextFormField {
                     borderSide: BorderSide(
                         color: Colors.blue[800],
                         width: ScUtil.getInstance().setWidth(3)),
-                    borderRadius: BorderRadius.all(Radius.circular(8.0)))),
+                    borderRadius: BorderRadius.all(Radius.circular(8.0))
+                )
+            ),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return "This field is empty";
@@ -46,3 +48,40 @@ class BaseTextForm extends TextFormField {
               return null;
             });
 }
+
+class LoginTextField extends TextFormField {
+  final String labelText;
+  final IconData iconData;
+  final bool obscureText;
+ // final TextStyle height;
+
+  LoginTextField(
+      { this.labelText, this.iconData, this.obscureText})
+      : super(
+      obscureText: obscureText ?? false,
+      style: TextStyle(
+          color: Colors.white,
+          fontSize:13,
+          fontFamily: "MR"),
+      cursorColor: Colors.white,
+
+      decoration: InputDecoration(
+          // errorMaxLines: 2,
+          labelStyle: ThemeText.textStyle,
+          prefixIcon: Icon(iconData, color: Colors.white),
+          fillColor: Colors.grey.withAlpha(90),
+          filled: true,
+           enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8.0))
+           ),
+           focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8.0))),
+      ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return "This field is empty";
+        }
+        return null;
+      });
+}
+

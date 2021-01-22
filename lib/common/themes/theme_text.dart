@@ -4,6 +4,10 @@ import 'package:schedule/common/themes/theme_color.dart';
 import 'package:schedule/presentation/screen/home_screen/home_screen_constance.dart';
 
 class ThemeText {
+  static TextStyle LoginStyle = TextStyle(
+      color: ThemeColor.primaryColor,
+      fontSize: ScreenUtil().setSp(34),
+      fontWeight: FontWeight.w500);
   static TextStyle buttonStyle = TextStyle(
       color: ThemeColor.secondColor,
       fontSize: ScreenUtil().setSp(34),
@@ -13,6 +17,12 @@ class ThemeText {
       color: ThemeColor.primaryColor,
       fontSize: ScreenUtil().setSp(18),
       fontWeight: FontWeight.w500);
+
+  static TextStyle textInforStyle = TextStyle(
+      color: ThemeColor.primaryColor,
+      fontSize: ScreenUtil().setSp(11),
+      fontWeight: FontWeight.w600);
+
   static TextStyle titleStyle =  TextStyle(
       color: ThemeColor.secondColor,
       fontSize: ScreenUtil().setSp(24),

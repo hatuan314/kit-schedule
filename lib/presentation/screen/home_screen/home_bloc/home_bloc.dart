@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:schedule/data/data_sources/share_service.dart';
 import 'package:schedule/domain/entities/animation_entities.dart';
 import 'package:schedule/domain/use_cases/HomeUseCase.dart';
 import 'package:schedule/presentation/screen/home_screen/home_bloc/home_event.dart';
 import 'package:schedule/presentation/screen/home_screen/home_bloc/home_state.dart';
-import 'file:///C:/Users/BTThanh/Documents/DevProject/KitProject/kit-schedule/lib/data/data_sources/share_service.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final HomeUseCase homeUseCase;
