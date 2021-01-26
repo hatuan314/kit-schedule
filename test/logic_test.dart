@@ -28,7 +28,7 @@ saveScheduleSchool(Map scheduleDataMap) async {
           SchoolModel schoolSchedule =
           SchoolModel.fromJsonApi(scheduleJson, date);
           print('${schoolSchedule.toString()}');
-          //await _offline.addScheduleLessonRepo(schoolSchedule);
+          await _offline.addScheduleLessonRepo(schoolSchedule);
         });
     });
   } catch (e) {
@@ -47,9 +47,10 @@ void main() {
     print('$dataJson');
   });
   test('convert json to DB',() async {
-    String dataJson = await new File('${Directory.current.path}/test/response.json').readAsString();
+    String dataJson = await new File('${Directory.current.path}/test/mock_data/CT2.json').readAsString();
     Map data = json.decode(dataJson);
-    //saveScheduleSchool(data['schedule']['dataJson']);
+    //print('$data');
+    saveScheduleSchool(data['schedule']['dataJson']);
   });
 
   test('get data from json', () async {
@@ -61,7 +62,6 @@ void main() {
 
     ScheduleUseCase scheduleUseCase = getIt<ScheduleUseCase>();
     List<SchoolEntity> list= await scheduleUseCase.initData();
-    List<SchoolEntity> list2schoolScheduleEntity= await scheduleUseCase.getScheduleFromDate(list, '1611416400000');
-    print('${list2schoolScheduleEntity}');
+//    print('${list2schoolScheduleEntity}');
   });
 }

@@ -37,6 +37,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+
+    ///todo:get data online
+    /*final AccountModel accountModel =
+    AccountModel(account: 'CT030419', password: 'p02t08c2019');
+    RepositoryOnline _online = RepositoryOnline();
+    _online.fetchScheduleSchoolDataRepo(accountModel).then((value) {
+      Map data = json.decode(value);
+      _saveScheduleSchool(data);
+    });*/
     /*_offline.fetchScheduleSchoolOfflineRepo().then((value) {
       listSchoolModel=value;
       print('$listSchoolModel');

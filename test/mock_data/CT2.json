@@ -1,0 +1,732 @@
+{
+  "status": true,
+  "message": "get dataJson schedule success",
+  "dataJson": {
+    "1623110400000": [
+      {
+        "school": true,
+        "subject": "Lập trình Android cơ bản (có thể thay thế)-2-20 (C2D01.01)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1623283200000": [
+      {
+        "school": true,
+        "subject": "Lập trình Android cơ bản (có thể thay thế)-2-20 (C2D01.01)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1623715200000": [
+      {
+        "school": true,
+        "subject": "Lập trình Android cơ bản (có thể thay thế)-2-20 (C2D01.01)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1623888000000": [
+      {
+        "school": true,
+        "subject": "Lập trình Android cơ bản (có thể thay thế)-2-20 (C2D01.01)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1624320000000": [
+      {
+        "school": true,
+        "subject": "Lập trình Android cơ bản (có thể thay thế)-2-20 (C2D01.01)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1624492800000": [
+      {
+        "school": true,
+        "subject": "Lập trình Android cơ bản (có thể thay thế)-2-20 (C2D01.01)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1624924800000": [
+      {
+        "school": true,
+        "subject": "Lập trình Android cơ bản (có thể thay thế)-2-20 (C2D01.01)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1625097600000": [
+      {
+        "school": true,
+        "subject": "Lập trình Android cơ bản (có thể thay thế)-2-20 (C2D01.01)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1625529600000": [
+      {
+        "school": true,
+        "subject": "Lập trình Android cơ bản (có thể thay thế)-2-20 (C2D01.01)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1625702400000": [
+      {
+        "school": true,
+        "subject": "Lập trình Android cơ bản (có thể thay thế)-2-20 (C2D01.01)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1620086400000": [
+      {
+        "school": true,
+        "subject": "Lập trình Android cơ bản (có thể thay thế)-2-20 (C2D01)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1620259200000": [
+      {
+        "school": true,
+        "subject": "Lập trình Android cơ bản (có thể thay thế)-2-20 (C2D01)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1620691200000": [
+      {
+        "school": true,
+        "subject": "Lập trình Android cơ bản (có thể thay thế)-2-20 (C2D01)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1620864000000": [
+      {
+        "school": true,
+        "subject": "Lập trình Android cơ bản (có thể thay thế)-2-20 (C2D01)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1621296000000": [
+      {
+        "school": true,
+        "subject": "Lập trình Android cơ bản (có thể thay thế)-2-20 (C2D01)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1621468800000": [
+      {
+        "school": true,
+        "subject": "Lập trình Android cơ bản (có thể thay thế)-2-20 (C2D01)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1621900800000": [
+      {
+        "school": true,
+        "subject": "Lập trình Android cơ bản (có thể thay thế)-2-20 (C2D01)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1622073600000": [
+      {
+        "school": true,
+        "subject": "Lập trình Android cơ bản (có thể thay thế)-2-20 (C2D01)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1622505600000": [
+      {
+        "school": true,
+        "subject": "Lập trình Android cơ bản (có thể thay thế)-2-20 (C2D01)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1622678400000": [
+      {
+        "school": true,
+        "subject": "Lập trình Android cơ bản (có thể thay thế)-2-20 (C2D01)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1615161600000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201.2)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1615334400000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201.2)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1615766400000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201.2)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1615939200000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201.2)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1616371200000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201.2)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1616544000000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201.2)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1616976000000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201.2)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1617148800000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201.2)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1617580800000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201.2)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1617753600000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201.2)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1618185600000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201.2)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1618358400000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201.2)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1618790400000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201.2)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1610928000000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201)_1FE",
+        "address": "null",
+        "lesson": "1,2,3"
+      },
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1611100800000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201)_1FE",
+        "address": "null",
+        "lesson": "1,2,3"
+      },
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1611273600000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201)_1FE",
+        "address": "null",
+        "lesson": "1,2,3"
+      },
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1611532800000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201)_1FE",
+        "address": "null",
+        "lesson": "1,2,3"
+      },
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1611705600000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201)_1FE",
+        "address": "null",
+        "lesson": "1,2,3"
+      },
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1611878400000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201)_1FE",
+        "address": "null",
+        "lesson": "1,2,3"
+      },
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1612137600000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201)_1FE",
+        "address": "null",
+        "lesson": "1,2,3"
+      },
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1612310400000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201)_1FE",
+        "address": "null",
+        "lesson": "1,2,3"
+      },
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1613952000000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201)_1FE",
+        "address": "null",
+        "lesson": "1,2,3"
+      },
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1614124800000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201)_1FE",
+        "address": "null",
+        "lesson": "1,2,3"
+      },
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1614297600000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201)_1FE",
+        "address": "null",
+        "lesson": "1,2,3"
+      },
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1614556800000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201)_1FE",
+        "address": "null",
+        "lesson": "1,2,3"
+      },
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1614729600000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201)_1FE",
+        "address": "null",
+        "lesson": "1,2,3"
+      },
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1614816000000": [
+      {
+        "school": true,
+        "subject": "Lập trình driver-2-20 (C201)_1FE",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1615248000000": [
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201.1)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1615507200000": [
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201.1)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1615852800000": [
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201.1)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1616112000000": [
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201.1)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1616457600000": [
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201.1)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1616716800000": [
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201.1)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1617062400000": [
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201.1)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1617321600000": [
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201.1)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1617667200000": [
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201.1)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1617926400000": [
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201.1)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1618272000000": [
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201.1)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1618531200000": [
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201.1)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1618876800000": [
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201.1)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1614902400000": [
+      {
+        "school": true,
+        "subject": "Lập trình nhân Linux-2-20 (C201)",
+        "address": "null",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1623196800000": [
+      {
+        "school": true,
+        "subject": "Phát triển phần mềm trong thẻ thông minh-2-20 (C2D01.01)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1623369600000": [
+      {
+        "school": true,
+        "subject": "Phát triển phần mềm trong thẻ thông minh-2-20 (C2D01.01)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1623801600000": [
+      {
+        "school": true,
+        "subject": "Phát triển phần mềm trong thẻ thông minh-2-20 (C2D01.01)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1623974400000": [
+      {
+        "school": true,
+        "subject": "Phát triển phần mềm trong thẻ thông minh-2-20 (C2D01.01)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1624406400000": [
+      {
+        "school": true,
+        "subject": "Phát triển phần mềm trong thẻ thông minh-2-20 (C2D01.01)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1624579200000": [
+      {
+        "school": true,
+        "subject": "Phát triển phần mềm trong thẻ thông minh-2-20 (C2D01.01)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1625011200000": [
+      {
+        "school": true,
+        "subject": "Phát triển phần mềm trong thẻ thông minh-2-20 (C2D01.01)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1625184000000": [
+      {
+        "school": true,
+        "subject": "Phát triển phần mềm trong thẻ thông minh-2-20 (C2D01.01)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1625616000000": [
+      {
+        "school": true,
+        "subject": "Phát triển phần mềm trong thẻ thông minh-2-20 (C2D01.01)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1625788800000": [
+      {
+        "school": true,
+        "subject": "Phát triển phần mềm trong thẻ thông minh-2-20 (C2D01.01)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1620172800000": [
+      {
+        "school": true,
+        "subject": "Phát triển phần mềm trong thẻ thông minh-2-20 (C2D01)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1620345600000": [
+      {
+        "school": true,
+        "subject": "Phát triển phần mềm trong thẻ thông minh-2-20 (C2D01)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1620777600000": [
+      {
+        "school": true,
+        "subject": "Phát triển phần mềm trong thẻ thông minh-2-20 (C2D01)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1620950400000": [
+      {
+        "school": true,
+        "subject": "Phát triển phần mềm trong thẻ thông minh-2-20 (C2D01)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1621382400000": [
+      {
+        "school": true,
+        "subject": "Phát triển phần mềm trong thẻ thông minh-2-20 (C2D01)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1621555200000": [
+      {
+        "school": true,
+        "subject": "Phát triển phần mềm trong thẻ thông minh-2-20 (C2D01)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1621987200000": [
+      {
+        "school": true,
+        "subject": "Phát triển phần mềm trong thẻ thông minh-2-20 (C2D01)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1622160000000": [
+      {
+        "school": true,
+        "subject": "Phát triển phần mềm trong thẻ thông minh-2-20 (C2D01)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1622592000000": [
+      {
+        "school": true,
+        "subject": "Phát triển phần mềm trong thẻ thông minh-2-20 (C2D01)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1622764800000": [
+      {
+        "school": true,
+        "subject": "Phát triển phần mềm trong thẻ thông minh-2-20 (C2D01)",
+        "address": "null",
+        "lesson": "4,5,6"
+      }
+    ]
+  }
+}
