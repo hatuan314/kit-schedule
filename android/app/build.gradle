@@ -23,7 +23,7 @@ if (flutterVersionName == null) {
 
 apply plugin: 'com.android.application'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
-
+apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 28
 
@@ -32,10 +32,14 @@ android {
             keyAlias 'key0'
             keyPassword 'Hat112358'
             storeFile file(' /Volumes/MYDATA/Dev/Mobile/Project/kit_schedule/kit-schedule/android/keystore.jks')
-
             storePassword 'Hat112358'
         }
-
+        debug {
+            storeFile file("C:\\Users\\Admin\\my-release-key.keystore")
+            storePassword 'android'
+            keyAlias 'hieu'
+            keyPassword 'android'
+        }
     }
     lintOptions {
         disable 'InvalidPackage'
@@ -64,6 +68,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
@@ -85,4 +92,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation platform('com.google.firebase:firebase-bom:26.3.0')
+    implementation 'com.google.firebase:firebase-analytics'
 }

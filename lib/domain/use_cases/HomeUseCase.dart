@@ -4,7 +4,6 @@ import 'package:schedule/presentation/screen/home_screen/home_bloc/home_event.da
 class HomeUseCase {
   AnimationEntity init({AnimationEntity animationEntity, HomeInitEvent event}) {
     animationEntity = AnimationEntity(controller: event.animationController);
-    print('homeusecase: ${animationEntity.toString()}');
     return animationEntity;
   }
 

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:schedule/src/models/model.dart';
 import 'package:schedule/src/service/services.dart';
 
-class ProviderOffline {
+class ScheduleOfflineDataSource {
   /// Add School Schedule Data
-  Future insertSchoolScheduleProvider(SchoolSchedule schedule) async {
+  Future insertSchoolScheduleProvider(SchoolModel schedule) async {
     final sql = '''INSERT INTO ${DatabaseCreator.lessonTable}
     (date, lesson, subject_name, address) VALUES (?, ?, ?, ?)''';
     List<dynamic> params = [
@@ -42,14 +42,14 @@ class ProviderOffline {
   }
 
   /// Select All School Schedules
-  Future<List<SchoolSchedule>> selectAllScheduleLessonProvider() async {
+  Future<List<SchoolModel>> selectAllScheduleLessonProvider() async {
     final dateSql =
         '''SELECT * FROM ${DatabaseCreator.lessonTable} ORDER BY date ASC''';
     final scheduleData = await db.rawQuery(dateSql);
-    List<SchoolSchedule> allSchedules = new List<SchoolSchedule>();
+    List<SchoolModel> allSchedules = new List<SchoolModel>();
     for (final node in scheduleData) {
       String date = node['date'];
-      SchoolSchedule schedule = SchoolSchedule.fromJsonDb(node);
+      SchoolModel schedule = SchoolModel.fromJsonDb(node);
       allSchedules.add(schedule);
     }
 //    debugPrint('RepositoryService - allSchedulesMap: ${allSchedules.length}');
@@ -71,15 +71,15 @@ class ProviderOffline {
   }
 
   /// Select All School Schedules Of Date
-  Future<List<SchoolSchedule>> selectAllSchoolScheudleOfDateProvider(
+  Future<List<SchoolModel>> selectAllSchoolScheudleOfDateProvider(
       String date) async {
     final sql =
         '''SELECT * FROM ${DatabaseCreator.lessonTable} WHERE date = ?''';
     List<dynamic> params = [date];
     final scheduleData = await db.rawQuery(sql, params);
-    List<SchoolSchedule> schedules = [];
+    List<SchoolModel> schedules = [];
     for (final node in scheduleData) {
-      SchoolSchedule schedule = SchoolSchedule.fromJsonDb(node);
+      SchoolModel schedule = SchoolModel.fromJsonDb(node);
       schedules.add(schedule);
     }
     debugPrint('selectAllSchoolScheudleOfDateProvider - schedules: ${schedules.length}');

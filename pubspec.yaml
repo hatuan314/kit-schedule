@@ -59,7 +59,10 @@ dependencies:
   crypto: ^2.1.5
   flutter_screenutil: ^4.0.2+5
   simple_gesture_detector: ^0.1.5
-
+  #google
+  firebase_core: "0.5.0"
+  firebase_auth: "^0.18.0+1"
+  google_sign_in: ^4.5.3
 
 dev_dependencies:
   flutter_test:

@@ -34,10 +34,10 @@ class SearchBloc extends Bloc<SearchEvent,SearchState>{
 
   Stream<SearchState>_mapSearchScheduleEventToState(SearchScheduleEvent event) async* {
     yield SearchLoadingState();
-    List<PersonalSchedule> schedule = List<PersonalSchedule>();
-    schedule.add(PersonalSchedule(title: "Test", note: "Normal Test", times: '18:00', date: '15/2/2021'));
-    schedule.add(PersonalSchedule(title: 'Test 2', note: 'Normal Test 2', times: '5:00', date: '28/12/2020'));
-    schedule.add(PersonalSchedule(title: "Test 3", note: 'Normal Test 3', times: '20:30', date: '30/1/2021'));
+    List<PersonalScheduleEntity> schedule = List<PersonalScheduleEntity>();
+    schedule.add(PersonalScheduleEntity(title: "Test", note: "Normal Test", times: '18:00', date: '15/2/2021'));
+    schedule.add(PersonalScheduleEntity(title: 'Test 2', note: 'Normal Test 2', times: '5:00', date: '28/12/2020'));
+    schedule.add(PersonalScheduleEntity(title: "Test 3", note: 'Normal Test 3', times: '20:30', date: '30/1/2021'));
     yield SearchSuccessState(listSchedule: schedule);
   }
 

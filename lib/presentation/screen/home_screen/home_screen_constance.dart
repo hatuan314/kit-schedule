@@ -9,6 +9,6 @@ class HomeScreenConstance {
 
   static String scheduleTitle = "Schedule";
   static String todoTitle = "Todo";
-  static String logoutTitle = "Todo";
+  static String logoutTitle = "Logout";
   static String syncTitle = "Sync";
 }

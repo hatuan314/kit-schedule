@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:schedule/domain/entities/personal_schedule.dart';
 
-class PersonalScheduleModel extends PersonalSchedule {
+class PersonalScheduleModel extends PersonalScheduleEntity {
   PersonalScheduleModel(
       {@required String id,
       @required String title,

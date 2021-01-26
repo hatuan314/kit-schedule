@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/common/router_list.dart';
 import 'package:schedule/common/themes/theme_data.dart';
 import 'package:schedule/injection.dart';
+import 'package:schedule/presentation/screen/home_screen/calendarView/bloc/calendar_bloc.dart';
 import 'package:schedule/presentation/screen/home_screen/home_bloc/home_bloc.dart';
 import 'package:schedule/presentation/screen/home_screen/home_screen.dart';
 import 'package:schedule/presentation/screen/search_screen/bloc/search_bloc.dart';
@@ -25,11 +26,16 @@ class MyApp extends StatelessWidget {
 
           debugShowCheckedModeBanner: false,
           theme: defaultThemeData(),
-          initialRoute: RouterList.welcome,
+          initialRoute: RouterList.home,
           routes: {
             RouterList.home: (context) =>
-                BlocProvider<HomeBloc>(
-                  create: (_) => getIt<HomeBloc>(),
+                MultiBlocProvider(providers: [
+                  BlocProvider<HomeBloc>(
+                  create: (_) => getIt<HomeBloc>()),
+                  BlocProvider<CalendarBloc>(
+                  create: (_) => getIt<CalendarBloc>())
+
+                ],
                   child: HomeScreen(),
                 ),
             RouterList.todo: (context) =>
@@ -45,7 +51,7 @@ class MyApp extends StatelessWidget {
                   getIt<SearchBloc>()
                     ..add(SearchInitEvent()),
                   child: SearchScreen(),),
-            RouterList.welcome: (context)=> SignInView(),
+            RouterList.welcome: (context)=> Infor(),
             RouterList.login: (context)=> LoginScreen(),
           },
         ));

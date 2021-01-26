@@ -1,48 +1,33 @@
-class SchoolSchedule {
-  String _date;
-  String _lesson;
-  String _subject;
-  String _address;
+import 'package:flutter/cupertino.dart';
+import 'package:schedule/domain/entities/school_entity.dart';
 
-  SchoolSchedule(this._date, this._lesson, this._subject, this._address);
+class SchoolModel extends SchoolEntity {
 
-  String get date => _date;
 
-  set date(String value) {
-    _date = value;
-  }
+  SchoolModel({
+    @required String subject,
+    @required String address,
+    @required String date,
+    @required String lesson})
+      : super(subject: subject, address: address, date: date, lesson: lesson);
 
-  String get lesson => _lesson;
-
-  String get address => _address;
-
-  set address(String value) {
-    _address = value;
-  }
-
-  String get subject => _subject;
-
-  set subject(String value) {
-    _subject = value;
-  }
-
-  set lesson(String value) {
-    _lesson = value;
-  }
-
-  SchoolSchedule.fromJsonApi(Map<String, dynamic> data, this._date) {
+  SchoolModel.fromJsonApi(Map<String, dynamic> data, String date) {
+    this.date = date;
     this.subject = data['subject'];
     this.lesson = data['lesson'];
     this.address = data['address'];
   }
 
-  SchoolSchedule.fromJsonDb(Map<String, dynamic> data) {
+  SchoolModel.fromJsonDb(Map<String, dynamic> data) {
     this.date = data['date'];
     this.subject = data['subject_name'];
     this.lesson = data['lesson'];
     this.address = data['address'];
   }
-
+  SchoolEntity toEntity()
+  {
+    return SchoolEntity(date: this.date, lesson: this.lesson, subject: this.subject, address: this.address);
+  }
   toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
     data['date'] = this.date;
@@ -51,10 +36,9 @@ class SchoolSchedule {
     data['subject'] = this.subject;
     return data;
   }
-
   @override
   String toString() {
-    // TODO: implement toString
-    return super.toString();
+    return 'SchoolScheduleEntity{date: $date, lesson: $lesson, subject: $subject, address: $address}';
   }
+
 }

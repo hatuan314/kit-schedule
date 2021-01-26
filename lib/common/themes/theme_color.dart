@@ -33,6 +33,9 @@ class ThemeColor {
 
   static const Color addTodoButtonColor = Colors.red;
 
+  /// icon of list item view
+  static const Color scheduleType = Colors.red;
+  static const Color todoType = Colors.yellow;
 
 
 

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,12 +8,16 @@ import 'package:schedule/common/assets_constance.dart';
 import 'package:schedule/common/router_list.dart';
 import 'package:schedule/common/themes/theme_color.dart';
 import 'package:schedule/common/themes/theme_text.dart';
+import 'package:schedule/data/repositories_impl/offline_schedule_repository_impl.dart';
 import 'package:schedule/presentation/screen/home_screen/calendarView/schedule-widget.dart';
 import 'package:schedule/presentation/screen/home_screen/home_bloc/home_bloc.dart';
 import 'package:schedule/presentation/screen/home_screen/home_bloc/home_event.dart';
 import 'package:schedule/presentation/screen/home_screen/home_bloc/home_state.dart';
 import 'package:schedule/presentation/screen/home_screen/home_screen_constance.dart';
 import 'package:schedule/presentation/screen/home_screen/widgets/AccountWidget.dart';
+import 'package:schedule/src/models/account_model.dart';
+import 'package:schedule/src/models/school_schedule.dart';
+import 'package:schedule/src/service/repositors/online/repository_online.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -25,9 +31,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final Duration duration =
       const Duration(milliseconds: HomeScreenConstance.animationDuration);
 
+  OfflineRepositoryImpl _offline = OfflineRepositoryImpl();
+  List<SchoolModel> listSchoolModel;
+
   @override
   void initState() {
     super.initState();
+    /*_offline.fetchScheduleSchoolOfflineRepo().then((value) {
+      listSchoolModel=value;
+      print('$listSchoolModel');
+    });*/
     _controller = AnimationController(
         vsync: this,
         duration: const Duration(
@@ -211,5 +224,21 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         ),
       ),
     );
+  }
+  _saveScheduleSchool(Map scheduleDataMap) async {
+    List dates = scheduleDataMap.keys.toList();
+    try {
+      dates.forEach((date) {
+        if (scheduleDataMap[date] != null || scheduleDataMap[date].length > 0)
+          scheduleDataMap[date].forEach((scheduleJson) async {
+            SchoolModel schoolSchedule =
+            SchoolModel.fromJsonApi(scheduleJson, date);
+            await _offline.addScheduleLessonRepo(schoolSchedule);
+            print('save data done');
+          });
+      });
+    } catch (e) {
+      debugPrint('RegisterBloc - saveSchoolSchedule - error: {$e}');
+    }
   }
 }

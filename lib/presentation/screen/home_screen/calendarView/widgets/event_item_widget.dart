@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:schedule/presentation/screen/home_screen/calendarView/widgets/TimeDurationWidget.dart';
-import 'package:schedule/presentation/screen/home_screen/calendarView/widgets/colonWidget.dart';
+import 'package:schedule/common/themes/theme_color.dart';
+import 'package:schedule/presentation/screen/home_screen/calendarView/widgets/time_duration_widget.dart';
+import 'package:schedule/presentation/screen/home_screen/calendarView/widgets/colon_widget.dart';
 
 class EventItemWidget extends StatelessWidget {
   final String startTime;
@@ -22,7 +23,7 @@ class EventItemWidget extends StatelessWidget {
             Container(
 //                        height: 60.h,
                 margin: EdgeInsets.symmetric(horizontal: 20),
-                child: ColonWidget()),
+                child: Icon(Icons.circle,color: ThemeColor.scheduleType,size: 20.w,)),
             Flexible(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
