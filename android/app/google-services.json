@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "90947568218",
+    "project_id": "kitschedule-244ae",
+    "storage_bucket": "kitschedule-244ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:90947568218:android:b8333bc9ffbe3adb7f8e63",
+        "android_client_info": {
+          "package_name": "kma.hatuan314.schedule"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "90947568218-t3s0n2uop93jkd3su7ptdhi7phq026sc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kma.hatuan314.schedule",
+            "certificate_hash": "e122c11de4597c5f75747d6789c2e09304e3c980"
+          }
+        },
+        {
+          "client_id": "90947568218-24hv1f9m9s9s2oj8427p089q1c21ptsr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRMevvugD54tbNK_bE5gwR20AslhXv_1Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "90947568218-24hv1f9m9s9s2oj8427p089q1c21ptsr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

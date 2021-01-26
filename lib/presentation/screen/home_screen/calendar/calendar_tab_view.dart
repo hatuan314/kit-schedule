@@ -1,7 +1,8 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/presentation/screen/home_screen/calendar/schedule_view.dart';
-import 'package:schedule/src/blocs/blocs.dart';
+
 import 'package:schedule/src/utils/utils.dart';
 
 class CalendarView extends StatelessWidget {
@@ -10,7 +11,6 @@ class CalendarView extends StatelessWidget {
   const CalendarView({Key key, this.state}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return BlocBuilder<CalendarBloc, CalendarState>(
       builder: (context, state) {
         if (state is CalendarLoadingDataState)
@@ -58,3 +58,4 @@ class CalendarView extends StatelessWidget {
     );
   }
 }
+*/

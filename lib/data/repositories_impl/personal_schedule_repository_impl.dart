@@ -8,7 +8,7 @@ class PersonalScheduleRepositoryImpl implements PersonalScheduleRepository{
 
   PersonalScheduleRepositoryImpl({@required this.dataSource});
   @override
-  Future addPersonalSchedule(PersonalSchedule schedule) async{
+  Future addPersonalSchedule(PersonalScheduleEntity schedule) async{
     dataSource.insertPersonalSchedule(schedule.toModel());
   }
 
@@ -19,17 +19,17 @@ class PersonalScheduleRepositoryImpl implements PersonalScheduleRepository{
   }
 
   @override
-  Future<List<PersonalSchedule>> fetchAllPersonalSchedule() async{
+  Future<List<PersonalScheduleEntity>> fetchAllPersonalSchedule() async{
     return await dataSource.selectAllPersonalSchedule();
   }
 
   @override
-  Future<List<PersonalSchedule>> fetchAllPersonalScheduleOfDate(String date)async {
+  Future<List<PersonalScheduleEntity>> fetchAllPersonalScheduleOfDate(String date)async {
     return await dataSource.selectAllPersonalScheduleOfDate(date);
   }
 
   @override
-  Future<int> updatePersonalScheduleData(PersonalSchedule schedule)async {
+  Future<int> updatePersonalScheduleData(PersonalScheduleEntity schedule)async {
     return await dataSource.updatePersonalScheduleData(schedule.toModel());
   }
 

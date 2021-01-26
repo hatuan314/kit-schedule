@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,12 +8,16 @@ import 'package:schedule/common/assets_constance.dart';
 import 'package:schedule/common/router_list.dart';
 import 'package:schedule/common/themes/theme_color.dart';
 import 'package:schedule/common/themes/theme_text.dart';
+import 'package:schedule/data/repositories_impl/offline_schedule_repository_impl.dart';
 import 'package:schedule/presentation/screen/home_screen/calendarView/schedule-widget.dart';
 import 'package:schedule/presentation/screen/home_screen/home_bloc/home_bloc.dart';
 import 'package:schedule/presentation/screen/home_screen/home_bloc/home_event.dart';
 import 'package:schedule/presentation/screen/home_screen/home_bloc/home_state.dart';
 import 'package:schedule/presentation/screen/home_screen/home_screen_constance.dart';
 import 'package:schedule/presentation/screen/home_screen/widgets/AccountWidget.dart';
+import 'package:schedule/src/models/account_model.dart';
+import 'package:schedule/src/models/school_schedule.dart';
+import 'package:schedule/src/service/repositors/online/repository_online.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -19,18 +25,22 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  bool isCollapsed = true;
   double screenWidth, screenHeight;
+
   AnimationController _controller;
-  AppBar appBar = AppBar();
-  double borderRadius = 0.0;
-  int currentScreen = 0;
   final Duration duration =
       const Duration(milliseconds: HomeScreenConstance.animationDuration);
+
+  OfflineRepositoryImpl _offline = OfflineRepositoryImpl();
+  List<SchoolModel> listSchoolModel;
 
   @override
   void initState() {
     super.initState();
+    /*_offline.fetchScheduleSchoolOfflineRepo().then((value) {
+      listSchoolModel=value;
+      print('$listSchoolModel');
+    });*/
     _controller = AnimationController(
         vsync: this,
         duration: const Duration(
@@ -42,48 +52,34 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   void dispose() {
     _controller.dispose();
-
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    screenHeight = size.height;
-    screenWidth = size.width;
+    screenHeight = ScreenUtil().screenHeight;
+    screenWidth = ScreenUtil().screenWidth;
     return BlocConsumer<HomeBloc, HomeState>(
       listener: (BuildContext context, state) {
         if (state is AddTodoState) {
           Navigator.pushNamed(context, RouterList.todo);
-        } else if (state is SwitchDrawerState) {
-          if (isCollapsed) {
-            _controller.forward();
-            borderRadius = 16.0;
-          } else {
-            _controller.reverse();
-            borderRadius = 0.0;
-          }
-          isCollapsed = !isCollapsed;
-        } else if (state is UserTapState) {
-          if (!isCollapsed) {
-            _controller.reverse();
-            borderRadius = 0.0;
-            isCollapsed = true;
-          }
         }
       },
       builder: (BuildContext context, state) {
-        if (state is HomeInitialState) return body();
+        if (state is HomeInitialState) {
+          return body(state);
+        }
         return Container();
       },
     );
   }
 
-  Widget body() {
+  Widget body(HomeState state) {
     return WillPopScope(
       onWillPop: () async {
-        if (!isCollapsed) {
-          BlocProvider.of<HomeBloc>(context).add(SwitchDrawerEvent());
+        if (!state.animationEntity.isCollapsed) {
+          BlocProvider.of<HomeBloc>(context)
+              .add(SwitchDrawerEvent(isCollapsed: true));
           return false;
         } else
           return true;
@@ -94,13 +90,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           children: <Widget>[
             menu(context),
             AnimatedPositioned(
-                left: isCollapsed ? 0 : 0.6 * screenWidth,
-                right: isCollapsed ? 0 : -0.2 * screenWidth,
-                top: isCollapsed ? 0 : screenHeight * 0.1,
-                bottom: isCollapsed ? 0 : screenHeight * 0.1,
+                left: state.animationEntity.isCollapsed ? 0 : 0.6 * screenWidth,
+                right:
+                    state.animationEntity.isCollapsed ? 0 : -0.2 * screenWidth,
+                top: state.animationEntity.isCollapsed ? 0 : screenHeight * 0.1,
+                bottom:
+                    state.animationEntity.isCollapsed ? 0 : screenHeight * 0.1,
                 duration: duration,
                 curve: Curves.fastOutSlowIn,
-                child: dashboard(context)),
+                child: dashboard(state: state, context: context)),
           ],
         ),
       ),
@@ -136,7 +134,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ListTile(
                         leading: Icon(AssetsConstance.scheduleIcon,
                             color: ThemeColor.secondColor),
-                        title: Text('Schedule',
+                        title: Text(HomeScreenConstance.scheduleTitle,
+
+                            ///todo
                             style: ThemeText.menuItemTextStyle),
                         onTap: () {
                           BlocProvider.of<HomeBloc>(context)
@@ -147,7 +147,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ListTile(
                         leading:
                             Icon(AssetsConstance.todoIcon, color: Colors.white),
-                        title: Text('Todo', style: ThemeText.menuItemTextStyle),
+                        title: Text(HomeScreenConstance.todoTitle,
+                            style: ThemeText.menuItemTextStyle),
+                        onTap: () {
+                          BlocProvider.of<HomeBloc>(context)
+                              .add(AddTodoEvent());
+                        },
+                      ),
+                      SizedBox(height: 10),
+                      SizedBox(height: 10),
+                      ListTile(
+                        leading:
+                            Icon(AssetsConstance.logoutIcon, color: Colors.white),
+                        title: Text(HomeScreenConstance.logoutTitle,
+                            style: ThemeText.menuItemTextStyle),
                         onTap: () {
                           BlocProvider.of<HomeBloc>(context)
                               .add(AddTodoEvent());
@@ -163,33 +176,33 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  Widget dashboard(context) {
+  Widget dashboard({HomeState state, context}) {
     return SafeArea(
       child: Material(
-        borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+        borderRadius: BorderRadius.all(
+            Radius.circular(state.animationEntity.borderRadius)),
         type: MaterialType.card,
         animationDuration: duration,
         color: Theme.of(context).scaffoldBackgroundColor,
         elevation: 8,
         child: GestureDetector(
           onTap: () {
-            if (!isCollapsed) {
+            if (!state.animationEntity.isCollapsed) {
               BlocProvider.of<HomeBloc>(context).add(UserTapEvent());
             }
           },
           child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+            borderRadius: BorderRadius.all(
+                Radius.circular(state.animationEntity.borderRadius)),
             child: Scaffold(
               body: Container(
-
                 child: Stack(
                   children: [
-                    ScheduleWidget(drawerController: _controller,),
-                    (isCollapsed)
-                        ? SizedBox(
-                            width: 0,
-                            height: 0,
-                          )
+                    ScheduleWidget(
+                      drawerController: _controller,
+                    ),
+                    (state.animationEntity.isCollapsed)
+                        ? SizedBox()
                         : Container(
                             color: Colors.transparent,
                             width: ScreenUtil().screenWidth,
@@ -203,12 +216,29 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   Navigator.pushNamed(context, RouterList.todo);
                 },
                 child: Icon(Icons.add),
-                backgroundColor: Colors.red,
+                backgroundColor: ThemeColor.addTodoButtonColor
+                    .withOpacity(state.animationEntity.addTodoButtonOpacity),
               ),
             ),
           ),
         ),
       ),
     );
+  }
+  _saveScheduleSchool(Map scheduleDataMap) async {
+    List dates = scheduleDataMap.keys.toList();
+    try {
+      dates.forEach((date) {
+        if (scheduleDataMap[date] != null || scheduleDataMap[date].length > 0)
+          scheduleDataMap[date].forEach((scheduleJson) async {
+            SchoolModel schoolSchedule =
+            SchoolModel.fromJsonApi(scheduleJson, date);
+            await _offline.addScheduleLessonRepo(schoolSchedule);
+            print('save data done');
+          });
+      });
+    } catch (e) {
+      debugPrint('RegisterBloc - saveSchoolSchedule - error: {$e}');
+    }
   }
 }

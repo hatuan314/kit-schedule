@@ -17,7 +17,7 @@ class SearchInitState extends SearchState {
   List<Object> get props => [searchHistory];
 }
 class SearchSuccessState extends SearchState {
-  final List<PersonalSchedule> listSchedule;
+  final List<PersonalScheduleEntity> listSchedule;
 
   SearchSuccessState({@required this.listSchedule});
   @override

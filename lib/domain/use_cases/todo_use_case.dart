@@ -6,10 +6,10 @@ class TodoUseCase {
   final PersonalScheduleRepository repository;
   TodoUseCase({@required this.repository});
 
-  Future createTodo(PersonalSchedule schedule) async{
+  Future createTodo(PersonalScheduleEntity schedule) async{
     await repository.addPersonalSchedule(schedule);
   }
-  Future<List<PersonalSchedule>> fetchPersonalScheduleOfDate(String date) async{
+  Future<List<PersonalScheduleEntity>> fetchPersonalScheduleOfDate(String date) async{
     return await repository.fetchAllPersonalScheduleOfDate(date);
   }
 

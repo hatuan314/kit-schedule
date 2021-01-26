@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rounded_date_picker/rounded_picker.dart';
@@ -158,7 +159,7 @@ class SearchView extends StatelessWidget {
   }
 
   _schoolScheduleWidget(SearchState state) {
-    List<SchoolSchedule> schoolSchedulesOfDay = state.schedulesSchoolOfDay;
+    List<SchoolModel> schoolSchedulesOfDay = state.schedulesSchoolOfDay;
     return Card(
       semanticContainer: true,
 //      color: Color(0xffFCFAF3),
@@ -208,7 +209,7 @@ class SearchView extends StatelessWidget {
                     shrinkWrap: true,
                     itemCount: schoolSchedulesOfDay.length,
                     itemBuilder: (context, index) {
-                      SchoolSchedule schedule = schoolSchedulesOfDay[index];
+                      SchoolModel schedule = schoolSchedulesOfDay[index];
                       return _schoolScheduleElementWidget(schedule);
                     })
                 : Align(
@@ -227,7 +228,7 @@ class SearchView extends StatelessWidget {
     );
   }
 
-  Widget _schoolScheduleElementWidget(SchoolSchedule schedule) {
+  Widget _schoolScheduleElementWidget(SchoolModel schedule) {
     List lessonNumbers = schedule.lesson.split(',');
     String startLesson = lessonNumbers[0];
     String endLesson = lessonNumbers[lessonNumbers.length - 1];
@@ -456,3 +457,4 @@ class SearchView extends StatelessWidget {
     BlocProvider.of<SearchBloc>(context)..add(SearchButtonOnPress(selectDay));
   }
 }
+*/

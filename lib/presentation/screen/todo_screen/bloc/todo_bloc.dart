@@ -48,7 +48,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
 
   Stream<TodoState> _mapCreateTodoEventToState(CreateTodoEvent event) async* {
     yield TodoInitState();
-    PersonalSchedule schedule = PersonalSchedule(
+    PersonalScheduleEntity schedule = PersonalScheduleEntity(
         title: event.title,
         note: event.note,
         times: DateFormat('kk:mm').format(_time),

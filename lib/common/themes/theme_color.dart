@@ -17,7 +17,7 @@ class ThemeColor {
   static Color todayTextColor = Colors.yellow[700];
 
   //static const Color weekendDayBackgroundColor = Colors.red;
-  static  Color weekendTextColor = Colors.red[700];
+  static  Color weekendTextColor = Colors.redAccent;
 
   static const Color selectedDayBackgroundColor = Color.fromRGBO(253, 147, 113, 1);
   static const Color selectedDayTextColor = Colors.white;
@@ -29,8 +29,13 @@ class ThemeColor {
   static const Color weekDayTextColor = Colors.white;
 
   static const Color holidayTextColorBackgroundColor = Color.fromRGBO(253, 147, 113, 1);
-  static const Color eventdayTextColor = Colors.white;
+  static const Color eventDayTextColor = Colors.white;
 
+  static const Color addTodoButtonColor = Colors.red;
+
+  /// icon of list item view
+  static const Color scheduleType = Colors.red;
+  static const Color todoType = Colors.yellow;
 
 
 

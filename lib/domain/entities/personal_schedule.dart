@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:schedule/data/model/personal_schedule_model.dart';
 
-class PersonalSchedule {
+class PersonalScheduleEntity {
   final String id;
   final String title;
   final String note;
   final String date;
   final String times;
 
-  PersonalSchedule(
+  PersonalScheduleEntity(
       {this.id,
       @required this.title,
       @required this.note,
       @required this.times,
       @required this.date});
 
-  toModel() => PersonalScheduleModel(
-      id: id, title: title, note: note, date: date, times: times);
+    toModel() => PersonalScheduleModel(
+        id: id, title: title, note: note, date: date, times: times);
 
   @override
   String toString() {

@@ -13,11 +13,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc({@required this.homeUseCase});
 
   @override
-  HomeState get initialState => HomeInitialState();
+  HomeState get initialState => HomeLoadingState();
 
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
-    // TODO: implement mapEventToState
     if (event is HomeInitEvent) {
       yield* mapHomeInitEventToState(event);
     } else if (event is UserTapEvent) {
@@ -27,7 +26,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     } else if (event is OpenDrawerEvent) {
       yield* mapOpenDrawerEventToState();
     } else if (event is SwitchDrawerEvent) {
-      yield* mapSwitchDrawerEventToState();
+      yield* mapSwitchDrawerEventToState(event);
+    } else if (event is ScrollEvent) {
+      yield* mapScrollEventToState();
+    } else if (event is ScrollStopEvent) {
+      yield* mapScrollStopEventToState();
     } else if (event is SignOutOnPressEvent) {
       ShareService shareService = ShareService();
       try {
@@ -47,25 +50,39 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     yield HomeInitialState(animationEntity: animationEntity);
   }
 
-
   Stream<HomeState> mapAddTodoEventToState() async* {
     yield SwitchDrawerState();
+    homeUseCase.switchDrawer(animationEntity: animationEntity);
     yield AddTodoState();
-    yield HomeInitialState();
+    yield HomeInitialState(animationEntity: animationEntity);
   }
 
-  Stream<HomeState>mapSwitchDrawerEventToState() async* {
+  Stream<HomeState>mapSwitchDrawerEventToState(SwitchDrawerEvent event) async* {
     yield SwitchDrawerState();
-    yield HomeInitialState();
+    homeUseCase.switchDrawer(animationEntity: animationEntity);
+    yield HomeInitialState(animationEntity: animationEntity);
   }
   Stream<HomeState>mapOpenDrawerEventToState() async* {
     yield OpenDrawerState();
-    yield HomeInitialState();
+    yield HomeInitialState(animationEntity: animationEntity);
   }
 
-  Stream<HomeState>mapUserTapEventToState() async*{
+  Stream<HomeState> mapUserTapEventToState() async*{
     yield UserTapState();
-    yield HomeInitialState();
+    homeUseCase.closeDrawer(animationEntity: animationEntity);
+    yield HomeInitialState(animationEntity: animationEntity);
+  }
+
+  Stream<HomeState> mapScrollEventToState()async* {
+    yield ScrollState();
+    homeUseCase.setAddTodoButtonBlur(animationEntity: animationEntity);
+    yield HomeInitialState(animationEntity: animationEntity);
+
+  }
+  Stream<HomeState> mapScrollStopEventToState()async* {
+    yield ScrollStopState();
+    homeUseCase.resetAddTodoButtonOpacity(animationEntity: animationEntity);
+    yield HomeInitialState(animationEntity: animationEntity);
   }
 }
 

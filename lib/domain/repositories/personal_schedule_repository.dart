@@ -2,14 +2,14 @@ import 'package:schedule/domain/entities/personal_schedule.dart';
 
 abstract class PersonalScheduleRepository {
 
-  Future<List<PersonalSchedule>> fetchAllPersonalSchedule();
+  Future<List<PersonalScheduleEntity>> fetchAllPersonalSchedule();
 
-  Future<List<PersonalSchedule>> fetchAllPersonalScheduleOfDate(
+  Future<List<PersonalScheduleEntity>> fetchAllPersonalScheduleOfDate(
       String date);
 
-  Future addPersonalSchedule(PersonalSchedule schedule);
+  Future addPersonalSchedule(PersonalScheduleEntity schedule);
 
-  Future<int> updatePersonalScheduleData(PersonalSchedule schedule);
+  Future<int> updatePersonalScheduleData(PersonalScheduleEntity schedule);
 
   Future<int> deletePersonalSchedule(String id);
 }

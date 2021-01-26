@@ -1,0 +1,573 @@
+{
+  "message": "get data schedule success",
+  "schedule": {
+    "dataJson": {
+      "1611330000000": [
+        {
+          "lesson": "10,11,12",
+          "address": "202_TA2 TA2",
+          "subject": "Quản trị mạng máy tính-2-19 (A15C3-02)"
+        }
+      ],
+      "1611416400000": [
+        {
+          "lesson": "1,2,3",
+          "address": "san bai San",
+          "subject": "Giáo dục thể chất 4-2-19 (A15C3D1-09)-bóng rổ"
+        },
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Toán rời rạc-2-19 (A15C3D1-08)"
+        }
+      ],
+      "1611502800000": [
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Điện tử tương tự và điện tử số-2-19 (A15C3-05)"
+        },
+        {
+          "lesson": "10,11,12",
+          "address": "202_TA2 TA2",
+          "subject": "Quản trị mạng máy tính-2-19 (A15C3-02)"
+        }
+      ],
+      "1611589200000": [
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Otomat và ngôn ngữ hình thức-2-19 (A15C3-05)"
+        },
+        {
+          "lesson": "10,11,12",
+          "address": "202_TA2 TA2",
+          "subject": "Quản trị mạng máy tính-2-19 (A15C3-02)"
+        },
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Toán rời rạc-2-19 (A15C3D1-08)"
+        }
+      ],
+      "1611934800000": [
+        {
+          "lesson": "10,11,12",
+          "address": "202_TA2 TA2",
+          "subject": "Quản trị mạng máy tính-2-19 (A15C3-02)"
+        }
+      ],
+      "1612021200000": [
+        {
+          "lesson": "1,2,3",
+          "address": "san bai San",
+          "subject": "Giáo dục thể chất 4-2-19 (A15C3D1-09)-bóng rổ"
+        },
+        {
+          "lesson": "10,11,12",
+          "address": "202_TA2 TA2",
+          "subject": "Quản trị mạng máy tính-2-19 (A15C3-02)"
+        },
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Toán rời rạc-2-19 (A15C3D1-08)"
+        }
+      ],
+      "1612107600000": [
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Lý thuyết cơ sở dữ liệu-2-19 (A15C3-06)"
+        },
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Otomat và ngôn ngữ hình thức-2-19 (A15C3-05)"
+        },
+        {
+          "lesson": "10,11,12",
+          "address": "202_TA2 TA2",
+          "subject": "Quản trị mạng máy tính-2-19 (A15C3-02)"
+        }
+      ],
+      "1613662800000": [
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Otomat và ngôn ngữ hình thức-2-19 (A15C3-05)"
+        }
+      ],
+      "1613749200000": [
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Otomat và ngôn ngữ hình thức-2-19 (A15C3-05)"
+        },
+        {
+          "lesson": "10,11,12",
+          "address": "201_TA4(THCNTT) TA4",
+          "subject": "Quản trị mạng máy tính-2-19 (A15C3-02.1)"
+        }
+      ],
+      "1613835600000": [
+        {
+          "lesson": "1,2,3",
+          "address": "san bai San",
+          "subject": "Giáo dục thể chất 4-2-19 (A15C3D1-09)-bóng rổ"
+        },
+        {
+          "lesson": "7,8,9",
+          "address": "206_TA3(THCNTT) TA4",
+          "subject": "Quản trị mạng máy tính-2-19 (A15C3-02.1)"
+        },
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Toán rời rạc-2-19 (A15C3D1-08)"
+        }
+      ],
+      "1613922000000": [
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Điện tử tương tự và điện tử số-2-19 (A15C3-05)"
+        }
+      ],
+      "1614008400000": [
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Lý thuyết cơ sở dữ liệu-2-19 (A15C3-06)"
+        },
+        {
+          "lesson": "7,8,9",
+          "address": "202_TA4(THCNTT) TA4",
+          "subject": "Quản trị mạng máy tính-2-19 (A15C3-02.1)"
+        }
+      ],
+      "1614267600000": [
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Otomat và ngôn ngữ hình thức-2-19 (A15C3-05)"
+        }
+      ],
+      "1614354000000": [
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Otomat và ngôn ngữ hình thức-2-19 (A15C3-05)"
+        },
+        {
+          "lesson": "10,11,12",
+          "address": "201_TA4(THCNTT) TA4",
+          "subject": "Quản trị mạng máy tính-2-19 (A15C3-02.1)"
+        }
+      ],
+      "1614440400000": [
+        {
+          "lesson": "1,2,3",
+          "address": "san bai San",
+          "subject": "Giáo dục thể chất 4-2-19 (A15C3D1-09)-bóng rổ"
+        },
+        {
+          "lesson": "7,8,9",
+          "address": "206_TA3(THCNTT) TA4",
+          "subject": "Quản trị mạng máy tính-2-19 (A15C3-02.1)"
+        },
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Toán rời rạc-2-19 (A15C3D1-08)"
+        }
+      ],
+      "1614526800000": [
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Điện tử tương tự và điện tử số-2-19 (A15C3-05)"
+        }
+      ],
+      "1614613200000": [
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Lý thuyết cơ sở dữ liệu-2-19 (A15C3-06)"
+        },
+        {
+          "lesson": "7,8,9",
+          "address": "202_TA4(THCNTT) TA4",
+          "subject": "Quản trị mạng máy tính-2-19 (A15C3-02.1)"
+        }
+      ],
+      "1614872400000": [
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Otomat và ngôn ngữ hình thức-2-19 (A15C3-05)"
+        }
+      ],
+      "1614958800000": [
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Otomat và ngôn ngữ hình thức-2-19 (A15C3-05)"
+        },
+        {
+          "lesson": "10,11,12",
+          "address": "201_TA4(THCNTT) TA4",
+          "subject": "Quản trị mạng máy tính-2-19 (A15C3-02.1)"
+        }
+      ],
+      "1615045200000": [
+        {
+          "lesson": "1,2,3",
+          "address": "san bai San",
+          "subject": "Giáo dục thể chất 4-2-19 (A15C3D1-09)-bóng rổ"
+        },
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Toán rời rạc-2-19 (A15C3D1-08)"
+        }
+      ],
+      "1615131600000": [
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Điện tử tương tự và điện tử số-2-19 (A15C3-05)"
+        }
+      ],
+      "1615218000000": [
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Điện tử tương tự và điện tử số-2-19 (A15C3-05)"
+        },
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Lý thuyết cơ sở dữ liệu-2-19 (A15C3-06)"
+        }
+      ],
+      "1615477200000": [
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Otomat và ngôn ngữ hình thức-2-19 (A15C3-05)"
+        }
+      ],
+      "1615563600000": [
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Otomat và ngôn ngữ hình thức-2-19 (A15C3-05)"
+        }
+      ],
+      "1615650000000": [
+        {
+          "lesson": "1,2,3",
+          "address": "san bai San",
+          "subject": "Giáo dục thể chất 4-2-19 (A15C3D1-09)-bóng rổ"
+        },
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Toán rời rạc-2-19 (A15C3D1-08)"
+        }
+      ],
+      "1615736400000": [
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Điện tử tương tự và điện tử số-2-19 (A15C3-05)"
+        }
+      ],
+      "1615822800000": [
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Điện tử tương tự và điện tử số-2-19 (A15C3-05)"
+        },
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Lý thuyết cơ sở dữ liệu-2-19 (A15C3-06)"
+        }
+      ],
+      "1614082000000": [
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Otomat và ngôn ngữ hình thức-2-19 (A15C3-05)"
+        }
+      ],
+      "1614168400000": [
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Otomat và ngôn ngữ hình thức-2-19 (A15C3-05)"
+        }
+      ],
+      "1614254800000": [
+        {
+          "lesson": "1,2,3",
+          "address": "san bai San",
+          "subject": "Giáo dục thể chất 4-2-19 (A15C3D1-09)-bóng rổ"
+        },
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Toán rời rạc-2-19 (A15C3D1-08)"
+        }
+      ],
+      "1614341200000": [
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Điện tử tương tự và điện tử số-2-19 (A15C3-05)"
+        }
+      ],
+      "1614427600000": [
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Điện tử tương tự và điện tử số-2-19 (A15C3-05)"
+        },
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Lý thuyết cơ sở dữ liệu-2-19 (A15C3-06)"
+        }
+      ],
+      "1614686800000": [
+        {
+          "lesson": "10,11,12",
+          "address": "103_TA2 TA1",
+          "subject": "Điện tử tương tự và điện tử số-2-19 (A15C3-05)"
+        },
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Otomat và ngôn ngữ hình thức-2-19 (A15C3-05)"
+        }
+      ],
+      "1614773200000": [
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Điện tử tương tự và điện tử số-2-19 (A15C3-05)"
+        },
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Lý thuyết cơ sở dữ liệu-2-19 (A15C3-06)"
+        }
+      ],
+      "1614859600000": [
+        {
+          "lesson": "1,2,3",
+          "address": "san bai San",
+          "subject": "Giáo dục thể chất 4-2-19 (A15C3D1-09)-bóng rổ"
+        },
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Toán rời rạc-2-19 (A15C3D1-08)"
+        }
+      ],
+      "1614946000000": [
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Điện tử tương tự và điện tử số-2-19 (A15C3-05)"
+        },
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Lý thuyết cơ sở dữ liệu-2-19 (A15C3-06)"
+        }
+      ],
+      "1615032400000": [
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Lý thuyết cơ sở dữ liệu-2-19 (A15C3-06)"
+        }
+      ],
+      "1615291600000": [
+        {
+          "lesson": "10,11,12",
+          "address": "103_TA2 TA1",
+          "subject": "Điện tử tương tự và điện tử số-2-19 (A15C3-05)"
+        },
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Otomat và ngôn ngữ hình thức-2-19 (A15C3-05)"
+        }
+      ],
+      "1615464400000": [
+        {
+          "lesson": "1,2,3",
+          "address": "san bai San",
+          "subject": "Giáo dục thể chất 4-2-19 (A15C3D1-09)-bóng rổ"
+        },
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Toán rời rạc-2-19 (A15C3D1-08)"
+        }
+      ],
+      "1615550800000": [
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Lý thuyết cơ sở dữ liệu-2-19 (A15C3-06)"
+        }
+      ],
+      "1615637200000": [
+        {
+          "lesson": "7,8,9,10,11,12",
+          "address": "304_TA4(THĐTVT) TA4",
+          "subject": "Điện tử tương tự và điện tử số-2-19 (A15C3-05.2)"
+        },
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Lý thuyết cơ sở dữ liệu-2-19 (A15C3-06)"
+        }
+      ],
+      "1615896400000": [
+        {
+          "lesson": "7,8,9",
+          "address": "103_TA2 TA1",
+          "subject": "Otomat và ngôn ngữ hình thức-2-19 (A15C3-05)"
+        }
+      ],
+      "1615069200000": [
+        {
+          "lesson": "1,2,3",
+          "address": "san bai San",
+          "subject": "Giáo dục thể chất 4-2-19 (A15C3D1-09)-bóng rổ"
+        },
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Toán rời rạc-2-19 (A15C3D1-08)"
+        }
+      ],
+      "1615155600000": [
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Lý thuyết cơ sở dữ liệu-2-19 (A15C3-06)"
+        }
+      ],
+      "1615242000000": [
+        {
+          "lesson": "7,8,9,10,11,12",
+          "address": "304_TA4(THĐTVT) TA4",
+          "subject": "Điện tử tương tự và điện tử số-2-19 (A15C3-05.2)"
+        },
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Lý thuyết cơ sở dữ liệu-2-19 (A15C3-06)"
+        }
+      ],
+      "1616278800000": [
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Chương trình dịch-2-19 (CT303)"
+        }
+      ],
+      "1616365200000": [
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Chương trình dịch-2-19 (CT303)"
+        }
+      ],
+      "1616970000000": [
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Chương trình dịch-2-19 (CT303)"
+        }
+      ],
+      "1617488400000": [
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Chương trình dịch-2-19 (CT303)"
+        }
+      ],
+      "1617574800000": [
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Chương trình dịch-2-19 (CT303)"
+        }
+      ],
+      "1618698000000": [
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Chương trình dịch-2-19 (CT303)"
+        }
+      ],
+      "1618784400000": [
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Chương trình dịch-2-19 (CT303)"
+        }
+      ],
+      "1619302800000": [
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Chương trình dịch-2-19 (CT303)"
+        }
+      ],
+      "1619389200000": [
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Chương trình dịch-2-19 (CT303)"
+        }
+      ],
+      "1619907600000": [
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Chương trình dịch-2-19 (CT303)"
+        }
+      ],
+      "1619994000000": [
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Chương trình dịch-2-19 (CT303)"
+        }
+      ],
+      "1620512400000": [
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Chương trình dịch-2-19 (CT303)"
+        }
+      ],
+      "1620598800000": [
+        {
+          "lesson": "4,5,6",
+          "address": "202_TA2 TA2",
+          "subject": "Chương trình dịch-2-19 (CT303)"
+        }
+      ]
+    }
+  }
+}

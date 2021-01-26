@@ -1,12 +1,21 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/common/router_list.dart';
 import 'package:schedule/common/themes/theme_color.dart';
+import 'package:schedule/domain/entities/school_entity.dart';
+import 'package:schedule/presentation/screen/home_screen/calendarView/bloc/calendar_bloc.dart';
+import 'package:schedule/presentation/screen/home_screen/calendarView/bloc/calendar_event.dart';
+import 'package:schedule/presentation/screen/home_screen/calendarView/bloc/calendar_state.dart';
 import 'package:schedule/presentation/screen/home_screen/calendarView/widgets/event_item_widget.dart';
+import 'package:schedule/presentation/screen/home_screen/calendarView/widgets/search_widget.dart';
 import 'package:schedule/presentation/screen/home_screen/home_bloc/home_bloc.dart';
 import 'package:schedule/presentation/screen/home_screen/home_bloc/home_event.dart';
+import 'package:schedule/src/utils/convert.dart';
 import 'package:schedule/utils/table_calendar-2.3.3/table_calendar.dart';
 
 class ScheduleWidget extends StatefulWidget {
@@ -22,6 +31,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
     with TickerProviderStateMixin {
   double distance;
   double initial;
+  ScrollController scrollController = ScrollController();
   final Map<DateTime, List> _holidays = {
     DateTime(2020, 1, 1): ['New Year\'s Day'],
     DateTime(2020, 1, 6): ['Epiphany'],
@@ -29,114 +39,21 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
     DateTime(2020, 4, 21): ['Easter Sunday'],
     DateTime(2020, 4, 22): ['Easter Monday'],
   };
-  Map<DateTime, List> _events;
-  List _selectedEvents;
+
   AnimationController _animationController;
   CalendarController _calendarController;
-
+  bool listenInitial = false;
   @override
   void initState() {
     super.initState();
-    final _selectedDay = DateTime.now();
-
-    _events = {
-      _selectedDay.subtract(Duration(days: 30)): [
-        'Event A0',
-        'Event A0',
-        'Event A0',
-        'Event A0',
-        'Event A0',
-        'Event B0',
-        'Event C0'
-      ],
-      _selectedDay.subtract(Duration(days: 27)): ['Event A1'],
-      _selectedDay.subtract(Duration(days: 20)): [
-        'Event A2',
-        'Event B2',
-        'Event C2',
-        'Event D2',
-        'Event D2',
-        'Event D2',
-        'Event D2',
-        'Event D2',
-        'Event D2',
-        'Event D2',
-      ],
-      _selectedDay.subtract(Duration(days: 16)): ['Event A3', 'Event B3'],
-      _selectedDay.subtract(Duration(days: 10)): [
-        'Event A4',
-        'Event A4',
-        'Event A4',
-        'Event A4',
-        'Event B4',
-        'Event C4'
-      ],
-      _selectedDay.subtract(Duration(days: 4)): [
-        'Event A5',
-        'Event B5',
-        'Event B5',
-        'Event B5',
-        'Event B5',
-        'Event B5',
-        'Event C5'
-      ],
-      _selectedDay.subtract(Duration(days: 2)): ['Event A6', 'Event B6'],
-      _selectedDay: ['Event A7', 'Event B7', 'Event C7', 'Event D7'],
-      _selectedDay.add(Duration(days: 1)): [
-        'Event A8',
-        'Event B8',
-        'Event C8',
-        'Event D8'
-      ],
-      _selectedDay.add(Duration(days: 3)):
-          Set.from(['Event A9', 'Event A9', 'Event B9']).toList(),
-      _selectedDay.add(Duration(days: 7)): [
-        'Event A10',
-        'Event B10',
-        'Event B10',
-        'Event B10',
-        'Event C10'
-      ],
-      _selectedDay.add(Duration(days: 11)): [
-        'Event A11',
-        'Event B11',
-        'Event B11',
-        'Event B11',
-        'Event B11'
-      ],
-      _selectedDay.add(Duration(days: 17)): [
-        'Event A12',
-        'Event B12',
-        'Event B12',
-        'Event C12',
-        'Event D12'
-      ],
-      _selectedDay.add(Duration(days: 22)): [
-        'Event A13',
-        'Event B13',
-        'Event B13',
-        'Event B13',
-        'Event B13',
-        'Event B13'
-      ],
-      _selectedDay.add(Duration(days: 26)): [
-        'Event A14',
-        'Event B14',
-        'Event B14',
-        'Event B14',
-        'Event B14',
-        'Event B14',
-        'Event C14'
-      ],
-    };
-
-    _selectedEvents = _events[_selectedDay] ?? [];
+    BlocProvider.of<CalendarBloc>(context).add(CalendarInitEvent());
+    BlocProvider.of<CalendarBloc>(context).add(CalendarSelectDayEvent(selectedDay: Convert.dateConvert(DateTime.now())));
     _calendarController = CalendarController();
-
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 400),
     );
+
 
     _animationController.forward();
   }
@@ -150,9 +67,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
 
   void _onDaySelected(DateTime day, List events, List holidays) {
     print('CALLBACK: _onDaySelected');
-    setState(() {
-      _selectedEvents = events;
-    });
+
   }
 
   void _onVisibleDaysChanged(
@@ -168,20 +83,46 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          // Switch out 2 lines below to play with TableCalendar's settings
-          //-----------------------
-          //_buildTableCalendar(),
-          _buildTableCalendarWithBuilders(),
-          const SizedBox(height: 8.0),
-          //_buildButtons(),
-          const SizedBox(height: 8.0),
-          Expanded(child: _buildEventList()),
-        ],
-      ),
-    );
+        body: BlocConsumer<CalendarBloc, CalendarState>(
+            listener: (BuildContext context, state) {
+              if(state is CalendarInitState && listenInitial == false)
+                {
+                  WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                    scrollController.addListener(() {
+                      ///scrolling
+                      BlocProvider.of<HomeBloc>(context).add(ScrollEvent());
+                    });
+                    scrollController.position.isScrollingNotifier.addListener(() {
+                      if (!scrollController.position.isScrollingNotifier.value) {
+                        /// scroll stop
+                        BlocProvider.of<HomeBloc>(context).add(ScrollStopEvent());
+                      } else {
+                        ///print('scroll is started');
+                      }
+                    });
+                  });
+                  listenInitial=true;
+                }
+            },
+            builder: (BuildContext context, state) {
+              if (state is CalendarInitState) {
+                return Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    // Switch out 2 lines below to play with TableCalendar's settings
+                    //-----------------------
+                    //_buildTableCalendar(),
+                    _buildTableCalendarWithBuilders(
+                        allEvent: state.allSchedule),
+                    const SizedBox(height: 8.0),
+                    //_buildButtons(),
+                    const SizedBox(height: 8.0),
+                    Expanded(child: _buildEventList(state)),
+                  ],
+                );
+              }
+              return Container();
+            }));
   }
 
   Widget drawerNavigationWidget() {
@@ -196,65 +137,15 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
         });
   }
 
-  Widget searchWidget() {
-    final dateTime = _events.keys.elementAt(_events.length - 2);
-    return IconButton(
-        icon: Icon(
-          Icons.search,
-          color: ThemeColor.secondColor,
-          size: 30,
-        ),
-        onPressed: () {
-          Navigator.pushNamed(context, RouterList.search);
-          // _calendarController.setSelectedDay(
-          //   DateTime(dateTime.year, dateTime.month, dateTime.day),
-          //   runCallback: true,
-          // );
-        });
-  }
-
-  // Simple TableCalendar configuration (using Styles)
-  /*Widget _buildTableCalendar() {
-    return TableCalendar(
-      drawerWidget: drawerNavigationWidget(),
-      searchWidget: searchWidget(),
-      calendarController: _calendarController,
-      events: _events,
-      holidays: _holidays,
-      startingDayOfWeek: StartingDayOfWeek.monday,
-      calendarStyle: CalendarStyle(
-        selectedColor: Colors.deepOrange[400],
-        todayColor: Colors.deepOrange[200],
-        markersColor: Colors.blue,
-        outsideDaysVisible: true,
-      ),
-      headerStyle: HeaderStyle(
-        drawerWidgetVisible: true,
-        searchWidgetVisible: true,
-        formatButtonVisible: false,
-        rightChevronVisible: false,
-        leftChevronVisible: false,
-        formatButtonTextStyle:
-        TextStyle().copyWith(color: Colors.white, fontSize: 15.0),
-        formatButtonDecoration: BoxDecoration(
-          color: Colors.deepOrange[400],
-          borderRadius: BorderRadius.circular(16.0),
-        ),
-      ),
-      headerVisible: true,
-      onDaySelected: _onDaySelected,
-      onVisibleDaysChanged: _onVisibleDaysChanged,
-      onCalendarCreated: _onCalendarCreated,
-    );
-  }
-*/
   // More advanced TableCalendar configuration (using Builders & Styles)
-  Widget _buildTableCalendarWithBuilders() {
+  Widget _buildTableCalendarWithBuilders({Map<DateTime, dynamic> allEvent}) {
     return TableCalendar(
       drawerWidget: drawerNavigationWidget(),
-      searchWidget: searchWidget(),
+      searchWidget: searchWidget(() {
+        Navigator.pushNamed(context, RouterList.search);
+      }),
       calendarController: _calendarController,
-      events: _events,
+      events: allEvent,
       holidays: _holidays,
       initialCalendarFormat: CalendarFormat.month,
       formatAnimation: FormatAnimation.slide,
@@ -268,10 +159,10 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
         highlightToday: false,
         outsideDaysVisible: false,
         //selectedStyle: TextStyle().copyWith(color: ThemeColor.selectedDayBackgroundColor),
-        weekendStyle: TextStyle().copyWith(color: Colors.red),
+        weekendStyle: TextStyle().copyWith(color: ThemeColor.weekendTextColor),
         weekdayStyle: TextStyle().copyWith(color: ThemeColor.weekDayTextColor),
         eventDayStyle:
-            TextStyle().copyWith(color: ThemeColor.eventdayTextColor),
+            TextStyle().copyWith(color: ThemeColor.eventDayTextColor),
         //outsideStyle: TextStyle().copyWith(color: Colors.lightBlue),
       ),
       daysOfWeekStyle: DaysOfWeekStyle(
@@ -356,6 +247,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
       ),
       onDaySelected: (date, events, holidays) {
         _onDaySelected(date, events, holidays);
+        BlocProvider.of<CalendarBloc>(context).add(CalendarSelectDayEvent(selectedDay: date));
         _animationController.forward(from: 0.0);
       },
       onVisibleDaysChanged: _onVisibleDaysChanged,
@@ -397,26 +289,8 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
     );
   }
 
-  Widget _buildButtons() {
-    final dateTime = _events.keys.elementAt(_events.length - 2);
+  Widget _buildEventList(CalendarInitState state) {
 
-    return Column(
-      children: <Widget>[
-        RaisedButton(
-          child: Text(
-              'Set day ${dateTime.day}-${dateTime.month}-${dateTime.year}'),
-          onPressed: () {
-            _calendarController.setSelectedDay(
-              DateTime(dateTime.year, dateTime.month, dateTime.day),
-              runCallback: true,
-            );
-          },
-        ),
-      ],
-    );
-  }
-
-  Widget _buildEventList() {
     return Container(
       width: ScreenUtil().screenWidth,
       padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -424,7 +298,6 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
           color: ThemeColor.secondColor,
           borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
       child: Column(
-
         children: [
           GestureDetector(
             onPanStart: (DragStartDetails details) {
@@ -436,18 +309,16 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
             onPanEnd: (DragEndDetails details) {
               initial = 0.0;
               print(distance);
-              if(distance<-20)
-                {
-                  setState(() {
-                    _calendarController.setCalendarFormat(CalendarFormat.twoWeeks);
-                  });
-                } else if(distance>20)
-                  {
-                    setState(() {
-                      _calendarController.setCalendarFormat(CalendarFormat.month);
-                    });
-                  }
-
+              if (distance < -5) {
+                setState(() {
+                  _calendarController
+                      .setCalendarFormat(CalendarFormat.twoWeeks);
+                });
+              } else if (distance > 5) {
+                setState(() {
+                  _calendarController.setCalendarFormat(CalendarFormat.month);
+                });
+              }
               //+ve distance signifies a drag from left to right(start to end)
               //-ve distance signifies a drag from right to left(end to start)
             },
@@ -460,14 +331,22 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
               ),
             ),
           ),
-
           Expanded(
-            child: ListView.builder(
-              itemCount: _selectedEvents.length,
-              itemBuilder: (context, position) {
-                return EventItemWidget();
+            child: (state.listScheduleOfDay!=null) ? ListView.builder(
+              controller: scrollController,
+              itemCount: state.listScheduleOfDay.length,
+              itemBuilder: (context, index) {
+                List lessonNumbers = state.listScheduleOfDay[index].lesson.split(',');
+                String startLesson = lessonNumbers[0];
+                String endLesson = lessonNumbers[lessonNumbers.length - 1];
+                return EventItemWidget(
+                  startTime: Convert.startTimeLessonMap[startLesson],
+                  endTime: Convert.endTimeLessonMap[endLesson],
+                  title: state.listScheduleOfDay[index].subject,
+                  note: state.listScheduleOfDay[index].address,
+                );
               },
-            ),
+            ) : Text('No data')
           )
         ],
       ),

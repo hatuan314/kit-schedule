@@ -18,30 +18,36 @@ class HomeInitEvent extends HomeEvent{
 
   HomeInitEvent({@required this.animationController});
   @override
-  // TODO: implement props
   List<Object> get props => [animationController];
 }
 
 class UserTapEvent extends HomeEvent {
   @override
-  // TODO: implement props
   List<Object> get props => [];
 }class SwitchDrawerEvent extends HomeEvent {
+  final bool isCollapsed;
+
+  SwitchDrawerEvent({this.isCollapsed});
   @override
-  // TODO: implement props
   List<Object> get props => [];
 }
   class OpenDrawerEvent extends HomeEvent {
   @override
-  // TODO: implement props
   List<Object> get props => [];
-}class SignOutOnPressEvent extends HomeEvent {
+}
+class SignOutOnPressEvent extends HomeEvent {
   @override
-  // TODO: implement props
+  List<Object> get props => [];
+}
+class ScrollEvent extends HomeEvent {
+  @override
+  List<Object> get props => [];
+}
+class ScrollStopEvent extends HomeEvent {
+  @override
   List<Object> get props => [];
 }
 class AddTodoEvent extends HomeEvent {
   @override
-  // TODO: implement props
   List<Object> get props => throw UnimplementedError();
 }
