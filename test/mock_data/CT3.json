@@ -1,0 +1,912 @@
+{
+  "status": true,
+  "message": "get dataJson schedule success",
+  "dataJson": {
+    "1620345600000": [
+      {
+        "school": true,
+        "subject": "Hệ thống thông tin di động-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1620950400000": [
+      {
+        "school": true,
+        "subject": "Hệ thống thông tin di động-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1621296000000": [
+      {
+        "school": true,
+        "subject": "Hệ thống thông tin di động-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Tiếng Anh 2-2-20 (A16C4D314)",
+        "address": "102_TA2 TA2",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1622160000000": [
+      {
+        "school": true,
+        "subject": "Hệ thống thông tin di động-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Tiếng Anh 2-2-20 (A16C4D314)",
+        "address": "102_TA2 TA2",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1622764800000": [
+      {
+        "school": true,
+        "subject": "Hệ thống thông tin di động-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Tiếng Anh 2-2-20 (A16C4D314)",
+        "address": "102_TA2 TA2",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1623024000000": [
+      {
+        "school": true,
+        "subject": "Hệ thống thông tin di động-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1623628800000": [
+      {
+        "school": true,
+        "subject": "Hệ thống thông tin di động-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1624233600000": [
+      {
+        "school": true,
+        "subject": "Hệ thống thông tin di động-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1624838400000": [
+      {
+        "school": true,
+        "subject": "Hệ thống thông tin di động-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1626220800000": [
+      {
+        "school": true,
+        "subject": "Hệ thống thông tin di động-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Tiếng Anh 2-2-20 (A16C4D314)",
+        "address": "102_TA2 TA2",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1626393600000": [
+      {
+        "school": true,
+        "subject": "Hệ thống thông tin di động-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Tiếng Anh 2-2-20 (A16C4D314)",
+        "address": "102_TA2 TA2",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1625443200000": [
+      {
+        "school": true,
+        "subject": "Hệ thống viễn thông-2-20 (A15C310.1)",
+        "address": "303_TA4(THĐTVT) TA4",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1626048000000": [
+      {
+        "school": true,
+        "subject": "Hệ thống viễn thông-2-20 (A15C310.1)",
+        "address": "303_TA4(THĐTVT) TA4",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1620172800000": [
+      {
+        "school": true,
+        "subject": "Hệ thống viễn thông-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1620777600000": [
+      {
+        "school": true,
+        "subject": "Hệ thống viễn thông-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1621382400000": [
+      {
+        "school": true,
+        "subject": "Hệ thống viễn thông-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1621987200000": [
+      {
+        "school": true,
+        "subject": "Hệ thống viễn thông-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Tiếng Anh 2-2-20 (A16C4D314)",
+        "address": "102_TA2 TA2",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1622592000000": [
+      {
+        "school": true,
+        "subject": "Hệ thống viễn thông-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Tiếng Anh 2-2-20 (A16C4D314)",
+        "address": "102_TA2 TA2",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1623196800000": [
+      {
+        "school": true,
+        "subject": "Hệ thống viễn thông-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Tiếng Anh 2-2-20 (A16C4D314)",
+        "address": "102_TA2 TA2",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1623801600000": [
+      {
+        "school": true,
+        "subject": "Hệ thống viễn thông-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Tiếng Anh 2-2-20 (A16C4D314)",
+        "address": "102_TA2 TA2",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1624406400000": [
+      {
+        "school": true,
+        "subject": "Hệ thống viễn thông-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Tiếng Anh 2-2-20 (A16C4D314)",
+        "address": "102_TA2 TA2",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1625011200000": [
+      {
+        "school": true,
+        "subject": "Hệ thống viễn thông-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Tiếng Anh 2-2-20 (A16C4D314)",
+        "address": "102_TA2 TA2",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1625616000000": [
+      {
+        "school": true,
+        "subject": "Hệ thống viễn thông-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Tiếng Anh 2-2-20 (A16C4D314)",
+        "address": "102_TA2 TA2",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1611100800000": [
+      {
+        "school": true,
+        "subject": "Kiến trúc máy tính-2-20 (A15C3D210)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1611705600000": [
+      {
+        "school": true,
+        "subject": "Kiến trúc máy tính-2-20 (A15C3D210)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1612310400000": [
+      {
+        "school": true,
+        "subject": "Kiến trúc máy tính-2-20 (A15C3D210)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1614124800000": [
+      {
+        "school": true,
+        "subject": "Kiến trúc máy tính-2-20 (A15C3D210)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1614729600000": [
+      {
+        "school": true,
+        "subject": "Kiến trúc máy tính-2-20 (A15C3D210)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1615334400000": [
+      {
+        "school": true,
+        "subject": "Kiến trúc máy tính-2-20 (A15C3D210)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1615939200000": [
+      {
+        "school": true,
+        "subject": "Kiến trúc máy tính-2-20 (A15C3D210)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1616544000000": [
+      {
+        "school": true,
+        "subject": "Kiến trúc máy tính-2-20 (A15C3D210)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1617148800000": [
+      {
+        "school": true,
+        "subject": "Kiến trúc máy tính-2-20 (A15C3D210)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1617753600000": [
+      {
+        "school": true,
+        "subject": "Kiến trúc máy tính-2-20 (A15C3D210)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1618358400000": [
+      {
+        "school": true,
+        "subject": "Kiến trúc máy tính-2-20 (A15C3D210)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1620086400000": [
+      {
+        "school": true,
+        "subject": "Kỹ thuật truyền số liệu-2-20 (A15C3D210)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Tiếng Anh 2-2-20 (A16C4D314)",
+        "address": "102_TA2 TA2",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1620691200000": [
+      {
+        "school": true,
+        "subject": "Kỹ thuật truyền số liệu-2-20 (A15C3D210)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Tiếng Anh 2-2-20 (A16C4D314)",
+        "address": "102_TA2 TA2",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1621555200000": [
+      {
+        "school": true,
+        "subject": "Kỹ thuật truyền số liệu-2-20 (A15C3D210)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1622073600000": [
+      {
+        "school": true,
+        "subject": "Kỹ thuật truyền số liệu-2-20 (A15C3D210)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1622678400000": [
+      {
+        "school": true,
+        "subject": "Kỹ thuật truyền số liệu-2-20 (A15C3D210)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1623283200000": [
+      {
+        "school": true,
+        "subject": "Kỹ thuật truyền số liệu-2-20 (A15C3D210)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1623888000000": [
+      {
+        "school": true,
+        "subject": "Kỹ thuật truyền số liệu-2-20 (A15C3D210)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1624492800000": [
+      {
+        "school": true,
+        "subject": "Kỹ thuật truyền số liệu-2-20 (A15C3D210)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1611273600000": [
+      {
+        "school": true,
+        "subject": "Nguyên lý hệ điều hành-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1611878400000": [
+      {
+        "school": true,
+        "subject": "Nguyên lý hệ điều hành-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1614297600000": [
+      {
+        "school": true,
+        "subject": "Nguyên lý hệ điều hành-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1615507200000": [
+      {
+        "school": true,
+        "subject": "Nguyên lý hệ điều hành-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1616112000000": [
+      {
+        "school": true,
+        "subject": "Nguyên lý hệ điều hành-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1616716800000": [
+      {
+        "school": true,
+        "subject": "Nguyên lý hệ điều hành-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1617321600000": [
+      {
+        "school": true,
+        "subject": "Nguyên lý hệ điều hành-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1617926400000": [
+      {
+        "school": true,
+        "subject": "Nguyên lý hệ điều hành-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1618185600000": [
+      {
+        "school": true,
+        "subject": "Nguyên lý hệ điều hành-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1618531200000": [
+      {
+        "school": true,
+        "subject": "Nguyên lý hệ điều hành-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1623369600000": [
+      {
+        "school": true,
+        "subject": "Phát triển ứng dụng web-2-20 (A15C310.1)",
+        "address": "null",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Tiếng Anh 2-2-20 (A16C4D314)",
+        "address": "102_TA2 TA2",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1623974400000": [
+      {
+        "school": true,
+        "subject": "Phát triển ứng dụng web-2-20 (A15C310.1)",
+        "address": "null",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Tiếng Anh 2-2-20 (A16C4D314)",
+        "address": "102_TA2 TA2",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1624579200000": [
+      {
+        "school": true,
+        "subject": "Phát triển ứng dụng web-2-20 (A15C310.1)",
+        "address": "null",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Tiếng Anh 2-2-20 (A16C4D314)",
+        "address": "102_TA2 TA2",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1625184000000": [
+      {
+        "school": true,
+        "subject": "Phát triển ứng dụng web-2-20 (A15C310.1)",
+        "address": "null",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Tiếng Anh 2-2-20 (A16C4D314)",
+        "address": "102_TA2 TA2",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1625788800000": [
+      {
+        "school": true,
+        "subject": "Phát triển ứng dụng web-2-20 (A15C310.1)",
+        "address": "null",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Tiếng Anh 2-2-20 (A16C4D314)",
+        "address": "102_TA2 TA2",
+        "lesson": "1,2,3"
+      }
+    ],
+    "1620604800000": [
+      {
+        "school": true,
+        "subject": "Phát triển ứng dụng web-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1620864000000": [
+      {
+        "school": true,
+        "subject": "Phát triển ứng dụng web-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1621209600000": [
+      {
+        "school": true,
+        "subject": "Phát triển ứng dụng web-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1621814400000": [
+      {
+        "school": true,
+        "subject": "Phát triển ứng dụng web-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1622419200000": [
+      {
+        "school": true,
+        "subject": "Phát triển ứng dụng web-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1610928000000": [
+      {
+        "school": true,
+        "subject": "Phân tích, thiết kế hệ thống-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1611532800000": [
+      {
+        "school": true,
+        "subject": "Phân tích, thiết kế hệ thống-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1612137600000": [
+      {
+        "school": true,
+        "subject": "Phân tích, thiết kế hệ thống-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1613952000000": [
+      {
+        "school": true,
+        "subject": "Phân tích, thiết kế hệ thống-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1614556800000": [
+      {
+        "school": true,
+        "subject": "Phân tích, thiết kế hệ thống-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1615161600000": [
+      {
+        "school": true,
+        "subject": "Phân tích, thiết kế hệ thống-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1615766400000": [
+      {
+        "school": true,
+        "subject": "Phân tích, thiết kế hệ thống-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1616371200000": [
+      {
+        "school": true,
+        "subject": "Phân tích, thiết kế hệ thống-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1616976000000": [
+      {
+        "school": true,
+        "subject": "Phân tích, thiết kế hệ thống-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1611014400000": [
+      {
+        "school": true,
+        "subject": "Tiếng Anh chuyên ngành (CNTT)-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1611187200000": [
+      {
+        "school": true,
+        "subject": "Tiếng Anh chuyên ngành (CNTT)-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1611619200000": [
+      {
+        "school": true,
+        "subject": "Tiếng Anh chuyên ngành (CNTT)-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1611792000000": [
+      {
+        "school": true,
+        "subject": "Tiếng Anh chuyên ngành (CNTT)-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1612224000000": [
+      {
+        "school": true,
+        "subject": "Tiếng Anh chuyên ngành (CNTT)-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1614038400000": [
+      {
+        "school": true,
+        "subject": "Tiếng Anh chuyên ngành (CNTT)-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1614211200000": [
+      {
+        "school": true,
+        "subject": "Tiếng Anh chuyên ngành (CNTT)-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1614643200000": [
+      {
+        "school": true,
+        "subject": "Tiếng Anh chuyên ngành (CNTT)-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1614816000000": [
+      {
+        "school": true,
+        "subject": "Tiếng Anh chuyên ngành (CNTT)-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1615248000000": [
+      {
+        "school": true,
+        "subject": "Tiếng Anh chuyên ngành (CNTT)-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1615420800000": [
+      {
+        "school": true,
+        "subject": "Tiếng Anh chuyên ngành (CNTT)-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1615852800000": [
+      {
+        "school": true,
+        "subject": "Tiếng Anh chuyên ngành (CNTT)-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1616025600000": [
+      {
+        "school": true,
+        "subject": "Tiếng Anh chuyên ngành (CNTT)-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1616457600000": [
+      {
+        "school": true,
+        "subject": "Tiếng Anh chuyên ngành (CNTT)-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1616630400000": [
+      {
+        "school": true,
+        "subject": "Tiếng Anh chuyên ngành (CNTT)-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1617062400000": [
+      {
+        "school": true,
+        "subject": "Tiếng Anh chuyên ngành (CNTT)-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1617235200000": [
+      {
+        "school": true,
+        "subject": "Tiếng Anh chuyên ngành (CNTT)-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1617667200000": [
+      {
+        "school": true,
+        "subject": "Tiếng Anh chuyên ngành (CNTT)-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1617840000000": [
+      {
+        "school": true,
+        "subject": "Tiếng Anh chuyên ngành (CNTT)-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1618272000000": [
+      {
+        "school": true,
+        "subject": "Tiếng Anh chuyên ngành (CNTT)-2-20 (C302)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1621900800000": [
+      {
+        "school": true,
+        "subject": "Xử lý tín hiệu số-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1622505600000": [
+      {
+        "school": true,
+        "subject": "Xử lý tín hiệu số-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1623110400000": [
+      {
+        "school": true,
+        "subject": "Xử lý tín hiệu số-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1623715200000": [
+      {
+        "school": true,
+        "subject": "Xử lý tín hiệu số-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1624320000000": [
+      {
+        "school": true,
+        "subject": "Xử lý tín hiệu số-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1624924800000": [
+      {
+        "school": true,
+        "subject": "Xử lý tín hiệu số-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1625529600000": [
+      {
+        "school": true,
+        "subject": "Xử lý tín hiệu số-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1626134400000": [
+      {
+        "school": true,
+        "subject": "Xử lý tín hiệu số-2-20 (A15C310)",
+        "address": "102_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ]
+  }
+}

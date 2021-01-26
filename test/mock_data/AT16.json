@@ -1,0 +1,472 @@
+{
+  "status": true,
+  "message": "get dataJson schedule success",
+  "dataJson": {
+    "1611014400000": [
+      {
+        "school": true,
+        "subject": "Lịch sử Đảng cộng sản Việt Nam-2-20 (A16C4D307)",
+        "address": "104_TA1 TA1",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Lý thuyết cơ sở dữ liệu-2-20 (A16C405)",
+        "address": "104_TA1 TA1",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1611619200000": [
+      {
+        "school": true,
+        "subject": "Lịch sử Đảng cộng sản Việt Nam-2-20 (A16C4D307)",
+        "address": "104_TA1 TA1",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Lý thuyết cơ sở dữ liệu-2-20 (A16C405)",
+        "address": "104_TA1 TA1",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1612224000000": [
+      {
+        "school": true,
+        "subject": "Lịch sử Đảng cộng sản Việt Nam-2-20 (A16C4D307)",
+        "address": "104_TA1 TA1",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Lý thuyết cơ sở dữ liệu-2-20 (A16C405)",
+        "address": "104_TA1 TA1",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1614038400000": [
+      {
+        "school": true,
+        "subject": "Lịch sử Đảng cộng sản Việt Nam-2-20 (A16C4D307)",
+        "address": "104_TA1 TA1",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Lý thuyết cơ sở dữ liệu-2-20 (A16C405)",
+        "address": "104_TA1 TA1",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1614643200000": [
+      {
+        "school": true,
+        "subject": "Lịch sử Đảng cộng sản Việt Nam-2-20 (A16C4D307)",
+        "address": "104_TA1 TA1",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Lý thuyết cơ sở dữ liệu-2-20 (A16C405)",
+        "address": "104_TA1 TA1",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1615248000000": [
+      {
+        "school": true,
+        "subject": "Lịch sử Đảng cộng sản Việt Nam-2-20 (A16C4D307)",
+        "address": "104_TA1 TA1",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Lý thuyết cơ sở dữ liệu-2-20 (A16C405)",
+        "address": "104_TA1 TA1",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1615852800000": [
+      {
+        "school": true,
+        "subject": "Lịch sử Đảng cộng sản Việt Nam-2-20 (A16C4D307)",
+        "address": "104_TA1 TA1",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Lý thuyết cơ sở dữ liệu-2-20 (A16C405)",
+        "address": "104_TA1 TA1",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1616457600000": [
+      {
+        "school": true,
+        "subject": "Lịch sử Đảng cộng sản Việt Nam-2-20 (A16C4D307)",
+        "address": "104_TA1 TA1",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Lý thuyết cơ sở dữ liệu-2-20 (A16C405)",
+        "address": "104_TA1 TA1",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1617062400000": [
+      {
+        "school": true,
+        "subject": "Lịch sử Đảng cộng sản Việt Nam-2-20 (A16C4D307)",
+        "address": "104_TA1 TA1",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Lý thuyết cơ sở dữ liệu-2-20 (A16C405)",
+        "address": "104_TA1 TA1",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1617667200000": [
+      {
+        "school": true,
+        "subject": "Lịch sử Đảng cộng sản Việt Nam-2-20 (A16C4D307)",
+        "address": "104_TA1 TA1",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Lý thuyết cơ sở dữ liệu-2-20 (A16C405)",
+        "address": "104_TA1 TA1",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1618272000000": [
+      {
+        "school": true,
+        "subject": "Lịch sử Đảng cộng sản Việt Nam-2-20 (A16C4D307)",
+        "address": "104_TA1 TA1",
+        "lesson": "13,14,15,16"
+      },
+      {
+        "school": true,
+        "subject": "Lý thuyết cơ sở dữ liệu-2-20 (A16C405)",
+        "address": "104_TA1 TA1",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1611187200000": [
+      {
+        "school": true,
+        "subject": "Lý thuyết cơ sở dữ liệu-2-20 (A16C405)",
+        "address": "104_TA1 TA1",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1618876800000": [
+      {
+        "school": true,
+        "subject": "Lý thuyết cơ sở dữ liệu-2-20 (A16C405)",
+        "address": "104_TA1 TA1",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1623024000000": [
+      {
+        "school": true,
+        "subject": "Quản trị mạng máy tính-2-20 (A16C409.1)",
+        "address": "null",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1623628800000": [
+      {
+        "school": true,
+        "subject": "Quản trị mạng máy tính-2-20 (A16C409.1)",
+        "address": "null",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1624233600000": [
+      {
+        "school": true,
+        "subject": "Quản trị mạng máy tính-2-20 (A16C409.1)",
+        "address": "null",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1624838400000": [
+      {
+        "school": true,
+        "subject": "Quản trị mạng máy tính-2-20 (A16C409.1)",
+        "address": "null",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1625443200000": [
+      {
+        "school": true,
+        "subject": "Quản trị mạng máy tính-2-20 (A16C409.1)",
+        "address": "null",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1626048000000": [
+      {
+        "school": true,
+        "subject": "Quản trị mạng máy tính-2-20 (A16C409.1)",
+        "address": "null",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1619395200000": [
+      {
+        "school": true,
+        "subject": "Quản trị mạng máy tính-2-20 (A16C409)",
+        "address": "203_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1620604800000": [
+      {
+        "school": true,
+        "subject": "Quản trị mạng máy tính-2-20 (A16C409)",
+        "address": "203_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1621209600000": [
+      {
+        "school": true,
+        "subject": "Quản trị mạng máy tính-2-20 (A16C409)",
+        "address": "203_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1621814400000": [
+      {
+        "school": true,
+        "subject": "Quản trị mạng máy tính-2-20 (A16C409)",
+        "address": "203_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1622419200000": [
+      {
+        "school": true,
+        "subject": "Quản trị mạng máy tính-2-20 (A16C409)",
+        "address": "203_TA2 TA2",
+        "lesson": "13,14,15,16"
+      }
+    ],
+    "1621987200000": [
+      {
+        "school": true,
+        "subject": "Thuật toán trong an toàn thông tin-2-20 (A1603.1)",
+        "address": "403_TA4(THATTT) TA4",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1622592000000": [
+      {
+        "school": true,
+        "subject": "Thuật toán trong an toàn thông tin-2-20 (A1603.1)",
+        "address": "403_TA4(THATTT) TA4",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1623196800000": [
+      {
+        "school": true,
+        "subject": "Thuật toán trong an toàn thông tin-2-20 (A1603.1)",
+        "address": "403_TA4(THATTT) TA4",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1623801600000": [
+      {
+        "school": true,
+        "subject": "Thuật toán trong an toàn thông tin-2-20 (A1603.1)",
+        "address": "403_TA4(THATTT) TA4",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1624406400000": [
+      {
+        "school": true,
+        "subject": "Thuật toán trong an toàn thông tin-2-20 (A1603.1)",
+        "address": "403_TA4(THATTT) TA4",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1625011200000": [
+      {
+        "school": true,
+        "subject": "Thuật toán trong an toàn thông tin-2-20 (A1603.1)",
+        "address": "403_TA4(THATTT) TA4",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1625616000000": [
+      {
+        "school": true,
+        "subject": "Thuật toán trong an toàn thông tin-2-20 (A1603.1)",
+        "address": "403_TA4(THATTT) TA4",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1626220800000": [
+      {
+        "school": true,
+        "subject": "Thuật toán trong an toàn thông tin-2-20 (A1603.1)",
+        "address": "403_TA4(THATTT) TA4",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1620172800000": [
+      {
+        "school": true,
+        "subject": "Thuật toán trong an toàn thông tin-2-20 (A1603)",
+        "address": "104_TA1 TA1",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1620345600000": [
+      {
+        "school": true,
+        "subject": "Thuật toán trong an toàn thông tin-2-20 (A1603)",
+        "address": "104_TA1 TA1",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1620777600000": [
+      {
+        "school": true,
+        "subject": "Thuật toán trong an toàn thông tin-2-20 (A1603)",
+        "address": "104_TA1 TA1",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1620950400000": [
+      {
+        "school": true,
+        "subject": "Thuật toán trong an toàn thông tin-2-20 (A1603)",
+        "address": "104_TA1 TA1",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1621382400000": [
+      {
+        "school": true,
+        "subject": "Thuật toán trong an toàn thông tin-2-20 (A1603)",
+        "address": "104_TA1 TA1",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1621555200000": [
+      {
+        "school": true,
+        "subject": "Thuật toán trong an toàn thông tin-2-20 (A1603)",
+        "address": "104_TA1 TA1",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1610928000000": [
+      {
+        "school": true,
+        "subject": "Toán rời rạc-2-20 (A16C4D304)_17E",
+        "address": "102_TA2 TA2",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1611100800000": [
+      {
+        "school": true,
+        "subject": "Toán rời rạc-2-20 (A16C4D304)_17E",
+        "address": "102_TA2 TA2",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1611705600000": [
+      {
+        "school": true,
+        "subject": "Toán rời rạc-2-20 (A16C4D304)_17E",
+        "address": "102_TA2 TA2",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1612310400000": [
+      {
+        "school": true,
+        "subject": "Toán rời rạc-2-20 (A16C4D304)_17E",
+        "address": "102_TA2 TA2",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1614124800000": [
+      {
+        "school": true,
+        "subject": "Toán rời rạc-2-20 (A16C4D304)_17E",
+        "address": "102_TA2 TA2",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1614729600000": [
+      {
+        "school": true,
+        "subject": "Toán rời rạc-2-20 (A16C4D304)_17E",
+        "address": "102_TA2 TA2",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1615334400000": [
+      {
+        "school": true,
+        "subject": "Toán rời rạc-2-20 (A16C4D304)_17E",
+        "address": "102_TA2 TA2",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1615939200000": [
+      {
+        "school": true,
+        "subject": "Toán rời rạc-2-20 (A16C4D304)_17E",
+        "address": "102_TA2 TA2",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1616544000000": [
+      {
+        "school": true,
+        "subject": "Toán rời rạc-2-20 (A16C4D304)_17E",
+        "address": "102_TA2 TA2",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1617148800000": [
+      {
+        "school": true,
+        "subject": "Toán rời rạc-2-20 (A16C4D304)_17E",
+        "address": "102_TA2 TA2",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1617753600000": [
+      {
+        "school": true,
+        "subject": "Toán rời rạc-2-20 (A16C4D304)_17E",
+        "address": "102_TA2 TA2",
+        "lesson": "4,5,6"
+      }
+    ],
+    "1618358400000": [
+      {
+        "school": true,
+        "subject": "Toán rời rạc-2-20 (A16C4D304)_17E",
+        "address": "102_TA2 TA2",
+        "lesson": "4,5,6"
+      }
+    ]
+  }
+}

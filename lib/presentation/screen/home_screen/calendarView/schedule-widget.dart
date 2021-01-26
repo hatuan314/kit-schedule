@@ -85,7 +85,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
     return Scaffold(
         body: BlocConsumer<CalendarBloc, CalendarState>(
             listener: (BuildContext context, state) {
-              if(state is CalendarInitState && listenInitial == false)
+              if(state is CalendarInitState && listenInitial == false && state.listScheduleOfDay!=null)
                 {
                   WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
                     scrollController.addListener(() {
