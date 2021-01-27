@@ -19,7 +19,6 @@ class ProviderOnline {
 
     final response = await dio.post('', data: authBody);
     if (response.data['status'] == true) {
-//      debugPrint('fetchScheduleSchoolDataProvider ${response.data['dataJson'] is String}');
       String dataJson = json.encode(response.data['dataJson']);
       dio.close();
       return dataJson;

@@ -18,7 +18,6 @@ import 'package:schedule/presentation/screen/home_screen/widgets/AccountWidget.d
 import 'package:schedule/src/models/account_model.dart';
 import 'package:schedule/src/models/school_schedule.dart';
 import 'package:schedule/src/service/repositors/online/repository_online.dart';
-
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -39,14 +38,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     super.initState();
 
     ///todo:get data online
-    /*final AccountModel accountModel =
+   /* final AccountModel accountModel =
     AccountModel(account: 'CT030419', password: 'p02t08c2019');
     RepositoryOnline _online = RepositoryOnline();
     _online.fetchScheduleSchoolDataRepo(accountModel).then((value) {
       Map data = json.decode(value);
       _saveScheduleSchool(data);
-    });*/
-    /*_offline.fetchScheduleSchoolOfflineRepo().then((value) {
+    });
+    _offline.fetchScheduleSchoolOfflineRepo().then((value) {
       listSchoolModel=value;
       print('$listSchoolModel');
     });*/

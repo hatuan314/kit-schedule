@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:schedule/common/app_constance.dart';
 import 'package:schedule/common/themes/theme_border.dart';
-import 'package:schedule/common/themes/theme_color.dart';
 import 'package:schedule/common/themes/theme_text.dart';
 import 'package:schedule/presentation/screen/todo_screen/todo_screen_constance.dart';
 
@@ -41,7 +38,7 @@ class TodoTextField extends StatelessWidget {
             decoration: InputDecoration(
                 hintText: hintText,
                 hintStyle: ThemeText.textStyle,
-                border: ThemBorder.outlineInputBorder),
+                border: ThemeBorder.outlineInputBorder),
             autofocus: autofocus,
             textInputAction:textInputAction,
             onEditingComplete: onEditingComplete,

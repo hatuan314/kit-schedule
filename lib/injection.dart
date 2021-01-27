@@ -32,10 +32,13 @@ getIt.registerLazySingleton<OfflineRepository>(() =>
 
   ///use case
   getIt.registerFactory<HomeUseCase>(() => HomeUseCase());
+
   getIt.registerFactory<TodoUseCase>(
       () => TodoUseCase(repository: getIt<PersonalScheduleRepository>()));
+
   getIt.registerFactory<SearchUseCase>(() => SearchUseCase(
       personalScheduleRepository: getIt<PersonalScheduleRepository>()));
+
 getIt.registerFactory<ScheduleUseCase>(() => ScheduleUseCase(
       repositoryOffline: getIt<OfflineRepository>()));
 
