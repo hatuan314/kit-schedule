@@ -6,4 +6,5 @@ class SearchScreenConstance {
   static double paddingVertical = 20.h;
   static double paddingHorizontal = 20.h;
   static double paddingLeft = 20.w;
+  static double noteSize = 12.sp;
 }

@@ -21,7 +21,6 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       backgroundColor: Colors.blue[900],
       body: SafeArea(
