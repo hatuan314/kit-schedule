@@ -7,5 +7,7 @@ class RegistrationConstant {
   static const String signUpFbBtn = "Sign Up With Facebook";
   static const String alreadyAccount = "Already have an account? ";
   static const String signInBtn = "Sign in";
+  static const String kitScheduleTxt = 'KIT Schedule';
+  static const String contentTxt = 'Manage your School Schedule';
 
 }

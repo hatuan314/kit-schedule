@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/common/themes/theme_color.dart';
 import 'package:schedule/src/blocs/blocs.dart';
 import 'package:schedule/src/common/constants/registration_constaint.dart';
-import 'package:schedule/src/common/widgets/base_button.dart';
+import 'package:schedule/src/common/widgets/button/base_button.dart';
 import 'package:schedule/src/common/widgets/base_text_form.dart';
 import 'package:schedule/src/utils/multi_screen/flutter_screen_util.dart';
 import 'package:schedule/src/utils/utils.dart';
