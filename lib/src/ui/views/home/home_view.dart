@@ -2,7 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:schedule/presentation/screen/home_screen/calendar/calendar_view.dart';
+import 'package:schedule/presentation/journey/home_screen/calendar/calendar_view.dart';
 import 'package:schedule/src/blocs/home/home_bloc.dart';
 import 'package:schedule/src/utils/multi_screen/flutter_screen_util.dart';
 

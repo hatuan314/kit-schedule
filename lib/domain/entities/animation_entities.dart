@@ -1,6 +1,6 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:schedule/presentation/screen/home_screen/home_screen_constance.dart';
+import 'package:schedule/presentation/journey/home_screen/home_screen_constance.dart';
 
 class AnimationEntity {
   bool isCollapsed = true;

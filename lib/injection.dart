@@ -5,9 +5,9 @@ import 'package:schedule/domain/repositories/personal_schedule_repository.dart';
 import 'package:schedule/domain/use_cases/HomeUseCase.dart';
 import 'package:schedule/domain/use_cases/search_use_case.dart';
 import 'package:schedule/domain/use_cases/todo_use_case.dart';
-import 'package:schedule/presentation/screen/home_screen/home_bloc/home_bloc.dart';
-import 'package:schedule/presentation/screen/search_screen/bloc/search_bloc.dart';
-import 'package:schedule/presentation/screen/todo_screen/bloc/todo_bloc.dart';
+import 'package:schedule/presentation/journey/home_screen/home_bloc/home_bloc.dart';
+import 'package:schedule/presentation/journey/search_screen/bloc/search_bloc.dart';
+import 'package:schedule/presentation/journey/todo_screen/bloc/todo_bloc.dart';
 
 GetIt getIt = GetIt.instance;
 

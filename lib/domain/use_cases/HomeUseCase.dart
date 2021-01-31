@@ -1,5 +1,5 @@
 import 'package:schedule/domain/entities/animation_entities.dart';
-import 'package:schedule/presentation/screen/home_screen/home_bloc/home_event.dart';
+import 'package:schedule/presentation/journey/home_screen/home_bloc/home_event.dart';
 
 class HomeUseCase {
   AnimationEntity init(

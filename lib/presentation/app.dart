@@ -4,16 +4,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/common/router_list.dart';
 import 'package:schedule/common/themes/theme_data.dart';
 import 'package:schedule/injection.dart';
-import 'package:schedule/presentation/screen/home_screen/home_bloc/home_bloc.dart';
-import 'package:schedule/presentation/screen/home_screen/home_screen.dart';
-import 'package:schedule/presentation/screen/search_screen/bloc/search_bloc.dart';
-import 'package:schedule/presentation/screen/search_screen/bloc/search_event.dart';
-import 'package:schedule/presentation/screen/search_screen/search_screen.dart';
-import 'package:schedule/presentation/screen/todo_screen/bloc/todo_bloc.dart';
-import 'package:schedule/presentation/screen/todo_screen/bloc/todo_event.dart';
-import 'package:schedule/presentation/screen/todo_screen/todo_screen.dart';
-import 'package:schedule/src/ui/views/register/infor.dart';
-import 'package:schedule/src/ui/views/register/login_screen.dart';
+import 'package:schedule/presentation/journey/home_screen/home_bloc/home_bloc.dart';
+import 'package:schedule/presentation/journey/home_screen/home_screen.dart';
+import 'package:schedule/presentation/journey/search_screen/bloc/search_bloc.dart';
+import 'package:schedule/presentation/journey/search_screen/bloc/search_event.dart';
+import 'package:schedule/presentation/journey/search_screen/search_screen.dart';
+import 'package:schedule/presentation/journey/todo_screen/bloc/todo_bloc.dart';
+import 'package:schedule/presentation/journey/todo_screen/bloc/todo_event.dart';
+import 'package:schedule/presentation/journey/todo_screen/todo_screen.dart';
+import 'package:schedule/presentation/journey/welcome/infor.dart';
+import 'package:schedule/presentation/journey/login/login_screen.dart';
 import 'package:schedule/src/ui/views/register/sign_in_view.dart';
 
 class MyApp extends StatelessWidget {
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
                   getIt<SearchBloc>()
                     ..add(SearchInitEvent()),
                   child: SearchScreen(),),
-            RouterList.welcome: (context)=> SignInView(),
+            RouterList.welcome: (context)=> Infor(),
             RouterList.login: (context)=> LoginScreen(),
           },
         ));
