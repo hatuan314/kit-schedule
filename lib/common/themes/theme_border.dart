@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:schedule/common/themes/theme_color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ThemBorder {
+class ThemeBorder {
   static const BorderRadius borderRadiusAll = BorderRadius.all(Radius.circular(12));
   static  OutlineInputBorder outlineInputBorder = OutlineInputBorder(
     borderRadius: borderRadiusAll,

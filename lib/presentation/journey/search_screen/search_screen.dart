@@ -8,6 +8,7 @@ import 'package:schedule/presentation/journey/search_screen/bloc/search_bloc.dar
 import 'package:schedule/presentation/journey/search_screen/bloc/search_event.dart';
 import 'package:schedule/presentation/journey/search_screen/bloc/search_state.dart';
 import 'package:schedule/presentation/journey/search_screen/search_screen_constance.dart';
+import 'package:schedule/presentation/journey/search_screen/widgets/search_event_item.dart';
 
 // ignore: must_be_immutable
 class SearchScreen extends StatelessWidget {

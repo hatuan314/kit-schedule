@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/common/themes/theme_color.dart';
 import 'package:schedule/common/themes/theme_text.dart';
-import 'package:schedule/presentation/screen/home_screen/calendarView/widgets/event_item_widget.dart';
-import 'package:schedule/presentation/screen/search_screen/search_screen_constance.dart';
+import 'package:schedule/presentation/journey/home_screen/calendarView/widgets/event_item_widget.dart';
+import 'package:schedule/presentation/journey/search_screen/search_screen_constance.dart';
 import 'package:schedule/presentation/widgets/event_detail.dart';
 
 class SearchEventItem extends StatelessWidget {

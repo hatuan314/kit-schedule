@@ -11,7 +11,7 @@ ThemeData defaultThemeData() {
       errorColor: ThemeColor.errorColor,
       buttonTheme: ButtonThemeData(
         shape: RoundedRectangleBorder(
-          borderRadius: ThemBorder.borderRadiusAll,
+          borderRadius: ThemeBorder.borderRadiusAll,
         ),
       ));
 }

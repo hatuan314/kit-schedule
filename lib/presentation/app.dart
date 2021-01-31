@@ -16,6 +16,8 @@ import 'package:schedule/presentation/journey/welcome/infor.dart';
 import 'package:schedule/presentation/journey/login/login_screen.dart';
 import 'package:schedule/src/ui/views/register/sign_in_view.dart';
 
+import 'journey/home_screen/calendarView/bloc/calendar_bloc.dart';
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

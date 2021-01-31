@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/domain/entities/personal_schedule.dart';
 import 'package:schedule/domain/entities/school_entity.dart';
 import 'package:schedule/domain/use_cases/schedule_use_case.dart';
+import 'package:schedule/presentation/journey/home_screen/calendarView/bloc/calendar_event.dart';
+import 'package:schedule/presentation/journey/home_screen/calendarView/bloc/calendar_state.dart';
 
-import 'package:schedule/presentation/screen/home_screen/calendarView/bloc/calendar_event.dart';
-import 'package:schedule/presentation/screen/home_screen/calendarView/bloc/calendar_state.dart';
 
 class CalendarBloc extends Bloc<CalendarEvent,CalendarState>{
   final ScheduleUseCase scheduleUseCase;
