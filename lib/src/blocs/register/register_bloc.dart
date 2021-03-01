@@ -4,7 +4,6 @@ import 'package:crypto/crypto.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:schedule/src/models/account_model.dart';
 import 'package:schedule/src/models/model.dart';
 import 'package:schedule/src/service/services.dart';
 
@@ -32,11 +31,11 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       }
     } else if (event is SignInOnPressEvent) {
       yield RegisterLoadingState();
-      final AccountModel accountModel =
-          AccountModel(account: event.account, password: event.password);
+      String account = event.account;
+      String password = md5.convert(utf8.encode(event.password)).toString();
       try {
         var dataJson =
-            await _online.fetchScheduleSchoolDataRepo(accountModel);
+            await _online.fetchScheduleSchoolDataRepo(account, password);
         if (dataJson == null || dataJson == '') {
           yield RegisterNoDataState();
         } else {

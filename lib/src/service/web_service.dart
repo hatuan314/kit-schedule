@@ -7,8 +7,8 @@ import 'package:schedule/src/service/services.dart';
 class WebService {
   Dio setupDio({String accessToken, String contentType}) {
     Dio dio = Dio(BaseOptions(
-      headers: {'header': '167.179.115.162:5000'},
-      baseUrl: 'http://167.179.115.162:5000/api/schedule/guest',
+      headers: {'header': 'tkbkma.herokuapp.com'},
+      baseUrl: 'https://tkbkma.herokuapp.com/api/schedule/guest',
       contentType: contentType,
       connectTimeout: 50000,
       receiveTimeout: 50000,

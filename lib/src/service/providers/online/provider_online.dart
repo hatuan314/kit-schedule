@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:schedule/src/models/account_model.dart';
 import 'package:schedule/src/service/services.dart';
 import 'package:schedule/src/service/web_service.dart';
 
@@ -10,11 +9,11 @@ class ProviderOnline {
   final WebService _service = WebService();
 
   Future<String> fetchScheduleSchoolDataProvider(
-      AccountModel accountModel) async {
+      String account, String password) async {
     final dio = _service.setupDio();
     final authBody = {
-      "studentAccount": "${accountModel.account}",
-      "studentPassword": "${accountModel.hashPassword()}"
+      "studentAccount": "$account",
+      "studentPassword": "$password"
     };
 
     final response = await dio.post('', data: authBody);

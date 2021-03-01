@@ -8,10 +8,10 @@ abstract class HomeEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class OnTabDrawerEvent extends HomeEvent {
+class OnTabChangeEvent extends HomeEvent {
   final int selectIndex;
 
-  OnTabDrawerEvent(this.selectIndex);
+  OnTabChangeEvent(this.selectIndex);
 
   List<Object> get props => [this.selectIndex];
 }
