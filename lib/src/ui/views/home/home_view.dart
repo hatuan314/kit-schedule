@@ -42,7 +42,7 @@ class HomeView extends StatelessWidget {
                     iconSize: 24,
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                     duration: Duration(milliseconds: 800),
-                    tabBackgroundColor: Colors.grey[800],
+                    tabBackgroundColor: Colors.grey[800]!,
                     tabs: [
                       GButton(
                         icon: Icons.date_range,
@@ -112,13 +112,13 @@ class HomeView extends StatelessWidget {
         animType: AnimType.BOTTOMSLIDE,
         body: Padding(
           padding: EdgeInsets.symmetric(
-              vertical: ScUtil.getInstance().setHeight(20)),
+              vertical: ScUtil.getInstance()!.setHeight(20)),
           child: RichText(
             text: TextSpan(
                 text: 'Do you want ',
                 style: TextStyle(
                     color: Colors.black54,
-                    fontSize: ScUtil.getInstance().setSp(32),
+                    fontSize: ScUtil.getInstance()!.setSp(32),
                     fontFamily: 'MR',
                     fontWeight: FontWeight.normal),
                 children: [
@@ -126,14 +126,14 @@ class HomeView extends StatelessWidget {
                       text: 'Sign Out ',
                       style: TextStyle(
                           color: Colors.red,
-                          fontSize: ScUtil.getInstance().setSp(32),
+                          fontSize: ScUtil.getInstance()!.setSp(32),
                           fontFamily: 'MR',
                           fontWeight: FontWeight.w600)),
                   TextSpan(
                       text: '?',
                       style: TextStyle(
                           color: Colors.black54,
-                          fontSize: ScUtil.getInstance().setSp(32),
+                          fontSize: ScUtil.getInstance()!.setSp(32),
                           fontFamily: 'MR',
                           fontWeight: FontWeight.normal)),
                 ]),
@@ -150,7 +150,7 @@ class HomeView extends StatelessWidget {
             child: Text('Yes (Y)',
                 style: TextStyle(
                     color: Color(0xffFCFAF3),
-                    fontSize: ScUtil.getInstance().setSp(32),
+                    fontSize: ScUtil.getInstance()!.setSp(32),
                     fontFamily: 'MR',
                     fontWeight: FontWeight.bold)),
           ),
@@ -166,7 +166,7 @@ class HomeView extends StatelessWidget {
             child: Text('No (N)',
                 style: TextStyle(
                     color: Color(0xffFCFAF3),
-                    fontSize: ScUtil.getInstance().setSp(32),
+                    fontSize: ScUtil.getInstance()!.setSp(32),
                     fontFamily: 'MR',
                     fontWeight: FontWeight.bold)),
           ),
@@ -191,13 +191,13 @@ class HomeView extends StatelessWidget {
         animType: AnimType.BOTTOMSLIDE,
         body: Padding(
           padding: EdgeInsets.symmetric(
-              vertical: ScUtil.getInstance().setHeight(20)),
+              vertical: ScUtil.getInstance()!.setHeight(20)),
           child: RichText(
             text: TextSpan(
                 text: 'Can\'t ',
                 style: TextStyle(
                     color: Colors.black54,
-                    fontSize: ScUtil.getInstance().setSp(36),
+                    fontSize: ScUtil.getInstance()!.setSp(36),
                     fontFamily: 'MR',
                     fontWeight: FontWeight.normal),
                 children: [
@@ -205,14 +205,14 @@ class HomeView extends StatelessWidget {
                       text: 'Sign Out ',
                       style: TextStyle(
                           color: Colors.red,
-                          fontSize: ScUtil.getInstance().setSp(36),
+                          fontSize: ScUtil.getInstance()!.setSp(36),
                           fontFamily: 'MR',
                           fontWeight: FontWeight.w600)),
                   TextSpan(
                       text: 'now. Please, try again.',
                       style: TextStyle(
                           color: Colors.black54,
-                          fontSize: ScUtil.getInstance().setSp(36),
+                          fontSize: ScUtil.getInstance()!.setSp(36),
                           fontFamily: 'MR',
                           fontWeight: FontWeight.normal)),
                 ]),

@@ -1,28 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:schedule/src/utils/multi_screen/flutter_screen_util.dart';
 
 class LoadingWidget extends StatefulWidget {
   final Color color;
   final double size;
 
   const LoadingWidget({
-    Key key,
-    @required this.color,
+    Key? key,
+    required this.color,
     this.size = 50.0,
   }) : super(key: key);
 
   @override
-  _LoadingWidgetState createState() =>
-      new _LoadingWidgetState();
+  _LoadingWidgetState createState() => new _LoadingWidgetState();
 }
 
 class _LoadingWidgetState extends State<LoadingWidget>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<double> _animation1;
-  Animation<double> _animation2;
+  late AnimationController _controller;
+  late Animation<double> _animation1;
+  late Animation<double> _animation2;
 
   @override
   void initState() {
@@ -65,7 +62,7 @@ class _LoadingWidgetState extends State<LoadingWidget>
           height: widget.size,
           width: widget.size,
           decoration:
-          BoxDecoration(shape: BoxShape.circle, color: widget.color),
+              BoxDecoration(shape: BoxShape.circle, color: widget.color),
         ),
       ),
     );

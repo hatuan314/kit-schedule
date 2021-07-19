@@ -19,9 +19,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
   Map<DateTime, List<PersonalSchedule>> allPersonalSchedulesMap =
       Map<DateTime, List<PersonalSchedule>>();
 
-  @override
-  // TODO: implement initialState
-  CalendarState get initialState => CalendarLoadingDataState();
+  CalendarBloc() : super(CalendarLoadingDataState());
 
   @override
   Stream<CalendarState> mapEventToState(CalendarEvent event) async* {
@@ -54,16 +52,16 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
           List<SchoolSchedule> allSchoolSchedules = result;
           allSchoolSchedules.forEach((schedule) {
             DateTime scheduleDate = Convert.dateConvert(
-                DateTime.fromMillisecondsSinceEpoch(int.parse(schedule.date)));
+                DateTime.fromMillisecondsSinceEpoch(int.parse(schedule.date!)));
             if (allSchedulesCalendarMap[scheduleDate] == null) {
-              allSchedulesCalendarMap[scheduleDate] = List();
+              allSchedulesCalendarMap[scheduleDate] = [];
             }
             if (allSchoolSchedulesMap[scheduleDate] == null) {
-              allSchoolSchedulesMap[scheduleDate] = List<SchoolSchedule>();
+              allSchoolSchedulesMap[scheduleDate] = [];
             }
-            allSchedulesCalendarMap[scheduleDate]
+            allSchedulesCalendarMap[scheduleDate]!
                 .add(json.encode(schedule.toJson()));
-            allSchoolSchedulesMap[scheduleDate].add(schedule);
+            allSchoolSchedulesMap[scheduleDate]!.add(schedule);
           });
         }
       } catch (e) {
@@ -80,16 +78,16 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
           List<PersonalSchedule> allPersonalSchedules = personalResult;
           allPersonalSchedules.forEach((schedule) {
             DateTime scheduleDate = Convert.dateConvert(
-                DateTime.fromMillisecondsSinceEpoch(int.parse(schedule.date)));
+                DateTime.fromMillisecondsSinceEpoch(int.parse(schedule.date!)));
             if (allSchedulesCalendarMap[scheduleDate] == null) {
-              allSchedulesCalendarMap[scheduleDate] = List();
+              allSchedulesCalendarMap[scheduleDate] = [];
             }
             if (allPersonalSchedulesMap[scheduleDate] == null) {
-              allPersonalSchedulesMap[scheduleDate] = List<PersonalSchedule>();
+              allPersonalSchedulesMap[scheduleDate] = [];
             }
-            allSchedulesCalendarMap[scheduleDate]
+            allSchedulesCalendarMap[scheduleDate]!
                 .add(json.encode(schedule.toJson()));
-            allPersonalSchedulesMap[scheduleDate].add(schedule);
+            allPersonalSchedulesMap[scheduleDate]!.add(schedule);
           });
         }
       } catch (e) {

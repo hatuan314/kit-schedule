@@ -1,11 +1,8 @@
 part of 'calendar_bloc.dart';
 
-abstract class CalendarState extends Equatable {}
+abstract class CalendarState {}
 
 class CalendarLoadingDataState extends CalendarState {
-  @override
-  // TODO: implement props
-  List<Object> get props => null;
 }
 
 class CalendarLoadDataSuccessState extends CalendarState {
@@ -24,7 +21,7 @@ class CalendarLoadDataSuccessState extends CalendarState {
 class CalendarNoDataState extends CalendarState {
   @override
   // TODO: implement props
-  List<Object> get props => null;
+  List<Object>? get props => null;
 }
 
 class CalendarFailureState extends CalendarState {

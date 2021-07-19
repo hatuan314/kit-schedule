@@ -9,7 +9,7 @@ import 'app.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  BlocSupervisor.delegate = SimpleBlocDelegate();
+  ///*BlocSupervisor.delegate =*/ SimpleBlocDelegate();
   await DatabaseCreator().initDatabase();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

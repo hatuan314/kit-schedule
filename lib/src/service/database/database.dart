@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-Database db;
+Database? db;
 
 class DatabaseCreator {
   static const scheduleTable = 'SCHEDULE';
@@ -11,9 +11,9 @@ class DatabaseCreator {
   static const personaScheduleTable = 'PERSONAL';
 
   static void databaseLog(String functionName, String sql,
-      [List<Map<String, dynamic>> selectQueryResult,
-      int insertAndUpdateQueryResult,
-      List<dynamic> params]) {
+      [List<Map<String, dynamic>>? selectQueryResult,
+      int? insertAndUpdateQueryResult,
+      List<dynamic>? params]) {
     print(functionName);
     print(sql);
     if (params != null) {

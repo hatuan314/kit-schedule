@@ -13,12 +13,13 @@ part 'search_state.dart';
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   RepositoryOffline _repositoryOffline = RepositoryOffline();
 
-  List<SchoolSchedule> _schoolSchedulesOfDay = List<SchoolSchedule>();
-  List<PersonalSchedule> _personalSchedulesOfDay = List<PersonalSchedule>();
+  List<SchoolSchedule> _schoolSchedulesOfDay = [];
+  List<PersonalSchedule> _personalSchedulesOfDay = [];
   DateTime _selectDay = DateTime.now();
 
+  SearchBloc() : super(SearchWaitingState('',[],[])); //todo  initialState
+
   @override
-  // TODO: implement initialState
   SearchState get initialState => SearchWaitingState(
       DateFormat('dd/MM/yyyy').format(this._selectDay),
       _schoolSchedulesOfDay,

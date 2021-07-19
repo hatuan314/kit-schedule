@@ -6,17 +6,15 @@ import 'package:schedule/src/models/model.dart';
 import 'package:schedule/src/ui/views/loading_view.dart';
 import 'package:schedule/src/utils/convert.dart';
 import 'package:schedule/src/utils/utils.dart';
-import 'package:worm_indicator/shape.dart';
-import 'package:worm_indicator/worm_indicator.dart';
 
 class ScheduleView extends StatelessWidget {
-  PageController _controller = PageController();
+  final PageController _controller = PageController();
 
   Widget buildPageView() {
     return Container(
       padding: EdgeInsets.symmetric(
-          horizontal: ScUtil.getInstance().setWidth(50),
-          vertical: ScUtil.getInstance().setHeight(20)),
+          horizontal: ScUtil.getInstance()!.setWidth(50),
+          vertical: ScUtil.getInstance()!.setHeight(20)),
       alignment: Alignment.center,
       child: PageView.builder(
         physics: AlwaysScrollableScrollPhysics(),
@@ -42,8 +40,8 @@ class ScheduleView extends StatelessWidget {
     );
   }
 
-  Widget buildExampleIndicatorWithShapeAndBottomPos(
-      Shape shape, double bottomPos) {
+  /*Widget buildExampleIndicatorWithShapeAndBottomPos(
+      */ /*Shape shape,*/ /* double bottomPos) {
     return Positioned(
       bottom: bottomPos,
       left: 0,
@@ -54,15 +52,15 @@ class ScheduleView extends StatelessWidget {
         shape: shape,
       ),
     );
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
-    final circleShape = Shape(
+    /* final circleShape = Shape(
       size: 8,
       shape: DotShape.Circle,
       spacing: 8,
-    );
+    );*/
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: SizedBox(
@@ -72,7 +70,7 @@ class ScheduleView extends StatelessWidget {
           alignment: Alignment.center,
           children: <Widget>[
             buildPageView(),
-            buildExampleIndicatorWithShapeAndBottomPos(circleShape, 8),
+            //todo buildExampleIndicatorWithShapeAndBottomPos(circleShape, 8),
           ],
         ),
       ),
@@ -80,7 +78,7 @@ class ScheduleView extends StatelessWidget {
   }
 
   _schoolScheduleWidget(UpdateScheduleDaySuccessState state) {
-    List<SchoolSchedule> schoolSchedulesOfDay = state.schedulesSchoolOfDay;
+    List<SchoolSchedule>? schoolSchedulesOfDay = state.schedulesSchoolOfDay;
     return Card(
       semanticContainer: true,
 //      color: Color(0xffFCFAF3),
@@ -94,7 +92,7 @@ class ScheduleView extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           SizedBox(
-            height: ScUtil.getInstance().setHeight(8),
+            height: ScUtil.getInstance()!.setHeight(8),
           ),
           Row(
             mainAxisSize: MainAxisSize.min,
@@ -102,7 +100,7 @@ class ScheduleView extends StatelessWidget {
               Text(
                 'School',
                 style: TextStyle(
-                    fontSize: ScUtil.getInstance().setSp(36),
+                    fontSize: ScUtil.getInstance()!.setSp(36),
                     color: Colors.red,
                     fontFamily: 'MR',
                     fontWeight: FontWeight.bold),
@@ -117,7 +115,7 @@ class ScheduleView extends StatelessWidget {
                       ? '${schoolSchedulesOfDay.length}'
                       : '0',
                   style: TextStyle(
-                      fontSize: ScUtil.getInstance().setSp(28),
+                      fontSize: ScUtil.getInstance()!.setSp(28),
                       color: Color(0xffFCFAF3),
                       fontWeight: FontWeight.normal),
                 ),
@@ -139,7 +137,7 @@ class ScheduleView extends StatelessWidget {
                       'No Data',
                       style: TextStyle(
                           color: Colors.red,
-                          fontSize: ScUtil.getInstance().setSp(32),
+                          fontSize: ScUtil.getInstance()!.setSp(32),
                           fontWeight: FontWeight.w600),
                     ),
                   ),
@@ -150,13 +148,13 @@ class ScheduleView extends StatelessWidget {
   }
 
   Widget _schoolScheduleElementWidget(SchoolSchedule schedule) {
-    List lessonNumbers = schedule.lesson.split(',');
+    List lessonNumbers = schedule.lesson!.split(',');
     String startLesson = lessonNumbers[0];
     String endLesson = lessonNumbers[lessonNumbers.length - 1];
     debugPrint('schoolScheduleElementWidget - address: ${schedule.address}');
     return Padding(
       padding:
-          EdgeInsets.symmetric(vertical: ScUtil.getInstance().setHeight(8)),
+          EdgeInsets.symmetric(vertical: ScUtil.getInstance()!.setHeight(8)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -172,18 +170,18 @@ class ScheduleView extends StatelessWidget {
                   Text(
                     '${Convert.startTimeLessonMap[startLesson]}',
                     style: TextStyle(
-                        fontSize: ScUtil.getInstance().setSp(32),
+                        fontSize: ScUtil.getInstance()!.setSp(32),
                         color: Colors.red,
                         fontFamily: 'MR',
                         fontWeight: FontWeight.w600),
                   ),
                   Icon(Icons.arrow_drop_down,
                       color: Colors.red,
-                      size: ScUtil.getInstance().setHeight(15)),
+                      size: ScUtil.getInstance()!.setHeight(15)),
                   Text(
                     '${Convert.endTimeLessonMap[endLesson]}',
                     style: TextStyle(
-                        fontSize: ScUtil.getInstance().setSp(32),
+                        fontSize: ScUtil.getInstance()!.setSp(32),
                         color: Colors.red,
                         fontFamily: 'MR',
                         fontWeight: FontWeight.w600),
@@ -196,11 +194,11 @@ class ScheduleView extends StatelessWidget {
             flex: 8,
             child: Container(
               padding: EdgeInsets.symmetric(
-                  horizontal: ScUtil.getInstance().setWidth(20)),
+                  horizontal: ScUtil.getInstance()!.setWidth(20)),
               decoration: BoxDecoration(
                   border: Border(
                       left: BorderSide(
-                          width: ScUtil.getInstance().setWidth(1.2),
+                          width: ScUtil.getInstance()!.setWidth(1.2),
                           color: Colors.red))),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -209,18 +207,18 @@ class ScheduleView extends StatelessWidget {
                   Text(
                     '${schedule.subject}',
                     style: TextStyle(
-                        fontSize: ScUtil.getInstance().setSp(32),
+                        fontSize: ScUtil.getInstance()!.setSp(32),
                         color: Colors.red,
                         fontFamily: 'MR',
                         fontWeight: FontWeight.w600),
                   ),
                   SizedBox(height: ScUtil().setHeight(8)),
                   Text(
-                    schedule.address.contains('null')
+                    schedule.address!.contains('null')
                         ? 'No Data'
                         : '${schedule.address}',
                     style: TextStyle(
-                        fontSize: ScUtil.getInstance().setSp(28),
+                        fontSize: ScUtil.getInstance()!.setSp(28),
                         color: Colors.red,
                         fontFamily: 'MR',
                         fontWeight: FontWeight.normal),
@@ -235,7 +233,7 @@ class ScheduleView extends StatelessWidget {
   }
 
   Widget _personalScheduleWidget(UpdateScheduleDaySuccessState state) {
-    List<PersonalSchedule> personalSchedulesOfDay =
+    List<PersonalSchedule>? personalSchedulesOfDay =
         state.schedulesPersonalOfDay;
     return Card(
       semanticContainer: true,
@@ -249,7 +247,7 @@ class ScheduleView extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           SizedBox(
-            height: ScUtil.getInstance().setHeight(8),
+            height: ScUtil.getInstance()!.setHeight(8),
           ),
           Row(
             mainAxisSize: MainAxisSize.min,
@@ -257,7 +255,7 @@ class ScheduleView extends StatelessWidget {
               Text(
                 'Personal',
                 style: TextStyle(
-                    fontSize: ScUtil.getInstance().setSp(36),
+                    fontSize: ScUtil.getInstance()!.setSp(36),
                     color: Colors.blue[800],
                     fontFamily: 'MR',
                     fontWeight: FontWeight.bold),
@@ -272,7 +270,7 @@ class ScheduleView extends StatelessWidget {
                       ? '${personalSchedulesOfDay.length}'
                       : '0',
                   style: TextStyle(
-                      fontSize: ScUtil.getInstance().setSp(28),
+                      fontSize: ScUtil.getInstance()!.setSp(28),
                       color: Color(0xffFCFAF3),
                       fontWeight: FontWeight.normal),
                 ),
@@ -298,7 +296,7 @@ class ScheduleView extends StatelessWidget {
                       'No Data',
                       style: TextStyle(
                           color: Colors.blue[800],
-                          fontSize: ScUtil.getInstance().setSp(32),
+                          fontSize: ScUtil.getInstance()!.setSp(32),
                           fontWeight: FontWeight.w600),
                     ),
                   ),
@@ -311,7 +309,7 @@ class ScheduleView extends StatelessWidget {
   Widget _personalScheduleElementWidget(PersonalSchedule schedule) {
     return Padding(
       padding:
-          EdgeInsets.symmetric(vertical: ScUtil.getInstance().setHeight(8)),
+          EdgeInsets.symmetric(vertical: ScUtil.getInstance()!.setHeight(8)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -324,7 +322,7 @@ class ScheduleView extends StatelessWidget {
               child: Text(
                 '${schedule.timer}',
                 style: TextStyle(
-                    fontSize: ScUtil.getInstance().setSp(32),
+                    fontSize: ScUtil.getInstance()!.setSp(32),
                     color: Colors.blue[800],
                     fontFamily: 'MR',
                     fontWeight: FontWeight.w600),
@@ -335,12 +333,12 @@ class ScheduleView extends StatelessWidget {
             flex: 8,
             child: Container(
               padding: EdgeInsets.symmetric(
-                  horizontal: ScUtil.getInstance().setWidth(20)),
+                  horizontal: ScUtil.getInstance()!.setWidth(20)),
               decoration: BoxDecoration(
                   border: Border(
                       left: BorderSide(
-                          width: ScUtil.getInstance().setWidth(1.2),
-                          color: Colors.blue[800]))),
+                          width: ScUtil.getInstance()!.setWidth(1.2),
+                          color: Colors.blue[800]!))),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
@@ -348,7 +346,7 @@ class ScheduleView extends StatelessWidget {
                   Text(
                     '${schedule.name}',
                     style: TextStyle(
-                        fontSize: ScUtil.getInstance().setSp(32),
+                        fontSize: ScUtil.getInstance()!.setSp(32),
                         color: Colors.blue[800],
                         fontFamily: 'MR',
                         fontWeight: FontWeight.w600),
@@ -356,7 +354,7 @@ class ScheduleView extends StatelessWidget {
                   Text(
                     '${schedule.note}',
                     style: TextStyle(
-                        fontSize: ScUtil.getInstance().setSp(32),
+                        fontSize: ScUtil.getInstance()!.setSp(32),
                         color: Colors.blue[800],
                         fontFamily: 'MR',
                         fontWeight: FontWeight.normal),

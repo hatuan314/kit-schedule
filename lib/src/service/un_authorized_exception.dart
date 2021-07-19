@@ -1,10 +1,10 @@
 class UnAuthorizedException implements Exception {
-  String cause;
+  String? cause;
 
   UnAuthorizedException(this.cause);
 
   @override
   String toString() {
-    return this.cause;
+    return this.cause!;
   }
 }

@@ -5,25 +5,25 @@ abstract class ScheduleState extends Equatable {}
 class UpdateScheduleDayInitState extends ScheduleState {
   @override
   // TODO: implement props
-  List<Object> get props => null;
+  List<Object> get props => [];
 }
 
 class UpdateScheduleDayLoadingState extends ScheduleState {
   @override
   // TODO: implement props
-  List<Object> get props => null;
+  List<Object> get props => [];
 }
 
 class UpdateScheduleDaySuccessState extends ScheduleState {
-  final List<SchoolSchedule> schedulesSchoolOfDay;
-  final List<PersonalSchedule> schedulesPersonalOfDay;
+  final List<SchoolSchedule>? schedulesSchoolOfDay;
+  final List<PersonalSchedule>? schedulesPersonalOfDay;
 
   UpdateScheduleDaySuccessState(
       this.schedulesSchoolOfDay, this.schedulesPersonalOfDay);
 
   @override
   // TODO: implement props
-  List<Object> get props =>
+  List<Object?> get props =>
       [this.schedulesSchoolOfDay, this.schedulesPersonalOfDay];
 }
 

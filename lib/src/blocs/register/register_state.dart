@@ -7,25 +7,28 @@ abstract class RegisterState extends Equatable {
 class RegisterInitState extends RegisterState {
   @override
   // TODO: implement props
-  List<Object> get props => null;
+  List<Object?> get props => throw UnimplementedError();
+
 }
 
 class RegisterLoadingState extends RegisterState {
   @override
   // TODO: implement props
-  List<Object> get props => null;
+  List<Object?> get props => throw UnimplementedError();
 }
 
 class RegisterNoDataState extends RegisterState {
   @override
   // TODO: implement props
-  List<Object> get props => null;
+  List<Object?> get props => throw UnimplementedError();
+
 }
 
 class RegisterSuccessState extends RegisterState {
   @override
   // TODO: implement props
-  List<Object> get props => null;
+  List<Object?> get props => throw UnimplementedError();
+
 }
 
 class RegisterFailureState extends RegisterState {

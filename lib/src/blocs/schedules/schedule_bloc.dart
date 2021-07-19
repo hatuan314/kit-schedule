@@ -9,14 +9,13 @@ part 'schedule_event.dart';
 part 'schedule_state.dart';
 
 class ScheduleBloc extends Bloc<ScheduleEvent, ScheduleState> {
-  Map<DateTime, List<SchoolSchedule>> _schedulesSchoolMap =
+  Map<DateTime, List<SchoolSchedule>>? _schedulesSchoolMap =
       Map<DateTime, List<SchoolSchedule>>();
-  Map<DateTime, List<PersonalSchedule>> _schedulesPersonalMap =
+  Map<DateTime, List<PersonalSchedule>>? _schedulesPersonalMap =
       Map<DateTime, List<PersonalSchedule>>();
 
-  @override
-  // TODO: implement initialState
-  ScheduleState get initialState => UpdateScheduleDayInitState();
+  ScheduleBloc() : super(UpdateScheduleDayInitState());
+
 
   @override
   Stream<ScheduleState> mapEventToState(ScheduleEvent event) async* {
@@ -27,8 +26,8 @@ class ScheduleBloc extends Bloc<ScheduleEvent, ScheduleState> {
       _schedulesPersonalMap = event.allSchedulePersonalMap;
 
       yield UpdateScheduleDaySuccessState(
-          _schedulesSchoolMap[Convert.dateConvert(event.selectDay)],
-          _schedulesPersonalMap[Convert.dateConvert(event.selectDay)]);
+          _schedulesSchoolMap![Convert.dateConvert(event.selectDay!)],
+          _schedulesPersonalMap![Convert.dateConvert(event.selectDay!)]);
     }
   }
 }

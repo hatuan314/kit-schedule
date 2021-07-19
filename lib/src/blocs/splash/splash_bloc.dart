@@ -7,9 +7,8 @@ part 'splash_state.dart';
 
 class SplashBloc extends Bloc<SplashEvent, SplashState> {
   ShareService _shareService = ShareService();
-  @override
-  // TODO: implement initialState
-  SplashState get initialState => CheckDataLoadingState();
+
+  SplashBloc() : super(CheckDataLoadingState());
 
   @override
   Stream<SplashState> mapEventToState(SplashEvent event) async* {

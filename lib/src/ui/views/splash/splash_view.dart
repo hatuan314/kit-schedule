@@ -22,13 +22,13 @@ class _SplashViewState extends State<SplashView> {
     });
   }
 
-  void _checkIfDarkModeEnabled() {
+ /* void _checkIfDarkModeEnabled() {
     brightness = MediaQuery.of(context).platformBrightness;
     if (brightness == Brightness.dark)
       print("Dark mode");
     else
       print("Normal mode");
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -49,19 +49,19 @@ class _SplashViewState extends State<SplashView> {
                   color: Colors.white,
                 ),
                 SizedBox(
-                  width: ScUtil.getInstance().setWidth(20),
+                  width: ScUtil.getInstance()!.setWidth(20),
                 ),
                 Text(
                   "KIT Schedule",
                   style: TextStyle(
-                      fontSize: ScUtil.getInstance().setSp(50),
+                      fontSize: ScUtil.getInstance()!.setSp(50),
                       color: Colors.white,
                       fontFamily: 'MR',
                       fontWeight: FontWeight.w600),
                 )
               ],
             ),
-            Box()
+            //Box()
           ],
         ),
       ),
