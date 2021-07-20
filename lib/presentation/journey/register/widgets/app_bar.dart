@@ -24,11 +24,11 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                       fontSize: ScUtil.getInstance().setSp(25)),
                 ),
                 SizedBox(
-                  height: 5,
+                  height:  ScUtil.getInstance().setHeight(5),
                 ),
                 Container(
-                  width: 30,
-                  height: 3,
+                  width: ScUtil.getInstance().setWidth(50),
+                  height: ScUtil.getInstance().setHeight(2.5),
                   decoration: BoxDecoration(
                       color: Colors.red,
                       borderRadius: BorderRadius.all(Radius.circular(10))),
