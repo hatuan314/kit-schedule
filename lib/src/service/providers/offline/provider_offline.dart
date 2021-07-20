@@ -5,16 +5,16 @@ import 'package:schedule/src/service/services.dart';
 class ProviderOffline {
   /// Add School Schedule Data
   Future insertSchoolScheduleProvider(SchoolSchedule schedule) async {
-    // final sql = '''INSERT INTO ${DatabaseCreator.lessonTable}
-    // (date, lesson, subject_name, address) VALUES (?, ?, ?, ?)''';
-    /*List<dynamic> params = [
+    final sql = '''INSERT INTO ${DatabaseCreator.lessonTable}
+    (date, lesson, subject_name, address) VALUES (?, ?, ?, ?)''';
+    List<dynamic> params = [
       schedule.date,
       schedule.lesson,
       schedule.subject,
       schedule.address
-    ];*/
+    ];
     try {
-//      final result = await db.rawInsert(sql, params);
+      final result = await db!.rawInsert(sql, params);
 //      debugPrint('ProviderOffline - addScheduleLessonProvider - result: {$result}');
     } catch (e) {
       debugPrint('ProviderOffline - addScheduleLessonProvider - error {$e}');
@@ -48,7 +48,7 @@ class ProviderOffline {
     final scheduleData = await db!.rawQuery(dateSql);
     List<SchoolSchedule> allSchedules = [];
     for (final node in scheduleData) {
-      //String date = node['date'];
+      String date = node['date'].toString();
       SchoolSchedule schedule = SchoolSchedule.fromJsonDb(node);
       allSchedules.add(schedule);
     }

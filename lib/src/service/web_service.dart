@@ -5,35 +5,31 @@ import 'package:flutter/material.dart';
 import 'package:schedule/src/service/services.dart';
 
 class WebService {
-  Dio setupDio({String? accessToken, required String contentType}) {
+  Dio setupDio() {
     Dio dio = Dio(BaseOptions(
       headers: {'header': 'tkbkma.herokuapp.com'},
       baseUrl: 'https://tkbkma.herokuapp.com/api/schedule/guest',
-      contentType: contentType,
-      connectTimeout: 50000,
-      receiveTimeout: 50000,
+      contentType: 'application/json; charset=utf-8',
+      connectTimeout: 30000,
+      receiveTimeout: 30000,
     ));
-    dio.interceptors
-        .add(_setupLoggingInterceptor()); // setup logging interceptors
+    dio.interceptors.add(
+      InterceptorsWrapper(
+        onError: (error, handler) {
+          // Do stuff here
+          handler.reject(error); // Added this line to let error propagate outside the interceptor
+        },
+      ),
+    );
 
     return dio;
   }
 
   Interceptor _setupLoggingInterceptor() {
-    final interceptor =
-    InterceptorsWrapper(onRequest: (RequestOptions options,r) {
-      // do something before request is send
-//          debugPrint(
-//              "--> ${options.method != null
-//                  ? options.method.toUpperCase()
-//                  : 'METHOD'} ${"" + (options.baseUrl ?? "") +
-//                  (options.path ?? "")}");
-//          debugPrint("Headers:");
+    final interceptor = InterceptorsWrapper(onRequest: (RequestOptions options,
+        RequestInterceptorHandler requestInterceptorHandler) {
       options.headers.forEach((k, v) => debugPrint('$k: $v'));
-      if (options.queryParameters != null) {
-//            debugPrint("queryParameters:");
         options.queryParameters.forEach((k, v) => debugPrint('$k: $v'));
-      }
       if (options.data != null) {
 //            debugPrint("Body: ${options.data}");
       }
@@ -41,8 +37,9 @@ class WebService {
 //              "--> END ${options.method != null
 //                  ? options.method.toUpperCase()
 //                  : 'METHOD'}");
-//       return options;
-    }, onResponse: (Response response,s) {
+      requestInterceptorHandler.next(options);
+    }, onResponse: (Response response,
+        ResponseInterceptorHandler responseInterceptorHandler) {
       // do something with data
 //          debugPrint(
 //              "<-- ${response.statusCode} ${(response.request != null
@@ -54,9 +51,9 @@ class WebService {
 //          debugPrint("<-- END HTTP");
 
       _handleResponseException(response); // handling error in response
-
-      // return response;
-    }, onError: (DioError err,s) async {
+      responseInterceptorHandler.next(response);
+    }, onError:
+        (DioError err, ErrorInterceptorHandler errorInterceptorHandler) async {
       // catch error
 //          debugPrint(
 //              "<-- ${err.message} ${(err.response?.request != null
@@ -65,7 +62,8 @@ class WebService {
 //          debugPrint(
 //              "${err.response != null ? err.response.data : 'Unknown Error'}");
 //          debugPrint("<-- End error");
-
+      errorInterceptorHandler.reject(err);
+      throw _handleError(err); // handling error in dio
     });
 
     return interceptor;
@@ -81,10 +79,10 @@ class WebService {
           try {
             var errorJson = json.decode(errorResponse);
 
-            String? errorOut = errorJson['error'];
+            String errorOut = errorJson['error'];
 
             throw UnAuthorizedException(errorOut);
-          } on Exception catch (e) {
+          } on Exception catch (e, b) {
             throw UnAuthorizedException(e.toString());
           }
         }
@@ -94,7 +92,7 @@ class WebService {
         try {
           var errorJson = json.decode(errorResponse);
 
-          String? errorOut = errorJson['error'];
+          String errorOut = errorJson['error'];
 
           throw Exception(errorOut);
 
@@ -127,11 +125,11 @@ class WebService {
           break;
         case DioErrorType.response:
           responseError =
-          "Received invalid status code: ${error.response!.statusCode}";
+              "Received invalid status code: ${error.response!.statusCode}";
           break;
         default:
           responseError =
-          "Connection to API server failed due to internet connection";
+              "Connection to API server failed due to internet connection";
       }
     } else {
       responseError = 'Unexpected error occured: ${error.toString()}';

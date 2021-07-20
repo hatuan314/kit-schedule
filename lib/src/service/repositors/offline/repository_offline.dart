@@ -29,6 +29,6 @@ class RepositoryOffline {
   Future deleteAllSchoolSchedulesRepo() =>
       _providerOffline.deleteAllSchoolScheduleProvider();
 
-  Future<int> deletePersonalScheduleRepo(String? id) =>
+  Future<int> deletePersonalScheduleRepo(String id) =>
       _providerOffline.deletePersonalScheduleProvider(id);
 }

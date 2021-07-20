@@ -35,7 +35,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     else if (event is UpdatePersonalScheduleOnPressEvent)
       yield* _mapUpdatePersonalScheduleToState(event);
     else if (event is DetelePersonalScheduleOnPressEvent)
-      yield* _mapDetelePersonalScheduleToState(event.id);
+      yield* _mapDetelePersonalScheduleToState(event.id!);
   }
 
   Stream<TodoState> _mapSelectDatePickerToState(
@@ -88,7 +88,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     }
   }
 
-  Stream<TodoState> _mapDetelePersonalScheduleToState(String? id) async* {
+  Stream<TodoState> _mapDetelePersonalScheduleToState(String id) async* {
     yield TodoLoadingState();
     try {
       int flag = await _repositoryOffline.deletePersonalScheduleRepo(id);

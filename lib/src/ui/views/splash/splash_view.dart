@@ -75,7 +75,7 @@ class _SplashViewState extends State<SplashView> {
   Future navigateToScreen() async {
     ShareService _shareService = ShareService();
     try {
-      var flag = await _shareService.getIsSaveData();
+      final flag = await _shareService.getIsSaveData();
       if (flag == true)
         Navigator.pushReplacementNamed(context, '/home');
       else

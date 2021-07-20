@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:schedule/src/service/services.dart';
 import 'package:schedule/src/service/web_service.dart';
 
 class ProviderOnline {
@@ -7,7 +10,7 @@ class ProviderOnline {
 
   Future<String> fetchScheduleSchoolDataProvider(
       String account, String password) async {
-    final dio = _service.setupDio(contentType: '');
+    final dio = _service.setupDio();
     final authBody = {
       "studentAccount": "$account",
       "studentPassword": "$password"

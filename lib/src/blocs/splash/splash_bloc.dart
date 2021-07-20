@@ -15,7 +15,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     // TODO: implement mapEventToState
     if (event is CheckOfflineData) {
       try {
-        bool flag = await _shareService.getIsSaveData();
+        bool? flag = await _shareService.getIsSaveData();
         if (flag == false) {
           yield CheckNoDataState();
         } else {
