@@ -1,9 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:schedule/blocs/blocs.dart';
-import 'package:schedule/utils/utils.dart';
+import 'package:schedule/common/themes/theme_color.dart';
+import 'package:schedule/common/themes/theme_text.dart';
+import 'package:schedule/src/blocs/blocs.dart';
+import 'package:schedule/src/ui/views/widgets_constants/spacing_box_widget.dart';
+import '../widgets_constants/text_form_field_widget.dart';
+import '../widgets_constants/widgets_constants.dart';
+import 'package:schedule/src/utils/multi_screen/flutter_screen_util.dart';
+import 'package:schedule/src/utils/utils.dart';
 //import 'package:toast/toast.dart';
 
 class SignInView extends StatefulWidget {
@@ -20,7 +25,7 @@ class _SignInViewState extends State<SignInView> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      backgroundColor: Colors.blue[900],
+      backgroundColor: ThemeColor.signInColor,
       body: BlocListener<RegisterBloc, RegisterState>(
         listener: (context, state) {
           if (state is RegisterSuccessState) {
@@ -57,7 +62,7 @@ class _SignInViewState extends State<SignInView> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20))),
                         margin: EdgeInsets.only(
-                            top: ScreenUtil().setHeight(20)),
+                            top: ScUtil.getInstance()!.setHeight(20)),
                         elevation: 10,
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.8,
@@ -66,128 +71,30 @@ class _SignInViewState extends State<SignInView> {
                                   BorderRadius.all(Radius.circular(20)),
                               color: Colors.grey[100]),
                           padding: EdgeInsets.only(
-                              left: ScreenUtil().setWidth(20),
-                              top: ScreenUtil().setHeight(40),
-                              right: ScreenUtil().setWidth(20),
-                              bottom: ScreenUtil().setHeight(20)),
+                              left: ScUtil.getInstance()!.setWidth(20),
+                              top: ScUtil.getInstance()!.setHeight(40),
+                              right: ScUtil.getInstance()!.setWidth(20),
+                              bottom: ScUtil.getInstance()!.setHeight(20)),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
                               Text(
                                 'KIT Schedule',
-                                style: TextStyle(
-                                    fontSize: ScreenUtil().setSp(40),
-                                    color: Colors.blue[900],
-                                    fontFamily: 'MR',
-                                    fontWeight: FontWeight.w600),
+                                style: ThemeText.headerStyle2
                               ),
-                              SizedBox(
-                                height: ScreenUtil().setHeight(30),
-                              ),
-                              TextFormField(
-                                controller: _accountController,
-                                style: TextStyle(
-                                    color: Colors.blue[800],
-                                    fontSize: ScreenUtil().setSp(32),
-                                    fontFamily: "MR"),
-                                cursorColor: Colors.blue[800],
-                                decoration: InputDecoration(
-                                    errorStyle: TextStyle(
-                                        fontSize:
-                                            ScreenUtil().setSp(24),
-                                        color: Colors.redAccent,
-                                        fontFamily: "MR"),
-                                    errorMaxLines: 2,
-                                    labelText: 'KMA Account',
-                                    labelStyle: TextStyle(
-                                        fontSize:
-                                            ScreenUtil().setSp(32),
-                                        color: Colors.blue[800],
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: "MR"),
-                                    prefixIcon: Icon(Icons.account_circle,
-                                        color: Colors.blue[800]),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.blue[800]!,
-                                            width: ScreenUtil()
-                                                .setWidth(3)),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(8.0))),
-                                    errorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.redAccent,
-                                            width: ScreenUtil()
-                                                .setWidth(3)),
-                                        borderRadius:
-                                            BorderRadius.all(Radius.circular(8.0))),
-                                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue[800]!, width: ScreenUtil().setWidth(3)), borderRadius: BorderRadius.all(Radius.circular(8.0)))),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return "Trường này không được bỏ trống";
-                                  }
-                                  return null;
-                                },
-                              ),
-                              SizedBox(
-                                height: ScreenUtil().setHeight(20),
-                              ),
+                          SpacingBoxWidget(height: 30),
+                             TextFormFieldWidget(controller: _accountController, labelText: 'Account', isShowed: isShow, isPassword: false,isInLogInScreen: true,),
+                              SpacingBoxWidget(height: 20),
                               Stack(
                                 alignment: AlignmentDirectional.centerEnd,
                                 children: <Widget>[
-                                  TextFormField(
-                                    controller: _passwordController,
-                                    style: TextStyle(
-                                        color: Colors.blue[800],
-                                        fontSize:
-                                            ScreenUtil().setSp(32),
-                                        fontFamily: "MR"),
-                                    cursorColor: Colors.blue[800],
-                                    obscureText: !isShow,
-                                    decoration: InputDecoration(
-                                        errorStyle: TextStyle(
-                                            fontSize:
-                                                ScreenUtil().setSp(24),
-                                            color: Colors.redAccent,
-                                            fontFamily: "MR"),
-                                        errorMaxLines: 2,
-                                        labelText: 'Password',
-                                        labelStyle: TextStyle(
-                                            fontSize:
-                                                ScreenUtil().setSp(32),
-                                            color: Colors.blue[800],
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: "MR"),
-                                        prefixIcon: Icon(Icons.lock,
-                                            color: Colors.blue[800]),
-                                        enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.blue[800]!,
-                                                width: ScreenUtil()
-                                                    .setWidth(3)),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(8.0))),
-                                        errorBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.redAccent,
-                                                width: ScreenUtil()
-                                                    .setWidth(3)),
-                                            borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue[800]!, width: ScreenUtil().setWidth(3)), borderRadius: BorderRadius.all(Radius.circular(8.0)))),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return "Trường này không được bỏ trống";
-                                      }
-                                      return null;
-                                    },
-//                                  onChanged: (value) => model.password = value,
-                                  ),
+                                  TextFormFieldWidget(controller: _passwordController, labelText: 'Password', isShowed: isShow, isPassword: true,isInLogInScreen: true,),
                                   IconButton(
                                     icon: Icon(
                                       isShow
                                           ? Icons.visibility_off
                                           : Icons.visibility,
-                                      color: Colors.blue[800],
+                                      color: ThemeColor.personalScheduleColor,
                                     ),
                                     onPressed: () =>
                                         BlocProvider.of<RegisterBloc>(context)
@@ -196,13 +103,11 @@ class _SignInViewState extends State<SignInView> {
                                   )
                                 ],
                               ),
-                              SizedBox(
-                                height: ScreenUtil().setHeight(30),
-                              ),
+                              SpacingBoxWidget(height: 30),
                               state is RegisterLoadingState
                                   ? _loadingUI(state)
                                   : RaisedButton(
-                                      color: Colors.blue[800],
+                                      color: ThemeColor.personalScheduleColor,
                                       shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(5))),
@@ -211,11 +116,8 @@ class _SignInViewState extends State<SignInView> {
                                           _setOnClickLoginButton(state),
                                       child: Text(
                                         "LOGIN",
-                                        style: TextStyle(
-                                            fontSize:
-                                                ScreenUtil().setSp(34),
-                                            fontFamily: 'MR',
-                                            fontWeight: FontWeight.w600),
+                                        style:ThemeText.titleStyle.copyWith( fontSize:
+                                        ScUtil.getInstance()!.setSp(34),) ,
                                       ),
                                     )
                             ],
@@ -223,19 +125,15 @@ class _SignInViewState extends State<SignInView> {
                         ),
                       ),
                       Container(
-                        width: ScreenUtil().setWidth(110),
+                        width: ScUtil.getInstance()!.setWidth(110),
                         padding: EdgeInsets.all(11),
                         decoration: new BoxDecoration(
                             border: Border.all(
-                                color: Colors.blue[900]!,
-                                width: ScreenUtil().setWidth(8)),
+                                color: ThemeColor.signInColor,
+                                width: ScUtil.getInstance()!.setWidth(8)),
                             shape: BoxShape.circle,
                             color: Colors.grey[100]),
-                        child: Image.asset(
-                          'assets/img/kit_schedule_logo.png',
-                          fit: BoxFit.cover,
-                          width: ScreenUtil().setWidth(50),
-                        ),
+                        child: WidgetsConstants().kitLogo
                       )
                     ],
                   ),

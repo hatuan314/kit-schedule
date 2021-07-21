@@ -3,13 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 //import 'package:flutter_rounded_date_picker/rounded_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
-import 'package:schedule/blocs/todo/todo_bloc.dart';
-import 'package:schedule/models/model.dart';
-import 'package:schedule/utils/utils.dart';
+import 'package:schedule/src/blocs/todo/todo_bloc.dart';
+import 'package:schedule/src/models/model.dart';
+import 'package:schedule/src/ui/views/widgets_constants/text_form_field_widget.dart';
+import 'package:schedule/src/utils/utils.dart';
 //import 'package:toast/toast.dart';
 
 class TodoDetailView extends StatefulWidget {
@@ -87,7 +87,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
   _todoBackgroundWidget(TodoState state) {
     return Padding(
       padding:
-          EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(50)),
+          EdgeInsets.symmetric(horizontal: ScUtil.getInstance()!.setWidth(50)),
       child: Stack(
         alignment: Alignment.centerRight,
         children: <Widget>[
@@ -100,7 +100,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                 child: Text(
                   '${this.widget.schedule!.name}',
                   style: TextStyle(
-                      fontSize: ScreenUtil().setSp(42),
+                      fontSize: ScUtil.getInstance()!.setSp(42),
                       color: Color(0xffFCFAF3),
                       fontFamily: 'MR',
                       fontWeight: FontWeight.w600),
@@ -110,17 +110,17 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                 onTap: () => _selectDatePicker(),
                 child: Padding(
                   padding: EdgeInsets.symmetric(
-                      vertical: ScreenUtil().setHeight(5)),
+                      vertical: ScUtil.getInstance()!.setHeight(5)),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       SvgPicture.asset(
                         'assets/img/ic-calendar.svg',
                         color: Color(0xffFCFAF3),
-                        height: ScreenUtil().setHeight(18),
+                        height: ScUtil.getInstance()!.setHeight(18),
                       ),
                       SizedBox(
-                        width: ScreenUtil().setWidth(18),
+                        width: ScUtil.getInstance()!.setWidth(18),
                       ),
                       Text(
                         state is TodoInitState
@@ -129,7 +129,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                                 ? '${DateFormat.yMd().format(DateTime.fromMillisecondsSinceEpoch(int.parse(state.selectDay!)))}'
                                 : '',
                         style: TextStyle(
-                            fontSize: ScreenUtil().setSp(28),
+                            fontSize: ScUtil.getInstance()!.setSp(28),
                             color: Color(0xffFCFAF3),
                             fontFamily: 'MR',
                             fontWeight: FontWeight.normal),
@@ -141,10 +141,10 @@ class _TodoDetailViewState extends State<TodoDetailView> {
             ],
           ),
           Padding(
-            padding: EdgeInsets.only(right: ScreenUtil().setWidth(50)),
+            padding: EdgeInsets.only(right: ScUtil.getInstance()!.setWidth(50)),
             child: SvgPicture.asset(
               'assets/img/kit_schedule_logo.svg',
-              width: ScreenUtil().setHeight(60),
+              width: ScUtil.getInstance()!.setHeight(60),
             ),
           )
         ],
@@ -160,10 +160,10 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                 color: Color(0xffFCFAF3),
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(30))),
             padding: EdgeInsets.only(
-                left: ScreenUtil().setWidth(50),
-                top: ScreenUtil().setWidth(75),
-                right: ScreenUtil().setWidth(50),
-                bottom: ScreenUtil().setWidth(50)),
+                left: ScUtil.getInstance()!.setWidth(50),
+                top: ScUtil.getInstance()!.setWidth(75),
+                right: ScUtil.getInstance()!.setWidth(50),
+                bottom: ScUtil.getInstance()!.setWidth(50)),
             child: CustomScrollView(
               shrinkWrap: true,
               slivers: <Widget>[
@@ -171,111 +171,36 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      TextFormField(
+                      TextFormFieldWidget(
                         controller: _nameController,
-                        style: TextStyle(
-                            color: Colors.blue[800],
-                            fontSize: ScreenUtil().setSp(32),
-                            fontFamily: "MR"),
-                        cursorColor: Colors.blue[800],
-                        decoration: InputDecoration(
-                            errorStyle: TextStyle(
-                                fontSize: ScreenUtil().setSp(24),
-                                color: Colors.redAccent,
-                                fontFamily: "MR"),
-                            errorMaxLines: 2,
-                            labelText: 'Title',
-                            labelStyle: TextStyle(
-                                fontSize: ScreenUtil().setSp(32),
-                                color: Colors.blue[800],
-                                fontWeight: FontWeight.w500,
-                                fontFamily: "MR"),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.blue[800]!,
-                                    width: ScreenUtil().setWidth(3)),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8.0))),
-                            errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.redAccent,
-                                    width: ScreenUtil().setWidth(3)),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8.0))),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.blue[800]!,
-                                    width: ScreenUtil().setWidth(3)),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8.0)))),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Trường này không được bỏ trống";
-                          }
-                          return null;
-                        },
+                        labelText: 'Title',
+                        isShowed: false,
+                        isPassword: false,
+                        isInLogInScreen: false,
                       ),
                       SizedBox(
-                        height: ScreenUtil().setHeight(20),
+                        height: ScUtil.getInstance()!.setHeight(20),
                       ),
-                      TextFormField(
+                      TextFormFieldWidget(
                         controller: _noteController,
-                        style: TextStyle(
-                            color: Colors.blue[800],
-                            fontSize: ScreenUtil().setSp(32),
-                            fontFamily: "MR"),
-                        maxLines: 5,
-                        cursorColor: Colors.blue[800],
-                        decoration: InputDecoration(
-                            errorStyle: TextStyle(
-                                fontSize: ScreenUtil().setSp(24),
-                                color: Colors.redAccent,
-                                fontFamily: "MR"),
-                            errorMaxLines: 2,
-                            labelText: 'Note',
-                            labelStyle: TextStyle(
-                                fontSize: ScreenUtil().setSp(32),
-                                color: Colors.blue[800],
-                                fontWeight: FontWeight.w500,
-                                fontFamily: "MR"),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.blue[800]!,
-                                    width: ScreenUtil().setWidth(3)),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8.0))),
-                            errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.redAccent,
-                                    width: ScreenUtil().setWidth(3)),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8.0))),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.blue[800]!,
-                                    width: ScreenUtil().setWidth(3)),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8.0)))),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Trường này không được bỏ trống";
-                          }
-                          return null;
-                        },
+                        labelText: 'Note',
+                        isShowed: false,
+                        isPassword: false,
+                        isInLogInScreen: false,
                       ),
                       SizedBox(
-                        height: ScreenUtil().setHeight(20),
+                        height: ScUtil.getInstance()!.setHeight(20),
                       ),
                       Text(
                         'Set time',
                         style: TextStyle(
                             color: Colors.blue[900],
-                            fontSize: ScreenUtil().setSp(38),
+                            fontSize: ScUtil.getInstance()!.setSp(38),
                             fontFamily: 'MR',
                             fontWeight: FontWeight.w600),
                       ),
                       SizedBox(
-                        height: ScreenUtil().setHeight(10),
+                        height: ScUtil.getInstance()!.setHeight(10),
                       ),
                       InkWell(
                         onTap: () => _selectTimePicker(),
@@ -286,10 +211,10 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                                   BorderRadius.all(Radius.circular(8)),
                               border: Border.all(
                                   color: Colors.blue[800]!,
-                                  width: ScreenUtil().setWidth(3))),
+                                  width: ScUtil.getInstance()!.setWidth(3))),
                           alignment: Alignment.center,
                           padding: EdgeInsets.symmetric(
-                              vertical: ScreenUtil().setHeight(12)),
+                              vertical: ScUtil.getInstance()!.setHeight(12)),
                           child: Text(
                             state is TodoInitState
                                 ? '${this.widget.schedule!.timer}'
@@ -298,14 +223,14 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                                     : '',
                             style: TextStyle(
                                 color: Colors.blue[800],
-                                fontSize: ScreenUtil().setSp(32),
+                                fontSize: ScUtil.getInstance()!.setSp(32),
                                 fontFamily: 'MR',
                                 fontWeight: FontWeight.w600),
                           ),
                         ),
                       ),
                       SizedBox(
-                        height: ScreenUtil().setHeight(30),
+                        height: ScUtil.getInstance()!.setHeight(30),
                       ),
                       state is TodoLoadingState
                           ? Container(
@@ -325,12 +250,12 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                                 alignment: Alignment.center,
                                 padding: EdgeInsets.symmetric(
                                     vertical:
-                                        ScreenUtil().setHeight(12)),
+                                        ScUtil.getInstance()!.setHeight(12)),
                                 child: Text(
                                   'Update',
                                   style: TextStyle(
                                       color: Color(0xffFCFAF3),
-                                      fontSize: ScreenUtil().setSp(36),
+                                      fontSize: ScUtil.getInstance()!.setSp(36),
                                       fontFamily: 'MR',
                                       fontWeight: FontWeight.w600),
                                 ),
@@ -380,13 +305,13 @@ class _TodoDetailViewState extends State<TodoDetailView> {
         animType: AnimType.BOTTOMSLIDE,
         body: Padding(
           padding: EdgeInsets.symmetric(
-              vertical: ScreenUtil().setHeight(20)),
+              vertical: ScUtil.getInstance()!.setHeight(20)),
           child: RichText(
             text: TextSpan(
                 text: 'Do you want ',
                 style: TextStyle(
                     color: Colors.black54,
-                    fontSize: ScreenUtil().setSp(32),
+                    fontSize: ScUtil.getInstance()!.setSp(32),
                     fontFamily: 'MR',
                     fontWeight: FontWeight.normal),
                 children: [
@@ -394,14 +319,14 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                       text: 'delete ',
                       style: TextStyle(
                           color: Colors.red,
-                          fontSize: ScreenUtil().setSp(32),
+                          fontSize: ScUtil.getInstance()!.setSp(32),
                           fontFamily: 'MR',
                           fontWeight: FontWeight.w600)),
                   TextSpan(
                       text: '${this.widget.schedule!.name}?',
                       style: TextStyle(
                           color: Colors.black54,
-                          fontSize: ScreenUtil().setSp(32),
+                          fontSize: ScUtil.getInstance()!.setSp(32),
                           fontFamily: 'MR',
                           fontWeight: FontWeight.normal)),
                 ]),
@@ -418,7 +343,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
             child: Text('Yes (Y)',
                 style: TextStyle(
                     color: Color(0xffFCFAF3),
-                    fontSize: ScreenUtil().setSp(32),
+                    fontSize: ScUtil.getInstance()!.setSp(32),
                     fontFamily: 'MR',
                     fontWeight: FontWeight.bold)),
           ),
@@ -434,7 +359,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
             child: Text('No (N)',
                 style: TextStyle(
                     color: Color(0xffFCFAF3),
-                    fontSize: ScreenUtil().setSp(32),
+                    fontSize: ScUtil.getInstance()!.setSp(32),
                     fontFamily: 'MR',
                     fontWeight: FontWeight.bold)),
           ),

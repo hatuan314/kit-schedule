@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:schedule/utils/utils.dart';
+import 'package:schedule/common/themes/theme_color.dart';
+import 'package:schedule/src/utils/multi_screen/flutter_screen_util.dart';
+import 'package:schedule/src/utils/utils.dart';
 
 class LoadingView extends StatelessWidget {
   @override
@@ -9,11 +10,9 @@ class LoadingView extends StatelessWidget {
 //    ScUtil.instance = ScUtil(width: 750, height: 1624)..init(context);
     return Scaffold(
       body: Container(
-          color: Colors.blue[900],
-          margin: EdgeInsets.only(top: ScreenUtil().setHeight(50)),
-          child: LoadingWidget(
-            color: Colors.white,
-          )),
+          color: ThemeColor.loadingColor,
+          margin: EdgeInsets.only(top: ScUtil.getInstance()!.setHeight(50)),
+          child: LoadingWidget(color: Colors.white,)),
     );
   }
 }
