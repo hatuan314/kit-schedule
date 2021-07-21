@@ -1,7 +1,10 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:schedule/common/themes/theme_color.dart';
+import 'package:schedule/common/themes/theme_text.dart';
 import 'package:schedule/src/blocs/home/home_bloc.dart';
 import 'package:schedule/src/utils/multi_screen/flutter_screen_util.dart';
 
@@ -26,83 +29,67 @@ class HomeView extends StatelessWidget {
         else
           _currentTab = CalendarTabView();
         return Scaffold(
-          backgroundColor: Color(0xffFCFAF3),
+          backgroundColor:ThemeColor.secondColor,
           body: _currentTab,
           bottomNavigationBar: Container(
-            decoration: BoxDecoration(color: Color(0xffFCFAF3), boxShadow: [
-              BoxShadow(blurRadius: 20, color: Colors.black.withOpacity(.1))
+            decoration: BoxDecoration(color:ThemeColor.secondColor, boxShadow: [
+              BoxShadow(blurRadius: 20, color: ThemeColor.primaryColor.withOpacity(.1))
             ]),
             child: SafeArea(
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
-                child: GNav(
-                    gap: 8,
-                    activeColor: Color(0xffFCFAF3),
-                    iconSize: 24,
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                    duration: Duration(milliseconds: 800),
-                    tabBackgroundColor: Colors.grey[800]!,
-                    tabs: [
-                      GButton(
-                        icon: Icons.date_range,
-                        backgroundColor: Colors.red,
-                        textColor: Color(0xffFCFAF3),
-                        iconActiveColor: Color(0xffFCFAF3),
-                        iconColor: Colors.black,
-                        text: 'Schedule',
-                        textStyle: TextStyle(
-                            color: Color(0xffFCFAF3),
-                            fontFamily: 'MR',
-                            fontWeight: FontWeight.w500),
-                      ),
-                      GButton(
-                        icon: Icons.search,
-                        backgroundColor: Colors.amber,
-                        textColor: Color(0xffFCFAF3),
-                        iconActiveColor: Color(0xffFCFAF3),
-                        iconColor: Colors.black,
-                        text: 'Search',
-                        textStyle: TextStyle(
-                            color: Color(0xffFCFAF3),
-                            fontFamily: 'MR',
-                            fontWeight: FontWeight.w500),
-                      ),
-                      GButton(
-                        icon: Icons.content_paste,
-                        backgroundColor: Colors.blue,
-                        textColor: Color(0xffFCFAF3),
-                        iconActiveColor: Color(0xffFCFAF3),
-                        iconColor: Colors.black,
-                        text: 'Create Todo',
-                        textStyle: TextStyle(
-                            color: Color(0xffFCFAF3),
-                            fontFamily: 'MR',
-                            fontWeight: FontWeight.w500),
-                      ),
-                      GButton(
-                        icon: Icons.power_settings_new,
-                        backgroundColor: Colors.red,
-                        textColor: Color(0xffFCFAF3),
-                        iconActiveColor: Color(0xffFCFAF3),
-                        iconColor: Colors.black,
-                        text: 'Sign out',
-                        textStyle: TextStyle(
-                            color: Color(0xffFCFAF3),
-                            fontFamily: 'MR',
-                            fontWeight: FontWeight.w500),
-                      ),
-                    ],
-                    selectedIndex:
-                        state is HomeOnChangeTabState ? state.selectIndex : 0,
-                    onTabChange: (index) => BlocProvider.of<HomeBloc>(context)
-                      ..add(OnTabChangeEvent(index))),
-              ),
-            ),
-          ),
-        );
-      }),
+                child: Row(
+
+    children: [
+
+    Expanded(
+    flex: 1,
+    child: navBarItem(context, 0, Icons.date_range ,state)),
+
+    Expanded(
+    flex: 1,child: navBarItem(context, 1,  Icons.search,state)),
+
+    Expanded(
+    flex: 1,child: navBarItem(context, 2, Icons.content_paste,state)),
+
+    Expanded(
+    flex: 1,child: navBarItem(context, 3, Icons.person,state)),
+
+    ],
+    ),
+    ),
+    ),
+    ));
+    }));
+  }
+  Widget navBarItem(BuildContext context,int index, IconData icon, HomeState state)
+  {
+    return  GestureDetector(
+        onTap: (){ BlocProvider.of<HomeBloc>(context)
+          ..add(OnTabChangeEvent(index));
+        },
+        child:
+        Container(
+          height: 50,
+          child: Icon(icon, color: state.selectIndex==index?getColor(index): ThemeColor.primaryColor,),
+        )
+
     );
+  }
+  Color getColor(int index) {
+    switch (index) {
+      case 0:
+        return ThemeColor.scheduleType;
+      case 1:
+        return ThemeColor.searchType;
+      case 2:
+        return ThemeColor.fourthColor;
+      case 3:
+        return ThemeColor.searchType;
+
+    }
+    return ThemeColor.fourthColor;
   }
 
   void _warningSignOutDialog(BuildContext context) {
@@ -116,31 +103,20 @@ class HomeView extends StatelessWidget {
           child: RichText(
             text: TextSpan(
                 text: 'Do you want ',
-                style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: ScUtil.getInstance()!.setSp(32),
-                    fontFamily: 'MR',
-                    fontWeight: FontWeight.normal),
+                style:   ThemeText.titleStyle.copyWith( color: ThemeColor.thirdColor, ),
                 children: [
                   TextSpan(
                       text: 'Sign Out ',
-                      style: TextStyle(
-                          color: Colors.red,
-                          fontSize: ScUtil.getInstance()!.setSp(32),
-                          fontFamily: 'MR',
-                          fontWeight: FontWeight.w600)),
+                      style:  ThemeText.titleStyle.copyWith( color: ThemeColor.errorColor, ),),
                   TextSpan(
                       text: '?',
-                      style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: ScUtil.getInstance()!.setSp(32),
-                          fontFamily: 'MR',
-                          fontWeight: FontWeight.normal)),
+                      style:
+                      ThemeText.titleStyle.copyWith( color: ThemeColor.thirdColor,fontWeight: FontWeight.normal ), ),
                 ]),
           ),
         ),
         btnOk: RaisedButton(
-          color: Colors.blue,
+          color: ThemeColor.fourthColor,
           onPressed: () => _bntOkDialogOnPress(context),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -148,15 +124,12 @@ class HomeView extends StatelessWidget {
           child: Container(
             alignment: Alignment.center,
             child: Text('Yes (Y)',
-                style: TextStyle(
-                    color: Color(0xffFCFAF3),
-                    fontSize: ScUtil.getInstance()!.setSp(32),
-                    fontFamily: 'MR',
-                    fontWeight: FontWeight.bold)),
+                style:ThemeText.titleStyle.copyWith( color: ThemeColor.secondColor,fontWeight: FontWeight.bold ),
+                 ),
           ),
         ),
         btnCancel: RaisedButton(
-          color: Colors.red,
+          color: ThemeColor.errorColor,
           onPressed: () => _btnCancelDialogOnPress(context),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -164,11 +137,8 @@ class HomeView extends StatelessWidget {
           child: Container(
             alignment: Alignment.center,
             child: Text('No (N)',
-                style: TextStyle(
-                    color: Color(0xffFCFAF3),
-                    fontSize: ScUtil.getInstance()!.setSp(32),
-                    fontFamily: 'MR',
-                    fontWeight: FontWeight.bold)),
+                style:ThemeText.titleStyle.copyWith( color: ThemeColor.secondColor,fontWeight: FontWeight.bold )
+             ),
           ),
         )).show();
   }
@@ -195,26 +165,16 @@ class HomeView extends StatelessWidget {
           child: RichText(
             text: TextSpan(
                 text: 'Can\'t ',
-                style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: ScUtil.getInstance()!.setSp(36),
-                    fontFamily: 'MR',
-                    fontWeight: FontWeight.normal),
+                style:  ThemeText.titleStyle.copyWith( color: ThemeColor.thirdColor,fontWeight: FontWeight.normal) ,
                 children: [
                   TextSpan(
                       text: 'Sign Out ',
-                      style: TextStyle(
-                          color: Colors.red,
-                          fontSize: ScUtil.getInstance()!.setSp(36),
-                          fontFamily: 'MR',
-                          fontWeight: FontWeight.w600)),
+                      style:  ThemeText.titleStyle.copyWith( color: ThemeColor.errorColor,  fontSize: ScUtil.getInstance()!.setSp(36),)
+                      ),
                   TextSpan(
                       text: 'now. Please, try again.',
-                      style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: ScUtil.getInstance()!.setSp(36),
-                          fontFamily: 'MR',
-                          fontWeight: FontWeight.normal)),
+                      style:  ThemeText.titleStyle.copyWith( color: ThemeColor.thirdColor,  fontSize: ScUtil.getInstance()!.setSp(36)),
+                  )
                 ]),
           ),
         ));

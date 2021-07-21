@@ -4,7 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:schedule/common/themes/theme_color.dart';
+import 'package:schedule/common/themes/theme_text.dart';
 import 'package:schedule/src/blocs/todo/todo_bloc.dart';
+import 'package:schedule/src/ui/views/widgets_constants/spacing_box_widget.dart';
+import 'package:schedule/src/ui/views/widgets_constants/text_form_field_widget.dart';
 import 'package:schedule/src/utils/utils.dart';
 
 class CreateTodoTabView extends StatefulWidget {
@@ -57,7 +61,7 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
   _todoBackgroundWidget(TodoState state) {
     return Padding(
       padding:
-      EdgeInsets.symmetric(horizontal: ScUtil.getInstance()!.setWidth(50)),
+          EdgeInsets.symmetric(horizontal: ScUtil.getInstance()!.setWidth(50)),
       child: Stack(
         alignment: Alignment.centerRight,
         children: <Widget>[
@@ -69,12 +73,8 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                 width: double.infinity,
                 child: Text(
                   'Create your todo',
-                  style: TextStyle(
-                      fontSize: ScUtil.getInstance()!.setSp(42),
-                      color: Color(0xffFCFAF3),
-                      fontFamily: 'MR',
-                      fontWeight: FontWeight.w600),
-                ),
+                  style: ThemeText.headerStyle,
+              ),
               ),
               InkWell(
                 onTap: () => _selectDatePicker(),
@@ -86,7 +86,7 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                     children: <Widget>[
                       SvgPicture.asset(
                         'assets/img/ic-calendar.svg',
-                        color: Color(0xffFCFAF3),
+                        color:  ThemeColor.secondColor,
                         height: ScUtil.getInstance()!.setHeight(18),
                       ),
                       SizedBox(
@@ -94,15 +94,9 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                       ),
                       Text(
                         state.selectDay != null
-                            ? '${DateFormat('dd/MM/yyyy').format(
-                            DateTime.fromMillisecondsSinceEpoch(int.parse(
-                                state.selectDay!)))}'
+                            ? '${DateFormat('dd/MM/yyyy').format(DateTime.fromMillisecondsSinceEpoch(int.parse(state.selectDay!)))}'
                             : '',
-                        style: TextStyle(
-                            fontSize: ScUtil.getInstance()!.setSp(28),
-                            color: Color(0xffFCFAF3),
-                            fontFamily: 'MR',
-                            fontWeight: FontWeight.normal),
+                        style: ThemeText.textInforStyle
                       ),
                     ],
                   ),
@@ -127,7 +121,7 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
         key: _formKey,
         child: Container(
             decoration: BoxDecoration(
-                color: Color(0xffFCFAF3),
+                color:  ThemeColor.secondColor,
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(30))),
             padding: EdgeInsets.only(
                 left: ScUtil.getInstance()!.setWidth(50),
@@ -141,121 +135,36 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      TextFormField(
+                      TextFormFieldWidget(
                         controller: _nameController,
-                        style: TextStyle(
-                            color: Colors.blue[800],
-                            fontSize: ScUtil.getInstance()!.setSp(32),
-                            fontFamily: "MR"),
-                        cursorColor: Colors.blue[800],
-                        decoration: InputDecoration(
-                            errorStyle: TextStyle(
-                                fontSize: ScUtil.getInstance()!.setSp(24),
-                                color: Colors.redAccent,
-                                fontFamily: "MR"),
-                            errorMaxLines: 2,
-                            labelText: 'Title',
-                            labelStyle: TextStyle(
-                                fontSize: ScUtil.getInstance()!.setSp(32),
-                                color: Colors.blue[800],
-                                fontWeight: FontWeight.w500,
-                                fontFamily: "MR"),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.blue[800]!,
-                                    width: ScUtil.getInstance()!.setWidth(3)),
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(8.0))),
-                            errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.redAccent,
-                                    width: ScUtil.getInstance()!.setWidth(3)),
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(8.0))),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.blue[800]!,
-                                    width: ScUtil.getInstance()!.setWidth(3)),
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(8.0)))),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Trường này không được bỏ trống";
-                          }
-                          return null;
-                        },
+                        labelText: 'Title',
+                        isShowed: false,
+                        isPassword: false,
+                        isInLogInScreen: false,
                       ),
-                      SizedBox(
-                        height: ScUtil.getInstance()!.setHeight(20),
-                      ),
-                      TextFormField(
+                      SpacingBoxWidget(height: 20),
+                      TextFormFieldWidget(
                         controller: _noteController,
-                        style: TextStyle(
-                            color: Colors.blue[800],
-                            fontSize: ScUtil.getInstance()!.setSp(32),
-                            fontFamily: "MR"),
-                        maxLines: 5,
-                        cursorColor: Colors.blue[800],
-                        decoration: InputDecoration(
-                            errorStyle: TextStyle(
-                                fontSize: ScUtil.getInstance()!.setSp(24),
-                                color: Colors.redAccent,
-                                fontFamily: "MR"),
-                            errorMaxLines: 2,
-                            labelText: 'Note',
-                            labelStyle: TextStyle(
-                                fontSize: ScUtil.getInstance()!.setSp(32),
-                                color: Colors.blue[800],
-                                fontWeight: FontWeight.w500,
-                                fontFamily: "MR"),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.blue[800]!,
-                                    width: ScUtil.getInstance()!.setWidth(3)),
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(8.0))),
-                            errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.redAccent,
-                                    width: ScUtil.getInstance()!.setWidth(3)),
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(8.0))),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.blue[800]!,
-                                    width: ScUtil.getInstance()!.setWidth(3)),
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(8.0)))),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Trường này không được bỏ trống";
-                          }
-                          return null;
-                        },
+                        labelText: 'Note',
+                        isShowed: false,
+                        isPassword: false,
+                        isInLogInScreen: false,
                       ),
-                      SizedBox(
-                        height: ScUtil.getInstance()!.setHeight(20),
-                      ),
+                      SpacingBoxWidget(height: 20),
                       Text(
                         'Set time',
-                        style: TextStyle(
-                            color: Colors.blue[900],
-                            fontSize: ScUtil.getInstance()!.setSp(38),
-                            fontFamily: 'MR',
-                            fontWeight: FontWeight.w600),
+                        style: ThemeText.titleStyle.copyWith(fontSize: ScUtil().setSp(38))
                       ),
-                      SizedBox(
-                        height: ScUtil.getInstance()!.setHeight(10),
-                      ),
+                      SpacingBoxWidget(height: 10),
                       InkWell(
                         onTap: () => _selectTimePicker(),
                         child: Container(
                           width: double.infinity,
                           decoration: BoxDecoration(
                               borderRadius:
-                              BorderRadius.all(Radius.circular(8)),
+                                  BorderRadius.all(Radius.circular(8)),
                               border: Border.all(
-                                  color: Colors.blue[800]!,
+                                  color:ThemeColor.personalScheduleColor2,
                                   width: ScUtil.getInstance()!.setWidth(3))),
                           alignment: Alignment.center,
                           padding: EdgeInsets.symmetric(
@@ -264,46 +173,38 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                             state.selectTimer != null
                                 ? '${state.selectTimer}'
                                 : '',
-                            style: TextStyle(
-                                color: Colors.blue[800],
-                                fontSize: ScUtil.getInstance()!.setSp(32),
-                                fontFamily: 'MR',
-                                fontWeight: FontWeight.w600),
+                            style: ThemeText.titleStyle,
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: ScUtil.getInstance()!.setHeight(30),
-                      ),
+                      SpacingBoxWidget(height: 30),
                       state is TodoLoadingState
                           ? Container(
-                        child: LoadingWidget(
-                          color: Colors.blue,
-                          size: 40.0,
-                        ),
-                      )
+                              child: LoadingWidget(
+                                color:ThemeColor.personalScheduleColor3,
+                                size: 40.0,
+                              ),
+                            )
                           : RaisedButton(
-                        onPressed: () => _setOnClickSaveButton(state),
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                            BorderRadius.all(Radius.circular(20))),
-                        color: Colors.blue[900],
-                        child: Container(
-                          width: double.infinity,
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.symmetric(
-                              vertical:
-                              ScUtil.getInstance()!.setHeight(12)),
-                          child: Text(
-                            'Save',
-                            style: TextStyle(
-                                color: Color(0xffFCFAF3),
-                                fontSize: ScUtil.getInstance()!.setSp(36),
-                                fontFamily: 'MR',
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                      )
+                              onPressed: () => _setOnClickSaveButton(state),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20))),
+                              color: ThemeColor.personalScheduleColor2,
+                              child: Container(
+                                width: double.infinity,
+                                alignment: Alignment.center,
+                                padding: EdgeInsets.symmetric(
+                                    vertical:
+                                        ScUtil.getInstance()!.setHeight(12)),
+                                child: Text(
+                                  'Save',
+                                  style:
+                                  ThemeText.titleStyle.copyWith( color: ThemeColor.secondColor,
+                                    fontSize: ScUtil.getInstance()!.setSp(36),),
+                                ),
+                              ),
+                            )
                     ],
                   ),
                 ),
@@ -315,12 +216,8 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
     DateTime? date = await showRoundedDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(DateTime
-          .now()
-          .year - 10),
-      lastDate: DateTime(DateTime
-          .now()
-          .year + 10),
+      firstDate: DateTime(DateTime.now().year - 10),
+      lastDate: DateTime(DateTime.now().year + 10),
       borderRadius: 20,
       fontFamily: 'MR',
       imageHeader: AssetImage("assets/img/calendar_header.jpg"),

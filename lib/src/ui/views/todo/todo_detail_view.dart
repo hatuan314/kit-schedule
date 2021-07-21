@@ -8,6 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:schedule/src/blocs/todo/todo_bloc.dart';
 import 'package:schedule/src/models/model.dart';
+import 'package:schedule/src/ui/views/widgets_constants/text_form_field_widget.dart';
 import 'package:schedule/src/utils/utils.dart';
 //import 'package:toast/toast.dart';
 
@@ -170,97 +171,22 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      TextFormField(
+                      TextFormFieldWidget(
                         controller: _nameController,
-                        style: TextStyle(
-                            color: Colors.blue[800],
-                            fontSize: ScUtil.getInstance()!.setSp(32),
-                            fontFamily: "MR"),
-                        cursorColor: Colors.blue[800],
-                        decoration: InputDecoration(
-                            errorStyle: TextStyle(
-                                fontSize: ScUtil.getInstance()!.setSp(24),
-                                color: Colors.redAccent,
-                                fontFamily: "MR"),
-                            errorMaxLines: 2,
-                            labelText: 'Title',
-                            labelStyle: TextStyle(
-                                fontSize: ScUtil.getInstance()!.setSp(32),
-                                color: Colors.blue[800],
-                                fontWeight: FontWeight.w500,
-                                fontFamily: "MR"),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.blue[800]!,
-                                    width: ScUtil.getInstance()!.setWidth(3)),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8.0))),
-                            errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.redAccent,
-                                    width: ScUtil.getInstance()!.setWidth(3)),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8.0))),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.blue[800]!,
-                                    width: ScUtil.getInstance()!.setWidth(3)),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8.0)))),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Trường này không được bỏ trống";
-                          }
-                          return null;
-                        },
+                        labelText: 'Title',
+                        isShowed: false,
+                        isPassword: false,
+                        isInLogInScreen: false,
                       ),
                       SizedBox(
                         height: ScUtil.getInstance()!.setHeight(20),
                       ),
-                      TextFormField(
+                      TextFormFieldWidget(
                         controller: _noteController,
-                        style: TextStyle(
-                            color: Colors.blue[800],
-                            fontSize: ScUtil.getInstance()!.setSp(32),
-                            fontFamily: "MR"),
-                        maxLines: 5,
-                        cursorColor: Colors.blue[800],
-                        decoration: InputDecoration(
-                            errorStyle: TextStyle(
-                                fontSize: ScUtil.getInstance()!.setSp(24),
-                                color: Colors.redAccent,
-                                fontFamily: "MR"),
-                            errorMaxLines: 2,
-                            labelText: 'Note',
-                            labelStyle: TextStyle(
-                                fontSize: ScUtil.getInstance()!.setSp(32),
-                                color: Colors.blue[800],
-                                fontWeight: FontWeight.w500,
-                                fontFamily: "MR"),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.blue[800]!,
-                                    width: ScUtil.getInstance()!.setWidth(3)),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8.0))),
-                            errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.redAccent,
-                                    width: ScUtil.getInstance()!.setWidth(3)),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8.0))),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.blue[800]!,
-                                    width: ScUtil.getInstance()!.setWidth(3)),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8.0)))),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Trường này không được bỏ trống";
-                          }
-                          return null;
-                        },
+                        labelText: 'Note',
+                        isShowed: false,
+                        isPassword: false,
+                        isInLogInScreen: false,
                       ),
                       SizedBox(
                         height: ScUtil.getInstance()!.setHeight(20),
