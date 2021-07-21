@@ -17,7 +17,7 @@ class CalendarTabView extends StatelessWidget {
             body: Center(
               child: Container(
                 margin:
-                    EdgeInsets.only(top: ScUtil.getInstance().setHeight(50)),
+                    EdgeInsets.only(top: ScUtil.getInstance()!.setHeight(50)),
                 child: LoadingWidget(
                   color: Colors.blue,
                   size: 40.0,
@@ -49,7 +49,7 @@ class CalendarTabView extends StatelessWidget {
     return SafeArea(
       child: Column(
         children: <Widget>[
-          CalendarView(state: state),
+          //CalendarView(state: state),
           Expanded(child: ScheduleView()),
         ],
       ),

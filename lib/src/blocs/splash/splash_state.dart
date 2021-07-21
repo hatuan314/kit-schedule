@@ -15,7 +15,7 @@ class CheckModeState extends SplashState {
 class CheckDataLoadingState extends SplashState {
   @override
   // TODO: implement props
-  List<Object> get props => null;
+  List<Object> get props => [];
 }
 
 class CheckDataSuccessState extends SplashState {
@@ -29,7 +29,7 @@ class CheckDataSuccessState extends SplashState {
 class CheckNoDataState extends SplashState {
   @override
   // TODO: implement props
-  List<Object> get props => null;
+  List<Object> get props => [];
 }
 
 class CheckDataFailureState extends SplashState {
@@ -42,5 +42,5 @@ class CheckDataFailureState extends SplashState {
   List<Object> get props => [this.error];
 
   @override
-  String toString() => "CheckDataFailureState - error {${error}}";
+  String toString() => "CheckDataFailureState - error {$error}";
 }

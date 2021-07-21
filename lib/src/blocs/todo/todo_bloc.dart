@@ -11,12 +11,12 @@ part 'todo_event.dart';
 part 'todo_state.dart';
 
 class TodoBloc extends Bloc<TodoEvent, TodoState> {
-  CalendarBloc calendarBloc;
+  CalendarBloc? calendarBloc;
   RepositoryOffline _repositoryOffline = RepositoryOffline();
   String _date = DateTime.now().millisecondsSinceEpoch.toString();
   String _timer = '${Convert.timerConvert(TimeOfDay.now())}';
 
-  TodoBloc({this.calendarBloc});
+  TodoBloc({this.calendarBloc}) : super(TodoInitState(selectDay: null,selectTimer:null));
 
   @override
   // TODO: implement initialState
@@ -35,20 +35,20 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     else if (event is UpdatePersonalScheduleOnPressEvent)
       yield* _mapUpdatePersonalScheduleToState(event);
     else if (event is DetelePersonalScheduleOnPressEvent)
-      yield* _mapDetelePersonalScheduleToState(event.id);
+      yield* _mapDetelePersonalScheduleToState(event.id!);
   }
 
   Stream<TodoState> _mapSelectDatePickerToState(
       SelectDatePickerOnPressEvent event) async* {
     yield TodoLoadingState();
-    _date = event.selectDay.millisecondsSinceEpoch.toString();
+    _date = event.selectDay!.millisecondsSinceEpoch.toString();
     yield TodoInitState(selectDay: _date, selectTimer: _timer);
   }
 
   Stream<TodoState> _mapSelectTimePickerToState(
       SelectTimePickerOnPressEvent event) async* {
     yield TodoLoadingState();
-    _timer = Convert.timerConvert(event.timer);
+    _timer = Convert.timerConvert(event.timer!);
     yield TodoInitState(selectTimer: _timer, selectDay: _date);
   }
 
@@ -61,7 +61,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       await _repositoryOffline.addPersonalScheduleRepo(schedule);
       _date = DateTime.now().millisecondsSinceEpoch.toString();
       _timer = '${Convert.timerConvert(TimeOfDay.now())}';
-      calendarBloc.add(GetAllScheduleDataEvent());
+      calendarBloc!.add(GetAllScheduleDataEvent());
       yield TodoSuccessState(true, selectTimer: _timer, selectDay: _date);
     } catch (e) {
       yield TodoFailureState(

@@ -14,7 +14,7 @@ class ProviderOffline {
       schedule.address
     ];
     try {
-      final result = await db.rawInsert(sql, params);
+      final result = await db!.rawInsert(sql, params);
 //      debugPrint('ProviderOffline - addScheduleLessonProvider - result: {$result}');
     } catch (e) {
       debugPrint('ProviderOffline - addScheduleLessonProvider - error {$e}');
@@ -22,7 +22,7 @@ class ProviderOffline {
   }
 
   /// Add Personal Schedule Data
-  Future<int> insertPersonalScheduleProvider(PersonalSchedule schedule) async {
+  Future<void> insertPersonalScheduleProvider(PersonalSchedule schedule) async {
     final sql = '''INSERT INTO ${DatabaseCreator.personaScheduleTable}
     (date, timer, schedule_name, note) VALUES (?, ?, ?, ?)''';
 
@@ -33,7 +33,7 @@ class ProviderOffline {
       schedule.note
     ];
     try {
-      final result = await db.rawInsert(sql, params);
+      final result = await db!.rawInsert(sql, params);
       DatabaseCreator.databaseLog(
           'Add Personal Schedule', sql, null, result, params);
     } catch (e) {
@@ -45,10 +45,10 @@ class ProviderOffline {
   Future<List<SchoolSchedule>> selectAllScheduleLessonProvider() async {
     final dateSql =
         '''SELECT * FROM ${DatabaseCreator.lessonTable} ORDER BY date ASC''';
-    final scheduleData = await db.rawQuery(dateSql);
-    List<SchoolSchedule> allSchedules = new List<SchoolSchedule>();
+    final scheduleData = await db!.rawQuery(dateSql);
+    List<SchoolSchedule> allSchedules = [];
     for (final node in scheduleData) {
-      String date = node['date'];
+      String date = node['date'].toString();
       SchoolSchedule schedule = SchoolSchedule.fromJsonDb(node);
       allSchedules.add(schedule);
     }
@@ -60,8 +60,8 @@ class ProviderOffline {
   Future<List<PersonalSchedule>> selectAllPersonalScheduleProvider() async {
     final dateSql =
         '''SELECT * FROM ${DatabaseCreator.personaScheduleTable} ORDER BY date ASC''';
-    final scheduleData = await db.rawQuery(dateSql);
-    List<PersonalSchedule> allSchedules = new List<PersonalSchedule>();
+    final scheduleData = await db!.rawQuery(dateSql);
+    List<PersonalSchedule> allSchedules = [];
     for (final node in scheduleData) {
       PersonalSchedule schedule = PersonalSchedule.fromJson(node);
       allSchedules.add(schedule);
@@ -76,7 +76,7 @@ class ProviderOffline {
     final sql =
         '''SELECT * FROM ${DatabaseCreator.lessonTable} WHERE date = ?''';
     List<dynamic> params = [date];
-    final scheduleData = await db.rawQuery(sql, params);
+    final scheduleData = await db!.rawQuery(sql, params);
     List<SchoolSchedule> schedules = [];
     for (final node in scheduleData) {
       SchoolSchedule schedule = SchoolSchedule.fromJsonDb(node);
@@ -92,7 +92,7 @@ class ProviderOffline {
     final sql =
         '''SELECT * FROM ${DatabaseCreator.personaScheduleTable} WHERE date = ?''';
     List<dynamic> params = [date];
-    final scheduleData = await db.rawQuery(sql, params);
+    final scheduleData = await db!.rawQuery(sql, params);
     List<PersonalSchedule> schedules = [];
     for (final node in scheduleData) {
       PersonalSchedule schedule = PersonalSchedule.fromJson(node);
@@ -105,15 +105,15 @@ class ProviderOffline {
   Future<int> updatePersonalScheduleDataProvider(
       PersonalSchedule schedule) async {
 //    debugPrint('ProviderOffline - updatePersonalScheduleData - scheduleId: {${schedule.id}}');
-    final data = await db.update(
+    final data = await db!.update(
         DatabaseCreator.personaScheduleTable, schedule.toJson(),
         where: 'id = ?', whereArgs: [schedule.id]);
     return data;
   }
 
   /// Delete Personal Schedule Data
-  Future<int> deletePersonalScheduleProvider(String id) async {
-    final data = await db.delete(DatabaseCreator.personaScheduleTable,
+  Future<int> deletePersonalScheduleProvider(String? id) async {
+    final data = await db!.delete(DatabaseCreator.personaScheduleTable,
         where: 'id = ?', whereArgs: [id]);
     return data;
   }
@@ -121,6 +121,6 @@ class ProviderOffline {
   /// Delete All School Schedules Data
   Future deleteAllSchoolScheduleProvider() async {
     final sql = '''DELETE FROM ${DatabaseCreator.lessonTable}''';
-    await db.rawQuery(sql);
+    await db!.rawQuery(sql);
   }
 }

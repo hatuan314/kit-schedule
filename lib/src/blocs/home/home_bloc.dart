@@ -8,11 +8,9 @@ part './home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   RepositoryOffline _repositoryOffline = RepositoryOffline();
-  @override
-  // TODO: implement initialState
-  HomeState get initialState => HomeInitialState(0);
 
-  @override
+  HomeBloc() : super(HomeInitialState(0));
+    @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
     // TODO: implement mapEventToState
     if (event is OnTabChangeEvent) {

@@ -1,36 +1,13 @@
 class SchoolSchedule {
-  String _date;
-  String _lesson;
-  String _subject;
-  String _address;
+  String? date;
+  String? lesson;
+  String? subject;
+  String? address;
 
-  SchoolSchedule(this._date, this._lesson, this._subject, this._address);
+  SchoolSchedule(this.date, this.lesson, this.subject, this.address);
 
-  String get date => _date;
 
-  set date(String value) {
-    _date = value;
-  }
-
-  String get lesson => _lesson;
-
-  String get address => _address;
-
-  set address(String value) {
-    _address = value;
-  }
-
-  String get subject => _subject;
-
-  set subject(String value) {
-    _subject = value;
-  }
-
-  set lesson(String value) {
-    _lesson = value;
-  }
-
-  SchoolSchedule.fromJsonApi(Map<String, dynamic> data, this._date) {
+  SchoolSchedule.fromJsonApi(Map<String, dynamic> data, this.date) {
     this.subject = data['subject'];
     this.lesson = data['lesson'];
     this.address = data['address'];

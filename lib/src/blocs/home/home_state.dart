@@ -5,15 +5,15 @@ abstract class HomeState extends Equatable {
 
   HomeState(this.selectIndex);
 
-  @override
-  // TODO: implement props
-  List<Object> get props => null;
 }
 
 class HomeInitialState extends HomeState {
   HomeInitialState(int selectIndex) : super(selectIndex);
 
-  List<Object> get props => null;
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+
 }
 
 class HomeOnChangeTabState extends HomeState {
@@ -24,8 +24,16 @@ class HomeOnChangeTabState extends HomeState {
 
 class SignOutSuccessState extends HomeState {
   SignOutSuccessState(int selectIndex) : super(selectIndex);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
 }
 
 class SignOutFailureState extends HomeState {
   SignOutFailureState(int selectIndex) : super(selectIndex);
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
 }

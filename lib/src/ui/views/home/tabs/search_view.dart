@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_rounded_date_picker/rounded_picker.dart';
+import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:schedule/src/blocs/blocs.dart';
 import 'package:schedule/src/models/model.dart';
 import 'package:schedule/src/ui/views/views.dart';
 import 'package:schedule/src/utils/utils.dart';
-import 'package:worm_indicator/indicator.dart';
-import 'package:worm_indicator/shape.dart';
 
 class SearchView extends StatelessWidget {
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    final circleShape = Shape(
+    /*final circleShape = Shape(
       size: 8,
       shape: DotShape.Circle,
       spacing: 8,
-    );
+    );*/
     return Scaffold(
       backgroundColor: Color(0xffFCFAF3),
       body: BlocListener<SearchBloc, SearchState>(
@@ -37,7 +35,7 @@ class SearchView extends StatelessWidget {
                   alignment: Alignment.center,
                   children: <Widget>[
                     _buildPageView(state),
-                    buildExampleIndicatorWithShapeAndBottomPos(circleShape, 8),
+                    //todo buildExampleIndicatorWithShapeAndBottomPos(circleShape, 8),
                   ],
                 ),
               ),
@@ -55,7 +53,7 @@ class SearchView extends StatelessWidget {
   Padding _searchWidget(BuildContext context, SearchState state) {
     return Padding(
       padding:
-          EdgeInsets.symmetric(horizontal: ScUtil.getInstance().setWidth(20)),
+      EdgeInsets.symmetric(horizontal: ScUtil.getInstance()!.setWidth(20)),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -65,7 +63,7 @@ class SearchView extends StatelessWidget {
             'Search by date',
             style: TextStyle(
                 color: Colors.black54,
-                fontSize: ScUtil.getInstance().setSp(38),
+                fontSize: ScUtil.getInstance()!.setSp(38),
                 fontFamily: 'MR',
                 fontWeight: FontWeight.w600),
           ),
@@ -74,7 +72,7 @@ class SearchView extends StatelessWidget {
             child: Container(
               width: double.infinity,
               margin:
-                  EdgeInsets.only(bottom: ScUtil.getInstance().setHeight(12)),
+              EdgeInsets.only(bottom: ScUtil.getInstance()!.setHeight(12)),
               child: Stack(
                 alignment: Alignment.centerRight,
                 children: <Widget>[
@@ -84,26 +82,26 @@ class SearchView extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                         border: Border.all(
                             color: Colors.black38,
-                            width: ScUtil.getInstance().setWidth(2))),
+                            width: ScUtil.getInstance()!.setWidth(2))),
                     alignment: Alignment.center,
                     padding: EdgeInsets.symmetric(
-                        vertical: ScUtil.getInstance().setHeight(12)),
+                        vertical: ScUtil.getInstance()!.setHeight(12)),
                     child: Text(
                       '${state.selectDay}',
                       style: TextStyle(
                           color: Colors.black54,
-                          fontSize: ScUtil.getInstance().setSp(32),
+                          fontSize: ScUtil.getInstance()!.setSp(32),
                           fontFamily: 'MR',
                           fontWeight: FontWeight.w600),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(
-                        horizontal: ScUtil.getInstance().setWidth(20)),
+                        horizontal: ScUtil.getInstance()!.setWidth(20)),
                     child: Icon(
                       Icons.search,
                       color: Colors.black54,
-                      size: ScUtil.getInstance().setSp(50),
+                      size: ScUtil.getInstance()!.setSp(50),
                     ),
                   )
                 ],
@@ -115,7 +113,7 @@ class SearchView extends StatelessWidget {
     );
   }
 
-  Widget buildExampleIndicatorWithShapeAndBottomPos(
+  /*Widget buildExampleIndicatorWithShapeAndBottomPos(
       Shape shape, double bottomPos) {
     return Positioned(
       bottom: bottomPos,
@@ -126,16 +124,16 @@ class SearchView extends StatelessWidget {
         controller: _pageController,
         shape: shape,
       ),
-    );
-  }
+    );}*/
+
 
   _buildPageView(SearchState state) {
     return Container(
       margin:
-          EdgeInsets.symmetric(vertical: ScUtil.getInstance().setHeight(50)),
+      EdgeInsets.symmetric(vertical: ScUtil.getInstance()!.setHeight(50)),
       padding: EdgeInsets.symmetric(
-          horizontal: ScUtil.getInstance().setWidth(50),
-          vertical: ScUtil.getInstance().setHeight(20)),
+          horizontal: ScUtil.getInstance()!.setWidth(50),
+          vertical: ScUtil.getInstance()!.setHeight(20)),
       alignment: Alignment.center,
       child: PageView.builder(
         physics: AlwaysScrollableScrollPhysics(),
@@ -172,7 +170,7 @@ class SearchView extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           SizedBox(
-            height: ScUtil.getInstance().setHeight(8),
+            height: ScUtil.getInstance()!.setHeight(8),
           ),
           Row(
             mainAxisSize: MainAxisSize.min,
@@ -180,14 +178,14 @@ class SearchView extends StatelessWidget {
               Text(
                 'School',
                 style: TextStyle(
-                    fontSize: ScUtil.getInstance().setSp(36),
+                    fontSize: ScUtil.getInstance()!.setSp(36),
                     color: Colors.red,
                     fontFamily: 'MR',
                     fontWeight: FontWeight.bold),
               ),
               Container(
                 decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: Colors.red),
+                BoxDecoration(shape: BoxShape.circle, color: Colors.red),
                 margin: EdgeInsets.only(left: 4),
                 padding: EdgeInsets.all(5),
                 child: Text(
@@ -195,7 +193,7 @@ class SearchView extends StatelessWidget {
                       ? '${schoolSchedulesOfDay.length}'
                       : '0',
                   style: TextStyle(
-                      fontSize: ScUtil.getInstance().setSp(28),
+                      fontSize: ScUtil.getInstance()!.setSp(28),
                       color: Color(0xffFCFAF3),
                       fontWeight: FontWeight.normal),
                 ),
@@ -205,22 +203,22 @@ class SearchView extends StatelessWidget {
           Expanded(
             child: schoolSchedulesOfDay.length != 0
                 ? ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: schoolSchedulesOfDay.length,
-                    itemBuilder: (context, index) {
-                      SchoolSchedule schedule = schoolSchedulesOfDay[index];
-                      return _schoolScheduleElementWidget(schedule);
-                    })
+                shrinkWrap: true,
+                itemCount: schoolSchedulesOfDay.length,
+                itemBuilder: (context, index) {
+                  SchoolSchedule schedule = schoolSchedulesOfDay[index];
+                  return _schoolScheduleElementWidget(schedule);
+                })
                 : Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'No Data',
-                      style: TextStyle(
-                          color: Colors.red,
-                          fontSize: ScUtil.getInstance().setSp(32),
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
+              alignment: Alignment.center,
+              child: Text(
+                'No Data',
+                style: TextStyle(
+                    color: Colors.red,
+                    fontSize: ScUtil.getInstance()!.setSp(32),
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
           )
         ],
       ),
@@ -228,12 +226,12 @@ class SearchView extends StatelessWidget {
   }
 
   Widget _schoolScheduleElementWidget(SchoolSchedule schedule) {
-    List lessonNumbers = schedule.lesson.split(',');
+    List lessonNumbers = schedule.lesson!.split(',');
     String startLesson = lessonNumbers[0];
     String endLesson = lessonNumbers[lessonNumbers.length - 1];
     return Padding(
       padding:
-          EdgeInsets.symmetric(vertical: ScUtil.getInstance().setHeight(8)),
+      EdgeInsets.symmetric(vertical: ScUtil.getInstance()!.setHeight(8)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -249,18 +247,18 @@ class SearchView extends StatelessWidget {
                   Text(
                     '${Convert.startTimeLessonMap[startLesson]}',
                     style: TextStyle(
-                        fontSize: ScUtil.getInstance().setSp(32),
+                        fontSize: ScUtil.getInstance()!.setSp(32),
                         color: Colors.red,
                         fontFamily: 'MR',
                         fontWeight: FontWeight.w600),
                   ),
                   Icon(Icons.arrow_drop_down,
                       color: Colors.red,
-                      size: ScUtil.getInstance().setHeight(15)),
+                      size: ScUtil.getInstance()!.setHeight(15)),
                   Text(
                     '${Convert.endTimeLessonMap[endLesson]}',
                     style: TextStyle(
-                        fontSize: ScUtil.getInstance().setSp(32),
+                        fontSize: ScUtil.getInstance()!.setSp(32),
                         color: Colors.red,
                         fontFamily: 'MR',
                         fontWeight: FontWeight.w600),
@@ -273,11 +271,11 @@ class SearchView extends StatelessWidget {
             flex: 8,
             child: Container(
               padding: EdgeInsets.symmetric(
-                  horizontal: ScUtil.getInstance().setWidth(20)),
+                  horizontal: ScUtil.getInstance()!.setWidth(20)),
               decoration: BoxDecoration(
                   border: Border(
                       left: BorderSide(
-                          width: ScUtil.getInstance().setWidth(1.2),
+                          width: ScUtil.getInstance()!.setWidth(1.2),
                           color: Colors.red))),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -286,17 +284,17 @@ class SearchView extends StatelessWidget {
                   Text(
                     '${schedule.subject}',
                     style: TextStyle(
-                        fontSize: ScUtil.getInstance().setSp(32),
+                        fontSize: ScUtil.getInstance()!.setSp(32),
                         color: Colors.red,
                         fontFamily: 'MR',
                         fontWeight: FontWeight.w600),
                   ),
                   Text(
-                    schedule.address.contains('null')
+                    schedule.address!.contains('null')
                         ? 'No Data'
                         : '${schedule.address}',
                     style: TextStyle(
-                        fontSize: ScUtil.getInstance().setSp(32),
+                        fontSize: ScUtil.getInstance()!.setSp(32),
                         color: Colors.red,
                         fontFamily: 'MR',
                         fontWeight: FontWeight.normal),
@@ -325,7 +323,7 @@ class SearchView extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           SizedBox(
-            height: ScUtil.getInstance().setHeight(8),
+            height: ScUtil.getInstance()!.setHeight(8),
           ),
           Row(
             mainAxisSize: MainAxisSize.min,
@@ -333,7 +331,7 @@ class SearchView extends StatelessWidget {
               Text(
                 'Personal',
                 style: TextStyle(
-                    fontSize: ScUtil.getInstance().setSp(36),
+                    fontSize: ScUtil.getInstance()!.setSp(36),
                     color: Colors.blue[800],
                     fontFamily: 'MR',
                     fontWeight: FontWeight.bold),
@@ -348,7 +346,7 @@ class SearchView extends StatelessWidget {
                       ? '${personalSchedulesOfDay.length}'
                       : '0',
                   style: TextStyle(
-                      fontSize: ScUtil.getInstance().setSp(28),
+                      fontSize: ScUtil.getInstance()!.setSp(28),
                       color: Color(0xffFCFAF3),
                       fontWeight: FontWeight.normal),
                 ),
@@ -358,22 +356,22 @@ class SearchView extends StatelessWidget {
           Expanded(
             child: personalSchedulesOfDay != null
                 ? ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: personalSchedulesOfDay.length,
-                    itemBuilder: (context, index) {
-                      PersonalSchedule schedule = personalSchedulesOfDay[index];
-                      return _personalScheduleElementWidget(schedule);
-                    })
+                shrinkWrap: true,
+                itemCount: personalSchedulesOfDay.length,
+                itemBuilder: (context, index) {
+                  PersonalSchedule schedule = personalSchedulesOfDay[index];
+                  return _personalScheduleElementWidget(schedule);
+                })
                 : Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'No Data',
-                      style: TextStyle(
-                          color: Colors.blue[800],
-                          fontSize: ScUtil.getInstance().setSp(32),
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
+              alignment: Alignment.center,
+              child: Text(
+                'No Data',
+                style: TextStyle(
+                    color: Colors.blue[800],
+                    fontSize: ScUtil.getInstance()!.setSp(32),
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
           )
         ],
       ),
@@ -383,7 +381,7 @@ class SearchView extends StatelessWidget {
   Widget _personalScheduleElementWidget(PersonalSchedule schedule) {
     return Padding(
       padding:
-          EdgeInsets.symmetric(vertical: ScUtil.getInstance().setHeight(8)),
+      EdgeInsets.symmetric(vertical: ScUtil.getInstance()!.setHeight(8)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -396,7 +394,7 @@ class SearchView extends StatelessWidget {
               child: Text(
                 '${schedule.timer}',
                 style: TextStyle(
-                    fontSize: ScUtil.getInstance().setSp(32),
+                    fontSize: ScUtil.getInstance()!.setSp(32),
                     color: Colors.blue[800],
                     fontFamily: 'MR',
                     fontWeight: FontWeight.w600),
@@ -407,12 +405,12 @@ class SearchView extends StatelessWidget {
             flex: 8,
             child: Container(
               padding: EdgeInsets.symmetric(
-                  horizontal: ScUtil.getInstance().setWidth(20)),
+                  horizontal: ScUtil.getInstance()!.setWidth(20)),
               decoration: BoxDecoration(
                   border: Border(
                       left: BorderSide(
-                          width: ScUtil.getInstance().setWidth(1.2),
-                          color: Colors.blue[800]))),
+                          width: ScUtil.getInstance()!.setWidth(1.2),
+                          color: Colors.blue[800]!))),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
@@ -420,7 +418,7 @@ class SearchView extends StatelessWidget {
                   Text(
                     '${schedule.name}',
                     style: TextStyle(
-                        fontSize: ScUtil.getInstance().setSp(32),
+                        fontSize: ScUtil.getInstance()!.setSp(32),
                         color: Colors.blue[800],
                         fontFamily: 'MR',
                         fontWeight: FontWeight.w600),
@@ -428,7 +426,7 @@ class SearchView extends StatelessWidget {
                   Text(
                     '${schedule.note}',
                     style: TextStyle(
-                        fontSize: ScUtil.getInstance().setSp(32),
+                        fontSize: ScUtil.getInstance()!.setSp(32),
                         color: Colors.blue[800],
                         fontFamily: 'MR',
                         fontWeight: FontWeight.normal),
@@ -444,15 +442,21 @@ class SearchView extends StatelessWidget {
   }
 
   _btnSearchOnPress(BuildContext context) async {
-    DateTime selectDay = await showRoundedDatePicker(
+    DateTime? selectDay = await showRoundedDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(DateTime.now().year - 10),
-      lastDate: DateTime(DateTime.now().year + 10),
+      firstDate: DateTime(DateTime
+          .now()
+          .year - 10),
+      lastDate: DateTime(DateTime
+          .now()
+          .year + 10),
       borderRadius: 20,
       fontFamily: 'MR',
       imageHeader: AssetImage("assets/img/calendar_header.jpg"),
     );
-    BlocProvider.of<SearchBloc>(context)..add(SearchButtonOnPress(selectDay));
+    BlocProvider.of<SearchBloc>(context)
+      ..add(SearchButtonOnPress(selectDay!));
   }
+
 }

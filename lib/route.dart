@@ -11,7 +11,7 @@ int currentRoot = 1;
 
 RouteFactory router() {
   return (RouteSettings settings) {
-    Widget screen;
+    late Widget screen;
 
     if (currentRoot == 1) {
       currentRoot = 2;
@@ -21,7 +21,7 @@ RouteFactory router() {
       });
     }
 
-    final args = settings.arguments as Map<String, dynamic> ?? {};
+    // final args = settings.arguments as Map<String, dynamic> ?? {};
 
     // todo:  add screen route here
     switch (settings.name) {
@@ -57,7 +57,7 @@ RouteFactory router() {
         });
       case '/todo-detail':
         PersonalSchedule schedule =
-            PersonalSchedule.fromJson(settings.arguments);
+            PersonalSchedule.fromJson(settings.arguments as Map<String, dynamic>);
         return CupertinoPageRoute(builder: (context) {
           ScUtil.init(context, pWidth: 750, pHeight: 640);
           return BlocProvider(
@@ -70,7 +70,7 @@ RouteFactory router() {
     }
 
     return MaterialPageRoute(
-      builder: (_) => screen,
+      builder: (_) => Container(),//todo must return widget
     );
   };
 }

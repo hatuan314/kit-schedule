@@ -9,5 +9,5 @@ class SearchButtonOnPress extends SearchEvent {
 
   @override
   // TODO: implement props
-  List<Object> get props => null;
+  List<Object> get props => [];
 }

@@ -7,16 +7,15 @@ part 'splash_state.dart';
 
 class SplashBloc extends Bloc<SplashEvent, SplashState> {
   ShareService _shareService = ShareService();
-  @override
-  // TODO: implement initialState
-  SplashState get initialState => CheckDataLoadingState();
+
+  SplashBloc() : super(CheckDataLoadingState());
 
   @override
   Stream<SplashState> mapEventToState(SplashEvent event) async* {
     // TODO: implement mapEventToState
     if (event is CheckOfflineData) {
       try {
-        bool flag = await _shareService.getIsSaveData();
+        bool? flag = await _shareService.getIsSaveData();
         if (flag == false) {
           yield CheckNoDataState();
         } else {

@@ -3,13 +3,13 @@ part of 'schedule_bloc.dart';
 abstract class ScheduleEvent extends Equatable {
   @override
   // TODO: implement props
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 class GetScheduleDayEvent extends ScheduleEvent {
-  final DateTime selectDay;
-  final Map<DateTime, List<SchoolSchedule>> allSchedulesSchoolMap;
-  final Map<DateTime, List<PersonalSchedule>> allSchedulePersonalMap;
+  final DateTime? selectDay;
+  final Map<DateTime, List<SchoolSchedule>>? allSchedulesSchoolMap;
+  final Map<DateTime, List<PersonalSchedule>>? allSchedulePersonalMap;
 
   GetScheduleDayEvent(
       {this.selectDay,
@@ -18,5 +18,5 @@ class GetScheduleDayEvent extends ScheduleEvent {
 
   @override
   // TODO: implement props
-  List<Object> get props => [this.selectDay];
+  List<Object?> get props => [this.selectDay];
 }

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/src/blocs/blocs.dart';
 import 'package:schedule/src/utils/multi_screen/flutter_screen_util.dart';
 import 'package:schedule/src/utils/utils.dart';
-import 'package:toast/toast.dart';
+//import 'package:toast/toast.dart';
 
 class SignInView extends StatefulWidget {
   @override
@@ -26,12 +26,14 @@ class _SignInViewState extends State<SignInView> {
           if (state is RegisterSuccessState) {
             Navigator.pushReplacementNamed(context, '/home');
           }
-          if (state is RegisterFailureState)
-            Toast.show('Connection Failed', context,
-                backgroundColor: Colors.red, textColor: Colors.white);
-          if (state is RegisterNoDataState)
-            Toast.show('No Data. Try again', context,
-                backgroundColor: Colors.red, textColor: Colors.white);
+          if (state is RegisterFailureState) {
+            /*Toast.show('Connection Failed', context,
+                backgroundColor: Colors.red, textColor: Colors.white);*/
+          }
+          if (state is RegisterNoDataState) {
+            /*Toast.show('No Data. Try again', context,
+                backgroundColor: Colors.red, textColor: Colors.white);*/
+          }
         },
         child:
             BlocBuilder<RegisterBloc, RegisterState>(builder: (context, state) {
@@ -55,7 +57,7 @@ class _SignInViewState extends State<SignInView> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20))),
                         margin: EdgeInsets.only(
-                            top: ScUtil.getInstance().setHeight(20)),
+                            top: ScUtil.getInstance()!.setHeight(20)),
                         elevation: 10,
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.8,
@@ -64,42 +66,42 @@ class _SignInViewState extends State<SignInView> {
                                   BorderRadius.all(Radius.circular(20)),
                               color: Colors.grey[100]),
                           padding: EdgeInsets.only(
-                              left: ScUtil.getInstance().setWidth(20),
-                              top: ScUtil.getInstance().setHeight(40),
-                              right: ScUtil.getInstance().setWidth(20),
-                              bottom: ScUtil.getInstance().setHeight(20)),
+                              left: ScUtil.getInstance()!.setWidth(20),
+                              top: ScUtil.getInstance()!.setHeight(40),
+                              right: ScUtil.getInstance()!.setWidth(20),
+                              bottom: ScUtil.getInstance()!.setHeight(20)),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
                               Text(
                                 'KIT Schedule',
                                 style: TextStyle(
-                                    fontSize: ScUtil.getInstance().setSp(40),
+                                    fontSize: ScUtil.getInstance()!.setSp(40),
                                     color: Colors.blue[900],
                                     fontFamily: 'MR',
                                     fontWeight: FontWeight.w600),
                               ),
                               SizedBox(
-                                height: ScUtil.getInstance().setHeight(30),
+                                height: ScUtil.getInstance()!.setHeight(30),
                               ),
                               TextFormField(
                                 controller: _accountController,
                                 style: TextStyle(
                                     color: Colors.blue[800],
-                                    fontSize: ScUtil.getInstance().setSp(32),
+                                    fontSize: ScUtil.getInstance()!.setSp(32),
                                     fontFamily: "MR"),
                                 cursorColor: Colors.blue[800],
                                 decoration: InputDecoration(
                                     errorStyle: TextStyle(
                                         fontSize:
-                                            ScUtil.getInstance().setSp(24),
+                                            ScUtil.getInstance()!.setSp(24),
                                         color: Colors.redAccent,
                                         fontFamily: "MR"),
                                     errorMaxLines: 2,
                                     labelText: 'KMA Account',
                                     labelStyle: TextStyle(
                                         fontSize:
-                                            ScUtil.getInstance().setSp(32),
+                                            ScUtil.getInstance()!.setSp(32),
                                         color: Colors.blue[800],
                                         fontWeight: FontWeight.w500,
                                         fontFamily: "MR"),
@@ -107,19 +109,19 @@ class _SignInViewState extends State<SignInView> {
                                         color: Colors.blue[800]),
                                     enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                            color: Colors.blue[800],
-                                            width: ScUtil.getInstance()
+                                            color: Colors.blue[800]!,
+                                            width: ScUtil.getInstance()!
                                                 .setWidth(3)),
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(8.0))),
                                     errorBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                             color: Colors.redAccent,
-                                            width: ScUtil.getInstance()
+                                            width: ScUtil.getInstance()!
                                                 .setWidth(3)),
                                         borderRadius:
                                             BorderRadius.all(Radius.circular(8.0))),
-                                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue[800], width: ScUtil.getInstance().setWidth(3)), borderRadius: BorderRadius.all(Radius.circular(8.0)))),
+                                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue[800]!, width: ScUtil.getInstance()!.setWidth(3)), borderRadius: BorderRadius.all(Radius.circular(8.0)))),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return "Trường này không được bỏ trống";
@@ -128,7 +130,7 @@ class _SignInViewState extends State<SignInView> {
                                 },
                               ),
                               SizedBox(
-                                height: ScUtil.getInstance().setHeight(20),
+                                height: ScUtil.getInstance()!.setHeight(20),
                               ),
                               Stack(
                                 alignment: AlignmentDirectional.centerEnd,
@@ -138,21 +140,21 @@ class _SignInViewState extends State<SignInView> {
                                     style: TextStyle(
                                         color: Colors.blue[800],
                                         fontSize:
-                                            ScUtil.getInstance().setSp(32),
+                                            ScUtil.getInstance()!.setSp(32),
                                         fontFamily: "MR"),
                                     cursorColor: Colors.blue[800],
                                     obscureText: !isShow,
                                     decoration: InputDecoration(
                                         errorStyle: TextStyle(
                                             fontSize:
-                                                ScUtil.getInstance().setSp(24),
+                                                ScUtil.getInstance()!.setSp(24),
                                             color: Colors.redAccent,
                                             fontFamily: "MR"),
                                         errorMaxLines: 2,
                                         labelText: 'Password',
                                         labelStyle: TextStyle(
                                             fontSize:
-                                                ScUtil.getInstance().setSp(32),
+                                                ScUtil.getInstance()!.setSp(32),
                                             color: Colors.blue[800],
                                             fontWeight: FontWeight.w500,
                                             fontFamily: "MR"),
@@ -160,18 +162,18 @@ class _SignInViewState extends State<SignInView> {
                                             color: Colors.blue[800]),
                                         enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
-                                                color: Colors.blue[800],
-                                                width: ScUtil.getInstance()
+                                                color: Colors.blue[800]!,
+                                                width: ScUtil.getInstance()!
                                                     .setWidth(3)),
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(8.0))),
                                         errorBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                                 color: Colors.redAccent,
-                                                width: ScUtil.getInstance()
+                                                width: ScUtil.getInstance()!
                                                     .setWidth(3)),
                                             borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue[800], width: ScUtil.getInstance().setWidth(3)), borderRadius: BorderRadius.all(Radius.circular(8.0)))),
+                                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue[800]!, width: ScUtil.getInstance()!.setWidth(3)), borderRadius: BorderRadius.all(Radius.circular(8.0)))),
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
                                         return "Trường này không được bỏ trống";
@@ -195,7 +197,7 @@ class _SignInViewState extends State<SignInView> {
                                 ],
                               ),
                               SizedBox(
-                                height: ScUtil.getInstance().setHeight(30),
+                                height: ScUtil.getInstance()!.setHeight(30),
                               ),
                               state is RegisterLoadingState
                                   ? _loadingUI(state)
@@ -211,7 +213,7 @@ class _SignInViewState extends State<SignInView> {
                                         "LOGIN",
                                         style: TextStyle(
                                             fontSize:
-                                                ScUtil.getInstance().setSp(34),
+                                                ScUtil.getInstance()!.setSp(34),
                                             fontFamily: 'MR',
                                             fontWeight: FontWeight.w600),
                                       ),
@@ -221,18 +223,18 @@ class _SignInViewState extends State<SignInView> {
                         ),
                       ),
                       Container(
-                        width: ScUtil.getInstance().setWidth(110),
+                        width: ScUtil.getInstance()!.setWidth(110),
                         padding: EdgeInsets.all(11),
                         decoration: new BoxDecoration(
                             border: Border.all(
-                                color: Colors.blue[900],
-                                width: ScUtil.getInstance().setWidth(8)),
+                                color: Colors.blue[900]!,
+                                width: ScUtil.getInstance()!.setWidth(8)),
                             shape: BoxShape.circle,
                             color: Colors.grey[100]),
                         child: Image.asset(
                           'assets/img/kit_schedule_logo.png',
                           fit: BoxFit.cover,
-                          width: ScUtil.getInstance().setWidth(50),
+                          width: ScUtil.getInstance()!.setWidth(50),
                         ),
                       )
                     ],
@@ -254,7 +256,7 @@ class _SignInViewState extends State<SignInView> {
 
   Future _setOnClickLoginButton(RegisterState state) async {
     FocusScope.of(context).requestFocus(new FocusNode());
-    if (_textFormKey.currentState.validate()) {
+    if (_textFormKey.currentState!.validate()) {
       BlocProvider.of<RegisterBloc>(context)
         ..add(SignInOnPressEvent(_accountController.text.toUpperCase().trim(),
             _passwordController.text.trim()));
