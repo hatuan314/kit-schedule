@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:schedule/presentation/journey/register/bloc/register_bloc.dart';
-import 'package:schedule/presentation/journey/register/login_screen.dart';
+
 import 'package:schedule/src/blocs/blocs.dart';
 import 'package:schedule/src/blocs/search/search_bloc.dart';
 import 'package:schedule/src/models/model.dart';
@@ -32,7 +31,7 @@ RouteFactory router() {
           ScUtil.init(context, pWidth: 750, pHeight: 640);
           return BlocProvider(
             create: (context) => RegisterBloc(),
-            child: LoginScreen(),
+            child: SignInView(),
           );
         });
       case '/home':

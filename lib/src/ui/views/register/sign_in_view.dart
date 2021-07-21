@@ -2,9 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/src/blocs/blocs.dart';
+import 'package:schedule/src/ui/views/register/sign_in_constains.dart';
+import 'package:schedule/src/ui/views/register/widgets/text_form_flield.dart';
 import 'package:schedule/src/utils/multi_screen/flutter_screen_util.dart';
 import 'package:schedule/src/utils/utils.dart';
-//import 'package:toast/toast.dart';
+import 'package:toast/toast.dart';
+
+import 'widgets/app_bar.dart';
 
 class SignInView extends StatefulWidget {
   @override
@@ -19,232 +23,110 @@ class _SignInViewState extends State<SignInView> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold(
-      backgroundColor: Colors.blue[900],
-      body: BlocListener<RegisterBloc, RegisterState>(
-        listener: (context, state) {
-          if (state is RegisterSuccessState) {
-            Navigator.pushReplacementNamed(context, '/home');
-          }
-          if (state is RegisterFailureState) {
-            /*Toast.show('Connection Failed', context,
-                backgroundColor: Colors.red, textColor: Colors.white);*/
-          }
-          if (state is RegisterNoDataState) {
-            /*Toast.show('No Data. Try again', context,
-                backgroundColor: Colors.red, textColor: Colors.white);*/
-          }
-        },
-        child:
-            BlocBuilder<RegisterBloc, RegisterState>(builder: (context, state) {
-          bool isShow = false;
-          if (state is RegisterShowPasswordState) {
-            isShow = state.isShow;
-          }
-          return Form(
-            key: _textFormKey,
+    return BlocConsumer<RegisterBloc, RegisterState>(
+      listener: (context, state) {
+        if (state is RegisterSuccessState) {
+          Navigator.pushReplacementNamed(context, '/home');
+        }
+        if (state is RegisterFailureState) {
+          Toast.show('Connection Failed', context,
+              backgroundColor: Colors.red, textColor: Colors.white);
+        }
+        if (state is RegisterNoDataState) {
+          Toast.show('No Data. Try again', context,
+              backgroundColor: Colors.red, textColor: Colors.white);
+        }
+      },
+      builder: (context, state) {
+        bool isShow = true;
+        if (state is RegisterShowPasswordState) {
+          isShow = state.isShow;
+        }
+        return Scaffold(
+          appBar: AppBarWidget(),
+          body: Container(
+            margin: EdgeInsets.symmetric(
+                horizontal: ScUtil.getInstance().setSp(50)),
+            height: MediaQuery.of(context).size.height,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Welcome to,",
+                  style: SignInConstains.textStyleTxt
+                      .copyWith(fontSize: SignInConstains.sizeWelcomeTxt),
+                ),
+                Text(
+                  "Kit Schedule",
+                  style: SignInConstains.textStyleTxt.copyWith(
+                      fontWeight: FontWeight.bold,
+                      fontSize: SignInConstains.sizeKitScheduleTxt),
+                ),
+                SizedBox(
+                  height: ScUtil.getInstance().setHeight(65),
+                ),
+                Form(
+                    key: _textFormKey,
+                    child: Column(
+                      children: [
+                        LoginTextField(
+                          textController: _accountController,
+                          labelText: 'Email address',
+                        ),
+                        SizedBox(
+                          height: ScUtil.getInstance().setHeight(10),
+                        ),
+                        LoginTextField(
+                          showPassWordBtn: state is RegisterLoadingState
+                              ? null
+                              : () {
+                            BlocProvider.of<RegisterBloc>(context)
+                              ..add(ShowPasswordOnPress(
+                                  isShow ? false : true));
+                          },
+                          textController: _passwordController,
+                          labelText: 'Password',
+                          obscureText: isShow,
+                        ),
+                      ],
+                    )),
+                SizedBox(
+                  height: ScUtil.getInstance().setHeight(90),
+                )
+              ],
+            ),
+          ),
+          floatingActionButton: GestureDetector(
+            onTap: state is RegisterLoadingState
+                ? null
+                : () {
+              _setOnClickLoginButton(state);
+            },
             child: Container(
-              height: MediaQuery.of(context).size.height,
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Stack(
-                    alignment: Alignment.topCenter,
-                    children: <Widget>[
-                      Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20))),
-                        margin: EdgeInsets.only(
-                            top: ScUtil.getInstance()!.setHeight(20)),
-                        elevation: 10,
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.8,
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              color: Colors.grey[100]),
-                          padding: EdgeInsets.only(
-                              left: ScUtil.getInstance()!.setWidth(20),
-                              top: ScUtil.getInstance()!.setHeight(40),
-                              right: ScUtil.getInstance()!.setWidth(20),
-                              bottom: ScUtil.getInstance()!.setHeight(20)),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              Text(
-                                'KIT Schedule',
-                                style: TextStyle(
-                                    fontSize: ScUtil.getInstance()!.setSp(40),
-                                    color: Colors.blue[900],
-                                    fontFamily: 'MR',
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              SizedBox(
-                                height: ScUtil.getInstance()!.setHeight(30),
-                              ),
-                              TextFormField(
-                                controller: _accountController,
-                                style: TextStyle(
-                                    color: Colors.blue[800],
-                                    fontSize: ScUtil.getInstance()!.setSp(32),
-                                    fontFamily: "MR"),
-                                cursorColor: Colors.blue[800],
-                                decoration: InputDecoration(
-                                    errorStyle: TextStyle(
-                                        fontSize:
-                                            ScUtil.getInstance()!.setSp(24),
-                                        color: Colors.redAccent,
-                                        fontFamily: "MR"),
-                                    errorMaxLines: 2,
-                                    labelText: 'KMA Account',
-                                    labelStyle: TextStyle(
-                                        fontSize:
-                                            ScUtil.getInstance()!.setSp(32),
-                                        color: Colors.blue[800],
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: "MR"),
-                                    prefixIcon: Icon(Icons.account_circle,
-                                        color: Colors.blue[800]),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.blue[800]!,
-                                            width: ScUtil.getInstance()!
-                                                .setWidth(3)),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(8.0))),
-                                    errorBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.redAccent,
-                                            width: ScUtil.getInstance()!
-                                                .setWidth(3)),
-                                        borderRadius:
-                                            BorderRadius.all(Radius.circular(8.0))),
-                                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue[800]!, width: ScUtil.getInstance()!.setWidth(3)), borderRadius: BorderRadius.all(Radius.circular(8.0)))),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return "Trường này không được bỏ trống";
-                                  }
-                                  return null;
-                                },
-                              ),
-                              SizedBox(
-                                height: ScUtil.getInstance()!.setHeight(20),
-                              ),
-                              Stack(
-                                alignment: AlignmentDirectional.centerEnd,
-                                children: <Widget>[
-                                  TextFormField(
-                                    controller: _passwordController,
-                                    style: TextStyle(
-                                        color: Colors.blue[800],
-                                        fontSize:
-                                            ScUtil.getInstance()!.setSp(32),
-                                        fontFamily: "MR"),
-                                    cursorColor: Colors.blue[800],
-                                    obscureText: !isShow,
-                                    decoration: InputDecoration(
-                                        errorStyle: TextStyle(
-                                            fontSize:
-                                                ScUtil.getInstance()!.setSp(24),
-                                            color: Colors.redAccent,
-                                            fontFamily: "MR"),
-                                        errorMaxLines: 2,
-                                        labelText: 'Password',
-                                        labelStyle: TextStyle(
-                                            fontSize:
-                                                ScUtil.getInstance()!.setSp(32),
-                                            color: Colors.blue[800],
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: "MR"),
-                                        prefixIcon: Icon(Icons.lock,
-                                            color: Colors.blue[800]),
-                                        enabledBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.blue[800]!,
-                                                width: ScUtil.getInstance()!
-                                                    .setWidth(3)),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(8.0))),
-                                        errorBorder: OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: Colors.redAccent,
-                                                width: ScUtil.getInstance()!
-                                                    .setWidth(3)),
-                                            borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.blue[800]!, width: ScUtil.getInstance()!.setWidth(3)), borderRadius: BorderRadius.all(Radius.circular(8.0)))),
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return "Trường này không được bỏ trống";
-                                      }
-                                      return null;
-                                    },
-//                                  onChanged: (value) => model.password = value,
-                                  ),
-                                  IconButton(
-                                    icon: Icon(
-                                      isShow
-                                          ? Icons.visibility_off
-                                          : Icons.visibility,
-                                      color: Colors.blue[800],
-                                    ),
-                                    onPressed: () =>
-                                        BlocProvider.of<RegisterBloc>(context)
-                                          ..add(ShowPasswordOnPress(
-                                              isShow ? false : true)),
-                                  )
-                                ],
-                              ),
-                              SizedBox(
-                                height: ScUtil.getInstance()!.setHeight(30),
-                              ),
-                              state is RegisterLoadingState
-                                  ? _loadingUI(state)
-                                  : RaisedButton(
-                                      color: Colors.blue[800],
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5))),
-                                      textColor: Colors.white,
-                                      onPressed: () =>
-                                          _setOnClickLoginButton(state),
-                                      child: Text(
-                                        "LOGIN",
-                                        style: TextStyle(
-                                            fontSize:
-                                                ScUtil.getInstance()!.setSp(34),
-                                            fontFamily: 'MR',
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: ScUtil.getInstance()!.setWidth(110),
-                        padding: EdgeInsets.all(11),
-                        decoration: new BoxDecoration(
-                            border: Border.all(
-                                color: Colors.blue[900]!,
-                                width: ScUtil.getInstance()!.setWidth(8)),
-                            shape: BoxShape.circle,
-                            color: Colors.grey[100]),
-                        child: Image.asset(
-                          'assets/img/kit_schedule_logo.png',
-                          fit: BoxFit.cover,
-                          width: ScUtil.getInstance()!.setWidth(50),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
+              height: ScUtil.getInstance().setHeight(40),
+              width: ScUtil.getInstance().setWidth(150),
+              decoration: BoxDecoration(
+                  color: Colors.yellow,
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              child: state is RegisterLoadingState
+                  ? _loadingUI(state)
+                  : Icon(
+                Icons.arrow_forward_rounded,
+                size: ScUtil.getInstance().setSp(50),
+                color: Colors.white,
               ),
             ),
-          );
-        }),
-      ),
+          ),
+          floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniEndDocked,
+          bottomNavigationBar: Container(
+            height: ScUtil.getInstance().setHeight(50),
+            width: double.infinity,
+            color: Colors.grey.withOpacity(0.3),
+          ),
+        );
+      },
     );
   }
 
@@ -256,7 +138,7 @@ class _SignInViewState extends State<SignInView> {
 
   Future _setOnClickLoginButton(RegisterState state) async {
     FocusScope.of(context).requestFocus(new FocusNode());
-    if (_textFormKey.currentState!.validate()) {
+    if (_textFormKey.currentState.validate()) {
       BlocProvider.of<RegisterBloc>(context)
         ..add(SignInOnPressEvent(_accountController.text.toUpperCase().trim(),
             _passwordController.text.trim()));

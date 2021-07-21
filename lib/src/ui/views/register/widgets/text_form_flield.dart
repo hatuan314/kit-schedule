@@ -1,7 +1,7 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:schedule/presentation/journey/register/login_constains.dart';
+
+import 'package:schedule/src/ui/views/register/sign_in_constains.dart';
 
 import 'package:schedule/src/utils/multi_screen/flutter_screen_util.dart';
 
@@ -64,7 +64,7 @@ class LoginTextField extends TextFormField {
       : super(
             controller: textController,
             obscureText: obscureText ?? false,
-            style: LoginConstains.textStyleTextField
+            style: SignInConstains.textStyleTextField
                 .copyWith(fontSize: ScUtil.getInstance().setSp(30)),
             cursorColor:  Colors.blue[800],
             decoration: InputDecoration(
@@ -80,7 +80,7 @@ class LoginTextField extends TextFormField {
                         ),
                       )
                     : SizedBox(),
-                labelStyle: LoginConstains.textStyleTextField
+                labelStyle: SignInConstains.textStyleTextField
                     .copyWith(fontSize: ScUtil.getInstance().setSp(30)),
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.blue[800]),
