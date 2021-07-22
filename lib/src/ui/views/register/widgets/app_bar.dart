@@ -8,7 +8,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
     return SafeArea(
       child: Container(
         margin:
-            EdgeInsets.symmetric(horizontal: ScUtil.getInstance().setSp(50)),
+            EdgeInsets.symmetric(horizontal: ScUtil.getInstance()!.setSp(50)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -21,14 +21,14 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                       fontFamily: "MR",
                       color: Colors.black,
                       fontWeight: FontWeight.w600,
-                      fontSize: ScUtil.getInstance().setSp(25)),
+                      fontSize: 25.sp),
                 ),
                 SizedBox(
-                  height:  ScUtil.getInstance().setHeight(5),
+                  height:  5.h,
                 ),
                 Container(
-                  width: ScUtil.getInstance().setWidth(50),
-                  height: ScUtil.getInstance().setHeight(2.5),
+                  width: 50.w,
+                  height: 2.5.h,
                   decoration: BoxDecoration(
                       color: Colors.red,
                       borderRadius: BorderRadius.all(Radius.circular(10))),
@@ -36,8 +36,8 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
               ],
             ),
             Container(
-              height: ScUtil.getInstance().setHeight(20),
-              width: ScUtil.getInstance().setHeight(20),
+              height: 20.h,
+              width: 20.h,
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage('assets/img/kit_schedule_logo.png'))),

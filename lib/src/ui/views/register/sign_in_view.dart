@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/src/blocs/blocs.dart';
 import 'package:schedule/src/ui/views/register/sign_in_constains.dart';
 import 'package:schedule/src/ui/views/register/widgets/text_form_flield.dart';
 import 'package:schedule/src/utils/multi_screen/flutter_screen_util.dart';
 import 'package:schedule/src/utils/utils.dart';
-import 'package:toast/toast.dart';
 
 import 'widgets/app_bar.dart';
 
@@ -29,12 +29,12 @@ class _SignInViewState extends State<SignInView> {
           Navigator.pushReplacementNamed(context, '/home');
         }
         if (state is RegisterFailureState) {
-          Toast.show('Connection Failed', context,
-              backgroundColor: Colors.red, textColor: Colors.white);
+          // Toast.show('Connection Failed', context,
+          //     backgroundColor: Colors.red, textColor: Colors.white);
         }
         if (state is RegisterNoDataState) {
-          Toast.show('No Data. Try again', context,
-              backgroundColor: Colors.red, textColor: Colors.white);
+          // Toast.show('No Data. Try again', context,
+          //     backgroundColor: Colors.red, textColor: Colors.white);
         }
       },
       builder: (context, state) {
@@ -46,7 +46,7 @@ class _SignInViewState extends State<SignInView> {
           appBar: AppBarWidget(),
           body: Container(
             margin: EdgeInsets.symmetric(
-                horizontal: ScUtil.getInstance().setSp(50)),
+                horizontal: 50.sp), //sẽ bị lỗi do chưa có thư viện /// fix xong, chỉ cần làm lần đầu với các file
             height: MediaQuery.of(context).size.height,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +64,7 @@ class _SignInViewState extends State<SignInView> {
                       fontSize: SignInConstains.sizeKitScheduleTxt),
                 ),
                 SizedBox(
-                  height: ScUtil.getInstance().setHeight(65),
+                  height: 65.h, /// chỉ cần gõ 65.h
                 ),
                 Form(
                     key: _textFormKey,
@@ -75,11 +75,11 @@ class _SignInViewState extends State<SignInView> {
                           labelText: 'Email address',
                         ),
                         SizedBox(
-                          height: ScUtil.getInstance().setHeight(10),
+                          height: 10.h,
                         ),
                         LoginTextField(
                           showPassWordBtn: state is RegisterLoadingState
-                              ? null
+                              ? (){}
                               : () {
                             BlocProvider.of<RegisterBloc>(context)
                               ..add(ShowPasswordOnPress(
@@ -92,7 +92,7 @@ class _SignInViewState extends State<SignInView> {
                       ],
                     )),
                 SizedBox(
-                  height: ScUtil.getInstance().setHeight(90),
+                  height: 90.h,
                 )
               ],
             ),
@@ -104,8 +104,8 @@ class _SignInViewState extends State<SignInView> {
               _setOnClickLoginButton(state);
             },
             child: Container(
-              height: ScUtil.getInstance().setHeight(40),
-              width: ScUtil.getInstance().setWidth(150),
+              height: 40.h,
+              width: 150.w,
               decoration: BoxDecoration(
                   color: Colors.yellow,
                   borderRadius: BorderRadius.all(Radius.circular(10))),
@@ -113,7 +113,7 @@ class _SignInViewState extends State<SignInView> {
                   ? _loadingUI(state)
                   : Icon(
                 Icons.arrow_forward_rounded,
-                size: ScUtil.getInstance().setSp(50),
+                size: 50.sp,
                 color: Colors.white,
               ),
             ),
@@ -121,7 +121,7 @@ class _SignInViewState extends State<SignInView> {
           floatingActionButtonLocation:
           FloatingActionButtonLocation.miniEndDocked,
           bottomNavigationBar: Container(
-            height: ScUtil.getInstance().setHeight(50),
+            height: 50.sp,
             width: double.infinity,
             color: Colors.grey.withOpacity(0.3),
           ),
@@ -138,7 +138,7 @@ class _SignInViewState extends State<SignInView> {
 
   Future _setOnClickLoginButton(RegisterState state) async {
     FocusScope.of(context).requestFocus(new FocusNode());
-    if (_textFormKey.currentState.validate()) {
+    if (_textFormKey.currentState!.validate()) {
       BlocProvider.of<RegisterBloc>(context)
         ..add(SignInOnPressEvent(_accountController.text.toUpperCase().trim(),
             _passwordController.text.trim()));
