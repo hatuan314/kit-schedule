@@ -6,6 +6,8 @@ import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 //import 'package:flutter_rounded_date_picker/rounded_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:schedule/common/themes/theme_color.dart';
+import 'package:schedule/common/themes/theme_text.dart';
 import 'package:schedule/src/blocs/todo/todo_bloc.dart';
 import 'package:schedule/src/models/model.dart';
 import 'package:schedule/src/ui/views/widgets_constants/text_form_field_widget.dart';
@@ -50,7 +52,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
       },
       child: BlocBuilder<TodoBloc, TodoState>(builder: (context, state) {
         return Scaffold(
-          backgroundColor: Colors.blue[900],
+          backgroundColor: ThemeColor.personalScheduleColor2,
           appBar: AppBar(
             elevation: 0,
             actions: <Widget>[
@@ -58,7 +60,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                   onPressed: () => _waitingDeleteDialog(),
                   icon: Icon(
                     Icons.delete,
-                    color: Color(0xffFCFAF3),
+                    color: ThemeColor.secondColor,
                     size: 24,
                   ))
             ],
@@ -99,11 +101,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                 width: double.infinity,
                 child: Text(
                   '${this.widget.schedule!.name}',
-                  style: TextStyle(
-                      fontSize: ScUtil.getInstance()!.setSp(42),
-                      color: Color(0xffFCFAF3),
-                      fontFamily: 'MR',
-                      fontWeight: FontWeight.w600),
+                  style: ThemeText.headerStyle,
                 ),
               ),
               InkWell(
@@ -116,7 +114,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                     children: <Widget>[
                       SvgPicture.asset(
                         'assets/img/ic-calendar.svg',
-                        color: Color(0xffFCFAF3),
+                        color: ThemeColor.secondColor,
                         height: ScUtil.getInstance()!.setHeight(18),
                       ),
                       SizedBox(
@@ -128,11 +126,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                             : state.selectDay != null
                                 ? '${DateFormat.yMd().format(DateTime.fromMillisecondsSinceEpoch(int.parse(state.selectDay!)))}'
                                 : '',
-                        style: TextStyle(
-                            fontSize: ScUtil.getInstance()!.setSp(28),
-                            color: Color(0xffFCFAF3),
-                            fontFamily: 'MR',
-                            fontWeight: FontWeight.normal),
+                        style:ThemeText.textInforStyle,
                       ),
                     ],
                   ),
@@ -157,7 +151,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
         key: _formKey,
         child: Container(
             decoration: BoxDecoration(
-                color: Color(0xffFCFAF3),
+                color: ThemeColor.secondColor,
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(30))),
             padding: EdgeInsets.only(
                 left: ScUtil.getInstance()!.setWidth(50),
@@ -193,11 +187,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                       ),
                       Text(
                         'Set time',
-                        style: TextStyle(
-                            color: Colors.blue[900],
-                            fontSize: ScUtil.getInstance()!.setSp(38),
-                            fontFamily: 'MR',
-                            fontWeight: FontWeight.w600),
+                        style: ThemeText.titleStyle.copyWith(fontSize: ScUtil().setSp(38))
                       ),
                       SizedBox(
                         height: ScUtil.getInstance()!.setHeight(10),
@@ -210,7 +200,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(8)),
                               border: Border.all(
-                                  color: Colors.blue[800]!,
+                                  color: ThemeColor.personalScheduleColor2,
                                   width: ScUtil.getInstance()!.setWidth(3))),
                           alignment: Alignment.center,
                           padding: EdgeInsets.symmetric(
@@ -221,13 +211,9 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                                 : state.selectTimer != null
                                     ? '${state.selectTimer}'
                                     : '',
-                            style: TextStyle(
-                                color: Colors.blue[800],
-                                fontSize: ScUtil.getInstance()!.setSp(32),
-                                fontFamily: 'MR',
-                                fontWeight: FontWeight.w600),
-                          ),
+                            style: ThemeText.titleStyle
                         ),
+                      ),
                       ),
                       SizedBox(
                         height: ScUtil.getInstance()!.setHeight(30),
@@ -235,17 +221,29 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                       state is TodoLoadingState
                           ? Container(
                               child: LoadingWidget(
-                                color: Colors.blue,
+                                color: ThemeColor.fourthColor,
                                 size: 40.0,
                               ),
                             )
-                          : RaisedButton(
+                          : ElevatedButton(
                               onPressed: () => _setOnClickUpdateButton(state),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20))),
-                              color: Colors.blue[900],
+
                               child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: ThemeColor.errorColor,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: ThemeColor.primaryColor.withOpacity(0.3),
+                                      blurRadius: 5,
+                                      spreadRadius: 1,
+                                      offset: Offset(
+                                        0,
+                                        3,
+                                      ),
+                                    )
+                                  ],
+                                ),
                                 width: double.infinity,
                                 alignment: Alignment.center,
                                 padding: EdgeInsets.symmetric(
@@ -253,11 +251,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                                         ScUtil.getInstance()!.setHeight(12)),
                                 child: Text(
                                   'Update',
-                                  style: TextStyle(
-                                      color: Color(0xffFCFAF3),
-                                      fontSize: ScUtil.getInstance()!.setSp(36),
-                                      fontFamily: 'MR',
-                                      fontWeight: FontWeight.w600),
+                                  style: ThemeText.buttonLabelStyle
                                 ),
                               ),
                             )
@@ -332,36 +326,64 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                 ]),
           ),
         ),
-        btnOk: RaisedButton(
-          color: Colors.blue,
-          onPressed: () => _bntOkDialogOnPress(context),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20))),
-          elevation: 5,
+        btnOk: GestureDetector(
+          onTap: () => _bntOkDialogOnPress(context),
           child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: ThemeColor.fourthColor,
+              boxShadow: [
+                BoxShadow(
+                  color: ThemeColor.primaryColor.withOpacity(0.3),
+                  blurRadius: 5,
+                  spreadRadius: 1,
+                  offset: Offset(
+                    0,
+                    3,
+                  ),
+                )
+              ],
+            ),
             alignment: Alignment.center,
-            child: Text('Yes (Y)',
-                style: TextStyle(
-                    color: Color(0xffFCFAF3),
-                    fontSize: ScUtil.getInstance()!.setSp(32),
-                    fontFamily: 'MR',
-                    fontWeight: FontWeight.bold)),
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(15, 8, 15, 8),
+              child: Text('Yes (Y)',
+                  style: TextStyle(
+                      color: Color(0xffFCFAF3),
+                      fontSize: ScUtil.getInstance()!.setSp(32),
+                      fontFamily: 'MR',
+                      fontWeight: FontWeight.bold)),
+            ),
           ),
         ),
-        btnCancel: RaisedButton(
-          color: Colors.red,
-          onPressed: () => Navigator.of(context).pop(),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20))),
-          elevation: 5,
+        btnCancel: GestureDetector(
+          onTap: () => Navigator.of(context).pop(),
           child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: ThemeColor.errorColor,
+              boxShadow: [
+                BoxShadow(
+                  color: ThemeColor.primaryColor.withOpacity(0.3),
+                  blurRadius: 5,
+                  spreadRadius: 1,
+                  offset: Offset(
+                    0,
+                    3,
+                  ),
+                )
+              ],
+            ),
             alignment: Alignment.center,
-            child: Text('No (N)',
-                style: TextStyle(
-                    color: Color(0xffFCFAF3),
-                    fontSize: ScUtil.getInstance()!.setSp(32),
-                    fontFamily: 'MR',
-                    fontWeight: FontWeight.bold)),
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(15, 8, 15, 8),
+              child: Text('No (N)',
+                  style: TextStyle(
+                      color: Color(0xffFCFAF3),
+                      fontSize: ScUtil.getInstance()!.setSp(32),
+                      fontFamily: 'MR',
+                      fontWeight: FontWeight.bold)),
+            ),
           ),
         )).show();
   }

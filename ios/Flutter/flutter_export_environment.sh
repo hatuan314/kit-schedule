@@ -1,7 +1,7 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=D:\Flutter\flutter_windows_2.2.2-stable\flutter"
-export "FLUTTER_APPLICATION_PATH=D:\Flutter\kit-schedule"
+export "FLUTTER_ROOT=D:\c10\OneDrive - actvn.edu.vn\Desktop\flutter_windows_2.2.3-stable\flutter"
+export "FLUTTER_APPLICATION_PATH=F:\flutter\kit-schedule"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_TARGET=lib\main.dart"
 export "FLUTTER_BUILD_DIR=build"

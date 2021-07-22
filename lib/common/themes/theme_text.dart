@@ -52,7 +52,7 @@ class ThemeText {
 
   static TextStyle textInforStyle = TextStyle(
       color: ThemeColor.secondColor,
-      fontSize: ScreenUtil().setSp(28),
+      fontSize: ScUtil.getInstance()!.setSp(32),
       fontWeight: FontWeight.normal);
 
   static TextStyle errorTextStyle=TextStyle(
@@ -65,6 +65,12 @@ class ThemeText {
       color: ThemeColor.personalScheduleColor,
       fontWeight: FontWeight.w500,
       fontFamily: "MR");
+
+  static TextStyle buttonLabelStyle = TextStyle(
+      color: Color(0xffFCFAF3),
+      fontSize: ScUtil.getInstance()!.setSp(36),
+      fontFamily: 'MR',
+      fontWeight: FontWeight.w600);
 
   /*static TextStyle errorTextStyle = TextStyle(
       color: ThemeColor.errorColor,
