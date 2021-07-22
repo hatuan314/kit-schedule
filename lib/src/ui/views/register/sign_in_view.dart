@@ -106,18 +106,37 @@ class _SignInViewState extends State<SignInView> {
                               SpacingBoxWidget(height: 30),
                               state is RegisterLoadingState
                                   ? _loadingUI(state)
-                                  : RaisedButton(
-                                      color: ThemeColor.personalScheduleColor,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5))),
-                                      textColor: Colors.white,
-                                      onPressed: () =>
+                                  : GestureDetector(
+                                     // color: ThemeColor.personalScheduleColor,
+
+                                     // textColor: Colors.white,
+                                      onTap: () =>
                                           _setOnClickLoginButton(state),
-                                      child: Text(
-                                        "LOGIN",
-                                        style:ThemeText.titleStyle.copyWith( fontSize:
-                                        ScUtil.getInstance()!.setSp(34),) ,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(15),
+                                          color: ThemeColor.fourthColor,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: ThemeColor.primaryColor.withOpacity(0.3),
+                                              blurRadius: 5,
+                                              spreadRadius: 1,
+                                              offset: Offset(
+                                                0,
+                                                3,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        child: Padding(
+                                          padding: EdgeInsets.fromLTRB(15, 8, 15, 8),
+                                          child: Text(
+                                            "LOGIN",
+                                            style:ThemeText.titleStyle.copyWith( fontSize:
+                                            ScUtil.getInstance()!.setSp(34),
+                                            color: ThemeColor.secondColor) ,
+                                          ),
+                                        ),
                                       ),
                                     )
                             ],

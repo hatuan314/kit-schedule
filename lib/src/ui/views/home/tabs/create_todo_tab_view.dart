@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,7 +27,7 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      backgroundColor: Colors.blue[900],
+      backgroundColor: ThemeColor.personalScheduleColor2,
       body: SafeArea(
         child: BlocListener<TodoBloc, TodoState>(
           listener: (context, state) {
@@ -185,23 +187,37 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                                 size: 40.0,
                               ),
                             )
-                          : RaisedButton(
-                              onPressed: () => _setOnClickSaveButton(state),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20))),
-                              color: ThemeColor.personalScheduleColor2,
-                              child: Container(
+                          : GestureDetector(
+                              onTap: () => _setOnClickSaveButton(state),
+                              child:Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color:ThemeColor.personalScheduleColor2,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: ThemeColor.primaryColor.withOpacity(0.3),
+                                      blurRadius: 5,
+                                      spreadRadius: 1,
+                                      offset: Offset(
+                                        0,
+                                        3,
+                                      ),
+                                    )
+                                  ],
+                                ),
                                 width: double.infinity,
                                 alignment: Alignment.center,
                                 padding: EdgeInsets.symmetric(
                                     vertical:
                                         ScUtil.getInstance()!.setHeight(12)),
-                                child: Text(
-                                  'Save',
-                                  style:
-                                  ThemeText.titleStyle.copyWith( color: ThemeColor.secondColor,
-                                    fontSize: ScUtil.getInstance()!.setSp(36),),
+                                child: Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                  child: Text(
+                                    'Save',
+                                    style:
+                                    ThemeText.titleStyle.copyWith( color: ThemeColor.secondColor,
+                                      fontSize: ScUtil.getInstance()!.setSp(36),),
+                                  ),
                                 ),
                               ),
                             )

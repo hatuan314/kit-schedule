@@ -12,6 +12,7 @@ class TextFormFieldWidget extends StatelessWidget {
   final bool isPassword;
   final bool isInLogInScreen;
 
+
   TextFormFieldWidget({
    required this.controller, required this.labelText,required this.isShowed,
     required this.isPassword, required this.isInLogInScreen});
@@ -19,6 +20,7 @@ class TextFormFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLines: labelText=='Note'?5:1,
       controller: controller,
       style: ThemeText.titleStyle.copyWith(color: ThemeColor.personalScheduleColor),
       cursorColor: ThemeColor.textFieldColor,
