@@ -22,8 +22,8 @@ class TextFormFieldWidget extends StatelessWidget {
     return TextFormField(
       maxLines: labelText=='Note'?5:1,
       controller: controller,
-      style: ThemeText.titleStyle.copyWith(color: ThemeColor.personalScheduleColor),
-      cursorColor: ThemeColor.textFieldColor,
+      style: ThemeText.titleStyle.copyWith(color: AppColor.personalScheduleColor),
+      cursorColor: AppColor.textFieldColor,
       obscureText: isPassword?(!isShowed):false,
       decoration: InputDecoration(
           errorStyle: ThemeText.errorTextStyle,
@@ -32,7 +32,7 @@ class TextFormFieldWidget extends StatelessWidget {
           labelStyle: ThemeText.labelStyle,
           prefixIcon: Visibility(
               visible: isInLogInScreen ,
-              child: Icon(isPassword?Icons.lock:Icons.account_circle, color: ThemeColor.textFieldColor)),
+              child: Icon(isPassword?Icons.lock:Icons.account_circle, color: AppColor.textFieldColor)),
           enabledBorder: OutlineInputBorder(
               borderSide: ThemeBorder.textFieldEnableBorder,
               borderRadius: BorderRadius.all(Radius.circular(8.0))),

@@ -7,7 +7,7 @@ class ThemeBorder {
   static const BorderRadius borderRadiusAll = BorderRadius.all(Radius.circular(12));
   static  OutlineInputBorder outlineInputBorder = OutlineInputBorder(
     borderRadius: borderRadiusAll,
-    borderSide: BorderSide(color: ThemeColor.primaryColor),
+    borderSide: BorderSide(color: AppColor.primaryColor),
   );
   static const Color borderColor = Color(0xFF42A5F5);
 
@@ -15,18 +15,18 @@ class ThemeBorder {
 
   static BorderSide scheduleElementBorder= BorderSide(
   width: ScUtil.getInstance()!.setWidth(1.2),
-  color: ThemeColor.personalScheduleColor);
+  color: AppColor.personalScheduleColor);
 
   static BorderSide textFieldEnableBorder = BorderSide(
-      color: ThemeColor.personalScheduleColor,
+      color: AppColor.personalScheduleColor,
       width: ScUtil.getInstance()!.setWidth(3));
 
   static BorderSide textFieldErrorBorder = BorderSide(
-      color: ThemeColor.errorColor,
+      color: AppColor.errorColor,
       width: ScUtil.getInstance()!.setWidth(3));
   static OutlineInputBorder textFieldBorder= OutlineInputBorder(
   borderSide: BorderSide(
-      color: ThemeColor.errorColor,
+      color: AppColor.errorColor,
       width: ScUtil.getInstance()!.setWidth(3)),
   borderRadius: BorderRadius.all(Radius.circular(8.0)));
 }

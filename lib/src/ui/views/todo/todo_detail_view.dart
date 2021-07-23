@@ -52,7 +52,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
       },
       child: BlocBuilder<TodoBloc, TodoState>(builder: (context, state) {
         return Scaffold(
-          backgroundColor: ThemeColor.personalScheduleColor2,
+          backgroundColor: AppColor.personalScheduleColor2,
           appBar: AppBar(
             elevation: 0,
             actions: <Widget>[
@@ -60,7 +60,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                   onPressed: () => _waitingDeleteDialog(),
                   icon: Icon(
                     Icons.delete,
-                    color: ThemeColor.secondColor,
+                    color: AppColor.secondColor,
                     size: 24,
                   ))
             ],
@@ -114,7 +114,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                     children: <Widget>[
                       SvgPicture.asset(
                         'assets/img/ic-calendar.svg',
-                        color: ThemeColor.secondColor,
+                        color: AppColor.secondColor,
                         height: ScUtil.getInstance()!.setHeight(18),
                       ),
                       SizedBox(
@@ -151,7 +151,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
         key: _formKey,
         child: Container(
             decoration: BoxDecoration(
-                color: ThemeColor.secondColor,
+                color: AppColor.secondColor,
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(30))),
             padding: EdgeInsets.only(
                 left: ScUtil.getInstance()!.setWidth(50),
@@ -200,7 +200,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(8)),
                               border: Border.all(
-                                  color: ThemeColor.personalScheduleColor2,
+                                  color: AppColor.personalScheduleColor2,
                                   width: ScUtil.getInstance()!.setWidth(3))),
                           alignment: Alignment.center,
                           padding: EdgeInsets.symmetric(
@@ -221,7 +221,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                       state is TodoLoadingState
                           ? Container(
                               child: LoadingWidget(
-                                color: ThemeColor.fourthColor,
+                                color: AppColor.fourthColor,
                                 size: 40.0,
                               ),
                             )
@@ -231,10 +231,10 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                               child: Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
-                                  color: ThemeColor.errorColor,
+                                  color: AppColor.errorColor,
                                   boxShadow: [
                                     BoxShadow(
-                                      color: ThemeColor.primaryColor.withOpacity(0.3),
+                                      color: AppColor.primaryColor.withOpacity(0.3),
                                       blurRadius: 5,
                                       spreadRadius: 1,
                                       offset: Offset(
@@ -331,10 +331,10 @@ class _TodoDetailViewState extends State<TodoDetailView> {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: ThemeColor.fourthColor,
+              color: AppColor.fourthColor,
               boxShadow: [
                 BoxShadow(
-                  color: ThemeColor.primaryColor.withOpacity(0.3),
+                  color: AppColor.primaryColor.withOpacity(0.3),
                   blurRadius: 5,
                   spreadRadius: 1,
                   offset: Offset(
@@ -361,10 +361,10 @@ class _TodoDetailViewState extends State<TodoDetailView> {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: ThemeColor.errorColor,
+              color: AppColor.errorColor,
               boxShadow: [
                 BoxShadow(
-                  color: ThemeColor.primaryColor.withOpacity(0.3),
+                  color: AppColor.primaryColor.withOpacity(0.3),
                   blurRadius: 5,
                   spreadRadius: 1,
                   offset: Offset(

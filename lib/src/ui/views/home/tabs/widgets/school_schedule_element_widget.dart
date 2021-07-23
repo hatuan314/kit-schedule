@@ -37,13 +37,13 @@ class SchoolScheduleElementWidget extends StatelessWidget{
                   children: <Widget>[
                     Text(
                       '${Convert.startTimeLessonMap[startLesson]}',
-                      style: ThemeText.titleStyle.copyWith(color: ThemeColor.scheduleType)),
+                      style: ThemeText.titleStyle.copyWith(color: AppColor.scheduleType)),
                     Icon(Icons.arrow_drop_down,
-                        color: ThemeColor.scheduleType,
+                        color: AppColor.scheduleType,
                         size: ScUtil.getInstance()!.setHeight(15)),
                     Text(
                       '${Convert.endTimeLessonMap[endLesson]}',
-                      style: ThemeText.titleStyle.copyWith(color: ThemeColor.scheduleType)),
+                      style: ThemeText.titleStyle.copyWith(color: AppColor.scheduleType)),
                   ],
                 ),
               ),
@@ -55,19 +55,19 @@ class SchoolScheduleElementWidget extends StatelessWidget{
                     horizontal: ScUtil.getInstance()!.setWidth(20)),
                 decoration: BoxDecoration(
                     border: Border(
-                        left: ThemeBorder.scheduleElementBorder.copyWith(color: ThemeColor.scheduleType))),
+                        left: ThemeBorder.scheduleElementBorder.copyWith(color: AppColor.scheduleType))),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Text(
                       '${schedule.subject}',
-                      style: ThemeText.titleStyle.copyWith(color: ThemeColor.scheduleType)),
+                      style: ThemeText.titleStyle.copyWith(color: AppColor.scheduleType)),
                     Text(
                       schedule.address!.contains('null')
                           ? 'No Data'
                           : '${schedule.address}',
-                      style: ThemeText.titleStyle.copyWith(color: ThemeColor.scheduleType).copyWith(fontWeight: FontWeight.normal)),
+                      style: ThemeText.titleStyle.copyWith(color: AppColor.scheduleType).copyWith(fontWeight: FontWeight.normal)),
                   ],
                 ),
               ),

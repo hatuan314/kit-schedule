@@ -10,7 +10,7 @@ class LoadingView extends StatelessWidget {
 //    ScUtil.instance = ScUtil(width: 750, height: 1624)..init(context);
     return Scaffold(
       body: Container(
-          color: ThemeColor.loadingColor,
+          color: AppColor.loadingColor,
           margin: EdgeInsets.only(top: ScUtil.getInstance()!.setHeight(50)),
           child: LoadingWidget(color: Colors.white,)),
     );

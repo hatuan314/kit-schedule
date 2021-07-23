@@ -20,7 +20,7 @@ class SchoolScheduleWidget extends StatelessWidget {
       semanticContainer: true,
 //      color: Color(0xffFCFAF3),
 //    margin: EdgeInsets.symmetric(vertical: ScUtil.getInstance().setHeight(8)),
-      color: ThemeColor.scheduleBackgroundColor,
+      color: AppColor.scheduleBackgroundColor,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20))),
       elevation: 3,
@@ -35,7 +35,7 @@ class SchoolScheduleWidget extends StatelessWidget {
               Text(
                 'School',
                 style:ThemeText.titleStyle.copyWith(
-                    color: ThemeColor.scheduleType,fontWeight: FontWeight.bold, fontSize: ScUtil().setSp(36))),
+                    color: AppColor.scheduleType,fontWeight: FontWeight.bold, fontSize: ScUtil().setSp(36))),
               Container(
                 decoration:
                     BoxDecoration(shape: BoxShape.circle, color: Colors.red),
@@ -63,7 +63,7 @@ class SchoolScheduleWidget extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Text(
                       'No Data',
-                      style: ThemeText.titleStyle.copyWith(color: ThemeColor.scheduleType)),
+                      style: ThemeText.titleStyle.copyWith(color: AppColor.scheduleType)),
                   ),
           )
         ],

@@ -26,15 +26,15 @@ class HomeView extends StatelessWidget {
       else
         _currentTab = CalendarTabView();
       return Scaffold(
-          backgroundColor: ThemeColor.secondColor,
+          backgroundColor: AppColor.secondColor,
           body: _currentTab,
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
-                color: ThemeColor.secondColor,
+                color: AppColor.secondColor,
                 boxShadow: [
                   BoxShadow(
                       blurRadius: 20,
-                      color: ThemeColor.primaryColor.withOpacity(.1))
+                      color: AppColor.primaryColor.withOpacity(.1))
                 ]),
             child: SafeArea(
               child: Padding(
@@ -75,7 +75,7 @@ class HomeView extends StatelessWidget {
             icon,
             color: state.selectIndex == index
                 ? getColor(index)
-                : ThemeColor.primaryColor,
+                : AppColor.primaryColor,
           ),
         ));
   }
@@ -83,15 +83,15 @@ class HomeView extends StatelessWidget {
   Color getColor(int index) {
     switch (index) {
       case 0:
-        return ThemeColor.scheduleType;
+        return AppColor.scheduleType;
       case 1:
-        return ThemeColor.searchType;
+        return AppColor.searchType;
       case 2:
-        return ThemeColor.fourthColor;
+        return AppColor.fourthColor;
       case 3:
-        return ThemeColor.searchType;
+        return AppColor.searchType;
     }
-    return ThemeColor.fourthColor;
+    return AppColor.fourthColor;
   }
 
   void _warningSignOutDialog(BuildContext context) {
@@ -106,19 +106,19 @@ class HomeView extends StatelessWidget {
             text: TextSpan(
                 text: 'Do you want ',
                 style: ThemeText.titleStyle.copyWith(
-                  color: ThemeColor.thirdColor,
+                  color: AppColor.thirdColor,
                 ),
                 children: [
                   TextSpan(
                     text: 'Sign Out ',
                     style: ThemeText.titleStyle.copyWith(
-                      color: ThemeColor.errorColor,
+                      color: AppColor.errorColor,
                     ),
                   ),
                   TextSpan(
                     text: '?',
                     style: ThemeText.titleStyle.copyWith(
-                        color: ThemeColor.thirdColor,
+                        color: AppColor.thirdColor,
                         fontWeight: FontWeight.normal),
                   ),
                 ]),
@@ -129,10 +129,10 @@ class HomeView extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: ThemeColor.fourthColor,
+              color: AppColor.fourthColor,
               boxShadow: [
                 BoxShadow(
-                  color: ThemeColor.primaryColor.withOpacity(0.3),
+                  color: AppColor.primaryColor.withOpacity(0.3),
                   blurRadius: 5,
                   spreadRadius: 1,
                   offset: Offset(
@@ -148,7 +148,7 @@ class HomeView extends StatelessWidget {
               child: Text(
                 'Yes (Y)',
                 style: ThemeText.titleStyle.copyWith(
-                    color: ThemeColor.secondColor, fontWeight: FontWeight.bold),
+                    color: AppColor.secondColor, fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -158,10 +158,10 @@ class HomeView extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: ThemeColor.errorColor,
+              color: AppColor.errorColor,
               boxShadow: [
                 BoxShadow(
-                  color: ThemeColor.primaryColor.withOpacity(0.3),
+                  color: AppColor.primaryColor.withOpacity(0.3),
                   blurRadius: 5,
                   spreadRadius: 1,
                   offset: Offset(
@@ -176,7 +176,7 @@ class HomeView extends StatelessWidget {
               padding: EdgeInsets.fromLTRB(15, 8, 15, 8),
               child: Text('No (N)',
                   style: ThemeText.titleStyle.copyWith(
-                      color: ThemeColor.secondColor,
+                      color: AppColor.secondColor,
                       fontWeight: FontWeight.bold)),
             ),
           ),
@@ -206,19 +206,19 @@ class HomeView extends StatelessWidget {
             text: TextSpan(
                 text: 'Can\'t ',
                 style: ThemeText.titleStyle.copyWith(
-                    color: ThemeColor.thirdColor,
+                    color: AppColor.thirdColor,
                     fontWeight: FontWeight.normal),
                 children: [
                   TextSpan(
                       text: 'Sign Out ',
                       style: ThemeText.titleStyle.copyWith(
-                        color: ThemeColor.errorColor,
+                        color: AppColor.errorColor,
                         fontSize: ScUtil.getInstance()!.setSp(36),
                       )),
                   TextSpan(
                     text: 'now. Please, try again.',
                     style: ThemeText.titleStyle.copyWith(
-                        color: ThemeColor.thirdColor,
+                        color: AppColor.thirdColor,
                         fontSize: ScUtil.getInstance()!.setSp(36)),
                   )
                 ]),

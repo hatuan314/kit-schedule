@@ -20,7 +20,7 @@ class PersonalScheduleWidget extends StatelessWidget {
     return Card(
       semanticContainer: true,
 //      color: Color(0xffFCFAF3),
-      color: ThemeColor.personalScheduleBackgroundColor,
+      color: AppColor.personalScheduleBackgroundColor,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20))),
       elevation: 5,
@@ -37,7 +37,7 @@ class PersonalScheduleWidget extends StatelessWidget {
                 style: ThemeText.titleStyle.copyWith(fontWeight: FontWeight.bold,fontSize: ScUtil().setSp(36))),
               Container(
                 decoration: BoxDecoration(
-                    shape: BoxShape.circle, color: ThemeColor.personalScheduleColor),
+                    shape: BoxShape.circle, color: AppColor.personalScheduleColor),
                 margin: EdgeInsets.only(left: 4),
                 padding: EdgeInsets.all(5),
                 child: Text(

@@ -25,7 +25,7 @@ class _SignInViewState extends State<SignInView> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      backgroundColor: ThemeColor.signInColor,
+      backgroundColor: AppColor.signInColor,
       body: BlocListener<RegisterBloc, RegisterState>(
         listener: (context, state) {
           if (state is RegisterSuccessState) {
@@ -94,7 +94,7 @@ class _SignInViewState extends State<SignInView> {
                                       isShow
                                           ? Icons.visibility_off
                                           : Icons.visibility,
-                                      color: ThemeColor.personalScheduleColor,
+                                      color: AppColor.personalScheduleColor,
                                     ),
                                     onPressed: () =>
                                         BlocProvider.of<RegisterBloc>(context)
@@ -107,7 +107,7 @@ class _SignInViewState extends State<SignInView> {
                               state is RegisterLoadingState
                                   ? _loadingUI(state)
                                   : GestureDetector(
-                                     // color: ThemeColor.personalScheduleColor,
+                                     // color: AppColor.personalScheduleColor,
 
                                      // textColor: Colors.white,
                                       onTap: () =>
@@ -115,10 +115,10 @@ class _SignInViewState extends State<SignInView> {
                                       child: Container(
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(15),
-                                          color: ThemeColor.fourthColor,
+                                          color: AppColor.fourthColor,
                                           boxShadow: [
                                             BoxShadow(
-                                              color: ThemeColor.primaryColor.withOpacity(0.3),
+                                              color: AppColor.primaryColor.withOpacity(0.3),
                                               blurRadius: 5,
                                               spreadRadius: 1,
                                               offset: Offset(
@@ -134,7 +134,7 @@ class _SignInViewState extends State<SignInView> {
                                             "LOGIN",
                                             style:ThemeText.titleStyle.copyWith( fontSize:
                                             ScUtil.getInstance()!.setSp(34),
-                                            color: ThemeColor.secondColor) ,
+                                            color: AppColor.secondColor) ,
                                           ),
                                         ),
                                       ),
@@ -148,7 +148,7 @@ class _SignInViewState extends State<SignInView> {
                         padding: EdgeInsets.all(11),
                         decoration: new BoxDecoration(
                             border: Border.all(
-                                color: ThemeColor.signInColor,
+                                color: AppColor.signInColor,
                                 width: ScUtil.getInstance()!.setWidth(8)),
                             shape: BoxShape.circle,
                             color: Colors.grey[100]),
