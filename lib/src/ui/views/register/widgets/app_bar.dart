@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:schedule/src/utils/multi_screen/flutter_screen_util.dart';
+
+import '../sign_in_constains.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -8,7 +9,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
     return SafeArea(
       child: Container(
         margin:
-            EdgeInsets.symmetric(horizontal: ScUtil.getInstance()!.setSp(50)),
+            EdgeInsets.symmetric(horizontal: SignInConstains.horizontalScreen),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -16,32 +17,32 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Login',
+                  SignInConstains.loginTxt,
                   style: TextStyle(
                       fontFamily: "MR",
                       color: Colors.black,
                       fontWeight: FontWeight.w600,
-                      fontSize: 25.sp),
+                      fontSize: SignInConstains.sizeLoginTxt),
                 ),
                 SizedBox(
                   height:  5.h,
                 ),
                 Container(
-                  width: 50.w,
-                  height: 2.5.h,
+                  width: SignInConstains.widthLineLogin,
+                  height: SignInConstains.heightLineLogin,
                   decoration: BoxDecoration(
-                      color: Colors.red,
+                      color: SignInConstains.colorDefault,
                       borderRadius: BorderRadius.all(Radius.circular(10))),
                 ),
               ],
             ),
-            Container(
-              height: 20.h,
-              width: 20.h,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/img/kit_schedule_logo.png'))),
-            )
+            // Container(
+            //   height: SignInConstains.sizeIconKit,
+            //   width:  SignInConstains.sizeIconKit,
+            //   decoration: BoxDecoration(
+            //       image: DecorationImage(
+            //           image: AssetImage('assets/img/kit_schedule_logo.png'))),
+            // )
           ],
         ),
       ),
@@ -52,26 +53,3 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   // TODO: implement preferredSize
   Size get preferredSize => Size(double.infinity, 64);
 }
-// appBar: AppBar(
-// backgroundColor: Colors.transparent,
-// elevation: 0,
-// leading: Column(
-// children: [
-// Text('Login',style: TextStyle(
-// fontFamily: "MR",
-// color: Colors.black,
-// fontWeight: FontWeight.w600
-// ),),
-// SizedBox(
-// height: 5,
-// ),
-// Container(
-// width: 40,
-// height: 3,
-// decoration: BoxDecoration(
-// color: Colors.red,
-// borderRadius: BorderRadius.all(Radius.circular(10))),
-// ),
-// ],
-// ),
-// ),

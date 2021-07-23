@@ -16,9 +16,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   RepositoryOffline _offline = RepositoryOffline();
   ShareService _shareService = ShareService();
 
-  @override
-  // TODO: implement initialState
-  RegisterState get initialState => RegisterInitState();
+  RegisterBloc() : super(RegisterInitState());
+
 
   @override
   Stream<RegisterState> mapEventToState(RegisterEvent event) async* {

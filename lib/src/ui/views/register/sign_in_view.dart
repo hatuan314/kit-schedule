@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,25 +48,26 @@ class _SignInViewState extends State<SignInView> {
           appBar: AppBarWidget(),
           body: Container(
             margin: EdgeInsets.symmetric(
-                horizontal: 50.sp), //sẽ bị lỗi do chưa có thư viện /// fix xong, chỉ cần làm lần đầu với các file
+                horizontal: SignInConstains.horizontalScreen), //sẽ bị lỗi do chưa có thư viện /// fix xong, chỉ cần làm lần đầu với các file
             height: MediaQuery.of(context).size.height,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Welcome to,",
+                  SignInConstains.welcomeTxt,
                   style: SignInConstains.textStyleTxt
                       .copyWith(fontSize: SignInConstains.sizeWelcomeTxt),
                 ),
                 Text(
-                  "Kit Schedule",
+                  SignInConstains.kitScheduleTxt,
                   style: SignInConstains.textStyleTxt.copyWith(
                       fontWeight: FontWeight.bold,
                       fontSize: SignInConstains.sizeKitScheduleTxt),
                 ),
                 SizedBox(
-                  height: 65.h, /// chỉ cần gõ 65.h
+                  height: SignInConstains.paddingTextToTextFiled,
+                  /// chỉ cần gõ 65.h
                 ),
                 Form(
                     key: _textFormKey,
@@ -72,27 +75,26 @@ class _SignInViewState extends State<SignInView> {
                       children: [
                         LoginTextField(
                           textController: _accountController,
-                          labelText: 'Email address',
+                          labelText: SignInConstains.accountTxt,
                         ),
                         SizedBox(
                           height: 10.h,
                         ),
                         LoginTextField(
-                          showPassWordBtn: state is RegisterLoadingState
-                              ? (){}
-                              : () {
+                          showPassWordBtn:state is RegisterLoadingState ?
+                              (){}:() {
+
                             BlocProvider.of<RegisterBloc>(context)
-                              ..add(ShowPasswordOnPress(
-                                  isShow ? false : true));
+                                .add(ShowPasswordOnPress(!isShow));
                           },
                           textController: _passwordController,
-                          labelText: 'Password',
+                          labelText: SignInConstains.passwordTxt,
                           obscureText: isShow,
                         ),
                       ],
                     )),
                 SizedBox(
-                  height: 90.h,
+                  height: SignInConstains.paddingEnd,
                 )
               ],
             ),
@@ -101,27 +103,27 @@ class _SignInViewState extends State<SignInView> {
             onTap: state is RegisterLoadingState
                 ? null
                 : () {
-              _setOnClickLoginButton(state);
-            },
+                    _setOnClickLoginButton(state);
+                  },
             child: Container(
-              height: 40.h,
-              width: 150.w,
+              height: SignInConstains.heightLoginBtn,
+              width: SignInConstains.widthLoginBtn,
               decoration: BoxDecoration(
-                  color: Colors.yellow,
+                  color: SignInConstains.colorDefault,
                   borderRadius: BorderRadius.all(Radius.circular(10))),
               child: state is RegisterLoadingState
-                  ? _loadingUI(state)
+                  ? _loadingUI()
                   : Icon(
-                Icons.arrow_forward_rounded,
-                size: 50.sp,
-                color: Colors.white,
-              ),
+                      Icons.arrow_forward_rounded,
+                      size: SignInConstains.sizeIconContinue,
+                      color: Colors.white,
+                    ),
             ),
           ),
           floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniEndDocked,
+              FloatingActionButtonLocation.miniEndDocked,
           bottomNavigationBar: Container(
-            height: 50.sp,
+            height: SignInConstains.heightBottomBar,
             width: double.infinity,
             color: Colors.grey.withOpacity(0.3),
           ),
@@ -130,14 +132,15 @@ class _SignInViewState extends State<SignInView> {
     );
   }
 
-  _loadingUI(RegisterState state) {
+  _loadingUI() {
     return Container(
-      child: LoadingWidget(color: Colors.blue,),
+      child: LoadingWidget(
+        color: Colors.blue,
+      ),
     );
   }
 
   Future _setOnClickLoginButton(RegisterState state) async {
-    FocusScope.of(context).requestFocus(new FocusNode());
     if (_textFormKey.currentState!.validate()) {
       BlocProvider.of<RegisterBloc>(context)
         ..add(SignInOnPressEvent(_accountController.text.toUpperCase().trim(),
@@ -145,3 +148,4 @@ class _SignInViewState extends State<SignInView> {
     }
   }
 }
+
