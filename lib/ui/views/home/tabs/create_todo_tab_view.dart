@@ -27,7 +27,7 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      backgroundColor: ThemeColor.personalScheduleColor2,
+      backgroundColor: AppColor.personalScheduleColor2,
       body: SafeArea(
         child: BlocListener<TodoBloc, TodoState>(
           listener: (context, state) {
@@ -88,7 +88,7 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                     children: <Widget>[
                       SvgPicture.asset(
                         'assets/img/ic-calendar.svg',
-                        color:  ThemeColor.secondColor,
+                        color:  AppColor.secondColor,
                         height: ScUtil.getInstance()!.setHeight(18),
                       ),
                       SizedBox(
@@ -123,7 +123,7 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
         key: _formKey,
         child: Container(
             decoration: BoxDecoration(
-                color:  ThemeColor.secondColor,
+                color:  AppColor.secondColor,
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(30))),
             padding: EdgeInsets.only(
                 left: ScUtil.getInstance()!.setWidth(50),
@@ -166,7 +166,7 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(8)),
                               border: Border.all(
-                                  color:ThemeColor.personalScheduleColor2,
+                                  color:AppColor.personalScheduleColor2,
                                   width: ScUtil.getInstance()!.setWidth(3))),
                           alignment: Alignment.center,
                           padding: EdgeInsets.symmetric(
@@ -183,7 +183,7 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                       state is TodoLoadingState
                           ? Container(
                               child: LoadingWidget(
-                                color:ThemeColor.personalScheduleColor3,
+                                color:AppColor.personalScheduleColor3,
                                 size: 40.0,
                               ),
                             )
@@ -192,10 +192,10 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                               child:Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
-                                  color:ThemeColor.personalScheduleColor2,
+                                  color:AppColor.personalScheduleColor2,
                                   boxShadow: [
                                     BoxShadow(
-                                      color: ThemeColor.primaryColor.withOpacity(0.3),
+                                      color: AppColor.primaryColor.withOpacity(0.3),
                                       blurRadius: 5,
                                       spreadRadius: 1,
                                       offset: Offset(
@@ -215,7 +215,7 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                                   child: Text(
                                     'Save',
                                     style:
-                                    ThemeText.titleStyle.copyWith( color: ThemeColor.secondColor,
+                                    ThemeText.titleStyle.copyWith( color: AppColor.secondColor,
                                       fontSize: ScUtil.getInstance()!.setSp(36),),
                                   ),
                                 ),

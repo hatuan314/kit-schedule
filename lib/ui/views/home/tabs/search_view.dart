@@ -25,7 +25,7 @@ class SearchView extends StatelessWidget {
       spacing: 8,
     );*/
     return Scaffold(
-      backgroundColor: ThemeColor.secondColor,
+      backgroundColor: AppColor.secondColor,
       body: BlocListener<SearchBloc, SearchState>(
         listener: (context, state) {
           if (state is SearchSuccessState) {
@@ -68,7 +68,7 @@ class SearchView extends StatelessWidget {
         children: <Widget>[
           Text(
             'Search by date',
-            style:ThemeText.titleStyle.copyWith( color: ThemeColor.searchColor,
+            style:ThemeText.titleStyle.copyWith( color: AppColor.searchColor,
               fontSize: ScUtil.getInstance()!.setSp(38),)
           ),
           InkWell(
@@ -85,14 +85,14 @@ class SearchView extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                         border: Border.all(
-                            color: ThemeColor.searchBorderColor,
+                            color: AppColor.searchBorderColor,
                             width: ScUtil.getInstance()!.setWidth(2))),
                     alignment: Alignment.center,
                     padding: EdgeInsets.symmetric(
                         vertical: ScUtil.getInstance()!.setHeight(12)),
                     child: Text(
                       '${state.selectDay}',
-                      style: ThemeText.titleStyle.copyWith( color:ThemeColor.searchColor, )
+                      style: ThemeText.titleStyle.copyWith( color:AppColor.searchColor, )
                     ),
                   ),
                   Padding(
@@ -100,7 +100,7 @@ class SearchView extends StatelessWidget {
                         horizontal: ScUtil.getInstance()!.setWidth(20)),
                     child: Icon(
                       Icons.search,
-                      color: ThemeColor.searchColor,
+                      color: AppColor.searchColor,
                       size: ScUtil.getInstance()!.setSp(50),
                     ),
                   )

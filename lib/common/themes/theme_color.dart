@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 
-class ThemeColor {
+class AppColor {
   //static const Color primaryColor = Color(0xFF1565C0);
   static const Color primaryColor = Color.fromRGBO(39, 44, 55, 1);
   static const Color secondColor = Color(0xffFCFAF3);
+  static const Color errorColor = Colors.red;
+
+  static const Color menuItemTextColor = Colors.white;
+  static const Color menuBackgroundColor = const Color.fromRGBO(48, 48, 48, 1);
+  static const Color highLightTextColor = const Color.fromRGBO(249, 170, 51, 1);
+
   static Color thirdColor = Colors.black54;
   static Color fourthColor = Colors.blue;
 
 
-  static const Color errorColor = Colors.red;
+
   static const Color errorColor2 = Colors.redAccent;
 
 
   static const Color dividerColor = Color(0xff818181);
-  static const Color menuItemTextColor = Colors.white;
-  static const Color menuBackgroundColor = const Color.fromRGBO(48, 48, 48, 1);
-  static const Color highLightTextColor = const Color.fromRGBO(249, 170, 51, 1);
+
   //static Color todayBackgroundColor = Colors.yellow[700];
  // static Color? todayTextColor = Colors.yellow![700];
 

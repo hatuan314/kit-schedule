@@ -7,9 +7,9 @@ import 'theme_border.dart';
 ThemeData defaultThemeData() {
   return ThemeData(
       fontFamily: "MR",
-      primaryColor: ThemeColor.primaryColor,
-      scaffoldBackgroundColor: ThemeColor.primaryColor,
-      errorColor: ThemeColor.errorColor,
+      primaryColor: AppColor.primaryColor,
+      scaffoldBackgroundColor: AppColor.primaryColor,
+      errorColor: AppColor.errorColor,
       buttonTheme: ButtonThemeData(
         shape: RoundedRectangleBorder(
           borderRadius: ThemeBorder.borderRadiusAll,

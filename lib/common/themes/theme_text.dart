@@ -4,65 +4,52 @@ import 'package:schedule/common/themes/theme_color.dart';
 import 'package:schedule/src/utils/utils.dart';
 
 class ThemeText {
-/*  static TextStyle loginStyle = TextStyle(
-      color: ThemeColor.primaryColor,
-      fontSize: ScreenUtil().setSp(34),
-      fontWeight: FontWeight.w500);
   static TextStyle buttonStyle = TextStyle(
-      color: ThemeColor.secondColor,
+      color: AppColor.secondColor,
       fontSize: ScreenUtil().setSp(34),
       fontWeight: FontWeight.w500);
 
   static TextStyle textStyle = TextStyle(
-      color: ThemeColor.primaryColor,
+      color: AppColor.primaryColor,
       fontSize: ScreenUtil().setSp(18),
       fontWeight: FontWeight.w500);
 
-  static TextStyle textInforStyle = TextStyle(
-      color: ThemeColor.primaryColor,
-      fontSize: ScreenUtil().setSp(11),
-      fontWeight: FontWeight.w600);*/
-
-/*  static TextStyle titleStyle =  TextStyle(
-      color: ThemeColor.secondColor,
-      fontSize: ScreenUtil().setSp(24),
-      fontWeight: FontWeight.w500);*/
-  static TextStyle titleStyle=  TextStyle(
+  static TextStyle titleStyle = TextStyle(
       fontSize: ScUtil.getInstance()!.setSp(32),
-      color: ThemeColor.personalScheduleColor,
+      color: AppColor.personalScheduleColor,
       fontFamily: 'MR',
-      fontWeight: FontWeight.w600 );
+      fontWeight: FontWeight.w600);
+
+  static TextStyle errorTextStyle = TextStyle(
+      fontSize: ScUtil.getInstance()!.setSp(24),
+      color: AppColor.errorColor2,
+      fontFamily: "MR");
 
   static TextStyle numberStyle = TextStyle(
       fontSize: ScUtil.getInstance()!.setSp(28),
-      color: ThemeColor.secondColor,
+      color: AppColor.secondColor,
       fontWeight: FontWeight.normal);
 
   static TextStyle headerStyle = TextStyle(
       fontSize: ScUtil.getInstance()!.setSp(42),
-      color: ThemeColor.secondColor,
+      color: AppColor.secondColor,
       fontFamily: 'MR',
       fontWeight: FontWeight.w600);
 
   static TextStyle headerStyle2 = TextStyle(
-  fontSize: ScUtil.getInstance()!.setSp(40),
-  color: ThemeColor.signInColor,
-  fontFamily: 'MR',
-  fontWeight: FontWeight.w600);
+      fontSize: ScUtil.getInstance()!.setSp(40),
+      color: AppColor.signInColor,
+      fontFamily: 'MR',
+      fontWeight: FontWeight.w600);
 
   static TextStyle textInforStyle = TextStyle(
-      color: ThemeColor.secondColor,
+      color: AppColor.secondColor,
       fontSize: ScUtil.getInstance()!.setSp(32),
       fontWeight: FontWeight.normal);
 
-  static TextStyle errorTextStyle=TextStyle(
-  fontSize: ScUtil.getInstance()!.setSp(24),
-  color:ThemeColor.errorColor2,
-  fontFamily: "MR");
-
   static TextStyle labelStyle = TextStyle(
       fontSize: ScUtil.getInstance()!.setSp(32),
-      color: ThemeColor.personalScheduleColor,
+      color: AppColor.personalScheduleColor,
       fontWeight: FontWeight.w500,
       fontFamily: "MR");
 
@@ -73,14 +60,14 @@ class ThemeText {
       fontWeight: FontWeight.w600);
 
   /*static TextStyle errorTextStyle = TextStyle(
-      color: ThemeColor.errorColor,
+      color: AppColor.errorColor,
       fontSize: ScreenUtil().setSp(24),
       fontWeight: FontWeight.w500);
 
   static TextStyle menuItemTextStyle = TextStyle(
       fontWeight: FontWeight.bold,
     //  fontSize: HomeScreenConstance.menuItemTextSize,
-      color: ThemeColor.menuItemTextColor);
+      color: AppColor.menuItemTextColor);
   static TextStyle accountTextStyle = TextStyle(
       fontWeight: FontWeight.normal,
    //   fontSize: HomeScreenConstance.menuItemTextSize,
@@ -114,7 +101,7 @@ class ThemeText {
     button: TextStyle(
         fontSize: 14.sp,
         fontWeight: FontWeight.normal,
-        color: ThemeColor.primaryColor),
+        color: AppColor.primaryColor),
     // caption: TextStyle(
     //     fontSize: 12.sp,
     //     fontWeight: FontWeight.normal,
