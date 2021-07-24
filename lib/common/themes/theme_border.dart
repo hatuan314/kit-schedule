@@ -13,19 +13,19 @@ class ThemeBorder {
   static double borderWidth = 5.w;
 
   static BorderSide scheduleElementBorder= BorderSide(
-  width: ScreenUtil()!.setWidth(1.2),
+  width: ScreenUtil() .setWidth(1.2),
   color: AppColor.personalScheduleColor);
 
   static BorderSide textFieldEnableBorder = BorderSide(
       color: AppColor.personalScheduleColor,
-      width: ScreenUtil()!.setWidth(3));
+      width: ScreenUtil() .setWidth(3));
 
   static BorderSide textFieldErrorBorder = BorderSide(
       color: AppColor.errorColor,
-      width: ScreenUtil()!.setWidth(3));
+      width: ScreenUtil() .setWidth(3));
   static OutlineInputBorder textFieldBorder= OutlineInputBorder(
   borderSide: BorderSide(
       color: AppColor.errorColor,
-      width: ScreenUtil()!.setWidth(3)),
+      width: ScreenUtil() .setWidth(3)),
   borderRadius: BorderRadius.all(Radius.circular(8.0)));
 }
