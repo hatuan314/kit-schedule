@@ -7,6 +7,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
+
       designSize: Size(375, 812), //iPhone X size
       builder: () => MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors.blue[900],
         ),
         onGenerateRoute: router(),
-      ),
+      )
     );
   }
 }
