@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:schedule/common/themes/theme_color.dart';
+import 'package:schedule/common/themes/theme_text.dart';
+
+import 'theme_border.dart';
 
 ThemeData defaultThemeData() {
   return ThemeData(
@@ -9,7 +12,7 @@ ThemeData defaultThemeData() {
       errorColor: AppColor.errorColor,
       buttonTheme: ButtonThemeData(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(11),
+          borderRadius: ThemeBorder.borderRadiusAll,
         ),
       ));
 }

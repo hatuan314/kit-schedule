@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,7 +7,11 @@ import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:schedule/common/themes/theme_color.dart';
+import 'package:schedule/common/themes/theme_text.dart';
 import 'package:schedule/blocs/todo/todo_bloc.dart';
+import 'package:schedule/ui/views/widgets/spacing_box_widget.dart';
+import 'package:schedule/ui/views/widgets/text_form_field_widget.dart';
 import 'package:schedule/utils/utils.dart';
 
 class CreateTodoTabView extends StatefulWidget {
@@ -22,7 +28,7 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      backgroundColor: Colors.blue[900],
+      backgroundColor: AppColor.personalScheduleColor2,
       body: SafeArea(
         child: BlocListener<TodoBloc, TodoState>(
           listener: (context, state) {
@@ -58,7 +64,7 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
   _todoBackgroundWidget(TodoState state) {
     return Padding(
       padding:
-      EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(50)),
+          EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(50)),
       child: Stack(
         alignment: Alignment.centerRight,
         children: <Widget>[
@@ -70,12 +76,8 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                 width: double.infinity,
                 child: Text(
                   'Create your todo',
-                  style: TextStyle(
-                      fontSize: ScreenUtil().setSp(42),
-                      color: Color(0xffFCFAF3),
-                      fontFamily: 'MR',
-                      fontWeight: FontWeight.w600),
-                ),
+                  style: ThemeText.headerStyle,
+              ),
               ),
               InkWell(
                 onTap: () => _selectDatePicker(),
@@ -87,7 +89,7 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                     children: <Widget>[
                       SvgPicture.asset(
                         'assets/img/ic-calendar.svg',
-                        color: Color(0xffFCFAF3),
+                        color:  AppColor.secondColor,
                         height: ScreenUtil().setHeight(18),
                       ),
                       SizedBox(
@@ -95,15 +97,9 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                       ),
                       Text(
                         state.selectDay != null
-                            ? '${DateFormat('dd/MM/yyyy').format(
-                            DateTime.fromMillisecondsSinceEpoch(int.parse(
-                                state.selectDay!)))}'
+                            ? '${DateFormat('dd/MM/yyyy').format(DateTime.fromMillisecondsSinceEpoch(int.parse(state.selectDay!)))}'
                             : '',
-                        style: TextStyle(
-                            fontSize: ScreenUtil().setSp(28),
-                            color: Color(0xffFCFAF3),
-                            fontFamily: 'MR',
-                            fontWeight: FontWeight.normal),
+                        style: ThemeText.textInforStyle
                       ),
                     ],
                   ),
@@ -128,7 +124,7 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
         key: _formKey,
         child: Container(
             decoration: BoxDecoration(
-                color: Color(0xffFCFAF3),
+                color:  AppColor.secondColor,
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(30))),
             padding: EdgeInsets.only(
                 left: ScreenUtil().setWidth(50),
@@ -142,121 +138,36 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      TextFormField(
+                      TextFormFieldWidget(
                         controller: _nameController,
-                        style: TextStyle(
-                            color: Colors.blue[800],
-                            fontSize: ScreenUtil().setSp(32),
-                            fontFamily: "MR"),
-                        cursorColor: Colors.blue[800],
-                        decoration: InputDecoration(
-                            errorStyle: TextStyle(
-                                fontSize: ScreenUtil().setSp(24),
-                                color: Colors.redAccent,
-                                fontFamily: "MR"),
-                            errorMaxLines: 2,
-                            labelText: 'Title',
-                            labelStyle: TextStyle(
-                                fontSize: ScreenUtil().setSp(32),
-                                color: Colors.blue[800],
-                                fontWeight: FontWeight.w500,
-                                fontFamily: "MR"),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.blue[800]!,
-                                    width: ScreenUtil().setWidth(3)),
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(8.0))),
-                            errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.redAccent,
-                                    width: ScreenUtil().setWidth(3)),
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(8.0))),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.blue[800]!,
-                                    width: ScreenUtil().setWidth(3)),
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(8.0)))),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Trường này không được bỏ trống";
-                          }
-                          return null;
-                        },
+                        labelText: 'Title',
+                        isShowed: false,
+                        isPassword: false,
+                        isInLogInScreen: false,
                       ),
-                      SizedBox(
-                        height: ScreenUtil().setHeight(20),
-                      ),
-                      TextFormField(
+                      SpacingBoxWidget(height: 20),
+                      TextFormFieldWidget(
                         controller: _noteController,
-                        style: TextStyle(
-                            color: Colors.blue[800],
-                            fontSize: ScreenUtil().setSp(32),
-                            fontFamily: "MR"),
-                        maxLines: 5,
-                        cursorColor: Colors.blue[800],
-                        decoration: InputDecoration(
-                            errorStyle: TextStyle(
-                                fontSize: ScreenUtil().setSp(24),
-                                color: Colors.redAccent,
-                                fontFamily: "MR"),
-                            errorMaxLines: 2,
-                            labelText: 'Note',
-                            labelStyle: TextStyle(
-                                fontSize: ScreenUtil().setSp(32),
-                                color: Colors.blue[800],
-                                fontWeight: FontWeight.w500,
-                                fontFamily: "MR"),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.blue[800]!,
-                                    width: ScreenUtil().setWidth(3)),
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(8.0))),
-                            errorBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.redAccent,
-                                    width: ScreenUtil().setWidth(3)),
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(8.0))),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.blue[800]!,
-                                    width: ScreenUtil().setWidth(3)),
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(8.0)))),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Trường này không được bỏ trống";
-                          }
-                          return null;
-                        },
+                        labelText: 'Note',
+                        isShowed: false,
+                        isPassword: false,
+                        isInLogInScreen: false,
                       ),
-                      SizedBox(
-                        height: ScreenUtil().setHeight(20),
-                      ),
+                      SpacingBoxWidget(height: 20),
                       Text(
                         'Set time',
-                        style: TextStyle(
-                            color: Colors.blue[900],
-                            fontSize: ScreenUtil().setSp(38),
-                            fontFamily: 'MR',
-                            fontWeight: FontWeight.w600),
+                        style: ThemeText.titleStyle.copyWith(fontSize: ScreenUtil().setSp(38))
                       ),
-                      SizedBox(
-                        height: ScreenUtil().setHeight(10),
-                      ),
+                      SpacingBoxWidget(height: 10),
                       InkWell(
                         onTap: () => _selectTimePicker(),
                         child: Container(
                           width: double.infinity,
                           decoration: BoxDecoration(
                               borderRadius:
-                              BorderRadius.all(Radius.circular(8)),
+                                  BorderRadius.all(Radius.circular(8)),
                               border: Border.all(
-                                  color: Colors.blue[800]!,
+                                  color:AppColor.personalScheduleColor2,
                                   width: ScreenUtil().setWidth(3))),
                           alignment: Alignment.center,
                           padding: EdgeInsets.symmetric(
@@ -265,46 +176,52 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                             state.selectTimer != null
                                 ? '${state.selectTimer}'
                                 : '',
-                            style: TextStyle(
-                                color: Colors.blue[800],
-                                fontSize: ScreenUtil().setSp(32),
-                                fontFamily: 'MR',
-                                fontWeight: FontWeight.w600),
+                            style: ThemeText.titleStyle,
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: ScreenUtil().setHeight(30),
-                      ),
+                      SpacingBoxWidget(height: 30),
                       state is TodoLoadingState
                           ? Container(
-                        child: LoadingWidget(
-                          color: Colors.blue,
-                          size: 40.0,
-                        ),
-                      )
-                          : RaisedButton(
-                        onPressed: () => _setOnClickSaveButton(state),
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                            BorderRadius.all(Radius.circular(20))),
-                        color: Colors.blue[900],
-                        child: Container(
-                          width: double.infinity,
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.symmetric(
-                              vertical:
-                              ScreenUtil().setHeight(12)),
-                          child: Text(
-                            'Save',
-                            style: TextStyle(
-                                color: Color(0xffFCFAF3),
-                                fontSize: ScreenUtil().setSp(36),
-                                fontFamily: 'MR',
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                      )
+                              child: LoadingWidget(
+                                color:AppColor.personalScheduleColor3,
+                                size: 40.0,
+                              ),
+                            )
+                          : GestureDetector(
+                              onTap: () => _setOnClickSaveButton(state),
+                              child:Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color:AppColor.personalScheduleColor2,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: AppColor.primaryColor.withOpacity(0.3),
+                                      blurRadius: 5,
+                                      spreadRadius: 1,
+                                      offset: Offset(
+                                        0,
+                                        3,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                width: double.infinity,
+                                alignment: Alignment.center,
+                                padding: EdgeInsets.symmetric(
+                                    vertical:
+                                        ScreenUtil().setHeight(12)),
+                                child: Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                  child: Text(
+                                    'Save',
+                                    style:
+                                    ThemeText.titleStyle.copyWith( color: AppColor.secondColor,
+                                      fontSize: ScreenUtil().setSp(36),),
+                                  ),
+                                ),
+                              ),
+                            )
                     ],
                   ),
                 ),
@@ -316,12 +233,8 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
     DateTime? date = await showRoundedDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(DateTime
-          .now()
-          .year - 10),
-      lastDate: DateTime(DateTime
-          .now()
-          .year + 10),
+      firstDate: DateTime(DateTime.now().year - 10),
+      lastDate: DateTime(DateTime.now().year + 10),
       borderRadius: 20,
       fontFamily: 'MR',
       imageHeader: AssetImage("assets/img/calendar_header.jpg"),
