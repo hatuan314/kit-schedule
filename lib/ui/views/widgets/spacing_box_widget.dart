@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:schedule/src/utils/multi_screen/flutter_screen_util.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SpacingBoxWidget extends StatelessWidget{
    double height =0;
@@ -11,7 +11,7 @@ class SpacingBoxWidget extends StatelessWidget{
   Widget build(BuildContext context) {
    return SizedBox(
    //  width: ,
-      height: ScUtil.getInstance()!.setHeight(height),
+      height: ScreenUtil()!.setHeight(height),
     );
   }
 

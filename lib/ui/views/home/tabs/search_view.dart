@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/common/themes/theme_color.dart';
 import 'package:schedule/common/themes/theme_text.dart';
-import 'package:schedule/src/blocs/blocs.dart';
-import 'package:schedule/src/models/model.dart';
-import 'package:schedule/src/ui/views/home/tabs/widgets/personal_schedule_element_widget.dart';
-import 'package:schedule/src/ui/views/home/tabs/widgets/personal_schedule_widget.dart';
-import 'package:schedule/src/ui/views/home/tabs/widgets/school_schedule_element_widget.dart';
-import 'package:schedule/src/ui/views/home/tabs/widgets/school_schedule_widget.dart';
-import 'package:schedule/src/ui/views/views.dart';
-import 'package:schedule/src/ui/views/widgets_constants/spacing_box_widget.dart';
-import 'package:schedule/src/utils/utils.dart';
+import 'package:schedule/blocs/blocs.dart';
+import 'package:schedule/models/model.dart';
+import 'package:schedule/ui/views/home/tabs/widgets/personal_schedule_element_widget.dart';
+import 'package:schedule/ui/views/home/tabs/widgets/personal_schedule_widget.dart';
+import 'package:schedule/ui/views/home/tabs/widgets/school_schedule_element_widget.dart';
+import 'package:schedule/ui/views/home/tabs/widgets/school_schedule_widget.dart';
+import 'package:schedule/ui/views/views.dart';
+import 'package:schedule/ui/views/widgets/spacing_box_widget.dart';
+import 'package:schedule/utils/utils.dart';
 
 class SearchView extends StatelessWidget {
   final PageController _pageController = PageController();
@@ -60,7 +61,7 @@ class SearchView extends StatelessWidget {
   Padding _searchWidget(BuildContext context, SearchState state) {
     return Padding(
       padding:
-      EdgeInsets.symmetric(horizontal: ScUtil.getInstance()!.setWidth(20)),
+      EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(20)),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -69,14 +70,14 @@ class SearchView extends StatelessWidget {
           Text(
             'Search by date',
             style:ThemeText.titleStyle.copyWith( color: AppColor.searchColor,
-              fontSize: ScUtil.getInstance()!.setSp(38),)
+              fontSize: ScreenUtil().setSp(38),)
           ),
           InkWell(
             onTap: () => _btnSearchOnPress(context),
             child: Container(
               width: double.infinity,
               margin:
-              EdgeInsets.only(bottom: ScUtil.getInstance()!.setHeight(12)),
+              EdgeInsets.only(bottom: ScreenUtil().setHeight(12)),
               child: Stack(
                 alignment: Alignment.centerRight,
                 children: <Widget>[
@@ -86,10 +87,10 @@ class SearchView extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                         border: Border.all(
                             color: AppColor.searchBorderColor,
-                            width: ScUtil.getInstance()!.setWidth(2))),
+                            width: ScreenUtil().setWidth(2))),
                     alignment: Alignment.center,
                     padding: EdgeInsets.symmetric(
-                        vertical: ScUtil.getInstance()!.setHeight(12)),
+                        vertical: ScreenUtil().setHeight(12)),
                     child: Text(
                       '${state.selectDay}',
                       style: ThemeText.titleStyle.copyWith( color:AppColor.searchColor, )
@@ -97,11 +98,11 @@ class SearchView extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(
-                        horizontal: ScUtil.getInstance()!.setWidth(20)),
+                        horizontal: ScreenUtil().setWidth(20)),
                     child: Icon(
                       Icons.search,
                       color: AppColor.searchColor,
-                      size: ScUtil.getInstance()!.setSp(50),
+                      size: ScreenUtil().setSp(50),
                     ),
                   )
                 ],
@@ -130,10 +131,10 @@ class SearchView extends StatelessWidget {
   _buildPageView(SearchState state) {
     return Container(
       margin:
-      EdgeInsets.symmetric(vertical: ScUtil.getInstance()!.setHeight(50)),
+      EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(50)),
       padding: EdgeInsets.symmetric(
-          horizontal: ScUtil.getInstance()!.setWidth(50),
-          vertical: ScUtil.getInstance()!.setHeight(20)),
+          horizontal: ScreenUtil().setWidth(50),
+          vertical: ScreenUtil().setHeight(20)),
       alignment: Alignment.center,
       child: PageView.builder(
         physics: AlwaysScrollableScrollPhysics(),

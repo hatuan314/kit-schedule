@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:schedule/common/themes/theme_color.dart';
-import 'package:schedule/src/utils/multi_screen/flutter_screen_util.dart';
-import 'package:schedule/src/utils/utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:schedule/common/themes/theme_color.dart'; 
+import 'package:schedule/utils/utils.dart';
 
 class LoadingView extends StatelessWidget {
   @override
@@ -11,7 +11,7 @@ class LoadingView extends StatelessWidget {
     return Scaffold(
       body: Container(
           color: AppColor.loadingColor,
-          margin: EdgeInsets.only(top: ScUtil.getInstance()!.setHeight(50)),
+          margin: EdgeInsets.only(top: ScreenUtil().setHeight(50)),
           child: LoadingWidget(color: Colors.white,)),
     );
   }

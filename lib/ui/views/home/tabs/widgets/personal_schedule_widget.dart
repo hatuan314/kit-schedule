@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/common/themes/theme_color.dart';
 import 'package:schedule/common/themes/theme_text.dart';
-import 'package:schedule/src/blocs/blocs.dart';
-import 'package:schedule/src/models/model.dart';
-import 'package:schedule/src/ui/views/home/tabs/widgets/personal_schedule_element_widget.dart';
-import 'package:schedule/src/ui/views/widgets_constants/spacing_box_widget.dart';
-import 'package:schedule/src/utils/utils.dart';
+import 'package:schedule/blocs/blocs.dart';
+import 'package:schedule/models/model.dart';
+import 'package:schedule/ui/views/home/tabs/widgets/personal_schedule_element_widget.dart';
+import 'package:schedule/ui/views/widgets/spacing_box_widget.dart';
+import 'package:schedule/utils/utils.dart';
 
 class PersonalScheduleWidget extends StatelessWidget {
   final dynamic state;
@@ -34,7 +35,7 @@ class PersonalScheduleWidget extends StatelessWidget {
             children: <Widget>[
               Text(
                 'Personal',
-                style: ThemeText.titleStyle.copyWith(fontWeight: FontWeight.bold,fontSize: ScUtil().setSp(36))),
+                style: ThemeText.titleStyle.copyWith(fontWeight: FontWeight.bold,fontSize: ScreenUtil().setSp(36))),
               Container(
                 decoration: BoxDecoration(
                     shape: BoxShape.circle, color: AppColor.personalScheduleColor),

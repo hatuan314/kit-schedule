@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/common/themes/theme_text.dart';
-import 'package:schedule/src/service/services.dart';
-import 'package:schedule/src/ui/views/splash/box.dart';
-import 'package:schedule/src/ui/views/widgets_constants/spacing_box_widget.dart';
-import '../widgets_constants/widgets_constants.dart';
-import 'package:schedule/src/utils/multi_screen/flutter_screen_util.dart';
+import 'package:schedule/service/services.dart';
+import 'package:schedule/ui/views/splash/box.dart';
+import 'package:schedule/ui/views/widgets/spacing_box_widget.dart';
+import 'package:schedule/ui/views/widgets/widgets_constants.dart';
 
 class SplashView extends StatefulWidget {
   @override
@@ -46,11 +46,11 @@ class _SplashViewState extends State<SplashView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                WidgetsConstants().kitLogo,
+               WidgetsConstants().kitLogo,
                 SpacingBoxWidget(height: 20),
                 Text(
                   "KIT Schedule",
-                  style: ThemeText.headerStyle.copyWith(fontSize: ScUtil.getInstance()!.setSp(50),
+                  style: ThemeText.headerStyle.copyWith(fontSize: ScreenUtil()!.setSp(50),
                     color: Colors.white,)
                 )
               ],

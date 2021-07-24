@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/common/themes/theme_border.dart';
 import 'package:schedule/common/themes/theme_text.dart';
-import 'package:schedule/src/models/model.dart';
-import 'package:schedule/src/utils/multi_screen/flutter_screen_util.dart';
+import 'package:schedule/models/model.dart';
+
 
 class PersonalScheduleElementWidget extends StatelessWidget{
   final PersonalSchedule schedule;
@@ -14,7 +15,7 @@ class PersonalScheduleElementWidget extends StatelessWidget{
   Widget build(BuildContext context) {
       return Padding(
         padding:
-        EdgeInsets.symmetric(vertical: ScUtil.getInstance()!.setHeight(8)),
+        EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(8)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -33,7 +34,7 @@ class PersonalScheduleElementWidget extends StatelessWidget{
               flex: 8,
               child: Container(
                 padding: EdgeInsets.symmetric(
-                    horizontal: ScUtil.getInstance()!.setWidth(20)),
+                    horizontal: ScreenUtil().setWidth(20)),
                 decoration: BoxDecoration(
                     border: Border(
                         left: ThemeBorder.scheduleElementBorder)),

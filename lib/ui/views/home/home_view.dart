@@ -4,8 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/common/themes/theme_color.dart';
 import 'package:schedule/common/themes/theme_text.dart';
-import 'package:schedule/src/blocs/home/home_bloc.dart';
-import 'package:schedule/src/utils/multi_screen/flutter_screen_util.dart';
+import 'package:schedule/blocs/home/home_bloc.dart'; 
 
 import 'tabs/tabs.dart';
 
@@ -101,7 +100,7 @@ class HomeView extends StatelessWidget {
         animType: AnimType.BOTTOMSLIDE,
         body: Padding(
           padding: EdgeInsets.symmetric(
-              vertical: ScUtil.getInstance()!.setHeight(20)),
+              vertical: ScreenUtil().setHeight(20)),
           child: RichText(
             text: TextSpan(
                 text: 'Do you want ',
@@ -201,7 +200,7 @@ class HomeView extends StatelessWidget {
         animType: AnimType.BOTTOMSLIDE,
         body: Padding(
           padding: EdgeInsets.symmetric(
-              vertical: ScUtil.getInstance()!.setHeight(20)),
+              vertical: ScreenUtil().setHeight(20)),
           child: RichText(
             text: TextSpan(
                 text: 'Can\'t ',
@@ -213,13 +212,13 @@ class HomeView extends StatelessWidget {
                       text: 'Sign Out ',
                       style: ThemeText.titleStyle.copyWith(
                         color: AppColor.errorColor,
-                        fontSize: ScUtil.getInstance()!.setSp(36),
+                        fontSize: ScreenUtil().setSp(36),
                       )),
                   TextSpan(
                     text: 'now. Please, try again.',
                     style: ThemeText.titleStyle.copyWith(
                         color: AppColor.thirdColor,
-                        fontSize: ScUtil.getInstance()!.setSp(36)),
+                        fontSize: ScreenUtil().setSp(36)),
                   )
                 ]),
           ),

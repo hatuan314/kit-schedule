@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/common/themes/theme_color.dart';
-import 'package:schedule/src/utils/utils.dart';
+import 'package:schedule/utils/utils.dart';
 
 class ThemeText {
   static TextStyle buttonStyle = TextStyle(
@@ -15,47 +15,47 @@ class ThemeText {
       fontWeight: FontWeight.w500);
 
   static TextStyle titleStyle = TextStyle(
-      fontSize: ScUtil.getInstance()!.setSp(32),
+      fontSize: ScreenUtil()!.setSp(32),
       color: AppColor.personalScheduleColor,
       fontFamily: 'MR',
       fontWeight: FontWeight.w600);
 
   static TextStyle errorTextStyle = TextStyle(
-      fontSize: ScUtil.getInstance()!.setSp(24),
+      fontSize: ScreenUtil()!.setSp(24),
       color: AppColor.errorColor2,
       fontFamily: "MR");
 
   static TextStyle numberStyle = TextStyle(
-      fontSize: ScUtil.getInstance()!.setSp(28),
+      fontSize: ScreenUtil()!.setSp(28),
       color: AppColor.secondColor,
       fontWeight: FontWeight.normal);
 
   static TextStyle headerStyle = TextStyle(
-      fontSize: ScUtil.getInstance()!.setSp(42),
+      fontSize: ScreenUtil()!.setSp(42),
       color: AppColor.secondColor,
       fontFamily: 'MR',
       fontWeight: FontWeight.w600);
 
   static TextStyle headerStyle2 = TextStyle(
-      fontSize: ScUtil.getInstance()!.setSp(40),
+      fontSize: ScreenUtil()!.setSp(40),
       color: AppColor.signInColor,
       fontFamily: 'MR',
       fontWeight: FontWeight.w600);
 
   static TextStyle textInforStyle = TextStyle(
       color: AppColor.secondColor,
-      fontSize: ScUtil.getInstance()!.setSp(32),
+      fontSize: ScreenUtil()!.setSp(32),
       fontWeight: FontWeight.normal);
 
   static TextStyle labelStyle = TextStyle(
-      fontSize: ScUtil.getInstance()!.setSp(32),
+      fontSize: ScreenUtil()!.setSp(32),
       color: AppColor.personalScheduleColor,
       fontWeight: FontWeight.w500,
       fontFamily: "MR");
 
   static TextStyle buttonLabelStyle = TextStyle(
       color: Color(0xffFCFAF3),
-      fontSize: ScUtil.getInstance()!.setSp(36),
+      fontSize: ScreenUtil()!.setSp(36),
       fontFamily: 'MR',
       fontWeight: FontWeight.w600);
 

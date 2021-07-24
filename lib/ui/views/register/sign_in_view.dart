@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/common/themes/theme_color.dart';
 import 'package:schedule/common/themes/theme_text.dart';
-import 'package:schedule/src/blocs/blocs.dart';
-import 'package:schedule/src/ui/views/widgets_constants/spacing_box_widget.dart';
-import '../widgets_constants/text_form_field_widget.dart';
-import '../widgets_constants/widgets_constants.dart';
-import 'package:schedule/src/utils/multi_screen/flutter_screen_util.dart';
-import 'package:schedule/src/utils/utils.dart';
+import 'package:schedule/blocs/blocs.dart';
+import 'package:schedule/ui/views/widgets/spacing_box_widget.dart';
+import 'package:schedule/ui/views/widgets/text_form_field_widget.dart';
+import 'package:schedule/ui/views/widgets/widgets_constants.dart';
+import 'package:schedule/utils/utils.dart';
 //import 'package:toast/toast.dart';
 
 class SignInView extends StatefulWidget {
@@ -62,7 +62,7 @@ class _SignInViewState extends State<SignInView> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20))),
                         margin: EdgeInsets.only(
-                            top: ScUtil.getInstance()!.setHeight(20)),
+                            top: ScreenUtil().setHeight(20)),
                         elevation: 10,
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.8,
@@ -71,10 +71,10 @@ class _SignInViewState extends State<SignInView> {
                                   BorderRadius.all(Radius.circular(20)),
                               color: Colors.grey[100]),
                           padding: EdgeInsets.only(
-                              left: ScUtil.getInstance()!.setWidth(20),
-                              top: ScUtil.getInstance()!.setHeight(40),
-                              right: ScUtil.getInstance()!.setWidth(20),
-                              bottom: ScUtil.getInstance()!.setHeight(20)),
+                              left: ScreenUtil().setWidth(20),
+                              top: ScreenUtil().setHeight(40),
+                              right: ScreenUtil().setWidth(20),
+                              bottom: ScreenUtil().setHeight(20)),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
@@ -133,7 +133,7 @@ class _SignInViewState extends State<SignInView> {
                                           child: Text(
                                             "LOGIN",
                                             style:ThemeText.titleStyle.copyWith( fontSize:
-                                            ScUtil.getInstance()!.setSp(34),
+                                            ScreenUtil().setSp(34),
                                             color: AppColor.secondColor) ,
                                           ),
                                         ),
@@ -144,12 +144,12 @@ class _SignInViewState extends State<SignInView> {
                         ),
                       ),
                       Container(
-                        width: ScUtil.getInstance()!.setWidth(110),
+                        width: ScreenUtil().setWidth(110),
                         padding: EdgeInsets.all(11),
                         decoration: new BoxDecoration(
                             border: Border.all(
                                 color: AppColor.signInColor,
-                                width: ScUtil.getInstance()!.setWidth(8)),
+                                width: ScreenUtil().setWidth(8)),
                             shape: BoxShape.circle,
                             color: Colors.grey[100]),
                         child: WidgetsConstants().kitLogo

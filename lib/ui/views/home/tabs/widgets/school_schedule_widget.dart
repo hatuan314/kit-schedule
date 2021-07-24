@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/common/themes/theme_color.dart';
 import 'package:schedule/common/themes/theme_text.dart';
-import 'package:schedule/src/blocs/blocs.dart';
-import 'package:schedule/src/models/model.dart';
-import 'package:schedule/src/ui/views/home/tabs/widgets/school_schedule_element_widget.dart';
-import 'package:schedule/src/ui/views/widgets_constants/spacing_box_widget.dart';
-import 'package:schedule/src/utils/multi_screen/flutter_screen_util.dart';
+import 'package:schedule/blocs/blocs.dart';
+import 'package:schedule/models/model.dart';
+import 'package:schedule/ui/views/home/tabs/widgets/school_schedule_element_widget.dart';
+import 'package:schedule/ui/views/widgets/spacing_box_widget.dart';
 
 class SchoolScheduleWidget extends StatelessWidget {
   final dynamic state;
@@ -35,12 +35,12 @@ class SchoolScheduleWidget extends StatelessWidget {
               Text(
                 'School',
                 style:ThemeText.titleStyle.copyWith(
-                    color: AppColor.scheduleType,fontWeight: FontWeight.bold, fontSize: ScUtil().setSp(36))),
+                    color: AppColor.scheduleType,fontWeight: FontWeight.bold, fontSize: ScreenUtil().setSp(36))),
               Container(
                 decoration:
                     BoxDecoration(shape: BoxShape.circle, color: Colors.red),
-                margin: EdgeInsets.only(left: ScUtil().setHeight(4)),
-                padding: EdgeInsets.all(ScUtil().setHeight(5)),
+                margin: EdgeInsets.only(left: ScreenUtil().setHeight(4)),
+                padding: EdgeInsets.all(ScreenUtil().setHeight(5)),
                 child: Text(
                   schoolSchedulesOfDay != null
                       ? '${schoolSchedulesOfDay.length}'

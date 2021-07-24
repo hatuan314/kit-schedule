@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/common/themes/theme_border.dart';
 import 'package:schedule/common/themes/theme_color.dart';
 import 'package:schedule/common/themes/theme_text.dart';
-import 'package:schedule/src/models/model.dart';
-import 'package:schedule/src/utils/convert.dart';
-import 'package:schedule/src/utils/multi_screen/flutter_screen_util.dart';
+import 'package:schedule/models/model.dart';
+import 'package:schedule/utils/convert.dart'; 
 
 
 class SchoolScheduleElementWidget extends StatelessWidget{
@@ -22,7 +22,7 @@ class SchoolScheduleElementWidget extends StatelessWidget{
       String endLesson = lessonNumbers[lessonNumbers.length - 1];
       return Padding(
         padding:
-        EdgeInsets.symmetric(vertical: ScUtil.getInstance()!.setHeight(8)),
+        EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(8)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -40,7 +40,7 @@ class SchoolScheduleElementWidget extends StatelessWidget{
                       style: ThemeText.titleStyle.copyWith(color: AppColor.scheduleType)),
                     Icon(Icons.arrow_drop_down,
                         color: AppColor.scheduleType,
-                        size: ScUtil.getInstance()!.setHeight(15)),
+                        size: ScreenUtil().setHeight(15)),
                     Text(
                       '${Convert.endTimeLessonMap[endLesson]}',
                       style: ThemeText.titleStyle.copyWith(color: AppColor.scheduleType)),
@@ -52,7 +52,7 @@ class SchoolScheduleElementWidget extends StatelessWidget{
               flex: 8,
               child: Container(
                 padding: EdgeInsets.symmetric(
-                    horizontal: ScUtil.getInstance()!.setWidth(20)),
+                    horizontal: ScreenUtil().setWidth(20)),
                 decoration: BoxDecoration(
                     border: Border(
                         left: ThemeBorder.scheduleElementBorder.copyWith(color: AppColor.scheduleType))),

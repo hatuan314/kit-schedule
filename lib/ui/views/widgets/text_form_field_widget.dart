@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:schedule/common/themes/theme_border.dart';
 import 'package:schedule/common/themes/theme_color.dart';
 import 'package:schedule/common/themes/theme_text.dart';
-import 'package:schedule/src/utils/utils.dart';
+import 'package:schedule/utils/utils.dart';
 
 class TextFormFieldWidget extends StatelessWidget {
   final TextEditingController controller;

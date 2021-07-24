@@ -4,14 +4,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:schedule/common/themes/theme_color.dart';
 import 'package:schedule/common/themes/theme_text.dart';
-import 'package:schedule/src/blocs/todo/todo_bloc.dart';
-import 'package:schedule/src/ui/views/widgets_constants/spacing_box_widget.dart';
-import 'package:schedule/src/ui/views/widgets_constants/text_form_field_widget.dart';
-import 'package:schedule/src/utils/utils.dart';
+import 'package:schedule/blocs/todo/todo_bloc.dart';
+import 'package:schedule/ui/views/widgets/spacing_box_widget.dart';
+import 'package:schedule/ui/views/widgets/text_form_field_widget.dart';
+import 'package:schedule/utils/utils.dart';
 
 class CreateTodoTabView extends StatefulWidget {
   @override
@@ -63,7 +64,7 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
   _todoBackgroundWidget(TodoState state) {
     return Padding(
       padding:
-          EdgeInsets.symmetric(horizontal: ScUtil.getInstance()!.setWidth(50)),
+          EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(50)),
       child: Stack(
         alignment: Alignment.centerRight,
         children: <Widget>[
@@ -82,17 +83,17 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                 onTap: () => _selectDatePicker(),
                 child: Padding(
                   padding: EdgeInsets.symmetric(
-                      vertical: ScUtil.getInstance()!.setHeight(5)),
+                      vertical: ScreenUtil().setHeight(5)),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       SvgPicture.asset(
                         'assets/img/ic-calendar.svg',
                         color:  AppColor.secondColor,
-                        height: ScUtil.getInstance()!.setHeight(18),
+                        height: ScreenUtil().setHeight(18),
                       ),
                       SizedBox(
-                        width: ScUtil.getInstance()!.setWidth(18),
+                        width: ScreenUtil().setWidth(18),
                       ),
                       Text(
                         state.selectDay != null
@@ -107,10 +108,10 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
             ],
           ),
           Padding(
-            padding: EdgeInsets.only(right: ScUtil.getInstance()!.setWidth(50)),
+            padding: EdgeInsets.only(right: ScreenUtil().setWidth(50)),
             child: SvgPicture.asset(
               'assets/img/kit_schedule_logo.svg',
-              width: ScUtil.getInstance()!.setHeight(60),
+              width: ScreenUtil().setHeight(60),
             ),
           )
         ],
@@ -126,10 +127,10 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                 color:  AppColor.secondColor,
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(30))),
             padding: EdgeInsets.only(
-                left: ScUtil.getInstance()!.setWidth(50),
-                top: ScUtil.getInstance()!.setWidth(75),
-                right: ScUtil.getInstance()!.setWidth(50),
-                bottom: ScUtil.getInstance()!.setWidth(50)),
+                left: ScreenUtil().setWidth(50),
+                top: ScreenUtil().setWidth(75),
+                right: ScreenUtil().setWidth(50),
+                bottom: ScreenUtil().setWidth(50)),
             child: CustomScrollView(
               shrinkWrap: true,
               slivers: <Widget>[
@@ -155,7 +156,7 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                       SpacingBoxWidget(height: 20),
                       Text(
                         'Set time',
-                        style: ThemeText.titleStyle.copyWith(fontSize: ScUtil().setSp(38))
+                        style: ThemeText.titleStyle.copyWith(fontSize: ScreenUtil().setSp(38))
                       ),
                       SpacingBoxWidget(height: 10),
                       InkWell(
@@ -167,10 +168,10 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                                   BorderRadius.all(Radius.circular(8)),
                               border: Border.all(
                                   color:AppColor.personalScheduleColor2,
-                                  width: ScUtil.getInstance()!.setWidth(3))),
+                                  width: ScreenUtil().setWidth(3))),
                           alignment: Alignment.center,
                           padding: EdgeInsets.symmetric(
-                              vertical: ScUtil.getInstance()!.setHeight(12)),
+                              vertical: ScreenUtil().setHeight(12)),
                           child: Text(
                             state.selectTimer != null
                                 ? '${state.selectTimer}'
@@ -209,14 +210,14 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                                 alignment: Alignment.center,
                                 padding: EdgeInsets.symmetric(
                                     vertical:
-                                        ScUtil.getInstance()!.setHeight(12)),
+                                        ScreenUtil().setHeight(12)),
                                 child: Padding(
                                   padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                                   child: Text(
                                     'Save',
                                     style:
                                     ThemeText.titleStyle.copyWith( color: AppColor.secondColor,
-                                      fontSize: ScUtil.getInstance()!.setSp(36),),
+                                      fontSize: ScreenUtil().setSp(36),),
                                   ),
                                 ),
                               ),

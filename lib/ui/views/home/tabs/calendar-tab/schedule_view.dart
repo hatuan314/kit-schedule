@@ -1,16 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:schedule/src/blocs/blocs.dart';
-import 'package:schedule/src/models/model.dart';
-import 'package:schedule/src/ui/views/home/tabs/widgets/personal_schedule_element_widget.dart';
-import 'package:schedule/src/ui/views/home/tabs/widgets/personal_schedule_widget.dart';
-import 'package:schedule/src/ui/views/home/tabs/widgets/school_schedule_element_widget.dart';
-import 'package:schedule/src/ui/views/home/tabs/widgets/school_schedule_widget.dart';
-import 'package:schedule/src/ui/views/loading_view.dart';
-import 'package:schedule/src/ui/views/widgets_constants/spacing_box_widget.dart';
-import 'package:schedule/src/utils/convert.dart';
-import 'package:schedule/src/utils/utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:schedule/blocs/blocs.dart';
+import 'package:schedule/models/model.dart';
+import 'package:schedule/ui/views/home/tabs/widgets/personal_schedule_element_widget.dart';
+import 'package:schedule/ui/views/home/tabs/widgets/personal_schedule_widget.dart';
+import 'package:schedule/ui/views/home/tabs/widgets/school_schedule_element_widget.dart';
+import 'package:schedule/ui/views/home/tabs/widgets/school_schedule_widget.dart';
+import 'package:schedule/ui/views/loading_view.dart';
+import 'package:schedule/ui/views/widgets/spacing_box_widget.dart';
+import 'package:schedule/utils/convert.dart';
+import 'package:schedule/utils/utils.dart';
 
 class ScheduleView extends StatelessWidget {
   final PageController _controller = PageController();
@@ -18,8 +19,8 @@ class ScheduleView extends StatelessWidget {
   Widget buildPageView() {
     return Container(
       padding: EdgeInsets.symmetric(
-          horizontal: ScUtil.getInstance()!.setWidth(50),
-          vertical: ScUtil.getInstance()!.setHeight(20)),
+          horizontal: ScreenUtil().setWidth(50),
+          vertical: ScreenUtil().setHeight(20)),
       alignment: Alignment.center,
       child: PageView.builder(
         physics: AlwaysScrollableScrollPhysics(),
