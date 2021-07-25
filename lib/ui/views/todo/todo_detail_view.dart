@@ -7,9 +7,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 //import 'package:flutter_rounded_date_picker/rounded_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:schedule/blocs/todo/todo_bloc.dart';
 import 'package:schedule/common/themes/theme_color.dart';
 import 'package:schedule/common/themes/theme_text.dart';
-import 'package:schedule/blocs/todo/todo_bloc.dart';
 import 'package:schedule/models/model.dart';
 import 'package:schedule/ui/views/widgets/text_form_field_widget.dart';
 import 'package:schedule/utils/utils.dart';
@@ -90,7 +90,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
   _todoBackgroundWidget(TodoState state) {
     return Padding(
       padding:
-          EdgeInsets.symmetric(horizontal: ScreenUtil()!.setWidth(50)),
+          EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(50)),
       child: Stack(
         alignment: Alignment.centerRight,
         children: <Widget>[
@@ -109,17 +109,17 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                 onTap: () => _selectDatePicker(),
                 child: Padding(
                   padding: EdgeInsets.symmetric(
-                      vertical: ScreenUtil()!.setHeight(5)),
+                      vertical: ScreenUtil().setHeight(5)),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       SvgPicture.asset(
                         'assets/img/ic-calendar.svg',
                         color: AppColor.secondColor,
-                        height: ScreenUtil()!.setHeight(18),
+                        height: ScreenUtil().setHeight(18),
                       ),
                       SizedBox(
-                        width: ScreenUtil()!.setWidth(18),
+                        width: ScreenUtil().setWidth(18),
                       ),
                       Text(
                         state is TodoInitState
@@ -136,10 +136,10 @@ class _TodoDetailViewState extends State<TodoDetailView> {
             ],
           ),
           Padding(
-            padding: EdgeInsets.only(right: ScreenUtil()!.setWidth(50)),
+            padding: EdgeInsets.only(right: ScreenUtil().setWidth(50)),
             child: SvgPicture.asset(
               'assets/img/kit_schedule_logo.svg',
-              width: ScreenUtil()!.setHeight(60),
+              width: ScreenUtil().setHeight(60),
             ),
           )
         ],
@@ -155,10 +155,10 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                 color: AppColor.secondColor,
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(30))),
             padding: EdgeInsets.only(
-                left: ScreenUtil()!.setWidth(50),
-                top: ScreenUtil()!.setWidth(75),
-                right: ScreenUtil()!.setWidth(50),
-                bottom: ScreenUtil()!.setWidth(50)),
+                left: ScreenUtil().setWidth(50),
+                top: ScreenUtil().setWidth(75),
+                right: ScreenUtil().setWidth(50),
+                bottom: ScreenUtil().setWidth(50)),
             child: CustomScrollView(
               shrinkWrap: true,
               slivers: <Widget>[
@@ -174,7 +174,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                         isInLogInScreen: false,
                       ),
                       SizedBox(
-                        height: ScreenUtil()!.setHeight(20),
+                        height: ScreenUtil().setHeight(20),
                       ),
                       TextFormFieldWidget(
                         controller: _noteController,
@@ -184,14 +184,14 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                         isInLogInScreen: false,
                       ),
                       SizedBox(
-                        height: ScreenUtil()!.setHeight(20),
+                        height: ScreenUtil().setHeight(20),
                       ),
                       Text(
                         'Set time',
                         style: ThemeText.titleStyle.copyWith(fontSize: ScreenUtil().setSp(38))
                       ),
                       SizedBox(
-                        height: ScreenUtil()!.setHeight(10),
+                        height: ScreenUtil().setHeight(10),
                       ),
                       InkWell(
                         onTap: () => _selectTimePicker(),
@@ -202,10 +202,10 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                                   BorderRadius.all(Radius.circular(8)),
                               border: Border.all(
                                   color: AppColor.personalScheduleColor2,
-                                  width: ScreenUtil()!.setWidth(3))),
+                                  width: ScreenUtil().setWidth(3))),
                           alignment: Alignment.center,
                           padding: EdgeInsets.symmetric(
-                              vertical: ScreenUtil()!.setHeight(12)),
+                              vertical: ScreenUtil().setHeight(12)),
                           child: Text(
                             state is TodoInitState
                                 ? '${this.widget.schedule!.timer}'
@@ -217,7 +217,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                       ),
                       ),
                       SizedBox(
-                        height: ScreenUtil()!.setHeight(30),
+                        height: ScreenUtil().setHeight(30),
                       ),
                       state is TodoLoadingState
                           ? Container(
@@ -249,7 +249,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                                 alignment: Alignment.center,
                                 padding: EdgeInsets.symmetric(
                                     vertical:
-                                        ScreenUtil()!.setHeight(12)),
+                                        ScreenUtil().setHeight(12)),
                                 child: Text(
                                   'Update',
                                   style: ThemeText.buttonLabelStyle
@@ -300,13 +300,13 @@ class _TodoDetailViewState extends State<TodoDetailView> {
         animType: AnimType.BOTTOMSLIDE,
         body: Padding(
           padding: EdgeInsets.symmetric(
-              vertical: ScreenUtil()!.setHeight(20)),
+              vertical: ScreenUtil().setHeight(20)),
           child: RichText(
             text: TextSpan(
                 text: 'Do you want ',
                 style: TextStyle(
                     color: Colors.black54,
-                    fontSize: ScreenUtil()!.setSp(32),
+                    fontSize: ScreenUtil().setSp(32),
                     fontFamily: 'MR',
                     fontWeight: FontWeight.normal),
                 children: [
@@ -314,14 +314,14 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                       text: 'delete ',
                       style: TextStyle(
                           color: Colors.red,
-                          fontSize: ScreenUtil()!.setSp(32),
+                          fontSize: ScreenUtil().setSp(32),
                           fontFamily: 'MR',
                           fontWeight: FontWeight.w600)),
                   TextSpan(
                       text: '${this.widget.schedule!.name}?',
                       style: TextStyle(
                           color: Colors.black54,
-                          fontSize: ScreenUtil()!.setSp(32),
+                          fontSize: ScreenUtil().setSp(32),
                           fontFamily: 'MR',
                           fontWeight: FontWeight.normal)),
                 ]),
@@ -351,7 +351,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
               child: Text('Yes (Y)',
                   style: TextStyle(
                       color: Color(0xffFCFAF3),
-                      fontSize: ScreenUtil()!.setSp(32),
+                      fontSize: ScreenUtil().setSp(32),
                       fontFamily: 'MR',
                       fontWeight: FontWeight.bold)),
             ),
@@ -381,7 +381,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
               child: Text('No (N)',
                   style: TextStyle(
                       color: Color(0xffFCFAF3),
-                      fontSize: ScreenUtil()!.setSp(32),
+                      fontSize: ScreenUtil().setSp(32),
                       fontFamily: 'MR',
                       fontWeight: FontWeight.bold)),
             ),

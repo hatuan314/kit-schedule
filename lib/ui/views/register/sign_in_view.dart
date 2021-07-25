@@ -1,15 +1,13 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:schedule/common/themes/theme_color.dart';
-import 'package:schedule/common/themes/theme_text.dart';
-import 'package:schedule/blocs/blocs.dart';
-import 'package:schedule/ui/views/widgets/spacing_box_widget.dart';
-import 'package:schedule/ui/views/widgets/text_form_field_widget.dart';
-import 'package:schedule/ui/views/widgets/widgets_constants.dart';
-import 'package:schedule/utils/utils.dart';
-//import 'package:toast/toast.dart';
+import 'package:schedule/blocs/register/register_bloc.dart';
+import 'package:schedule/ui/views/register/sign_in_constants.dart';
+import 'package:schedule/ui/views/register/widgets/app_bar_widget.dart';
+import 'package:schedule/ui/views/widgets/text_form_field.dart';
+import 'package:schedule/utils/loading_widget.dart';
 
 class SignInView extends StatefulWidget {
   @override
@@ -24,155 +22,122 @@ class _SignInViewState extends State<SignInView> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold(
-      backgroundColor: AppColor.signInColor,
-      body: BlocListener<RegisterBloc, RegisterState>(
-        listener: (context, state) {
-          if (state is RegisterSuccessState) {
-            Navigator.pushReplacementNamed(context, '/home');
-          }
-          if (state is RegisterFailureState) {
-            /*Toast.show('Connection Failed', context,
-                backgroundColor: Colors.red, textColor: Colors.white);*/
-          }
-          if (state is RegisterNoDataState) {
-            /*Toast.show('No Data. Try again', context,
-                backgroundColor: Colors.red, textColor: Colors.white);*/
-          }
-        },
-        child:
-            BlocBuilder<RegisterBloc, RegisterState>(builder: (context, state) {
-          bool isShow = false;
-          if (state is RegisterShowPasswordState) {
-            isShow = state.isShow;
-          }
-          return Form(
-            key: _textFormKey,
-            child: Container(
-              height: MediaQuery.of(context).size.height,
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Stack(
-                    alignment: Alignment.topCenter,
-                    children: <Widget>[
-                      Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20))),
-                        margin: EdgeInsets.only(
-                            top: ScreenUtil().setHeight(20)),
-                        elevation: 10,
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.8,
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                              color: Colors.grey[100]),
-                          padding: EdgeInsets.only(
-                              left: ScreenUtil().setWidth(20),
-                              top: ScreenUtil().setHeight(40),
-                              right: ScreenUtil().setWidth(20),
-                              bottom: ScreenUtil().setHeight(20)),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              Text(
-                                'KIT Schedule',
-                                style: ThemeText.headerStyle2
-                              ),
-                          SpacingBoxWidget(height: 30),
-                             TextFormFieldWidget(controller: _accountController, labelText: 'Account', isShowed: isShow, isPassword: false,isInLogInScreen: true,),
-                              SpacingBoxWidget(height: 20),
-                              Stack(
-                                alignment: AlignmentDirectional.centerEnd,
-                                children: <Widget>[
-                                  TextFormFieldWidget(controller: _passwordController, labelText: 'Password', isShowed: isShow, isPassword: true,isInLogInScreen: true,),
-                                  IconButton(
-                                    icon: Icon(
-                                      isShow
-                                          ? Icons.visibility_off
-                                          : Icons.visibility,
-                                      color: AppColor.personalScheduleColor,
-                                    ),
-                                    onPressed: () =>
-                                        BlocProvider.of<RegisterBloc>(context)
-                                          ..add(ShowPasswordOnPress(
-                                              isShow ? false : true)),
-                                  )
-                                ],
-                              ),
-                              SpacingBoxWidget(height: 30),
-                              state is RegisterLoadingState
-                                  ? _loadingUI(state)
-                                  : GestureDetector(
-                                     // color: AppColor.personalScheduleColor,
-
-                                     // textColor: Colors.white,
-                                      onTap: () =>
-                                          _setOnClickLoginButton(state),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(15),
-                                          color: AppColor.fourthColor,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: AppColor.primaryColor.withOpacity(0.3),
-                                              blurRadius: 5,
-                                              spreadRadius: 1,
-                                              offset: Offset(
-                                                0,
-                                                3,
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        child: Padding(
-                                          padding: EdgeInsets.fromLTRB(15, 8, 15, 8),
-                                          child: Text(
-                                            "LOGIN",
-                                            style:ThemeText.titleStyle.copyWith( fontSize:
-                                            ScreenUtil().setSp(34),
-                                            color: AppColor.secondColor) ,
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                            ],
-                          ),
+    return BlocConsumer<RegisterBloc, RegisterState>(
+      listener: (context, state) {
+        if (state is RegisterSuccessState) {
+          Navigator.pushReplacementNamed(context, '/home');
+        }
+        if (state is RegisterFailureState) {
+          // Toast.show('Connection Failed', context,
+          //     backgroundColor: Colors.red, textColor: Colors.white);
+        }
+        if (state is RegisterNoDataState) {
+          // Toast.show('No Data. Try again', context,
+          //     backgroundColor: Colors.red, textColor: Colors.white);
+        }
+      },
+      builder: (context, state) {
+        bool isShow = true;
+        if (state is RegisterShowPasswordState) {
+          isShow = state.isShow;
+        }
+        return Scaffold(
+          appBar: AppBarWidget(),
+          body: Container(
+            margin: EdgeInsets.symmetric(
+                horizontal: SignInConstants.horizontalScreen), //sẽ bị lỗi do chưa có thư viện /// fix xong, chỉ cần làm lần đầu với các file
+            height: MediaQuery.of(context).size.height,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  SignInConstants.welcomeTxt,
+                  style: SignInConstants.textStyleTxt
+                      .copyWith(fontSize: SignInConstants.sizeWelcomeTxt),
+                ),
+                Text(
+                  SignInConstants.kitScheduleTxt,
+                  style: SignInConstants.textStyleTxt.copyWith(
+                      fontWeight: FontWeight.bold,
+                      fontSize: SignInConstants.sizeKitScheduleTxt),
+                ),
+                SizedBox(
+                  height: SignInConstants.paddingTextToTextFiled,
+                  /// chỉ cần gõ 65.h
+                ),
+                Form(
+                    key: _textFormKey,
+                    child: Column(
+                      children: [
+                        LoginTextField(
+                          textController: _accountController,
+                          labelText: SignInConstants.accountTxt,
                         ),
-                      ),
-                      Container(
-                        width: ScreenUtil().setWidth(110),
-                        padding: EdgeInsets.all(11),
-                        decoration: new BoxDecoration(
-                            border: Border.all(
-                                color: AppColor.signInColor,
-                                width: ScreenUtil().setWidth(8)),
-                            shape: BoxShape.circle,
-                            color: Colors.grey[100]),
-                        child: WidgetsConstants().kitLogo
-                      )
-                    ],
-                  ),
-                ],
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        LoginTextField(
+                          showPassWordBtn:state is RegisterLoadingState ?
+                              (){}:() {
+
+                            BlocProvider.of<RegisterBloc>(context)
+                                .add(ShowPasswordOnPress(!isShow));
+                          },
+                          textController: _passwordController,
+                          labelText: SignInConstants.passwordTxt,
+                          obscureText: isShow,
+                        ),
+                      ],
+                    )),
+                SizedBox(
+                  height: SignInConstants.paddingEnd,
+                )
+              ],
+            ),
+          ),
+          floatingActionButton: GestureDetector(
+            onTap: state is RegisterLoadingState
+                ? null
+                : () {
+              _setOnClickLoginButton(state);
+            },
+            child: Container(
+              height: SignInConstants.heightLoginBtn,
+              width: SignInConstants.widthLoginBtn,
+              decoration: BoxDecoration(
+                  color: SignInConstants.colorDefault,
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              child: state is RegisterLoadingState
+                  ? _loadingUI()
+                  : Icon(
+                Icons.arrow_forward_rounded,
+                size: SignInConstants.sizeIconContinue,
+                color: Colors.white,
               ),
             ),
-          );
-        }),
+          ),
+          floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniEndDocked,
+          bottomNavigationBar: Container(
+            height: SignInConstants.heightBottomBar,
+            width: double.infinity,
+            color: Colors.grey.withOpacity(0.3),
+          ),
+        );
+      },
+    );
+  }
+
+  _loadingUI() {
+    return Container(
+      child: LoadingWidget(
+        color: Colors.blue,
       ),
     );
   }
 
-  _loadingUI(RegisterState state) {
-    return Container(
-      child: LoadingWidget(color: Colors.blue,),
-    );
-  }
-
   Future _setOnClickLoginButton(RegisterState state) async {
-    FocusScope.of(context).requestFocus(new FocusNode());
     if (_textFormKey.currentState!.validate()) {
       BlocProvider.of<RegisterBloc>(context)
         ..add(SignInOnPressEvent(_accountController.text.toUpperCase().trim(),
@@ -180,3 +145,4 @@ class _SignInViewState extends State<SignInView> {
     }
   }
 }
+

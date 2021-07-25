@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/common/themes/theme_text.dart';
 import 'package:schedule/service/services.dart';
-import 'package:schedule/ui/views/splash/box.dart';
 import 'package:schedule/ui/views/widgets/spacing_box_widget.dart';
 import 'package:schedule/ui/views/widgets/widgets_constants.dart';
 
@@ -50,7 +49,7 @@ class _SplashViewState extends State<SplashView> {
                 SpacingBoxWidget(height: 20),
                 Text(
                   "KIT Schedule",
-                  style: ThemeText.headerStyle.copyWith(fontSize: ScreenUtil()!.setSp(50),
+                  style: ThemeText.headerStyle.copyWith(fontSize: ScreenUtil().setSp(50),
                     color: Colors.white,)
                 )
               ],

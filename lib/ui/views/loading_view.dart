@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:schedule/common/themes/theme_color.dart'; 
+import 'package:schedule/common/themes/theme_color.dart';
 import 'package:schedule/utils/utils.dart';
 
 class LoadingView extends StatelessWidget {

@@ -17,6 +17,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
   RegisterBloc() : super(RegisterInitState());
 
+
   @override
   Stream<RegisterState> mapEventToState(RegisterEvent event) async* {
     // TODO: implement mapEventToState

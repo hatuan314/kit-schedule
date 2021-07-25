@@ -3,15 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/blocs/blocs.dart';
-import 'package:schedule/models/model.dart';
-import 'package:schedule/ui/views/home/tabs/widgets/personal_schedule_element_widget.dart';
 import 'package:schedule/ui/views/home/tabs/widgets/personal_schedule_widget.dart';
-import 'package:schedule/ui/views/home/tabs/widgets/school_schedule_element_widget.dart';
 import 'package:schedule/ui/views/home/tabs/widgets/school_schedule_widget.dart';
 import 'package:schedule/ui/views/loading_view.dart';
-import 'package:schedule/ui/views/widgets/spacing_box_widget.dart';
-import 'package:schedule/utils/convert.dart';
-import 'package:schedule/utils/utils.dart';
 
 class ScheduleView extends StatelessWidget {
   final PageController _controller = PageController();
