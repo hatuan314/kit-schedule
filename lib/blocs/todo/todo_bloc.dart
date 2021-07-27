@@ -2,9 +2,9 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/blocs/blocs.dart';
+import 'package:schedule/common/utils/convert.dart';
 import 'package:schedule/models/model.dart';
 import 'package:schedule/service/services.dart';
-import 'package:schedule/utils/utils.dart';
 
 part 'todo_event.dart';
 part 'todo_state.dart';

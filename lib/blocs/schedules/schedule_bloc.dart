@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:schedule/common/utils/convert.dart';
 import 'package:schedule/models/model.dart';
 
-import '../../utils/convert.dart';
 
 part 'schedule_event.dart';
 part 'schedule_state.dart';
