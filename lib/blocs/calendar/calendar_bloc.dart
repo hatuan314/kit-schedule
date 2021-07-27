@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:schedule/common/utils/convert.dart';
 import 'package:schedule/models/model.dart';
 import 'package:schedule/service/services.dart';
-import 'package:schedule/utils/convert.dart';
 
 part 'calendar_event.dart';
 part 'calendar_state.dart';
