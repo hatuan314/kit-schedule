@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,7 +8,9 @@ import 'package:schedule/presentation/journey/register/bloc/register_state.dart'
 
 import 'package:schedule/presentation/journey/register/sign_in_constants.dart';
 import 'package:schedule/presentation/journey/register/widgets/app_bar_widget.dart';
+import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
+import 'package:schedule/presentation/widget/snackbar_widget/snackbar_widget.dart';
 import 'package:schedule/presentation/widget/text_field_widget/text_field_widget.dart';
 import 'package:schedule/presentation/widget/loading_widget/loading_widget.dart';
 
@@ -30,12 +33,14 @@ class _SignInViewState extends State<SignInView> {
           Navigator.pushReplacementNamed(context, '/home');
         }
         if (state is RegisterFailureState) {
-          // Toast.show('Connection Failed', context,
-          //     backgroundColor: Colors.red, textColor: Colors.white);
+          TopSnackBar(context: context, title: 'Connection Failed')
+              .show(context);
         }
         if (state is RegisterNoDataState) {
-          // Toast.show('No Data. Try again', context,
-          //     backgroundColor: Colors.red, textColor: Colors.white);
+          TopSnackBar(
+            context: context,
+            title: 'No Data. Try again',
+          ).show(context);
         }
       },
       builder: (context, state) {
@@ -87,9 +92,10 @@ class _SignInViewState extends State<SignInView> {
                               labelText: SignInConstants.accountTxt,
                               controller: _accountController,
                               textStyle: ThemeText.labelStyle,
+                              colorBoder: AppColor.personalScheduleColor,
                             ),
                             SizedBox(
-                              height: 10.h,
+                              height: 15.h,
                             ),
                             TextFieldWidget(
                               validate: (value) {
@@ -98,6 +104,7 @@ class _SignInViewState extends State<SignInView> {
                                 }
                                 return null;
                               },
+                              colorBoder: AppColor.personalScheduleColor,
                               labelText: SignInConstants.passwordTxt,
                               controller: _passwordController,
                               textStyle: ThemeText.labelStyle,
@@ -116,6 +123,10 @@ class _SignInViewState extends State<SignInView> {
                                   color: SignInConstants.colorDefault,
                                 ),
                               ),
+                              onSubmitted: (pass) {
+                                _passwordController.text = pass;
+                                _setOnClickLoginButton(state);
+                              },
                             ),
                           ],
                         )),
