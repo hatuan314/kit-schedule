@@ -1,12 +1,11 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:schedule/common/constants/image_constants.dart';
 
-class WidgetsConstants{
+class WidgetsConstants {
   final Widget kitLogo = Image.asset(
-    'assets/img/kit_schedule_logo.png',
+    ImageConstants.kitScheduleLogoImage,
     fit: BoxFit.cover,
     width: ScreenUtil().setWidth(50),
   );
-
 }
