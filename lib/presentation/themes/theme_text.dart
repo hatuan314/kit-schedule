@@ -76,6 +76,13 @@ class ThemeText {
      // fontSize: HomeScreenConstance.dayOfWeekTextSize,
       color: Colors.red);
 */
+  TextStyle welcomeTextStyle = TextStyle(
+      letterSpacing: 5.w,
+      fontSize: 20.sp,
+//        fontWeight: FontWeight.w300,
+      fontFamily: 'MR',
+      color: AppColor.signInColor);
+
   static TextTheme getDefaultTextTheme = TextTheme(
     // headline3: TextStyle(
     //     fontSize: 50.sp,

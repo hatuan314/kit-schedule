@@ -1,5 +1,5 @@
 class ImageConstants {
-  static const String _path = 'assets/image';
+  static const String _path = 'assets/images';
   static const String calendarHeaderTodoDetail =
       '$_path/calendar_header_todo_detail.jpg';
   static const String calendarHeader = '$_path/calendar_header.png';

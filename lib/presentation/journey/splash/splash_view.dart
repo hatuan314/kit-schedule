@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
-import 'package:schedule/presentation/widget/spacing_box_widget.dart';
-import 'package:schedule/service/services.dart';
 import 'package:schedule/presentation/widget/widgets_constants.dart';
+import 'package:schedule/service/services.dart';
 
 class SplashView extends StatefulWidget {
   @override
@@ -19,12 +19,10 @@ class _SplashViewState extends State<SplashView> {
     // TODO: implement initState
     super.initState();
 //    _checkIfDarkModeEnabled();
-    initData().then((value) async {
-      await navigateToScreen();
-    });
+      navigateToScreen();
   }
 
- /* void _checkIfDarkModeEnabled() {
+  /* void _checkIfDarkModeEnabled() {
     brightness = MediaQuery.of(context).platformBrightness;
     if (brightness == Brightness.dark)
       print("Dark mode");
@@ -36,8 +34,13 @@ class _SplashViewState extends State<SplashView> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+      body: Container(
+        color: AppColor.secondColor,
+      ),
+    )
+    /*return Scaffold(
       backgroundColor:
-          brightness == Brightness.dark ? Colors.black : Colors.blue[900],
+          brightness == Brightness.dark ? Colors.black : AppColor.secondColor,
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -45,20 +48,22 @@ class _SplashViewState extends State<SplashView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-               WidgetsConstants().kitLogo,
-                SpacingBoxWidget(height: 20),
-                Text(
-                  "KIT Schedule",
-                  style: ThemeText.headerStyle.copyWith(fontSize: ScreenUtil().setSp(50),
-                    color: Colors.white,)
-                )
+                WidgetsConstants().kitLogo,
+                SizedBox(
+                  width: 20.w,
+                ),
+                Text("KIT Schedule",
+                    style: ThemeText.headerStyle.copyWith(
+                      fontSize: 24.sp,
+                      color: AppColor.signInColor
+                    ))
               ],
             ),
             //Box()
           ],
         ),
       ),
-    );
+    )*/;
   }
 
   Future initData() async {
