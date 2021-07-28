@@ -17,8 +17,8 @@ class ThemeBorder {
   color: AppColor.personalScheduleColor);
 
   static BorderSide textFieldEnableBorder = BorderSide(
-      color: AppColor.personalScheduleColor,
-      width: ScreenUtil() .setWidth(3));
+      color:borderColor,
+      width: ScreenUtil().setWidth(1.2));
 
   static BorderSide textFieldErrorBorder = BorderSide(
       color: AppColor.errorColor,

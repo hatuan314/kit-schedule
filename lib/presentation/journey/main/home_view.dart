@@ -101,6 +101,7 @@ class HomeView extends StatelessWidget {
         animType: AnimType.BOTTOMSLIDE,
         body: Padding(
           padding: EdgeInsets.symmetric(
+
               vertical: ScreenUtil().setHeight(20)),
           child: RichText(
             text: TextSpan(
@@ -127,6 +128,7 @@ class HomeView extends StatelessWidget {
         btnOk: GestureDetector(
           onTap: () => _bntOkDialogOnPress(context),
           child: Container(
+            margin: EdgeInsets.only(bottom: 20.h),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: AppColor.fourthColor,
@@ -147,7 +149,7 @@ class HomeView extends StatelessWidget {
               padding: EdgeInsets.fromLTRB(15, 8, 15, 8),
               child: Text(
                 'Yes (Y)',
-                style: ThemeText.titleStyle.copyWith(
+                style: ThemeText.buttonLabelStyle.copyWith(
                     color: AppColor.secondColor, fontWeight: FontWeight.bold),
               ),
             ),
@@ -156,6 +158,7 @@ class HomeView extends StatelessWidget {
         btnCancel: GestureDetector(
           onTap: () => _btnCancelDialogOnPress(context),
           child: Container(
+            margin: EdgeInsets.only(bottom: 20.h),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: AppColor.errorColor,
@@ -175,7 +178,7 @@ class HomeView extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.fromLTRB(15, 8, 15, 8),
               child: Text('No (N)',
-                  style: ThemeText.titleStyle.copyWith(
+                  style: ThemeText.buttonLabelStyle.copyWith(
                       color: AppColor.secondColor,
                       fontWeight: FontWeight.bold)),
             ),
@@ -213,13 +216,11 @@ class HomeView extends StatelessWidget {
                       text: 'Sign Out ',
                       style: ThemeText.titleStyle.copyWith(
                         color: AppColor.errorColor,
-                        fontSize: ScreenUtil().setSp(36),
                       )),
                   TextSpan(
                     text: 'now. Please, try again.',
                     style: ThemeText.titleStyle.copyWith(
-                        color: AppColor.thirdColor,
-                        fontSize: ScreenUtil().setSp(36)),
+                        color: AppColor.thirdColor, ),
                   )
                 ]),
           ),

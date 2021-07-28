@@ -13,7 +13,7 @@ class ScheduleView extends StatelessWidget {
   Widget buildPageView() {
     return Container(
       padding: EdgeInsets.symmetric(
-          horizontal: ScreenUtil().setWidth(50),
+          horizontal: ScreenUtil().setWidth(20),
           vertical: ScreenUtil().setHeight(20)),
       alignment: Alignment.center,
       child: PageView.builder(

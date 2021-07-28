@@ -33,7 +33,7 @@ class PersonalScheduleWidget extends StatelessWidget {
             children: <Widget>[
               Text(
                 'Personal',
-                style: ThemeText.titleStyle.copyWith(fontWeight: FontWeight.bold,fontSize: ScreenUtil().setSp(36))),
+                style: ThemeText.titleStyle.copyWith(fontWeight: FontWeight.bold,)),
               Container(
                 decoration: BoxDecoration(
                     shape: BoxShape.circle, color: AppColor.personalScheduleColor),

@@ -63,7 +63,7 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
   _todoBackgroundWidget(TodoState state) {
     return Padding(
       padding:
-          EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(50)),
+          EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(20)),
       child: Stack(
         alignment: Alignment.centerRight,
         children: <Widget>[
@@ -107,10 +107,10 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
             ],
           ),
           Padding(
-            padding: EdgeInsets.only(right: ScreenUtil().setWidth(50)),
+            padding: EdgeInsets.only(right: ScreenUtil().setWidth(20)),
             child: SvgPicture.asset(
               'assets/img/kit_schedule_logo.svg',
-              width: ScreenUtil().setHeight(60),
+              width: ScreenUtil().setHeight(30),
             ),
           )
         ],
@@ -126,9 +126,9 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                 color:  AppColor.secondColor,
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(30))),
             padding: EdgeInsets.only(
-                left: ScreenUtil().setWidth(50),
-                top: ScreenUtil().setWidth(75),
-                right: ScreenUtil().setWidth(50),
+                left: ScreenUtil().setWidth(20),
+                top: ScreenUtil().setWidth(25),
+                right: ScreenUtil().setWidth(20),
                 bottom: ScreenUtil().setWidth(50)),
             child: CustomScrollView(
               shrinkWrap: true,
@@ -136,7 +136,7 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                 SliverToBoxAdapter(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
+                    children: <Widget>[ SpacingBoxWidget(height: 10),
                       TextFormFieldWidget(
                         controller: _nameController,
                         labelText: 'Title',
@@ -155,7 +155,7 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                       SpacingBoxWidget(height: 20),
                       Text(
                         'Set time',
-                        style: ThemeText.titleStyle.copyWith(fontSize: ScreenUtil().setSp(38))
+                        style: ThemeText.titleStyle
                       ),
                       SpacingBoxWidget(height: 10),
                       InkWell(
@@ -175,7 +175,7 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                             state.selectTimer != null
                                 ? '${state.selectTimer}'
                                 : '',
-                            style: ThemeText.titleStyle,
+                            style: ThemeText.labelStyle.copyWith(fontSize: 20.sp,fontWeight: FontWeight.w600),
                           ),
                         ),
                       ),
@@ -213,8 +213,7 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                                   child: Text(
                                     'Save',
                                     style:
-                                    ThemeText.titleStyle.copyWith( color: AppColor.secondColor,
-                                      fontSize: ScreenUtil().setSp(36),),
+                                    ThemeText.titleStyle.copyWith( color: AppColor.secondColor,),
                                   ),
                                 ),
                               ),

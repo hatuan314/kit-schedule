@@ -18,7 +18,7 @@ class CalendarTabView extends StatelessWidget {
             body: Center(
               child: Container(
                 margin:
-                    EdgeInsets.only(top: ScreenUtil().setHeight(50)),
+                    EdgeInsets.only(top: 50.h),
                 child: LoadingWidget(),
               ),
             ),

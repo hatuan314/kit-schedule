@@ -34,7 +34,7 @@ class SchoolScheduleWidget extends StatelessWidget {
               Text(
                 'School',
                 style:ThemeText.titleStyle.copyWith(
-                    color: AppColor.scheduleType,fontWeight: FontWeight.bold, fontSize: ScreenUtil().setSp(36))),
+                    color: AppColor.scheduleType,fontWeight: FontWeight.bold, )),
               Container(
                 decoration:
                     BoxDecoration(shape: BoxShape.circle, color: Colors.red),

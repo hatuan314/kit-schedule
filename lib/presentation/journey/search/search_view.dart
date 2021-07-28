@@ -28,11 +28,12 @@ class SearchView extends StatelessWidget {
           }
         },
         child: BlocBuilder<SearchBloc, SearchState>(builder: (context, state) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Expanded(
-                flex: 85,
+          return ListView(
+            shrinkWrap: true,
+            children: [
+              Container(
+              //  color: Colors.black,
+                height: ScreenUtil().screenHeight*3/4,
                 child: Stack(
                   alignment: Alignment.center,
                   children: <Widget>[
@@ -41,10 +42,16 @@ class SearchView extends StatelessWidget {
                   ],
                 ),
               ),
-              Expanded(
-                flex: 15,
-                child: _searchWidget(context, state),
-              )
+              _searchWidget(context, state),
+              // Expanded(
+              //   flex: 85,
+              //   child:
+              // ),
+              // Expanded(
+              //   flex: 15,
+              //   child:
+              // )
+
             ],
           );
         }),
@@ -55,7 +62,8 @@ class SearchView extends StatelessWidget {
   Padding _searchWidget(BuildContext context, SearchState state) {
     return Padding(
       padding:
-      EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(20)),
+      EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(20),
+ ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -64,7 +72,7 @@ class SearchView extends StatelessWidget {
           Text(
             'Search by date',
             style:ThemeText.titleStyle.copyWith( color: AppColor.searchColor,
-              fontSize: ScreenUtil().setSp(38),)
+              fontSize: ScreenUtil().setSp(20),)
           ),
           InkWell(
             onTap: () => _btnSearchOnPress(context),
@@ -87,7 +95,8 @@ class SearchView extends StatelessWidget {
                         vertical: ScreenUtil().setHeight(12)),
                     child: Text(
                       '${state.selectDay}',
-                      style: ThemeText.titleStyle.copyWith( color:AppColor.searchColor, )
+                      style: ThemeText.titleStyle.copyWith( color:AppColor.searchColor,
+                )
                     ),
                   ),
                   Padding(
@@ -96,7 +105,7 @@ class SearchView extends StatelessWidget {
                     child: Icon(
                       Icons.search,
                       color: AppColor.searchColor,
-                      size: ScreenUtil().setSp(50),
+                      size: ScreenUtil().setSp(30),
                     ),
                   )
                 ],
@@ -125,9 +134,9 @@ class SearchView extends StatelessWidget {
   _buildPageView(SearchState state) {
     return Container(
       margin:
-      EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(50)),
+      EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
       padding: EdgeInsets.symmetric(
-          horizontal: ScreenUtil().setWidth(50),
+          horizontal: ScreenUtil().setWidth(20),
           vertical: ScreenUtil().setHeight(20)),
       alignment: Alignment.center,
       child: PageView.builder(

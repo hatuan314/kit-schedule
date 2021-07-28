@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:schedule/presentation/themes/theme_border.dart';
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TextFormFieldWidget extends StatelessWidget {
   final TextEditingController controller;
@@ -25,10 +26,15 @@ class TextFormFieldWidget extends StatelessWidget {
       cursorColor: AppColor.textFieldColor,
       obscureText: isPassword?(!isShowed):false,
       decoration: InputDecoration(
+
           errorStyle: ThemeText.errorTextStyle,
           errorMaxLines: 2,
           labelText: labelText,
-          labelStyle: ThemeText.labelStyle,
+          labelStyle:  TextStyle(
+              fontSize: ScreenUtil().setSp(18),
+              color: AppColor.personalScheduleColor,
+              fontWeight: FontWeight.w500,
+              fontFamily: "MR"),
           prefixIcon: Visibility(
               visible: isInLogInScreen ,
               child: Icon(isPassword?Icons.lock:Icons.account_circle, color: AppColor.textFieldColor)),
