@@ -30,11 +30,7 @@ class TextFormFieldWidget extends StatelessWidget {
           errorStyle: ThemeText.errorTextStyle,
           errorMaxLines: 2,
           labelText: labelText,
-          labelStyle:  TextStyle(
-              fontSize: ScreenUtil().setSp(18),
-              color: AppColor.personalScheduleColor,
-              fontWeight: FontWeight.w500,
-              fontFamily: "MR"),
+          labelStyle:   ThemeText.labelStyle,
           prefixIcon: Visibility(
               visible: isInLogInScreen ,
               child: Icon(isPassword?Icons.lock:Icons.account_circle, color: AppColor.textFieldColor)),

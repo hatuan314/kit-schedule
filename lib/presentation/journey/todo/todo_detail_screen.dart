@@ -8,10 +8,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:schedule/blocs/todo/todo_bloc.dart';
+import 'package:schedule/presentation/journey/todo/todo_constants.dart'; 
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
 import 'package:schedule/models/model.dart';
 import 'package:schedule/presentation/widget/loading_widget/loading_widget.dart';
+import 'package:schedule/presentation/widget/spacing_box_widget.dart';
 import 'package:schedule/presentation/widget/text_form_field_widget.dart';
 //import 'package:toast/toast.dart';
 
@@ -62,7 +64,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                   icon: Icon(
                     Icons.delete,
                     color: AppColor.secondColor,
-                    size: 24,
+                    size: ToDoConstants.iconSize,
                   ))
             ],
           ),
@@ -89,8 +91,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
 
   _todoBackgroundWidget(TodoState state) {
     return Padding(
-      padding:
-          EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(50)),
+      padding: const EdgeInsets.symmetric(horizontal: ToDoConstants.paddingHorizontal),
       child: Stack(
         alignment: Alignment.centerRight,
         children: <Widget>[
@@ -108,19 +109,17 @@ class _TodoDetailViewState extends State<TodoDetailView> {
               InkWell(
                 onTap: () => _selectDatePicker(),
                 child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      vertical: ScreenUtil().setHeight(5)),
+                  padding:const EdgeInsets.symmetric(
+                      vertical: ToDoConstants.inkWellPaddingVertical),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       SvgPicture.asset(
-                        'assets/img/ic-calendar.svg',
-                        color: AppColor.secondColor,
-                        height: ScreenUtil().setHeight(18),
+                        ToDoConstants.calendarImgPath,
+                        color:  AppColor.secondColor,
+                        height:ToDoConstants.calendarImgHeight,
                       ),
-                      SizedBox(
-                        width: ScreenUtil().setWidth(18),
-                      ),
+                      SpacingBoxWidget(height: 18),
                       Text(
                         state is TodoInitState
                             ? '${DateFormat('dd/MM/yyyy').format(DateTime.fromMillisecondsSinceEpoch(int.parse(this.widget.schedule!.date!)))}'
@@ -136,10 +135,10 @@ class _TodoDetailViewState extends State<TodoDetailView> {
             ],
           ),
           Padding(
-            padding: EdgeInsets.only(right: ScreenUtil().setWidth(50)),
+            padding:const EdgeInsets.only(right: ToDoConstants.paddingHorizontal),
             child: SvgPicture.asset(
-              'assets/img/kit_schedule_logo.svg',
-              width: ScreenUtil().setHeight(60),
+              ToDoConstants.kitLogoPath,
+              width: ToDoConstants.kitLogoWidth,
             ),
           )
         ],
@@ -154,45 +153,38 @@ class _TodoDetailViewState extends State<TodoDetailView> {
             decoration: BoxDecoration(
                 color: AppColor.secondColor,
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(30))),
-            padding: EdgeInsets.only(
-                left: ScreenUtil().setWidth(50),
-                top: ScreenUtil().setWidth(75),
-                right: ScreenUtil().setWidth(50),
-                bottom: ScreenUtil().setWidth(50)),
+            padding: EdgeInsets.symmetric(
+                vertical: ToDoConstants.paddingVertical,
+                horizontal: ToDoConstants.paddingHorizontal
+            ),
             child: CustomScrollView(
               shrinkWrap: true,
               slivers: <Widget>[
                 SliverToBoxAdapter(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
+                    children: <Widget>[ SpacingBoxWidget(height: 10),
                       TextFormFieldWidget(
                         controller: _nameController,
-                        labelText: 'Title',
+                        labelText:ToDoConstants.titleTxt,
                         isShowed: false,
                         isPassword: false,
                         isInLogInScreen: false,
                       ),
-                      SizedBox(
-                        height: ScreenUtil().setHeight(20),
-                      ),
+                      SpacingBoxWidget(height: 20),
                       TextFormFieldWidget(
                         controller: _noteController,
-                        labelText: 'Note',
+                        labelText: ToDoConstants.noteTxt,
                         isShowed: false,
                         isPassword: false,
                         isInLogInScreen: false,
                       ),
-                      SizedBox(
-                        height: ScreenUtil().setHeight(20),
-                      ),
+                      SpacingBoxWidget(height: 20),
                       Text(
-                        'Set time',
-                        style: ThemeText.titleStyle.copyWith(fontSize: ScreenUtil().setSp(38))
+                          ToDoConstants.setTimeTxt,
+                          style: ThemeText.titleStyle
                       ),
-                      SizedBox(
-                        height: ScreenUtil().setHeight(10),
-                      ),
+                      SpacingBoxWidget(height: 10),
                       InkWell(
                         onTap: () => _selectTimePicker(),
                         child: Container(
@@ -201,11 +193,11 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(8)),
                               border: Border.all(
-                                  color: AppColor.personalScheduleColor2,
-                                  width: ScreenUtil().setWidth(3))),
+                                  color:AppColor.personalScheduleColor2,
+                                  width: ToDoConstants.borderWidth)),
                           alignment: Alignment.center,
-                          padding: EdgeInsets.symmetric(
-                              vertical: ScreenUtil().setHeight(12)),
+                          padding:const EdgeInsets.symmetric(
+                              vertical: ToDoConstants.setTimeContainerPaddingVertical),
                           child: Text(
                             state is TodoInitState
                                 ? '${this.widget.schedule!.timer}'
@@ -216,9 +208,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                         ),
                       ),
                       ),
-                      SizedBox(
-                        height: ScreenUtil().setHeight(30),
-                      ),
+                      SpacingBoxWidget(height: 30),
                       state is TodoLoadingState
                           ? Container(
                               child: LoadingWidget(),
@@ -244,11 +234,10 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                                 ),
                                 width: double.infinity,
                                 alignment: Alignment.center,
-                                padding: EdgeInsets.symmetric(
-                                    vertical:
-                                        ScreenUtil().setHeight(12)),
+                                padding:const EdgeInsets.symmetric(
+                                    vertical: ToDoConstants.setTimeContainerPaddingVertical),
                                 child: Text(
-                                  'Update',
+                                    ToDoConstants.saveTxt,
                                   style: ThemeText.buttonLabelStyle
                                 ),
                               ),
@@ -296,31 +285,21 @@ class _TodoDetailViewState extends State<TodoDetailView> {
         dialogType: DialogType.WARNING,
         animType: AnimType.BOTTOMSLIDE,
         body: Padding(
-          padding: EdgeInsets.symmetric(
-              vertical: ScreenUtil().setHeight(20)),
+          padding:const EdgeInsets.symmetric(
+              vertical: ToDoConstants.paddingVertical),
           child: RichText(
             text: TextSpan(
-                text: 'Do you want ',
-                style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: ScreenUtil().setSp(32),
-                    fontFamily: 'MR',
+                text: ToDoConstants.confirmDeleteTxt,
+                style:ThemeText.titleStyle.copyWith(color: Colors.black54,
                     fontWeight: FontWeight.normal),
                 children: [
                   TextSpan(
-                      text: 'delete ',
-                      style: TextStyle(
-                          color: Colors.red,
-                          fontSize: ScreenUtil().setSp(32),
-                          fontFamily: 'MR',
-                          fontWeight: FontWeight.w600)),
+                      text: ToDoConstants.confirmDeleteTxt2,
+                      style: ThemeText.titleStyle.copyWith(color: AppColor.errorColor, )),
                   TextSpan(
                       text: '${this.widget.schedule!.name}?',
-                      style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: ScreenUtil().setSp(32),
-                          fontFamily: 'MR',
-                          fontWeight: FontWeight.normal)),
+                      style: ThemeText.titleStyle.copyWith(color: Colors.black54,
+                          fontWeight: FontWeight.normal),),
                 ]),
           ),
         ),
@@ -344,13 +323,14 @@ class _TodoDetailViewState extends State<TodoDetailView> {
             ),
             alignment: Alignment.center,
             child: Padding(
-              padding: EdgeInsets.fromLTRB(15, 8, 15, 8),
-              child: Text('Yes (Y)',
-                  style: TextStyle(
-                      color: Color(0xffFCFAF3),
-                      fontSize: ScreenUtil().setSp(32),
-                      fontFamily: 'MR',
-                      fontWeight: FontWeight.bold)),
+              padding: const EdgeInsets.symmetric(
+                  vertical: ToDoConstants.paddingVertical,
+                  horizontal: ToDoConstants.paddingHorizontal
+              ),
+              child: Text(
+                ToDoConstants.yesTxt,
+                style: ThemeText.buttonLabelStyle.copyWith(
+                    color: AppColor.secondColor, fontWeight: FontWeight.bold),),
             ),
           ),
         ),
@@ -374,12 +354,13 @@ class _TodoDetailViewState extends State<TodoDetailView> {
             ),
             alignment: Alignment.center,
             child: Padding(
-              padding: EdgeInsets.fromLTRB(15, 8, 15, 8),
-              child: Text('No (N)',
-                  style: TextStyle(
-                      color: Color(0xffFCFAF3),
-                      fontSize: ScreenUtil().setSp(32),
-                      fontFamily: 'MR',
+              padding:const EdgeInsets.symmetric(
+                  vertical: ToDoConstants.paddingVertical,
+                  horizontal: ToDoConstants.paddingHorizontal
+              ),
+              child: Text(ToDoConstants.noTxt,
+                  style: ThemeText.buttonLabelStyle.copyWith(
+                      color: AppColor.secondColor,
                       fontWeight: FontWeight.bold)),
             ),
           ),

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/blocs/blocs.dart';
 import 'package:schedule/common/utils/convert.dart';
-import 'package:schedule/presentation/journey/home/schedule_view.dart';
+import 'package:schedule/presentation/journey/home/calendar_tab_constants.dart';
+import 'package:schedule/presentation/journey/home/schedule_widget.dart';
 import 'package:schedule/presentation/widget/loading_widget/loading_widget.dart';
 
-class CalendarTabView extends StatelessWidget {
+class CalendarTabScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -14,18 +14,18 @@ class CalendarTabView extends StatelessWidget {
       builder: (context, state) {
         if (state is CalendarLoadingDataState)
           return Scaffold(
-            backgroundColor: Color(0xffFCFAF3),
+            backgroundColor: CalendarTabConstants.backgroundColor,
             body: Center(
               child: Container(
-                margin:
-                    EdgeInsets.only(top: 50.h),
+                margin:const
+                    EdgeInsets.only(top: CalendarTabConstants.marginLoading ),
                 child: LoadingWidget(),
               ),
             ),
           );
         else if (state is CalendarLoadDataSuccessState) {
           return Scaffold(
-              backgroundColor: Color(0xffFCFAF3),
+              backgroundColor:CalendarTabConstants.backgroundColor,
               body: BlocProvider(
                 create: (context) => ScheduleBloc()
                   ..add(GetScheduleDayEvent(
@@ -36,7 +36,7 @@ class CalendarTabView extends StatelessWidget {
               ));
         } else
           return Scaffold(
-            backgroundColor: Color(0xffFCFAF3),
+            backgroundColor: CalendarTabConstants.backgroundColor,
             body: SizedBox(),
           );
       },
@@ -48,7 +48,7 @@ class CalendarTabView extends StatelessWidget {
       child: Column(
         children: <Widget>[
           //CalendarView(state: state),
-          Expanded(child: ScheduleView()),
+          Expanded(child: ScheduleWidget()),
         ],
       ),
     );
