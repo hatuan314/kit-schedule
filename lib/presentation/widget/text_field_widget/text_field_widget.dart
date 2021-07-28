@@ -67,12 +67,12 @@ class TextFieldWidget extends StatelessWidget {
         keyboardType: inputType,
         validator: validate,
         autovalidateMode: autovalidateMode,
-        obscureText: obscureText!,
+        obscureText: obscureText ?? false,
         maxLength: maxLength,
-        maxLines: maxLines,
-        textCapitalization: textCapitalization!,
-        readOnly: readOnly!,
-        textAlign: align!,
+        maxLines: maxLines??1,
+        textCapitalization: textCapitalization ?? TextCapitalization.none,
+        readOnly: readOnly ?? false,
+        textAlign: align ?? TextAlign.start,
         onChanged: onChanged,
         onEditingComplete: onEditingComplete,
         onFieldSubmitted: onSubmitted,
@@ -87,7 +87,7 @@ class TextFieldWidget extends StatelessWidget {
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: AppColor.primaryColor, width: 0.5),
               borderRadius: BorderRadius.all(Radius.circular(20))),
-          disabledBorder: OutlineInputBorder(
+          focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: AppColor.primaryColor, width: 0.5),
               borderRadius: BorderRadius.all(Radius.circular(20))),
           errorBorder: OutlineInputBorder(
