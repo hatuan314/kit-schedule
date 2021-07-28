@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/blocs/blocs.dart';
 import 'package:schedule/blocs/search/search_bloc.dart';
 import 'package:schedule/models/model.dart';
+import 'package:schedule/presentation/journey/register/bloc/register_bloc.dart';
 import 'package:schedule/presentation/journey/register/sign_in_view.dart';
 import 'package:schedule/presentation/journey/splash/splash_view.dart';
 import 'package:schedule/presentation/journey/main/home_view.dart';

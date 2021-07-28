@@ -5,10 +5,11 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/models/model.dart';
+import 'package:schedule/presentation/journey/register/bloc/register_state.dart';
 import 'package:schedule/service/services.dart';
 
 part 'register_event.dart';
-part 'register_state.dart';
+
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   RepositoryOnline _online = RepositoryOnline();
