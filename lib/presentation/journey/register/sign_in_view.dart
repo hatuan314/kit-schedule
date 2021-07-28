@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:schedule/blocs/register/register_bloc.dart';
+import 'package:schedule/presentation/journey/register/bloc/register_bloc.dart';
+import 'package:schedule/presentation/journey/register/bloc/register_state.dart';
+
 import 'package:schedule/presentation/journey/register/sign_in_constants.dart';
 import 'package:schedule/presentation/journey/register/widgets/app_bar_widget.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
