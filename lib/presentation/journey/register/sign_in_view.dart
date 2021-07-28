@@ -1,8 +1,10 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:schedule/common/injector/injector.dart';
+import 'package:schedule/presentation/bloc/snackbar_bloc/bloc.dart';
+import 'package:schedule/presentation/bloc/snackbar_bloc/snackbar_type.dart';
 import 'package:schedule/presentation/journey/register/bloc/register_bloc.dart';
 import 'package:schedule/presentation/journey/register/bloc/register_state.dart';
 
@@ -10,7 +12,7 @@ import 'package:schedule/presentation/journey/register/sign_in_constants.dart';
 import 'package:schedule/presentation/journey/register/widgets/app_bar_widget.dart';
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
-import 'package:schedule/presentation/widget/snackbar_widget/snackbar_widget.dart';
+
 import 'package:schedule/presentation/widget/text_field_widget/text_field_widget.dart';
 import 'package:schedule/presentation/widget/loading_widget/loading_widget.dart';
 
@@ -33,14 +35,12 @@ class _SignInViewState extends State<SignInView> {
           Navigator.pushReplacementNamed(context, '/home');
         }
         if (state is RegisterFailureState) {
-          TopSnackBar(context: context, title: 'Connection Failed')
-              .show(context);
+          Injector.getIt<SnackbarBloc>().add(ShowSnackbar(
+              title: 'Connection Failed', type: SnackBarType.error));
         }
         if (state is RegisterNoDataState) {
-          TopSnackBar(
-            context: context,
-            title: 'No Data. Try again',
-          ).show(context);
+          Injector.getIt<SnackbarBloc>().add(ShowSnackbar(
+              title: 'No Data. Try again', type: SnackBarType.error));
         }
       },
       builder: (context, state) {
