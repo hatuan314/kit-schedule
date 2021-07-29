@@ -2,14 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:schedule/common/injector/injector.dart';
-import 'package:schedule/presentation/bloc/snackbar_bloc/bloc.dart';
-import 'package:schedule/presentation/bloc/snackbar_bloc/snackbar_type.dart';
-import 'package:schedule/presentation/journey/register/bloc/register_bloc.dart';
-import 'package:schedule/presentation/journey/register/bloc/register_state.dart';
-
-import 'package:schedule/presentation/journey/register/sign_in_constants.dart';
-import 'package:schedule/presentation/journey/register/widgets/app_bar_widget.dart';
+import 'package:schedule/presentation/journey/sign_in_screen.dart/bloc/register_bloc.dart';
+import 'package:schedule/presentation/journey/sign_in_screen.dart/bloc/register_state.dart';
+import 'package:schedule/presentation/journey/sign_in_screen.dart/sign_in_constants.dart';
+import 'package:schedule/presentation/journey/sign_in_screen.dart/widgets/app_bar_widget.dart';
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
 
@@ -34,14 +30,8 @@ class _SignInViewState extends State<SignInView> {
         if (state is RegisterSuccessState) {
           Navigator.pushReplacementNamed(context, '/home');
         }
-        if (state is RegisterFailureState) {
-          Injector.getIt<SnackbarBloc>().add(ShowSnackbar(
-              title: 'Connection Failed', type: SnackBarType.error));
-        }
-        if (state is RegisterNoDataState) {
-          Injector.getIt<SnackbarBloc>().add(ShowSnackbar(
-              title: 'No Data. Try again', type: SnackBarType.error));
-        }
+        if (state is RegisterFailureState) {}
+        if (state is RegisterNoDataState) {}
       },
       builder: (context, state) {
         bool isShow = true;

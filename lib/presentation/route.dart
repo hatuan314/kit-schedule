@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/blocs/blocs.dart';
 import 'package:schedule/blocs/search/search_bloc.dart';
+import 'package:schedule/common/injector/injector.dart';
 import 'package:schedule/models/model.dart';
-import 'package:schedule/presentation/journey/register/bloc/register_bloc.dart';
-import 'package:schedule/presentation/journey/register/sign_in_view.dart';
+import 'package:schedule/presentation/journey/sign_in_screen.dart/bloc/register_bloc.dart';
+import 'package:schedule/presentation/journey/sign_in_screen.dart/sign_in_view.dart';
 import 'package:schedule/presentation/journey/splash/splash_view.dart';
 import 'package:schedule/presentation/journey/main/home_view.dart';
 import 'package:schedule/presentation/journey/todo/todo_detail_view.dart';
@@ -14,7 +15,6 @@ int currentRoot = 1;
 
 RouteFactory router() {
   return (RouteSettings settings) {
-
     if (currentRoot == 1) {
       currentRoot = 2;
       return CupertinoPageRoute(builder: (context) {
@@ -29,7 +29,7 @@ RouteFactory router() {
       case '/sign-in':
         return CupertinoPageRoute(builder: (context) {
           return BlocProvider(
-            create: (context) => RegisterBloc(),
+            create: (context) => Injector.getIt<RegisterBloc>(),
             child: SignInView(),
           );
         });
@@ -55,8 +55,8 @@ RouteFactory router() {
 //            child: SchoolSchedulePageView());
         });
       case '/todo-detail':
-        PersonalSchedule schedule =
-            PersonalSchedule.fromJson(settings.arguments as Map<String, dynamic>);
+        PersonalSchedule schedule = PersonalSchedule.fromJson(
+            settings.arguments as Map<String, dynamic>);
         return CupertinoPageRoute(builder: (context) {
           return BlocProvider(
               create: (context) => TodoBloc(),
@@ -65,7 +65,7 @@ RouteFactory router() {
     }
 
     return MaterialPageRoute(
-      builder: (_) => Container(),//todo must return widget
+      builder: (_) => Container(), //todo must return widget
     );
   };
 }

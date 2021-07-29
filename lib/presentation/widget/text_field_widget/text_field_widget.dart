@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:schedule/common/constants/layout_constants.dart';
 import 'package:schedule/presentation/themes/theme_colors.dart';
 
 class TextFieldWidget extends StatelessWidget {
@@ -30,7 +29,7 @@ class TextFieldWidget extends StatelessWidget {
   final Function()? onEditingComplete;
   final Widget? seffixIcon;
   final Widget? prefixIcon;
-
+  static final double paddingContent=18.w;
   const TextFieldWidget(
       {Key? key,
       this.controller,
@@ -83,7 +82,7 @@ class TextFieldWidget extends StatelessWidget {
         onFieldSubmitted: onSubmitted,
         inputFormatters: formatter,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.all(LayoutConstants.paddingContent),
+          contentPadding: EdgeInsets.all(paddingContent),
           labelText: labelText,
           hintText: hintText,
           labelStyle: textStyle,

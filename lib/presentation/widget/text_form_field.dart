@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:schedule/presentation/journey/register/sign_in_constants.dart';
+import 'package:schedule/presentation/journey/sign_in_screen.dart/sign_in_constants.dart';
 
 
 class BaseTextForm extends TextFormField {
