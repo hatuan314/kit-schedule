@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:schedule/blocs/todo/todo_bloc.dart';
+import 'package:schedule/presentation/journey/todo/todo_constants.dart';
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
 import 'package:schedule/presentation/widget/loading_widget/loading_widget.dart';
@@ -62,8 +63,8 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
 
   _todoBackgroundWidget(TodoState state) {
     return Padding(
-      padding:
-          EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(50)),
+      padding: const
+          EdgeInsets.symmetric(horizontal: ToDoConstants.paddingHorizontal),
       child: Stack(
         alignment: Alignment.centerRight,
         children: <Widget>[
@@ -74,26 +75,24 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
               SizedBox(
                 width: double.infinity,
                 child: Text(
-                  'Create your todo',
+                  ToDoConstants.createToDoTxt,
                   style: ThemeText.headerStyle,
               ),
               ),
               InkWell(
                 onTap: () => _selectDatePicker(),
                 child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      vertical: ScreenUtil().setHeight(5)),
+                  padding:const EdgeInsets.symmetric(
+                      vertical: ToDoConstants.inkWellPaddingVertical),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       SvgPicture.asset(
-                        'assets/img/ic-calendar.svg',
+                        ToDoConstants.calendarImgPath,
                         color:  AppColor.secondColor,
-                        height: ScreenUtil().setHeight(18),
+                        height:ToDoConstants.calendarImgHeight,
                       ),
-                      SizedBox(
-                        width: ScreenUtil().setWidth(18),
-                      ),
+                     SpacingBoxWidget(height: 18),
                       Text(
                         state.selectDay != null
                             ? '${DateFormat('dd/MM/yyyy').format(DateTime.fromMillisecondsSinceEpoch(int.parse(state.selectDay!)))}'
@@ -107,10 +106,10 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
             ],
           ),
           Padding(
-            padding: EdgeInsets.only(right: ScreenUtil().setWidth(50)),
+            padding: const EdgeInsets.only(right: ToDoConstants.paddingHorizontal),
             child: SvgPicture.asset(
-              'assets/img/kit_schedule_logo.svg',
-              width: ScreenUtil().setHeight(60),
+              ToDoConstants.kitLogoPath,
+              width: ToDoConstants.kitLogoWidth,
             ),
           )
         ],
@@ -125,21 +124,20 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
             decoration: BoxDecoration(
                 color:  AppColor.secondColor,
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(30))),
-            padding: EdgeInsets.only(
-                left: ScreenUtil().setWidth(50),
-                top: ScreenUtil().setWidth(75),
-                right: ScreenUtil().setWidth(50),
-                bottom: ScreenUtil().setWidth(50)),
+            padding: EdgeInsets.symmetric(
+              vertical: ToDoConstants.paddingVertical,
+              horizontal: ToDoConstants.paddingHorizontal
+            ),
             child: CustomScrollView(
               shrinkWrap: true,
               slivers: <Widget>[
                 SliverToBoxAdapter(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
+                    children: <Widget>[ SpacingBoxWidget(height: 10),
                       TextFormFieldWidget(
                         controller: _nameController,
-                        labelText: 'Title',
+                        labelText: ToDoConstants.titleTxt,
                         isShowed: false,
                         isPassword: false,
                         isInLogInScreen: false,
@@ -147,15 +145,15 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                       SpacingBoxWidget(height: 20),
                       TextFormFieldWidget(
                         controller: _noteController,
-                        labelText: 'Note',
+                        labelText: ToDoConstants.noteTxt,
                         isShowed: false,
                         isPassword: false,
                         isInLogInScreen: false,
                       ),
                       SpacingBoxWidget(height: 20),
                       Text(
-                        'Set time',
-                        style: ThemeText.titleStyle.copyWith(fontSize: ScreenUtil().setSp(38))
+                       ToDoConstants.setTimeTxt,
+                        style: ThemeText.titleStyle
                       ),
                       SpacingBoxWidget(height: 10),
                       InkWell(
@@ -167,15 +165,15 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                                   BorderRadius.all(Radius.circular(8)),
                               border: Border.all(
                                   color:AppColor.personalScheduleColor2,
-                                  width: ScreenUtil().setWidth(3))),
+                                  width: ToDoConstants.borderWidth)),
                           alignment: Alignment.center,
-                          padding: EdgeInsets.symmetric(
-                              vertical: ScreenUtil().setHeight(12)),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: ToDoConstants.setTimeContainerPaddingVertical),
                           child: Text(
                             state.selectTimer != null
                                 ? '${state.selectTimer}'
                                 : '',
-                            style: ThemeText.titleStyle,
+                            style: ThemeText.labelStyle.copyWith(fontSize:ToDoConstants.timeFontSize,fontWeight: FontWeight.w600),
                           ),
                         ),
                       ),
@@ -205,17 +203,12 @@ class _CreateTodoTabViewState extends State<CreateTodoTabView> {
                                 ),
                                 width: double.infinity,
                                 alignment: Alignment.center,
-                                padding: EdgeInsets.symmetric(
-                                    vertical:
-                                        ScreenUtil().setHeight(12)),
-                                child: Padding(
-                                  padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                  child: Text(
-                                    'Save',
-                                    style:
-                                    ThemeText.titleStyle.copyWith( color: AppColor.secondColor,
-                                      fontSize: ScreenUtil().setSp(36),),
-                                  ),
+                                padding:const EdgeInsets.symmetric(
+                                    vertical: ToDoConstants.setTimeContainerPaddingVertical),
+                                child: Text(
+                                  ToDoConstants.saveTxt,
+                                  style:
+                                  ThemeText.titleStyle.copyWith( color: AppColor.secondColor,),
                                 ),
                               ),
                             )

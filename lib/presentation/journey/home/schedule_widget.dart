@@ -1,20 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/blocs/blocs.dart';
+import 'package:schedule/presentation/journey/home/calendar_tab_constants.dart';
 import 'package:schedule/presentation/widget/loading_widget/loading_widget.dart';
 import 'package:schedule/presentation/widget/personal_schedule_widget.dart';
 import 'package:schedule/presentation/widget/school_schedule_widget.dart';
 
-class ScheduleView extends StatelessWidget {
+class ScheduleWidget extends StatelessWidget {
   final PageController _controller = PageController();
 
   Widget buildPageView() {
     return Container(
-      padding: EdgeInsets.symmetric(
-          horizontal: ScreenUtil().setWidth(50),
-          vertical: ScreenUtil().setHeight(20)),
+      padding:const EdgeInsets.symmetric(
+          horizontal: CalendarTabConstants.paddingHorizontal,
+          vertical: CalendarTabConstants.paddingVertical),
       alignment: Alignment.center,
       child: PageView.builder(
         physics: AlwaysScrollableScrollPhysics(),

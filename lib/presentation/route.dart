@@ -6,8 +6,8 @@ import 'package:schedule/blocs/search/search_bloc.dart';
 import 'package:schedule/models/model.dart';
 import 'package:schedule/presentation/journey/register/sign_in_view.dart';
 import 'package:schedule/presentation/journey/splash/splash_view.dart';
-import 'package:schedule/presentation/journey/main/home_view.dart';
-import 'package:schedule/presentation/journey/todo/todo_detail_view.dart';
+import 'package:schedule/presentation/journey/main/main_screen.dart';
+import 'package:schedule/presentation/journey/todo/todo_detail_screen.dart';
 
 int currentRoot = 1;
 
@@ -50,7 +50,7 @@ RouteFactory router() {
               create: (context) => TodoBloc(
                   calendarBloc: BlocProvider.of<CalendarBloc>(context)),
             ),
-          ], child: HomeView());
+          ], child: MainScreen());
 //            child: SchoolSchedulePageView());
         });
       case '/todo-detail':
