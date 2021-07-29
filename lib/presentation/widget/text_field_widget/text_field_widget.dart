@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/presentation/themes/theme_colors.dart';
 
 class TextFieldWidget extends StatelessWidget {
   final TextEditingController? controller;
   final FocusNode? focusNode;
+  final Color? colorBoder;
   final String? initValue;
   final String? labelText;
   final String? hintText;
@@ -27,11 +29,12 @@ class TextFieldWidget extends StatelessWidget {
   final Function()? onEditingComplete;
   final Widget? seffixIcon;
   final Widget? prefixIcon;
-
+  static final double paddingContent=18.w;
   const TextFieldWidget(
       {Key? key,
       this.controller,
       this.focusNode,
+      this.colorBoder,
       this.initValue,
       this.labelText,
       this.hintText,
@@ -62,22 +65,24 @@ class TextFieldWidget extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         focusNode: focusNode,
+        style: textStyle,
         initialValue: initValue,
         textInputAction: inputAction,
         keyboardType: inputType,
         validator: validate,
         autovalidateMode: autovalidateMode,
-        obscureText: obscureText!,
+        obscureText: obscureText ?? false,
         maxLength: maxLength,
-        maxLines: maxLines,
-        textCapitalization: textCapitalization!,
-        readOnly: readOnly!,
-        textAlign: align!,
+        maxLines: maxLines ?? 1,
+        textCapitalization: textCapitalization ?? TextCapitalization.none,
+        readOnly: readOnly ?? false,
+        textAlign: align ?? TextAlign.start,
         onChanged: onChanged,
         onEditingComplete: onEditingComplete,
         onFieldSubmitted: onSubmitted,
         inputFormatters: formatter,
         decoration: InputDecoration(
+          contentPadding: EdgeInsets.all(paddingContent),
           labelText: labelText,
           hintText: hintText,
           labelStyle: textStyle,
@@ -85,17 +90,19 @@ class TextFieldWidget extends StatelessWidget {
           suffixIcon: seffixIcon,
           prefixIcon: prefixIcon,
           enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColor.primaryColor, width: 0.5),
-              borderRadius: BorderRadius.all(Radius.circular(20))),
-          disabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: AppColor.primaryColor, width: 0.5),
-              borderRadius: BorderRadius.all(Radius.circular(20))),
+              borderSide: BorderSide(
+                  color: colorBoder ?? AppColor.primaryColor, width: 0.5),
+              borderRadius: BorderRadius.all(Radius.circular(8))),
+          focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                  color: colorBoder ?? AppColor.primaryColor, width: 0.5),
+              borderRadius: BorderRadius.all(Radius.circular(8))),
           errorBorder: OutlineInputBorder(
               borderSide: BorderSide(color: AppColor.errorColor, width: 0.5),
-              borderRadius: BorderRadius.all(Radius.circular(20))),
+              borderRadius: BorderRadius.all(Radius.circular(8))),
           focusedErrorBorder: OutlineInputBorder(
               borderSide: BorderSide(color: AppColor.primaryColor, width: 0.5),
-              borderRadius: BorderRadius.all(Radius.circular(20))),
+              borderRadius: BorderRadius.all(Radius.circular(8))),
         ),
       ),
     );

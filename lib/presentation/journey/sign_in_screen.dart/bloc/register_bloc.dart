@@ -5,18 +5,19 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/models/model.dart';
+import 'package:schedule/presentation/bloc/snackbar_bloc/bloc.dart';
+import 'package:schedule/presentation/bloc/snackbar_bloc/snackbar_type.dart';
+import 'package:schedule/presentation/journey/sign_in_screen.dart/bloc/register_state.dart';
 import 'package:schedule/service/services.dart';
 
 part 'register_event.dart';
-part 'register_state.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   RepositoryOnline _online = RepositoryOnline();
   RepositoryOffline _offline = RepositoryOffline();
   ShareService _shareService = ShareService();
-
-  RegisterBloc() : super(RegisterInitState());
-
+  final SnackbarBloc snackbarBloc;
+  RegisterBloc({required this.snackbarBloc}) : super(RegisterInitState());
 
   @override
   Stream<RegisterState> mapEventToState(RegisterEvent event) async* {
@@ -35,6 +36,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         var dataJson =
             await _online.fetchScheduleSchoolDataRepo(account, password);
         if (dataJson == '') {
+          snackbarBloc.add(ShowSnackbar(
+              title: 'No Data. Try again', type: SnackBarType.error));
           yield RegisterNoDataState();
         } else {
           Map data = json.decode(dataJson);
@@ -43,6 +46,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           yield RegisterSuccessState();
         }
       } catch (e) {
+        snackbarBloc.add(
+            ShowSnackbar(title: 'Connection Failed', type: SnackBarType.error));
         yield RegisterFailureState(e.toString());
       }
     }
