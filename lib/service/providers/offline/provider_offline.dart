@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:schedule/models/model.dart';
 import 'package:schedule/service/services.dart';
@@ -52,7 +54,7 @@ class ProviderOffline {
       SchoolSchedule schedule = SchoolSchedule.fromJsonDb(node);
       allSchedules.add(schedule);
     }
-//    debugPrint('RepositoryService - allSchedulesMap: ${allSchedules.length}');
+     log('RepositoryService - allSchedulesMap: ${allSchedules.length}');
     return allSchedules;
   }
 

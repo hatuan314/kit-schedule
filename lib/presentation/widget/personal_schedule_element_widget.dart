@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/presentation/themes/theme_border.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
 import 'package:schedule/models/model.dart';
+import 'package:schedule/presentation/widget/widgets_constants.dart';
 
 
 class PersonalScheduleElementWidget extends StatelessWidget{
@@ -14,8 +15,8 @@ class PersonalScheduleElementWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
       return Padding(
-        padding:
-        EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(8)),
+        padding: const
+        EdgeInsets.symmetric(vertical: WidgetsConstants.cardMargin),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -27,14 +28,14 @@ class PersonalScheduleElementWidget extends StatelessWidget{
                 alignment: Alignment.center,
                 child: Text(
                   '${schedule.timer}',
-                  style: ThemeText.titleStyle
+                  style: ThemeText.titleStyle2
               ),
             )),
             Expanded(
               flex: 8,
               child: Container(
-                padding: EdgeInsets.symmetric(
-                    horizontal: ScreenUtil().setWidth(20)),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: WidgetsConstants.detailColumnPaddingHorizontal  ),
                 decoration: BoxDecoration(
                     border: Border(
                         left: ThemeBorder.scheduleElementBorder)),
@@ -44,11 +45,11 @@ class PersonalScheduleElementWidget extends StatelessWidget{
                   children: <Widget>[
                     Text(
                       '${schedule.name}',
-                      style:  ThemeText.titleStyle,
+                      style:  ThemeText.titleStyle2,
                     ),
                     Text(
                       '${schedule.note}',
-                      style:  ThemeText.titleStyle.copyWith(fontWeight: FontWeight.normal),
+                      style:  ThemeText.titleStyle2.copyWith(fontWeight: FontWeight.normal),
                       maxLines: 5,
                     ),
                   ],

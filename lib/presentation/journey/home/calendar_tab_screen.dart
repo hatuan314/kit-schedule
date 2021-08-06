@@ -6,6 +6,8 @@ import 'package:schedule/presentation/journey/home/calendar_tab_constants.dart';
 import 'package:schedule/presentation/journey/home/schedule_widget.dart';
 import 'package:schedule/presentation/widget/loading_widget/loading_widget.dart';
 
+import 'calendar_widget.dart';
+
 class CalendarTabScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -47,7 +49,7 @@ class CalendarTabScreen extends StatelessWidget {
     return SafeArea(
       child: Column(
         children: <Widget>[
-          //CalendarView(state: state),
+          CalendarView(state: state),
           Expanded(child: ScheduleWidget()),
         ],
       ),

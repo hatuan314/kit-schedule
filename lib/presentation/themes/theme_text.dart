@@ -19,6 +19,12 @@ class ThemeText {
       fontFamily: 'MR',
       fontWeight: FontWeight.w600);
 
+  static TextStyle titleStyle2 = TextStyle(
+      fontSize: ScreenUtil().setSp(20),
+      color: AppColor.personalScheduleColor,
+      fontFamily: 'MR',
+      fontWeight: FontWeight.w600);
+
   static TextStyle errorTextStyle = TextStyle(
       fontSize: ScreenUtil().setSp(14),
       color: AppColor.errorColor2,
@@ -42,6 +48,7 @@ class ThemeText {
       fontWeight: FontWeight.w600);
 
   static TextStyle textInforStyle = TextStyle(
+      fontFamily: 'MR',
       color: AppColor.secondColor,
       fontSize: ScreenUtil().setSp(18),
       fontWeight: FontWeight.normal);
@@ -57,6 +64,8 @@ class ThemeText {
       fontSize: ScreenUtil().setSp(18),
       fontFamily: 'MR',
       fontWeight: FontWeight.w600);
+
+  static TextStyle dayOfWeekStyle=TextStyle(fontFamily: 'MR', fontWeight: FontWeight.w400);
 
   /*static TextStyle errorTextStyle = TextStyle(
       color: AppColor.errorColor,

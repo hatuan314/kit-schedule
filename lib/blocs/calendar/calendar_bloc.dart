@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,7 +13,7 @@ part 'calendar_state.dart';
 
 class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
   final RepositoryOffline _offline = RepositoryOffline();
-  Map<DateTime, List> allSchedulesCalendarMap = Map<DateTime, List>();
+  Map<DateTime, List<dynamic>> allSchedulesCalendarMap = Map<DateTime, List>();
   Map<DateTime, List<SchoolSchedule>> allSchoolSchedulesMap =
       Map<DateTime, List<SchoolSchedule>>();
   Map<DateTime, List<PersonalSchedule>> allPersonalSchedulesMap =

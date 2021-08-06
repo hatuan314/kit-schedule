@@ -6,6 +6,7 @@ import 'package:schedule/presentation/themes/theme_text.dart';
 import 'package:schedule/models/model.dart';
 import 'package:schedule/presentation/widget/school_schedule_element_widget.dart';
 import 'package:schedule/presentation/widget/spacing_box_widget.dart';
+import 'package:schedule/presentation/widget/widgets_constants.dart';
 
 class SchoolScheduleWidget extends StatelessWidget {
   final dynamic state;
@@ -18,7 +19,8 @@ class SchoolScheduleWidget extends StatelessWidget {
     return Card(
       semanticContainer: true,
 //      color: Color(0xffFCFAF3),
-//    margin: EdgeInsets.symmetric(vertical: ScUtil.getInstance().setHeight(8)),
+   //   margin: EdgeInsets.symmetric(
+     //     vertical: WidgetsConstants.cardMargin),
       color: AppColor.scheduleBackgroundColor,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -31,38 +33,41 @@ class SchoolScheduleWidget extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text(
-                'School',
-                style:ThemeText.titleStyle.copyWith(
-                    color: AppColor.scheduleType,fontWeight: FontWeight.bold, )),
+              Text('School',
+                  style: ThemeText.titleStyle.copyWith(
+                    color: AppColor.scheduleType,
+                    fontWeight: FontWeight.bold,
+                  )),
               Container(
                 decoration:
                     BoxDecoration(shape: BoxShape.circle, color: Colors.red),
                 margin: EdgeInsets.only(left: ScreenUtil().setHeight(4)),
                 padding: EdgeInsets.all(ScreenUtil().setHeight(5)),
                 child: Text(
-                  schoolSchedulesOfDay != null
-                      ? '${schoolSchedulesOfDay.length}'
-                      : '0',
-                  style: ThemeText.numberStyle
-                ),
+                    schoolSchedulesOfDay != null
+                        ? '${schoolSchedulesOfDay.length}'
+                        : '0',
+                    style: ThemeText.numberStyle),
               )
             ],
           ),
           Expanded(
             child: schoolSchedulesOfDay != null
-                ? ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: schoolSchedulesOfDay.length,
-                    itemBuilder: (context, index) {
-                      SchoolSchedule schedule = schoolSchedulesOfDay[index];
-                      return SchoolScheduleElementWidget(schedule: schedule);
-                    })
+                ? Padding(
+                  padding: const EdgeInsets.only(bottom: WidgetsConstants.cardMargin),
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: schoolSchedulesOfDay.length,
+                      itemBuilder: (context, index) {
+                        SchoolSchedule schedule = schoolSchedulesOfDay[index];
+                        return SchoolScheduleElementWidget(schedule: schedule);
+                      }),
+                )
                 : Align(
                     alignment: Alignment.center,
-                    child: Text(
-                      'No Data',
-                      style: ThemeText.titleStyle.copyWith(color: AppColor.scheduleType)),
+                    child: Text(WidgetsConstants.noDataTxt,
+                        style: ThemeText.titleStyle
+                            .copyWith(color: AppColor.scheduleType)),
                   ),
           )
         ],
