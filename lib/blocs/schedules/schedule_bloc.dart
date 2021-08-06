@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/common/utils/convert.dart';
@@ -19,6 +21,7 @@ class ScheduleBloc extends Bloc<ScheduleEvent, ScheduleState> {
   @override
   Stream<ScheduleState> mapEventToState(ScheduleEvent event) async* {
     // TODO: implement mapEventToState
+
     if (event is GetScheduleDayEvent) {
       yield UpdateScheduleDayLoadingState();
       _schedulesSchoolMap = event.allSchedulesSchoolMap;

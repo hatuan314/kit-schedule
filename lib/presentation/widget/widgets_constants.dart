@@ -8,4 +8,8 @@ class WidgetsConstants {
     fit: BoxFit.cover,
     width: ScreenUtil().setWidth(50),
   );
+
+  static const cardMargin=8.0;
+  static const detailColumnPaddingHorizontal= 20.0;
+  static String noDataTxt= 'No Data';
 }

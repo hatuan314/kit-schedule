@@ -6,6 +6,7 @@ import 'package:schedule/presentation/themes/theme_border.dart';
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
 import 'package:schedule/models/model.dart';
+import 'package:schedule/presentation/widget/widgets_constants.dart';
 
 
 class SchoolScheduleElementWidget extends StatelessWidget{
@@ -21,8 +22,10 @@ class SchoolScheduleElementWidget extends StatelessWidget{
       String startLesson = lessonNumbers[0];
       String endLesson = lessonNumbers[lessonNumbers.length - 1];
       return Padding(
-        padding:
-        EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(8)),
+        padding:const
+        EdgeInsets.symmetric(vertical: WidgetsConstants.cardMargin,
+       horizontal: WidgetsConstants.cardMargin
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -37,13 +40,13 @@ class SchoolScheduleElementWidget extends StatelessWidget{
                   children: <Widget>[
                     Text(
                       '${Convert.startTimeLessonMap[startLesson]}',
-                      style: ThemeText.titleStyle.copyWith(color: AppColor.scheduleType)),
+                      style: ThemeText.titleStyle2.copyWith(color: AppColor.scheduleType)),
                     Icon(Icons.arrow_drop_down,
                         color: AppColor.scheduleType,
                         size: ScreenUtil().setHeight(15)),
                     Text(
                       '${Convert.endTimeLessonMap[endLesson]}',
-                      style: ThemeText.titleStyle.copyWith(color: AppColor.scheduleType)),
+                      style: ThemeText.titleStyle2.copyWith(color: AppColor.scheduleType)),
                   ],
                 ),
               ),
@@ -51,8 +54,8 @@ class SchoolScheduleElementWidget extends StatelessWidget{
             Expanded(
               flex: 8,
               child: Container(
-                padding: EdgeInsets.symmetric(
-                    horizontal: ScreenUtil().setWidth(20)),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: WidgetsConstants.detailColumnPaddingHorizontal),
                 decoration: BoxDecoration(
                     border: Border(
                         left: ThemeBorder.scheduleElementBorder.copyWith(color: AppColor.scheduleType))),
@@ -62,12 +65,14 @@ class SchoolScheduleElementWidget extends StatelessWidget{
                   children: <Widget>[
                     Text(
                       '${schedule.subject}',
-                      style: ThemeText.titleStyle.copyWith(color: AppColor.scheduleType)),
+                      style: ThemeText.titleStyle2.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: AppColor.scheduleType)),
                     Text(
                       schedule.address!.contains('null')
-                          ? 'No Data'
+                          ? WidgetsConstants.noDataTxt
                           : '${schedule.address}',
-                      style: ThemeText.titleStyle.copyWith(color: AppColor.scheduleType).copyWith(fontWeight: FontWeight.normal)),
+                      style: ThemeText.titleStyle2.copyWith(color: AppColor.scheduleType).copyWith(fontWeight: FontWeight.normal)),
                   ],
                 ),
               ),

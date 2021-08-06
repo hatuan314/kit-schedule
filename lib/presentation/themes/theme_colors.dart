@@ -6,6 +6,8 @@ class AppColor {
   static const Color secondColor = Color(0xffFCFAF3);
   static const Color errorColor = Colors.red;
 
+
+
   static const Color menuItemTextColor = Colors.white;
   static const Color menuBackgroundColor = const Color.fromRGBO(48, 48, 48, 1);
   static const Color highLightTextColor = const Color.fromRGBO(249, 170, 51, 1);

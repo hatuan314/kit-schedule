@@ -20,16 +20,18 @@ class MainScreen extends StatelessWidget {
         _warningSignOutDialog(context);
       if (state is SignOutFailureState) _errorSignOutDialog(context);
     }, child: BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
-      Widget _currentTab = CalendarTabScreen();
-      if (state.selectIndex == 2)
-        _currentTab = CreateTodoTabView();
-      else if (state.selectIndex == 1)
-        _currentTab = SearchScreen();
-      else
-        _currentTab = CalendarTabScreen();
+
       return Scaffold(
           backgroundColor: AppColor.secondColor,
-          body: _currentTab,
+          body: IndexedStack(
+            index: state.selectIndex,
+            children: [
+              CalendarTabScreen(),
+              SearchScreen(),
+              CreateTodoTabView(),
+              CalendarTabScreen(),
+            ],
+          ),
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
                 color: AppColor.secondColor,
