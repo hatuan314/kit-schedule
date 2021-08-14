@@ -84,8 +84,7 @@ class _CalendarViewState extends State<CalendarView> {
   }
 
   List _getEventsForDay(DateTime day) {
-    DateTime dateTime = Convert.dateConvert(
-        DateTime.fromMillisecondsSinceEpoch(day.millisecondsSinceEpoch));
+
     return this.widget.state!.allSchedulesCalendarMap[
             DateTime.fromMillisecondsSinceEpoch(day.millisecondsSinceEpoch)] ??
         [];
