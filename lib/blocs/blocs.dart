@@ -4,4 +4,4 @@ export 'schedules/schedule_bloc.dart';
 export 'search/search_bloc.dart';
 export 'simple_bloc_delegate.dart';
 export 'splash/splash_bloc.dart';
-export 'todo/todo_bloc.dart';
+

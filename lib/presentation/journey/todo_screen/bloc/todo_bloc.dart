@@ -4,6 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/blocs/blocs.dart';
 import 'package:schedule/common/utils/convert.dart';
 import 'package:schedule/models/model.dart';
+import 'package:schedule/presentation/bloc/snackbar_bloc/snackbar_bloc.dart';
+import 'package:schedule/presentation/bloc/snackbar_bloc/snackbar_event.dart';
+import 'package:schedule/presentation/bloc/snackbar_bloc/snackbar_type.dart';
 import 'package:schedule/service/services.dart';
 
 part 'todo_event.dart';
@@ -14,8 +17,11 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   RepositoryOffline _repositoryOffline = RepositoryOffline();
   String _date = DateTime.now().millisecondsSinceEpoch.toString();
   String _timer = '${Convert.timerConvert(TimeOfDay.now())}';
-
-  TodoBloc({this.calendarBloc}) : super(TodoInitState(selectDay: null,selectTimer:null));
+  SnackbarBloc snackbarBloc;
+  TodoBloc({this.calendarBloc,required this.snackbarBloc})
+      : super(TodoInitState(
+            selectDay: DateTime.now().millisecondsSinceEpoch.toString(),
+            selectTimer: '${Convert.timerConvert(TimeOfDay.now())}'));
 
   // @override
   // // TODO: implement initialState
@@ -61,8 +67,10 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       _date = DateTime.now().millisecondsSinceEpoch.toString();
       _timer = '${Convert.timerConvert(TimeOfDay.now())}';
       calendarBloc!.add(GetAllScheduleDataEvent());
+      snackbarBloc.add(ShowSnackbar(title: 'Create Success', type: SnackBarType.success));
       yield TodoSuccessState(true, selectTimer: _timer, selectDay: _date);
     } catch (e) {
+      snackbarBloc.add(ShowSnackbar(title: 'Create Failed', type: SnackBarType.error));
       yield TodoFailureState(
           error: e.toString(), selectDay: this._date, selectTimer: this._timer);
     }
