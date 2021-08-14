@@ -7,8 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 //import 'package:flutter_rounded_date_picker/rounded_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
-import 'package:schedule/blocs/todo/todo_bloc.dart';
-import 'package:schedule/presentation/journey/todo/todo_constants.dart'; 
+import 'package:schedule/presentation/journey/todo_screen/bloc/todo_bloc.dart';
+import 'package:schedule/presentation/journey/todo_screen/todo_constants.dart';
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
 import 'package:schedule/models/model.dart';
@@ -91,7 +91,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
 
   _todoBackgroundWidget(TodoState state) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: ToDoConstants.paddingHorizontal),
+      padding:  EdgeInsets.symmetric(horizontal: ToDoConstants.paddingHorizontal),
       child: Stack(
         alignment: Alignment.centerRight,
         children: <Widget>[
@@ -109,7 +109,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
               InkWell(
                 onTap: () => _selectDatePicker(),
                 child: Padding(
-                  padding:const EdgeInsets.symmetric(
+                  padding: EdgeInsets.symmetric(
                       vertical: ToDoConstants.inkWellPaddingVertical),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -135,7 +135,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
             ],
           ),
           Padding(
-            padding:const EdgeInsets.only(right: ToDoConstants.paddingHorizontal),
+            padding: EdgeInsets.only(right: ToDoConstants.paddingHorizontal),
             child: SvgPicture.asset(
               ToDoConstants.kitLogoPath,
               width: ToDoConstants.kitLogoWidth,
@@ -196,7 +196,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                                   color:AppColor.personalScheduleColor2,
                                   width: ToDoConstants.borderWidth)),
                           alignment: Alignment.center,
-                          padding:const EdgeInsets.symmetric(
+                          padding: EdgeInsets.symmetric(
                               vertical: ToDoConstants.setTimeContainerPaddingVertical),
                           child: Text(
                             state is TodoInitState
@@ -234,7 +234,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
                                 ),
                                 width: double.infinity,
                                 alignment: Alignment.center,
-                                padding:const EdgeInsets.symmetric(
+                                padding: EdgeInsets.symmetric(
                                     vertical: ToDoConstants.setTimeContainerPaddingVertical),
                                 child: Text(
                                     ToDoConstants.saveTxt,
@@ -285,7 +285,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
         dialogType: DialogType.WARNING,
         animType: AnimType.BOTTOMSLIDE,
         body: Padding(
-          padding:const EdgeInsets.symmetric(
+          padding: EdgeInsets.symmetric(
               vertical: ToDoConstants.paddingVertical),
           child: RichText(
             text: TextSpan(
@@ -323,7 +323,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
             ),
             alignment: Alignment.center,
             child: Padding(
-              padding: const EdgeInsets.symmetric(
+              padding:  EdgeInsets.symmetric(
                   vertical: ToDoConstants.paddingVertical,
                   horizontal: ToDoConstants.paddingHorizontal
               ),
@@ -354,7 +354,7 @@ class _TodoDetailViewState extends State<TodoDetailView> {
             ),
             alignment: Alignment.center,
             child: Padding(
-              padding:const EdgeInsets.symmetric(
+              padding: EdgeInsets.symmetric(
                   vertical: ToDoConstants.paddingVertical,
                   horizontal: ToDoConstants.paddingHorizontal
               ),

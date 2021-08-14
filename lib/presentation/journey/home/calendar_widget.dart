@@ -22,7 +22,6 @@ class CalendarView extends StatefulWidget {
 }
 
 class _CalendarViewState extends State<CalendarView> {
-
   DateTime _selectedDay = DateTime.now();
   DateTime _focusedDay = DateTime.now();
   @override
@@ -32,12 +31,10 @@ class _CalendarViewState extends State<CalendarView> {
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(30)),
           color: Color(0xffFCFAF3)),
       child: TableCalendar(
-
-    currentDay:_selectedDay,
+        currentDay: _selectedDay,
         firstDay: DateTime.utc(2010, 10, 16),
         lastDay: DateTime.utc(2030, 3, 14),
         focusedDay: _focusedDay,
-
         eventLoader: _getEventsForDay,
         startingDayOfWeek: StartingDayOfWeek.monday,
         daysOfWeekStyle: DaysOfWeekStyle(
@@ -50,8 +47,7 @@ class _CalendarViewState extends State<CalendarView> {
                 shape: BoxShape.circle,
                 color: CalendarTabConstants.markerColor),
             todayDecoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: CalendarTabConstants.todayColor),
+                shape: BoxShape.circle, color: CalendarTabConstants.todayColor),
             selectedDecoration:
                 BoxDecoration(color: CalendarTabConstants.selectedDayColor),
             markerSize: CalendarTabConstants.markerSize,
@@ -88,18 +84,19 @@ class _CalendarViewState extends State<CalendarView> {
   }
 
   List _getEventsForDay(DateTime day) {
-     return this.widget.state!.allSchedulesCalendarMap[
+    DateTime dateTime = Convert.dateConvert(
+        DateTime.fromMillisecondsSinceEpoch(day.millisecondsSinceEpoch));
+    return this.widget.state!.allSchedulesCalendarMap[
             DateTime.fromMillisecondsSinceEpoch(day.millisecondsSinceEpoch)] ??
         [];
   }
-
 
   void _onDaySelected(
       DateTime selectedDay, DateTime focusedDay, BuildContext context) {
     if (!isSameDay(_selectedDay, selectedDay))
       setState(() {
         _selectedDay = selectedDay;
-          _focusedDay = focusedDay;
+        _focusedDay = focusedDay;
       });
 
     BlocProvider.of<ScheduleBloc>(context)

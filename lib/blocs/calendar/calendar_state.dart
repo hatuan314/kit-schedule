@@ -5,7 +5,7 @@ abstract class CalendarState extends Equatable {}
 class CalendarLoadingDataState extends CalendarState {
   @override
   // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }
 
 class CalendarLoadDataSuccessState extends CalendarState {

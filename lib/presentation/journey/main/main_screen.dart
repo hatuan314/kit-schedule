@@ -5,7 +5,8 @@ import 'package:schedule/blocs/home/home_bloc.dart';
 import 'package:schedule/presentation/journey/home/calendar_tab_screen.dart';
 import 'package:schedule/presentation/journey/home/calendar_tab_constants.dart';
 import 'package:schedule/presentation/journey/search/search_screen.dart';
-import 'package:schedule/presentation/journey/todo/create_todo_tab_screen.dart';
+import 'package:schedule/presentation/journey/todo_screen/todo_screen.dart';
+
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
 
@@ -28,7 +29,7 @@ class MainScreen extends StatelessWidget {
             children: [
               CalendarTabScreen(),
               SearchScreen(),
-              CreateTodoTabView(),
+              TodoScreen(),
               CalendarTabScreen(),
             ],
           ),

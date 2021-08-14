@@ -9,7 +9,10 @@ import 'package:schedule/presentation/journey/sign_in_screen.dart/bloc/register_
 import 'package:schedule/presentation/journey/sign_in_screen.dart/sign_in_view.dart';
 import 'package:schedule/presentation/journey/splash/splash_view.dart';
 import 'package:schedule/presentation/journey/main/main_screen.dart';
-import 'package:schedule/presentation/journey/todo/todo_detail_screen.dart';
+import 'package:schedule/presentation/journey/todo_screen/bloc/todo_bloc.dart';
+
+import 'package:schedule/presentation/journey/todo_screen/todo_detail_screen.dart';
+import 'package:schedule/presentation/journey/todo_screen/todo_screen.dart';
 
 int currentRoot = 1;
 
@@ -40,16 +43,15 @@ RouteFactory router() {
               create: (context) => HomeBloc(),
             ),
             BlocProvider(
-              create: (context) =>
-                  CalendarBloc()..add(GetAllScheduleDataEvent()),
+              create: (context) => Injector.getIt<CalendarBloc>()
+                ..add(GetAllScheduleDataEvent()),
             ),
             BlocProvider(
               create: (context) =>
                   SearchBloc()..add(SearchButtonOnPress(DateTime.now())),
             ),
             BlocProvider(
-              create: (context) => TodoBloc(
-                  calendarBloc: BlocProvider.of<CalendarBloc>(context)),
+              create: (context) => Injector.getIt<TodoBloc>(),
             ),
           ], child: MainScreen());
 //            child: SchoolSchedulePageView());
@@ -57,10 +59,17 @@ RouteFactory router() {
       case '/todo-detail':
         PersonalSchedule schedule = PersonalSchedule.fromJson(
             settings.arguments as Map<String, dynamic>);
+        int hour = int.parse(schedule.timer!.split(':').elementAt(0));
+        int minute = int.parse(schedule.timer!.split(':').elementAt(1));
         return CupertinoPageRoute(builder: (context) {
           return BlocProvider(
-              create: (context) => TodoBloc(),
-              child: TodoDetailView(schedule: schedule));
+              create: (context) => Injector.getIt<TodoBloc>()
+                ..add(SelectDatePickerOnPressEvent(
+                    selectDay: DateTime.fromMillisecondsSinceEpoch(
+                        int.parse(schedule.date!))))
+                ..add(SelectTimePickerOnPressEvent(
+                    timer: TimeOfDay(hour: hour, minute: minute))),
+              child: TodoScreen(personalSchedule: schedule));
         });
     }
 
