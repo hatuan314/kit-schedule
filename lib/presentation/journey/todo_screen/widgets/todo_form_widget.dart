@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/presentation/journey/todo_screen/bloc/todo_bloc.dart';
 import 'package:schedule/presentation/journey/todo_screen/todo_constants.dart';
 import 'package:schedule/presentation/themes/theme_colors.dart';
@@ -98,7 +99,7 @@ class TodoFormWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SpacingBoxWidget(height: 30),
+                      SpacingBoxWidget(height: 30.h),
                       state is TodoLoadingState
                           ? Container(
                               child: LoadingWidget(),

@@ -11,7 +11,6 @@ import 'package:schedule/presentation/journey/splash/splash_view.dart';
 import 'package:schedule/presentation/journey/main/main_screen.dart';
 import 'package:schedule/presentation/journey/todo_screen/bloc/todo_bloc.dart';
 
-import 'package:schedule/presentation/journey/todo_screen/todo_detail_screen.dart';
 import 'package:schedule/presentation/journey/todo_screen/todo_screen.dart';
 
 int currentRoot = 1;
