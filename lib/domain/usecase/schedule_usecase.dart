@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:schedule/common/constants/timeout_constants.dart';
 import 'package:schedule/domain/repositories/schedule_repositories.dart';
 import 'package:schedule/presentation/journey/main/main_constants.dart';
 
@@ -12,7 +13,7 @@ class ScheduleUseCase {
     try {
       Map? result = await scheduleRepositories
           .fetchScheduleSchoolDataDioRepo(account, password)
-          .timeout(Duration(seconds: 5));
+          .timeout(TimOutConstants.timeOutConstants);
       if (result == null) {
         return {};
       } else if (result.isNotEmpty) {//api có data đồng bộ lên firebase
