@@ -60,6 +60,8 @@ dependencies:
   crypto: ^3.0.1
   flutter_screenutil: ^5.0.0+2
   #cupertino_date_textbox: ^1.0.0+3
+  firebase_core: ^1.4.0
+  cloud_firestore: ^2.4.0
 
 
 dev_dependencies:

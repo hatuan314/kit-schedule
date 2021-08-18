@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "448945980720",
+    "project_id": "kitschedule-d603c",
+    "storage_bucket": "kitschedule-d603c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:448945980720:android:fbfbcbe8111c35ce7234f5",
+        "android_client_info": {
+          "package_name": "kma.hatuan314.schedule"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "448945980720-t3ssl4cm9fvetkr2bh1c8epm8bvgtka1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkLT_gLhYk3BNcZBnIX9xr_iMGR5RJAWw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "448945980720-t3ssl4cm9fvetkr2bh1c8epm8bvgtka1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
