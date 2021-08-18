@@ -16,15 +16,18 @@ class ScheduleUseCase {
       if (result == null) {
         return {};
       } else if (result.isNotEmpty) {//api có data đồng bộ lên firebase
+        print('-->>>Api trả kq');
         await scheduleRepositories.syncScheduleSchoolDataFirebaseRepo(
             account, result);
         return result;
       } else {//nếu api trả về trống lấy data trên firebase
+        print('->>>FireBase');
         Map result = await scheduleRepositories
             .fetchScheduleSchoolDataFirebaseRepo(account);
         return result;
       }
     } on TimeoutException {
+      print('---->>>Firebase');
       Map result = await scheduleRepositories
           .fetchScheduleSchoolDataFirebaseRepo(account);
       return result;
