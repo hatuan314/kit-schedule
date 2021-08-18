@@ -4,6 +4,7 @@ import 'package:crypto/crypto.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:schedule/domain/usecase/schedule_usecase.dart';
 import 'package:schedule/models/model.dart';
 import 'package:schedule/presentation/bloc/snackbar_bloc/bloc.dart';
 import 'package:schedule/presentation/bloc/snackbar_bloc/snackbar_type.dart';
@@ -17,7 +18,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   RepositoryOffline _offline = RepositoryOffline();
   ShareService _shareService = ShareService();
   final SnackbarBloc snackbarBloc;
-  RegisterBloc({required this.snackbarBloc}) : super(RegisterInitState());
+  final ScheduleUseCase scheduleUseCase;
+  RegisterBloc({required this.snackbarBloc,required this.scheduleUseCase}) : super(RegisterInitState());
 
   @override
   Stream<RegisterState> mapEventToState(RegisterEvent event) async* {
@@ -33,14 +35,12 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       String account = event.account;
       String password = md5.convert(utf8.encode(event.password)).toString();
       try {
-        var dataJson =
-            await _online.fetchScheduleSchoolDataRepo(account, password);
-        if (dataJson == '') {
+        var data=await scheduleUseCase.fetchScheduleSchoolData(account, password);
+        if (data!.isEmpty) {
           snackbarBloc.add(ShowSnackbar(
               title: 'No Data. Try again', type: SnackBarType.error));
           yield RegisterNoDataState();
         } else {
-          Map data = json.decode(dataJson);
           await _saveScheduleSchool(data, state);
           await _shareService.setIsSaveData(true);
           yield RegisterSuccessState();

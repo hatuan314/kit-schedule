@@ -22,6 +22,7 @@ if (flutterVersionName == null) {
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
@@ -46,6 +47,7 @@ android {
         applicationId "kma.hatuan314.schedule"
         minSdkVersion 18
         targetSdkVersion 29
+        multiDexEnabled true
         versionCode 10
         versionName '6.0.3'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -85,4 +87,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation platform('com.google.firebase:firebase-bom:28.3.1')
 }

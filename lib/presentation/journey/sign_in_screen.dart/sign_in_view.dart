@@ -108,8 +108,8 @@ class _SignInViewState extends State<SignInView> {
                                       },
                                 icon: Icon(
                                   isShow
-                                      ? Icons.visibility_off
-                                      : Icons.visibility,
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
                                   color: SignInConstants.colorDefault,
                                 ),
                               ),
@@ -176,7 +176,9 @@ class _SignInViewState extends State<SignInView> {
 
   _loadingUI() {
     return Container(
-      child: LoadingWidget(),
+      child: LoadingWidget(
+        colorLoading: AppColor.secondColor,
+      ),
     );
   }
 

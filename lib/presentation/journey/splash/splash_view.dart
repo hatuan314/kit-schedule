@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:schedule/presentation/themes/theme_colors.dart';
-import 'package:schedule/presentation/themes/theme_text.dart';
-import 'package:schedule/presentation/widget/widgets_constants.dart';
+
 import 'package:schedule/service/services.dart';
 
 class SplashView extends StatefulWidget {
