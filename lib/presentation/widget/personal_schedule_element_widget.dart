@@ -28,7 +28,7 @@ class PersonalScheduleElementWidget extends StatelessWidget{
                 alignment: Alignment.center,
                 child: Text(
                   '${schedule.timer}',
-                  style: ThemeText.titleStyle2
+                  style: ThemeText.textStyle
               ),
             )),
             Expanded(
@@ -45,11 +45,11 @@ class PersonalScheduleElementWidget extends StatelessWidget{
                   children: <Widget>[
                     Text(
                       '${schedule.name}',
-                      style:  ThemeText.titleStyle2,
+                      style:  ThemeText.textStyle,
                     ),
                     Text(
                       '${schedule.note}',
-                      style:  ThemeText.titleStyle2.copyWith(fontWeight: FontWeight.normal),
+                      style:  ThemeText.textStyle.copyWith(fontWeight: FontWeight.normal),
                       maxLines: 5,
                     ),
                   ],
