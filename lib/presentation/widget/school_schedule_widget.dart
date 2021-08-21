@@ -66,7 +66,7 @@ class SchoolScheduleWidget extends StatelessWidget {
                 : Align(
                     alignment: Alignment.center,
                     child: Text(WidgetsConstants.noDataTxt,
-                        style: ThemeText.titleStyle
+                        style: ThemeText.textStyle
                             .copyWith(color: AppColor.scheduleType)),
                   ),
           )
