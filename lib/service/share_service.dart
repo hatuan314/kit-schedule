@@ -13,11 +13,12 @@ class ShareService {
 
   Future<String?> getUsername()async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return await prefs.getString('username');
+    String username = await prefs.getString('username') ??'';
+    return username ;
   }
-  Future  setUsername(String username)async{
+  Future<bool>  setUsername(String username)async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
-     await prefs.setString('username', username);
+    return await prefs.setString('username', username);
   }
 
   Future<bool?> getIsSaveData() async {

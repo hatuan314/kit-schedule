@@ -5,6 +5,7 @@ import 'package:schedule/presentation/themes/theme_text.dart';
 import 'package:schedule/models/model.dart';
 import 'package:schedule/presentation/widget/personal_schedule_element_widget.dart';
 import 'package:schedule/presentation/widget/spacing_box_widget.dart';
+import 'package:schedule/presentation/widget/widgets_constants.dart';
 
 class PersonalScheduleWidget extends StatelessWidget {
   final dynamic state;
@@ -65,8 +66,8 @@ class PersonalScheduleWidget extends StatelessWidget {
                 : Align(
                     alignment: Alignment.center,
                     child: Text(
-                      'No Data',
-                      style: ThemeText.titleStyle
+                      WidgetsConstants.noDataTxt,
+                      style: ThemeText.textStyle
                   ),
           )
           )

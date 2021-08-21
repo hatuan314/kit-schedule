@@ -62,7 +62,23 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
             allSchedulesCalendarMap[scheduleDate]!
                 .add(json.encode(schedule.toJson()));
             allSchoolSchedulesMap[scheduleDate]!.add(schedule);
+            for(int i=0;i< allSchoolSchedulesMap[scheduleDate]!.length-1;i++)
+              {
+                int lesson1= int.parse(allSchoolSchedulesMap[scheduleDate]![i].lesson!.split(',')[0]);
+                for(int j=i;j< allSchoolSchedulesMap[scheduleDate]!.length;j++)
+                {
+                  int lesson2= int.parse(allSchoolSchedulesMap[scheduleDate]![j].lesson!.split(',')[0]);
+                  if(lesson1>lesson2)
+                    {
+                      SchoolSchedule tmp = allSchoolSchedulesMap[scheduleDate]![i];
+                      allSchoolSchedulesMap[scheduleDate]![i]=allSchoolSchedulesMap[scheduleDate]![j];
+                      allSchoolSchedulesMap[scheduleDate]![j]=tmp;
+                    }
+                }
+              }
           });
+
+
         }
       } catch (e) {
         debugPrint('CalendarBloc - mapGetAllSchoolScheduleToMap - error: {$e}');

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -72,8 +74,10 @@ class _SplashViewState extends State<SplashView> {
   Future navigateToScreen() async {
     ShareService _shareService = ShareService();
     try {
-      final flag = await _shareService.getIsSaveData();
-      if (flag == true)
+      final flag1 = await _shareService.getIsSaveData();
+      final flag2 = await _shareService.getUsername();
+      log(flag2.toString());
+      if (flag1 == true && flag2!='')
         Navigator.pushReplacementNamed(context, '/home');
       else
         Navigator.pushReplacementNamed(context, '/sign-in');

@@ -31,7 +31,7 @@ class ThemeText {
       fontFamily: "MR");
 
   static TextStyle numberStyle = TextStyle(
-      fontSize: ScreenUtil().setSp(18),
+      fontSize: ScreenUtil().setSp(14),
       color: AppColor.secondColor,
       fontWeight: FontWeight.normal);
 
