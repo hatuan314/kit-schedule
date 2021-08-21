@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/blocs/home/home_bloc.dart';
 import 'package:schedule/presentation/journey/home/calendar_tab_screen.dart';
+import 'package:schedule/presentation/journey/profile/profile_screen.dart';
+import 'package:schedule/presentation/journey/scores/scores_screen.dart';
 
 import 'package:schedule/presentation/journey/search/search_screen.dart';
 import 'package:schedule/presentation/journey/todo_screen/todo_screen.dart';
@@ -17,7 +19,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return BlocListener<HomeBloc, HomeState>(listener: (context, state) {
-      if (state is HomeOnChangeTabState) if (state.selectIndex == 3)
+      if (state is HomeOnChangeTabState) if (state.selectIndex == 4)
         _warningSignOutDialog(context);
       if (state is SignOutFailureState) _errorSignOutDialog(context);
     }, child: BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
@@ -28,8 +30,9 @@ class MainScreen extends StatelessWidget {
             index: state.selectIndex,
             children: [
               CalendarTabScreen(),
-              SearchScreen(),
+              ScoresScreen(),
               TodoScreen(),
+              ProfileScreen(),
               CalendarTabScreen(),
             ],
           ),
@@ -53,7 +56,7 @@ class MainScreen extends StatelessWidget {
                         child: navBarItem(context, 0, Icons.date_range, state)),
                     Expanded(
                         flex: 1,
-                        child: navBarItem(context, 1, Icons.search, state)),
+                        child: navBarItem(context, 1, Icons.work_outline_rounded, state)),
                     Expanded(
                         flex: 1,
                         child:

@@ -11,6 +11,15 @@ class ShareService {
 
   bool? _isSave = false;
 
+  Future<String?> getUsername()async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return await prefs.getString('username');
+  }
+  Future  setUsername(String username)async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+     await prefs.setString('username', username);
+  }
+
   Future<bool?> getIsSaveData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     this._isSave = prefs.getBool('data');
