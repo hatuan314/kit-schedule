@@ -67,7 +67,7 @@ class PersonalScheduleWidget extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Text(
                       WidgetsConstants.noDataTxt,
-                      style: ThemeText.textStyle
+                      style: ThemeText.textStyle.copyWith(color: AppColor.personalScheduleColor)
                   ),
           )
           )

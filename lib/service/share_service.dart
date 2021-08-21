@@ -27,6 +27,7 @@ class ShareService {
     return this._isSave;
   }
 
+
   Future setIsSaveData(bool value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('data', value);
