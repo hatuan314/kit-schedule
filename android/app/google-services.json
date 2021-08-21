@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "448945980720",
-    "project_id": "kitschedule-d603c",
-    "storage_bucket": "kitschedule-d603c.appspot.com"
+    "project_number": "90947568218",
+    "project_id": "kitschedule-244ae",
+    "storage_bucket": "kitschedule-244ae.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:448945980720:android:fbfbcbe8111c35ce7234f5",
+        "mobilesdk_app_id": "1:90947568218:android:ea4b55687049238d7f8e63",
         "android_client_info": {
           "package_name": "kma.hatuan314.schedule"
         }
       },
       "oauth_client": [
         {
-          "client_id": "448945980720-t3ssl4cm9fvetkr2bh1c8epm8bvgtka1.apps.googleusercontent.com",
+          "client_id": "90947568218-rcf0q9vfqchedq3tijj51m8400l0agb3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kma.hatuan314.schedule",
+            "certificate_hash": "c5d59a392225359fc88888e1f645b95d9403ca51"
+          }
+        },
+        {
+          "client_id": "90947568218-24hv1f9m9s9s2oj8427p089q1c21ptsr.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCkLT_gLhYk3BNcZBnIX9xr_iMGR5RJAWw"
+          "current_key": "AIzaSyDRMevvugD54tbNK_bE5gwR20AslhXv_1Y"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "448945980720-t3ssl4cm9fvetkr2bh1c8epm8bvgtka1.apps.googleusercontent.com",
+              "client_id": "90947568218-24hv1f9m9s9s2oj8427p089q1c21ptsr.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
