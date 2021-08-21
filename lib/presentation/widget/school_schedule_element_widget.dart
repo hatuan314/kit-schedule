@@ -40,13 +40,13 @@ class SchoolScheduleElementWidget extends StatelessWidget{
                   children: <Widget>[
                     Text(
                       '${Convert.startTimeLessonMap[startLesson]}',
-                      style: ThemeText.titleStyle2.copyWith(color: AppColor.scheduleType)),
+                      style: ThemeText.textStyle.copyWith(color: AppColor.scheduleType)),
                     Icon(Icons.arrow_drop_down,
                         color: AppColor.scheduleType,
                         size: ScreenUtil().setHeight(15)),
                     Text(
                       '${Convert.endTimeLessonMap[endLesson]}',
-                      style: ThemeText.titleStyle2.copyWith(color: AppColor.scheduleType)),
+                      style: ThemeText.textStyle.copyWith(color: AppColor.scheduleType)),
                   ],
                 ),
               ),
@@ -65,14 +65,14 @@ class SchoolScheduleElementWidget extends StatelessWidget{
                   children: <Widget>[
                     Text(
                       '${schedule.subject}',
-                      style: ThemeText.titleStyle2.copyWith(
+                      style: ThemeText.textStyle.copyWith(
                           fontWeight: FontWeight.w600,
                           color: AppColor.scheduleType)),
                     Text(
                       schedule.address!.contains('null')
                           ? WidgetsConstants.noDataTxt
                           : '${schedule.address}',
-                      style: ThemeText.titleStyle2.copyWith(color: AppColor.scheduleType).copyWith(fontWeight: FontWeight.normal)),
+                      style: ThemeText.textStyle.copyWith(color: AppColor.scheduleType).copyWith(fontWeight: FontWeight.normal)),
                   ],
                 ),
               ),

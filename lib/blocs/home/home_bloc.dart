@@ -19,6 +19,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       ShareService shareService = ShareService();
       try {
         await _repositoryOffline.deleteAllSchoolSchedulesRepo();
+        await shareService.setUsername('');
         await shareService.setIsSaveData(false);
         yield SignOutSuccessState(0);
       } catch (e) {

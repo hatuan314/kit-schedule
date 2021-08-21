@@ -34,6 +34,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       yield RegisterLoadingState();
       String account = event.account;
       String password = md5.convert(utf8.encode(event.password)).toString();
+      await ShareService().setUsername(event.account);
       try {
         var data=await scheduleUseCase.fetchScheduleSchoolData(account, password);
         if (data!.isEmpty) {
