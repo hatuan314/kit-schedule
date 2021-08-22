@@ -13,6 +13,7 @@
     <application
         android:usesCleartextTraffic = "true"
         android:icon="@mipmap/ic_launcher"
+        android:installLocation="preferExternal"
         android:label="Kit Schedule">
         <activity
             android:name=".MainActivity"
