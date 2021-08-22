@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/blocs/home/home_bloc.dart';
@@ -13,12 +15,14 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return BlocProvider(
         create: (context) =>
         ProfileBloc()
           ..add(GetUserNameEvent()),
         child: BlocBuilder<ProfileBloc, ProfileState>(
             builder: (context, profileState) {
+              log( profileState.username.length.toString());
               return SafeArea(
                 child: Scaffold(
                   backgroundColor: AppColor.secondColor,
@@ -39,7 +43,7 @@ class ProfileScreen extends StatelessWidget {
                                   color: Colors.blue.shade100,
                                   shape: BoxShape.circle),
                               child: Text(
-                           profileState.username.substring(0, 2),
+                           profileState.username.length!=0 ?profileState.username.substring(0, 2):'',
                                 style: ThemeText.headerStyle2.copyWith(fontSize: 35),
                               ),
                             ),
