@@ -177,7 +177,7 @@ class _SignInViewState extends State<SignInView> {
   _loadingUI() {
     return Container(
       child: LoadingWidget(
-        colorLoading: AppColor.secondColor,
+        color: AppColor.secondColor,
       ),
     );
   }

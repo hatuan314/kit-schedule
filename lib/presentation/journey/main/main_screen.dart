@@ -17,7 +17,6 @@ import 'main_constants.dart';
 class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return BlocListener<HomeBloc, HomeState>(listener: (context, state) {
       if (state is HomeOnChangeTabState) if (state.selectIndex == 4)
         _warningSignOutDialog(context);
@@ -56,7 +55,7 @@ class MainScreen extends StatelessWidget {
                         child: navBarItem(context, 0, Icons.date_range, state)),
                     Expanded(
                         flex: 1,
-                        child: navBarItem(context, 1, Icons.work_outline_rounded, state)),
+                        child: navBarItem(context, 1, Icons.score_outlined, state)),
                     Expanded(
                         flex: 1,
                         child:
@@ -83,24 +82,10 @@ class MainScreen extends StatelessWidget {
           child: Icon(
             icon,
             color: state.selectIndex == index
-                ? getColor(index)
+                ? AppColor.fourthColor
                 : AppColor.primaryColor,
           ),
         ));
-  }
-
-  Color getColor(int index) {
-    switch (index) {
-      case 0:
-        return AppColor.scheduleType;
-      case 1:
-        return AppColor.searchType;
-      case 2:
-        return AppColor.fourthColor;
-      case 3:
-        return AppColor.searchType;
-    }
-    return AppColor.fourthColor;
   }
 
   void _warningSignOutDialog(BuildContext context) {

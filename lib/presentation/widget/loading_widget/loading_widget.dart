@@ -4,9 +4,9 @@ import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/widget/loader_widget/loader_constants.dart';
 
 class LoadingWidget extends StatelessWidget {
-  final Color colorLoading;
+  final Color color;
 
-  const LoadingWidget({Key? key, this.colorLoading = AppColor.primaryColor})
+  LoadingWidget({Key? key, this.color = AppColor.loadingColor})
       : super(key: key);
 
   @override
@@ -17,7 +17,7 @@ class LoadingWidget extends StatelessWidget {
       alignment: Alignment.center,
       child:  CircularProgressIndicator(
         key: ValueKey(LoaderConstants.loaderImageKey),
-        color: colorLoading,
+        color: color,
       ),
     );
   }

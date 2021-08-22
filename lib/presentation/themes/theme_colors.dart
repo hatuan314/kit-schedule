@@ -60,5 +60,5 @@ class AppColor {
 
   static Color textFieldColor = Colors.blue.shade800;
 
-  static Color loadingColor = Colors.blue.shade900;
+  static const Color loadingColor = Color(0xFF0D47A1);
 }

@@ -12,7 +12,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitialState(0));
     @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
-    // TODO: implement mapEventToState
     if (event is OnTabChangeEvent) {
       yield HomeOnChangeTabState(event.selectIndex);
     } else if (event is SignOutOnPressEvent) {
