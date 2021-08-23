@@ -11,9 +11,13 @@ class DataRemote {
 
   DataRemote({required this.firebaseSetup});
 
-  Future<Map<String, dynamic>?> fetchScheduleSchoolDataDio(String account, String password) async {
+  Future<Map<String, dynamic>?> fetchScheduleSchoolDataDio(
+      String account, String password) async {
     final dio = _service.setupDio();
-    final authBody = {"studentAccount": "$account", "studentPassword": "$password"};
+    final authBody = {
+      "studentAccount": "$account",
+      "studentPassword": "$password"
+    };
 
     final response = await dio.post('', data: authBody);
 
