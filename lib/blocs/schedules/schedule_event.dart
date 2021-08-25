@@ -9,7 +9,7 @@ abstract class ScheduleEvent extends Equatable {
 class GetScheduleDayEvent extends ScheduleEvent {
   final DateTime? selectDay;
   final Map<DateTime, List<SchoolSchedule>>? allSchedulesSchoolMap;
-  final Map<DateTime, List<PersonalSchedule>>? allSchedulePersonalMap;
+  final Map<DateTime, List<PersonalScheduleEntities>>? allSchedulePersonalMap;
 
   GetScheduleDayEvent(
       {this.selectDay,

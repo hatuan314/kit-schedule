@@ -1,9 +1,16 @@
 import 'package:get_it/get_it.dart';
+import 'package:schedule/blocs/blocs.dart';
 import 'package:schedule/blocs/calendar/calendar_bloc.dart';
 import 'package:schedule/common/config/firebase_setup.dart';
+import 'package:schedule/common/config/local_config.dart';
+import 'package:schedule/data/local_data_source/personal_hive.dart';
+import 'package:schedule/data/local_data_source/schedule_hive.dart';
 import 'package:schedule/data/remote/data_remote.dart';
+import 'package:schedule/data/reponsitories/personal_repositories_impl.dart';
 import 'package:schedule/data/reponsitories/schedule_repositories_impl.dart';
+import 'package:schedule/domain/repositories/personal_repositories.dart';
 import 'package:schedule/domain/repositories/schedule_repositories.dart';
+import 'package:schedule/domain/usecase/personal_usecase.dart';
 import 'package:schedule/domain/usecase/schedule_usecase.dart';
 import 'package:schedule/presentation/bloc/loader_bloc/bloc.dart';
 import 'package:schedule/presentation/bloc/snackbar_bloc/bloc.dart';
@@ -28,31 +35,47 @@ class Injector {
   static void _configBloc() {
     getIt.registerSingleton<LoaderBloc>(LoaderBloc());
     getIt.registerSingleton<SnackbarBloc>(SnackbarBloc());
+    getIt.registerFactory<HomeBloc>(() => HomeBloc(
+        personalUS: getIt<PersonalUseCase>(),
+        scheduleUS: getIt<ScheduleUseCase>()));
     getIt.registerFactory<RegisterBloc>(() => RegisterBloc(
         snackbarBloc: getIt<SnackbarBloc>(),
         scheduleUseCase: getIt<ScheduleUseCase>()));
-    getIt.registerLazySingleton<CalendarBloc>(() => CalendarBloc());
+    getIt.registerLazySingleton<CalendarBloc>(() => CalendarBloc(
+        scheduleUS: getIt<ScheduleUseCase>(),
+        personalUS: getIt<PersonalUseCase>()));
     getIt.registerFactory<TodoBloc>(() => TodoBloc(
         snackbarBloc: getIt<SnackbarBloc>(),
-        calendarBloc: getIt<CalendarBloc>()));
+        calendarBloc: getIt<CalendarBloc>(),
+        personalUS: getIt<PersonalUseCase>()));
   }
 
   static void _configUseCase() {
     getIt.registerFactory<ScheduleUseCase>(
         () => ScheduleUseCase(getIt<ScheduleRepositories>()));
+    getIt.registerFactory<PersonalUseCase>(() =>
+        PersonalUseCase(personalRepositories: getIt<PersonalRepositories>()));
   }
 
   static void _configRepository() {
-    getIt.registerLazySingleton<ScheduleRepositories>(
-        () => ScheduleRepositoriesImpl(getIt<DataRemote>()));
+    getIt.registerLazySingleton<ScheduleRepositories>(() =>
+        ScheduleRepositoriesImpl(getIt<DataRemote>(), getIt<ScheduleHive>()));
+    getIt.registerLazySingleton<PersonalRepositories>(
+        () => PersonalRepositoriesImpl(getIt<PersonalHive>()));
   }
 
   static void _configDataSource() {
     getIt.registerLazySingleton<DataRemote>(
         () => DataRemote(firebaseSetup: getIt<FirebaseSetup>()));
-    getIt.registerLazySingleton<FirebaseSetup>(() => FirebaseSetup());
+    getIt.registerLazySingleton<PersonalHive>(
+        () => PersonalHive(hiveConfig: getIt<LocalConfig>()));
+    getIt.registerLazySingleton<ScheduleHive>(
+        () => ScheduleHive(getIt<LocalConfig>()));
   }
 
   static void _configNetwork() {}
-  static void _configCommon() {}
+  static void _configCommon() {
+    getIt.registerLazySingleton<FirebaseSetup>(() => FirebaseSetup());
+    getIt.registerLazySingleton<LocalConfig>(() => LocalConfig());
+  }
 }

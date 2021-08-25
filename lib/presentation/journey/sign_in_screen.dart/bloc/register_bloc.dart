@@ -1,12 +1,11 @@
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:crypto/crypto.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:schedule/domain/entities/school_schedule_entities.dart';
 import 'package:schedule/domain/usecase/schedule_usecase.dart';
-import 'package:schedule/models/model.dart';
+
 import 'package:schedule/presentation/bloc/snackbar_bloc/bloc.dart';
 import 'package:schedule/presentation/bloc/snackbar_bloc/snackbar_type.dart';
 import 'package:schedule/presentation/journey/sign_in_screen.dart/bloc/register_state.dart';
@@ -15,12 +14,11 @@ import 'package:schedule/service/services.dart';
 part 'register_event.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
-  RepositoryOnline _online = RepositoryOnline();
-  RepositoryOffline _offline = RepositoryOffline();
   ShareService _shareService = ShareService();
   final SnackbarBloc snackbarBloc;
   final ScheduleUseCase scheduleUseCase;
-  RegisterBloc({required this.snackbarBloc,required this.scheduleUseCase}) : super(RegisterInitState());
+  RegisterBloc({required this.snackbarBloc, required this.scheduleUseCase})
+      : super(RegisterInitState());
 
   @override
   Stream<RegisterState> mapEventToState(RegisterEvent event) async* {
@@ -35,10 +33,10 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       yield RegisterLoadingState();
       String account = event.account;
       String password = md5.convert(utf8.encode(event.password)).toString();
-      bool isSaveUsername= await ShareService().setUsername(event.account);
-      log(isSaveUsername.toString());
+      bool isSaveUsername = await ShareService().setUsername(event.account);
       try {
-        var data=await scheduleUseCase.fetchScheduleSchoolData(account, password);
+        var data =
+            await scheduleUseCase.fetchScheduleSchoolData(account, password);
         if (data!.isEmpty) {
           snackbarBloc.add(ShowSnackbar(
               title: 'No Data. Try again', type: SnackBarType.error));
@@ -58,15 +56,15 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
   _saveScheduleSchool(Map scheduleDataMap, RegisterState state) async {
     List dates = scheduleDataMap.keys.toList();
+    List<SchoolSchedule> schoolSchedule = [];
     try {
       dates.forEach((date) {
         if (scheduleDataMap[date] != null || scheduleDataMap[date].length > 0)
           scheduleDataMap[date].forEach((scheduleJson) async {
-            SchoolSchedule schoolSchedule =
-                SchoolSchedule.fromJsonApi(scheduleJson, date);
-            await _offline.addScheduleLessonRepo(schoolSchedule);
+            schoolSchedule.add(SchoolSchedule.fromJsonApi(scheduleJson, date));
           });
       });
+      await scheduleUseCase.insertSchoolScheduleLocal(schoolSchedule);
     } catch (e) {
       debugPrint('RegisterBloc - saveSchoolSchedule - error: {$e}');
     }

@@ -1,25 +1,31 @@
 import 'dart:convert';
-
+import 'dart:developer';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/common/utils/convert.dart';
-import 'package:schedule/models/model.dart';
+import 'package:schedule/domain/entities/personal_schedule_entities.dart';
+import 'package:schedule/domain/entities/school_schedule_entities.dart';
+import 'package:schedule/domain/usecase/personal_usecase.dart';
+import 'package:schedule/domain/usecase/schedule_usecase.dart';
 import 'package:schedule/service/services.dart';
 
 part 'calendar_event.dart';
 part 'calendar_state.dart';
 
 class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
-  final RepositoryOffline _offline = RepositoryOffline();
+
+  final PersonalUseCase personalUS;
+  final ScheduleUseCase scheduleUS;
   Map<DateTime, List<dynamic>> allSchedulesCalendarMap = Map<DateTime, List>();
   Map<DateTime, List<SchoolSchedule>> allSchoolSchedulesMap =
       Map<DateTime, List<SchoolSchedule>>();
-  Map<DateTime, List<PersonalSchedule>> allPersonalSchedulesMap =
-      Map<DateTime, List<PersonalSchedule>>();
+  Map<DateTime, List<PersonalScheduleEntities>> allPersonalSchedulesMap =
+      Map<DateTime, List<PersonalScheduleEntities>>();
 
-  CalendarBloc() : super(CalendarLoadingDataState());
+  CalendarBloc({required this.personalUS, required this.scheduleUS})
+      : super(CalendarLoadingDataState());
 
   @override
   Stream<CalendarState> mapEventToState(CalendarEvent event) async* {
@@ -45,7 +51,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
   Stream<CalendarState> _mapGetAllSchoolSchedulesToMap() async* {
     if (state is CalendarLoadingDataState) {
       try {
-        var result = await _offline.fetchScheduleSchoolOfflineRepo();
+        var result = await scheduleUS.fetchScheduleSchoolOffline();
         debugPrint(
             'CalendarBloc - mapGetAllSchoolScheduleToMap - result: ${result.length}');
         if (result.length > 0) {
@@ -62,23 +68,20 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
             allSchedulesCalendarMap[scheduleDate]!
                 .add(json.encode(schedule.toJson()));
             allSchoolSchedulesMap[scheduleDate]!.add(schedule);
-            for(int i=0;i< allSchoolSchedulesMap[scheduleDate]!.length-1;i++)
-              {
-                int lesson1= int.parse(allSchoolSchedulesMap[scheduleDate]![i].lesson!.split(',')[0]);
-                for(int j=i;j< allSchoolSchedulesMap[scheduleDate]!.length;j++)
-                {
-                  int lesson2= int.parse(allSchoolSchedulesMap[scheduleDate]![j].lesson!.split(',')[0]);
-                  if(lesson1>lesson2)
-                    {
-                      SchoolSchedule tmp = allSchoolSchedulesMap[scheduleDate]![i];
-                      allSchoolSchedulesMap[scheduleDate]![i]=allSchoolSchedulesMap[scheduleDate]![j];
-                      allSchoolSchedulesMap[scheduleDate]![j]=tmp;
-                    }
+            for (int i = 0; i < allSchoolSchedulesMap[scheduleDate]!.length - 1; i++) {
+              int lesson1 = int.parse(allSchoolSchedulesMap[scheduleDate]![i]
+                  .lesson!
+                  .split(',')[0]);
+              for (int j = i; j < allSchoolSchedulesMap[scheduleDate]!.length; j++) {
+                int lesson2 = int.parse(allSchoolSchedulesMap[scheduleDate]![j].lesson!.split(',')[0]);
+                if (lesson1 > lesson2) {
+                  SchoolSchedule tmp = allSchoolSchedulesMap[scheduleDate]![i];
+                  allSchoolSchedulesMap[scheduleDate]![i] = allSchoolSchedulesMap[scheduleDate]![j];
+                  allSchoolSchedulesMap[scheduleDate]![j] = tmp;
                 }
               }
+            }
           });
-
-
         }
       } catch (e) {
         debugPrint('CalendarBloc - mapGetAllSchoolScheduleToMap - error: {$e}');
@@ -89,9 +92,11 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
   Stream<CalendarState> _mapGetAllPersonalScheduleToMap() async* {
     if (state is CalendarLoadingDataState) {
       try {
-        var personalResult = await _offline.fetchAllPersonalScheduleRepo();
+        // var personalResult = await _offline.fetchAllPersonalScheduleRepo();
+        var personalResult =
+            await personalUS.fetchAllPersonalScheduleRepoLocal();
         if (personalResult.length > 0) {
-          List<PersonalSchedule> allPersonalSchedules = personalResult;
+          List<PersonalScheduleEntities> allPersonalSchedules = personalResult;
           allPersonalSchedules.forEach((schedule) {
             DateTime scheduleDate = Convert.dateConvert(
                 DateTime.fromMillisecondsSinceEpoch(int.parse(schedule.date!)));
@@ -101,8 +106,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
             if (allPersonalSchedulesMap[scheduleDate] == null) {
               allPersonalSchedulesMap[scheduleDate] = [];
             }
-            allSchedulesCalendarMap[scheduleDate]!
-                .add(json.encode(schedule.toJson()));
+            allSchedulesCalendarMap[scheduleDate]!.add('3');
             allPersonalSchedulesMap[scheduleDate]!.add(schedule);
           });
         }

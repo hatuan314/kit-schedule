@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/blocs/blocs.dart';
 import 'package:schedule/blocs/search/search_bloc.dart';
 import 'package:schedule/common/injector/injector.dart';
+import 'package:schedule/domain/entities/personal_schedule_entities.dart';
 import 'package:schedule/models/model.dart';
 import 'package:schedule/presentation/journey/sign_in_screen.dart/bloc/register_bloc.dart';
 import 'package:schedule/presentation/journey/sign_in_screen.dart/sign_in_view.dart';
@@ -39,16 +40,16 @@ RouteFactory router() {
         return CupertinoPageRoute(builder: (context) {
           return MultiBlocProvider(providers: [
             BlocProvider(
-              create: (context) => HomeBloc(),
+              create: (context) => Injector.getIt<HomeBloc>(),
             ),
             BlocProvider(
               create: (context) => Injector.getIt<CalendarBloc>()
                 ..add(GetAllScheduleDataEvent()),
             ),
-            BlocProvider(
-              create: (context) =>
-                  SearchBloc()..add(SearchButtonOnPress(DateTime.now())),
-            ),
+            // BlocProvider(
+            //   create: (context) =>
+            //       SearchBloc()..add(SearchButtonOnPress(DateTime.now())),
+            // ),
             BlocProvider(
               create: (context) => Injector.getIt<TodoBloc>(),
             ),
@@ -56,8 +57,8 @@ RouteFactory router() {
 //            child: SchoolSchedulePageView());
         });
       case '/todo-detail':
-        PersonalSchedule schedule = PersonalSchedule.fromJson(
-            settings.arguments as Map<String, dynamic>);
+        PersonalScheduleEntities schedule =
+            settings.arguments as PersonalScheduleEntities;
         int hour = int.parse(schedule.timer!.split(':').elementAt(0));
         int minute = int.parse(schedule.timer!.split(':').elementAt(1));
         return CupertinoPageRoute(builder: (context) {

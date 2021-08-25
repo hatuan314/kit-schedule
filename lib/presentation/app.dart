@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:schedule/common/config/local_config.dart';
 import 'package:schedule/common/injector/injector.dart';
 import 'package:schedule/presentation/bloc/snackbar_bloc/snackbar_type.dart';
 import 'package:schedule/presentation/route.dart';
@@ -9,8 +10,14 @@ import 'package:schedule/presentation/widget/snackbar_widget/snackbar_widget.dar
 import 'bloc/loader_bloc/loader_bloc.dart';
 import 'bloc/snackbar_bloc/bloc.dart';
 import 'bloc/snackbar_bloc/snackbar_bloc.dart';
+class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
 
-class MyApp extends StatelessWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final GlobalKey<NavigatorState> _navigator = GlobalKey<NavigatorState>();
 
   List<BlocProvider> _getProviders() =>
@@ -68,5 +75,10 @@ class MyApp extends StatelessWidget {
       },
       child: widget,
     );
+  }
+  @override
+  void dispose() {
+    Injector.getIt<LocalConfig>().dispose();
+    super.dispose();
   }
 }

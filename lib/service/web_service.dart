@@ -91,7 +91,7 @@ class WebService {
 
           // throw errorOut;
         } on Exception catch (e, b) {
-          print("$e \n $b");
+        ("$e \n $b");
           throw UnAuthorizedException(e.toString());
         }
       }

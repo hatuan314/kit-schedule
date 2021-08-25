@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:schedule/domain/entities/personal_schedule_entities.dart';
 
 import 'package:schedule/presentation/themes/theme_border.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
@@ -8,7 +9,7 @@ import 'package:schedule/presentation/widget/widgets_constants.dart';
 
 
 class PersonalScheduleElementWidget extends StatelessWidget{
-  final PersonalSchedule schedule;
+  final PersonalScheduleEntities schedule;
 
   PersonalScheduleElementWidget({required this.schedule});
 

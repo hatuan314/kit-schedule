@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:schedule/domain/entities/personal_schedule_entities.dart';
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
 import 'package:schedule/models/model.dart';
@@ -14,7 +17,7 @@ class PersonalScheduleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<PersonalSchedule>? personalSchedulesOfDay =
+    List<PersonalScheduleEntities>? personalSchedulesOfDay =
         state.schedulesPersonalOfDay;
     return Card(
       semanticContainer: true,
@@ -54,11 +57,11 @@ class PersonalScheduleWidget extends StatelessWidget {
                     shrinkWrap: true,
                     itemCount: personalSchedulesOfDay.length,
                     itemBuilder: (context, index) {
-                      PersonalSchedule schedule = personalSchedulesOfDay[index];
+                      PersonalScheduleEntities schedule = personalSchedulesOfDay[index];
                       return InkWell(
                           onTap: () => Navigator.pushNamed(
                               context, '/todo-detail',
-                              arguments: schedule.toJson()),
+                              arguments: schedule),
                           child: PersonalScheduleElementWidget(
                             schedule: schedule,
                           ));

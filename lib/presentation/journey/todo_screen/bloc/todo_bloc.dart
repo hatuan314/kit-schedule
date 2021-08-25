@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/blocs/blocs.dart';
 import 'package:schedule/common/utils/convert.dart';
+import 'package:schedule/domain/entities/personal_schedule_entities.dart';
+import 'package:schedule/domain/usecase/personal_usecase.dart';
 import 'package:schedule/models/model.dart';
 import 'package:schedule/presentation/bloc/snackbar_bloc/snackbar_bloc.dart';
 import 'package:schedule/presentation/bloc/snackbar_bloc/snackbar_event.dart';
@@ -14,11 +18,13 @@ part 'todo_state.dart';
 
 class TodoBloc extends Bloc<TodoEvent, TodoState> {
   CalendarBloc? calendarBloc;
-  RepositoryOffline _repositoryOffline = RepositoryOffline();
+
   String _date = DateTime.now().millisecondsSinceEpoch.toString();
   String _timer = '${Convert.timerConvert(TimeOfDay.now())}';
   SnackbarBloc snackbarBloc;
-  TodoBloc({this.calendarBloc,required this.snackbarBloc})
+  final PersonalUseCase personalUS;
+  TodoBloc(
+      {this.calendarBloc, required this.snackbarBloc, required this.personalUS})
       : super(TodoInitState(
             selectDay: DateTime.now().millisecondsSinceEpoch.toString(),
             selectTimer: '${Convert.timerConvert(TimeOfDay.now())}'));
@@ -40,7 +46,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     else if (event is UpdatePersonalScheduleOnPressEvent)
       yield* _mapUpdatePersonalScheduleToState(event);
     else if (event is DetelePersonalScheduleOnPressEvent)
-      yield* _mapDetelePersonalScheduleToState(event.id!);
+      yield* _mapDetelePersonalScheduleToState(event.personal);
   }
 
   Stream<TodoState> _mapSelectDatePickerToState(
@@ -60,17 +66,23 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   Stream<TodoState> _mapCreatePersonalScheduleToState(
       CreatePersonalScheduleOnPressEvent event) async* {
     yield TodoLoadingState();
-    PersonalSchedule schedule =
-        PersonalSchedule(this._date, event.name, this._timer, event.note);
+    PersonalScheduleEntities schedule = PersonalScheduleEntities(
+        date: this._date,
+        name: event.name,
+        timer: this._timer,
+        note: event.note);
     try {
-      await _repositoryOffline.addPersonalScheduleRepo(schedule);
+      // await _repositoryOffline.addPersonalScheduleRepo(schedule);
+      await personalUS.insertPersonalSchedule(schedule);
       _date = DateTime.now().millisecondsSinceEpoch.toString();
       _timer = '${Convert.timerConvert(TimeOfDay.now())}';
       calendarBloc!.add(GetAllScheduleDataEvent());
-      snackbarBloc.add(ShowSnackbar(title: 'Create Success', type: SnackBarType.success));
+      snackbarBloc.add(
+          ShowSnackbar(title: 'Create Success', type: SnackBarType.success));
       yield TodoSuccessState(true, selectTimer: _timer, selectDay: _date);
     } catch (e) {
-      snackbarBloc.add(ShowSnackbar(title: 'Create Failed', type: SnackBarType.error));
+      snackbarBloc
+          .add(ShowSnackbar(title: 'Create Failed', type: SnackBarType.error));
       yield TodoFailureState(
           error: e.toString(), selectDay: this._date, selectTimer: this._timer);
     }
@@ -79,11 +91,19 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   Stream<TodoState> _mapUpdatePersonalScheduleToState(
       UpdatePersonalScheduleOnPressEvent event) async* {
     yield TodoLoadingState();
-    PersonalSchedule schedule = PersonalSchedule(
-        this._date, event.name, this._timer, event.note,
-        id: event.id);
+    // PersonalSchedule schedule = PersonalSchedule(
+    //     this._date, event.name, this._timer, event.note,
+    //     id: event.id);
+    PersonalScheduleEntities schedule = PersonalScheduleEntities(
+        date: this._date,
+        name: event.name,
+        timer: this._timer,
+        note: event.note,
+        id: event.id,
+      createAt: event.createAt
+    );
     try {
-      int flag = await _repositoryOffline.updatePersonalScheduleData(schedule);
+      int flag = await personalUS.updatePersonalScheduleData(schedule);
       _date = DateTime.now().millisecondsSinceEpoch.toString();
       _timer = '${Convert.timerConvert(TimeOfDay.now())}';
       if (flag == 1) {
@@ -95,16 +115,17 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     }
   }
 
-  Stream<TodoState> _mapDetelePersonalScheduleToState(String id) async* {
+  Stream<TodoState> _mapDetelePersonalScheduleToState(
+      PersonalScheduleEntities personal) async* {
     yield TodoLoadingState();
-    try {
-      int flag = await _repositoryOffline.deletePersonalScheduleRepo(id);
-      if (flag == 1) {
-        yield TodoSuccessState(true, selectTimer: _timer, selectDay: _date);
-      }
-    } catch (e) {
+    int flag = await personalUS.deletePersonalScheduleLocal(personal);
+    if (flag == 1) {
+      yield TodoSuccessState(true, selectTimer: _timer, selectDay: _date);
+    } else {
       yield TodoFailureState(
-          error: e.toString(), selectDay: this._date, selectTimer: this._timer);
+          error: 'save failure',
+          selectDay: this._date,
+          selectTimer: this._timer);
     }
   }
 }
