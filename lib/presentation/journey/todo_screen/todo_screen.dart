@@ -1,14 +1,16 @@
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:schedule/common/constants/layout_constants.dart';
+import 'package:schedule/domain/entities/personal_schedule_entities.dart';
 
 import 'package:schedule/models/personal_schedule.dart';
+import 'package:schedule/presentation/journey/home/calendar_tab_constants.dart';
 import 'package:schedule/presentation/journey/todo_screen/todo_constants.dart';
 
-import 'package:schedule/presentation/journey/todo_screen/widgets/todo_background_widget.dart';
 import 'package:schedule/presentation/journey/todo_screen/widgets/todo_form_widget.dart';
 
 import 'package:schedule/presentation/themes/theme_colors.dart';
@@ -17,7 +19,7 @@ import 'package:schedule/presentation/themes/theme_text.dart';
 import 'bloc/todo_bloc.dart';
 
 class TodoScreen extends StatefulWidget {
-  final PersonalSchedule? personalSchedule;
+  final PersonalScheduleEntities? personalSchedule;
 
   const TodoScreen({Key? key, this.personalSchedule}) : super(key: key);
   @override
@@ -42,17 +44,21 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      backgroundColor: AppColor.personalScheduleColor2,
+      backgroundColor: AppColor.secondColor,
       appBar: widget.personalSchedule == null
           ? null
           : AppBar(
               elevation: 0,
+              backgroundColor: Colors.transparent,
+              leading: BackButton(
+                color: AppColor.personalScheduleColor2,
+              ),
               actions: <Widget>[
                 IconButton(
                     onPressed: () => _waitingDeleteDialog(),
                     icon: Icon(
                       Icons.delete,
-                      color: AppColor.secondColor,
+                      color: AppColor.personalScheduleColor2,
                       size: ToDoConstants.iconSize,
                     ))
               ],
@@ -70,42 +76,43 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
             } else if (state is TodoFailureState) {}
           },
           child: BlocBuilder<TodoBloc, TodoState>(builder: (context, state) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Expanded(
-                  flex: 25,
-                  child: _todoBackgroundWidget(state),
+            return SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: CalendarTabConstants.paddingHorizontal),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    Text(
+                      widget.personalSchedule == null
+                          ? ToDoConstants.createToDoTxt
+                          : ToDoConstants.editToDoTxt,
+                      style: ThemeText.headerStyle2.copyWith(fontSize: 18.sp),
+                    ),
+                    SizedBox(
+                      height: 30.h,
+                    ),
+                    TodoFormWidget(
+                      state: state,
+                      nameController: _nameController,
+                      noteController: _noteController,
+                      formKey: _formKey,
+                      setDatePicker: _selectDatePicker,
+                      setTimePicker: _selectTimePicker,
+                      setOnBtnSave: widget.personalSchedule == null
+                          ? _setOnClickSaveButton
+                          : _setOnClickUpdateButton,
+                    ),
+                  ],
                 ),
-                Expanded(
-                  flex: 75,
-                  child: _todoFormWidget(state),
-                )
-              ],
+              ),
             );
           }),
         ),
       ),
-    );
-  }
-
-  _todoBackgroundWidget(TodoState state) {
-    return TodoBackgroundWidget(
-      header: widget.personalSchedule==null?ToDoConstants.createToDoTxt:widget.personalSchedule!.name!,
-        state: state, selectDataPicker: _selectDatePicker);
-  }
-
-  _todoFormWidget(TodoState state) {
-    return TodoFormWidget(
-      state: state,
-      setOnClickSaveButton: this.widget.personalSchedule == null
-          ? _setOnClickSaveButton
-          : _setOnClickUpdateButton,
-      setTimePicker: _selectTimePicker,
-      nameController: _nameController,
-      noteController: _noteController,
-      formKey: _formKey,
     );
   }
 
@@ -147,10 +154,13 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
     FocusScope.of(context).requestFocus(new FocusNode());
     if (_formKey.currentState!.validate()) {
       BlocProvider.of<TodoBloc>(context)
-        ..add(UpdatePersonalScheduleOnPressEvent(
-            this.widget.personalSchedule!.id,
-            _nameController.text.trim(),
-            _noteController.text.trim()));
+        ..add(
+          UpdatePersonalScheduleOnPressEvent(
+              this.widget.personalSchedule!.id,
+              _nameController.text.trim(),
+              _noteController.text.trim(),
+              widget.personalSchedule!.createAt!),
+        );
     }
   }
 
@@ -246,7 +256,6 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
 
   _bntOkDialogOnPress(BuildContext context) {
     BlocProvider.of<TodoBloc>(context)
-      ..add(
-          DetelePersonalScheduleOnPressEvent(this.widget.personalSchedule!.id));
+      ..add(DetelePersonalScheduleOnPressEvent(this.widget.personalSchedule!));
   }
 }

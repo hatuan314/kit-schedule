@@ -2,10 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/common/utils/convert.dart';
+import 'package:schedule/domain/entities/school_schedule_entities.dart';
 import 'package:schedule/presentation/themes/theme_border.dart';
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
-import 'package:schedule/models/model.dart';
+
 import 'package:schedule/presentation/widget/widgets_constants.dart';
 
 

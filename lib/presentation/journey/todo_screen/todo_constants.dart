@@ -4,6 +4,7 @@ class ToDoConstants{
   static double paddingVertical= 20.h;
   static double inkWellPaddingVertical= 5.h;
   static double setTimeContainerPaddingVertical = 12.h;
+  static double spacingHeight =18.h;
 
   static String calendarImgPath='assets/icons/ic-calendar.svg';
   static String kitLogoPath='assets/icons/kit_schedule_logo.svg';
@@ -15,10 +16,12 @@ class ToDoConstants{
   static double timeFontSize= 20.sp;
   static double iconSize= 24.sp;
 
-  static String createToDoTxt ='Create your todo';
+  static String createToDoTxt ='Create todo';
+  static String editToDoTxt ='Edit todo';
   static String titleTxt ='Title';
   static String noteTxt ='Note';
   static String setTimeTxt ='Set time';
+  static String setDateTxt ='Set date';
   static String saveTxt='Save';
   static String confirmDeleteTxt= 'Do you want ';
   static String confirmDeleteTxt2= 'delete ';

@@ -1,8 +1,9 @@
-import 'dart:convert';
+
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+
 import 'package:schedule/common/config/firebase_setup.dart';
+
 import 'package:schedule/service/web_service.dart';
 
 class DataRemote {
@@ -11,9 +12,13 @@ class DataRemote {
 
   DataRemote({required this.firebaseSetup});
 
-  Future<Map<String, dynamic>?> fetchScheduleSchoolDataDio(String account, String password) async {
+  Future<Map<String, dynamic>?> fetchScheduleSchoolDataDio(
+      String account, String password) async {
     final dio = _service.setupDio();
-    final authBody = {"studentAccount": "$account", "studentPassword": "$password"};
+    final authBody = {
+      "studentAccount": "$account",
+      "studentPassword": "$password"
+    };
 
     final response = await dio.post('', data: authBody);
 

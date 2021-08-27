@@ -11,7 +11,7 @@ class CalendarLoadingDataState extends CalendarState {
 class CalendarLoadDataSuccessState extends CalendarState {
   final Map<DateTime, List> allSchedulesCalendarMap;
   final Map<DateTime, List<SchoolSchedule>> allSchedulesSchoolMap;
-  final Map<DateTime, List<PersonalSchedule>> allSchedulePersonalMap;
+  final Map<DateTime, List<PersonalScheduleEntities>> allSchedulePersonalMap;
 
   CalendarLoadDataSuccessState(this.allSchedulesCalendarMap,
       this.allSchedulesSchoolMap, this.allSchedulePersonalMap);

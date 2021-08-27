@@ -33,7 +33,8 @@ class CalendarTabScreen extends StatelessWidget {
                   ..add(GetScheduleDayEvent(
                       selectDay: Convert.dateConvert(DateTime.now()),
                       allSchedulesSchoolMap: state.allSchedulesSchoolMap,
-                      allSchedulePersonalMap: state.allSchedulePersonalMap)),
+                      allSchedulePersonalMap: state.allSchedulePersonalMap)
+                  ),
                 child: _mBody(context, state),
               ));
         } else

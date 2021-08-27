@@ -16,7 +16,7 @@ class UpdateScheduleDayLoadingState extends ScheduleState {
 
 class UpdateScheduleDaySuccessState extends ScheduleState {
   final List<SchoolSchedule>? schedulesSchoolOfDay;
-  final List<PersonalSchedule>? schedulesPersonalOfDay;
+  final List<PersonalScheduleEntities>? schedulesPersonalOfDay;
 
   UpdateScheduleDaySuccessState(
       this.schedulesSchoolOfDay, this.schedulesPersonalOfDay);
