@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:schedule/domain/entities/personal_schedule_entities.dart';
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
 import 'package:schedule/models/model.dart';
@@ -15,7 +16,7 @@ class PersonalScheduleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<PersonalSchedule>? personalSchedulesOfDay =
+    List<PersonalScheduleEntities>? personalSchedulesOfDay =
         state.schedulesPersonalOfDay;
     return Card(
       semanticContainer: true,
@@ -56,7 +57,7 @@ class PersonalScheduleWidget extends StatelessWidget {
                       shrinkWrap: true,
                       itemCount: personalSchedulesOfDay.length,
                       itemBuilder: (context, index) {
-                        PersonalSchedule schedule =
+                        PersonalScheduleEntities schedule =
                             personalSchedulesOfDay[index];
                         return InkWell(
                             onTap: () {
@@ -83,7 +84,7 @@ class PersonalScheduleWidget extends StatelessWidget {
     );
   }
 
-  Widget toDoDetailsDialog(BuildContext context, PersonalSchedule toDoItem) {
+  Widget toDoDetailsDialog(BuildContext context, PersonalScheduleEntities toDoItem) {
     return SimpleDialog(
         titlePadding: EdgeInsets.all(0),
         title: Container(
@@ -163,9 +164,9 @@ class PersonalScheduleWidget extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                   horizontal: WidgetsConstants.paddingHorizontal),
               onPressed: () {
-                //    Navigator.pop(context);
-                Navigator.pushNamed(context, '/todo-detail',
-                    arguments: toDoItem.toJson());
+                    Navigator.pop(context);
+             Navigator.pushNamed(context, '/todo-detail',
+                    arguments: toDoItem);
               },
               icon: Icon(Icons.edit),
               color: AppColor.personalScheduleColor2,
@@ -177,7 +178,7 @@ class PersonalScheduleWidget extends StatelessWidget {
   // context, '/todo-detail',
   // arguments: schedule.toJson()),
 
-  String getTime(PersonalSchedule item) {
+  String getTime(PersonalScheduleEntities item) {
     String str = '';
     if (item.timer != null) str = str + (item.timer as String) + ' ';
     if (item.date != null)
