@@ -32,7 +32,7 @@ class MainScreen extends StatelessWidget {
               ScoresScreen(),
               TodoScreen(),
               ProfileScreen(),
-              CalendarTabScreen(),
+              ProfileScreen(),
             ],
           ),
           bottomNavigationBar: Container(
@@ -90,6 +90,7 @@ class MainScreen extends StatelessWidget {
 
   void _warningSignOutDialog(BuildContext context) {
     AwesomeDialog(
+      dismissOnTouchOutside: false,
         context: context,
         dialogType: DialogType.WARNING,
         animType: AnimType.BOTTOMSLIDE,
@@ -186,7 +187,7 @@ class MainScreen extends StatelessWidget {
   }
 
   _btnCancelDialogOnPress(BuildContext context) {
-    BlocProvider.of<HomeBloc>(context)..add(OnTabChangeEvent(0));
+    BlocProvider.of<HomeBloc>(context)..add(OnTabChangeEvent(3));
     Navigator.of(context).pop();
   }
 
