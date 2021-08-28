@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-<<<<<<< HEAD
+
 import 'package:schedule/domain/entities/personal_schedule_entities.dart';
-=======
->>>>>>> 6bb32b802f4ae384536fced97ae9c1c7e750b278
+
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
 import 'package:schedule/models/model.dart';
@@ -60,11 +59,7 @@ class PersonalScheduleWidget extends StatelessWidget {
                       shrinkWrap: true,
                       itemCount: personalSchedulesOfDay.length,
                       itemBuilder: (context, index) {
-<<<<<<< HEAD
                         PersonalScheduleEntities schedule =
-=======
-                        PersonalSchedule schedule =
->>>>>>> 6bb32b802f4ae384536fced97ae9c1c7e750b278
                             personalSchedulesOfDay[index];
                         return InkWell(
                             onTap: () {
@@ -73,9 +68,6 @@ class PersonalScheduleWidget extends StatelessWidget {
                                   builder: (dialogContext) =>
                                       toDoDetailsDialog(context, schedule));
                             },
-                            // Navigator.pushNamed(
-                            // context, '/todo-detail',
-                            // arguments: schedule.toJson()),
                             child: PersonalScheduleElementWidget(
                               schedule: schedule,
                             ));
@@ -91,11 +83,8 @@ class PersonalScheduleWidget extends StatelessWidget {
     );
   }
 
-<<<<<<< HEAD
-  Widget toDoDetailsDialog(BuildContext context, PersonalScheduleEntities toDoItem) {
-=======
-  Widget toDoDetailsDialog(BuildContext context, PersonalSchedule toDoItem) {
->>>>>>> 6bb32b802f4ae384536fced97ae9c1c7e750b278
+  Widget toDoDetailsDialog(
+      BuildContext context, PersonalScheduleEntities toDoItem) {
     return SimpleDialog(
         titlePadding: EdgeInsets.all(0),
         title: Container(
@@ -175,15 +164,9 @@ class PersonalScheduleWidget extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                   horizontal: WidgetsConstants.paddingHorizontal),
               onPressed: () {
-<<<<<<< HEAD
-                    Navigator.pop(context);
-             Navigator.pushNamed(context, '/todo-detail',
-                    arguments: toDoItem);
-=======
-                //    Navigator.pop(context);
+                Navigator.pop(context);
                 Navigator.pushNamed(context, '/todo-detail',
-                    arguments: toDoItem.toJson());
->>>>>>> 6bb32b802f4ae384536fced97ae9c1c7e750b278
+                    arguments: toDoItem);
               },
               icon: Icon(Icons.edit),
               color: AppColor.personalScheduleColor2,
@@ -191,15 +174,9 @@ class PersonalScheduleWidget extends StatelessWidget {
           )
         ]);
   }
-  // Navigator.pushNamed(
-  // context, '/todo-detail',
-  // arguments: schedule.toJson()),
 
-<<<<<<< HEAD
+
   String getTime(PersonalScheduleEntities item) {
-=======
-  String getTime(PersonalSchedule item) {
->>>>>>> 6bb32b802f4ae384536fced97ae9c1c7e750b278
     String str = '';
     if (item.timer != null) str = str + (item.timer as String) + ' ';
     if (item.date != null)
