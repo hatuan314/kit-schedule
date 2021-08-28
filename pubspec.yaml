@@ -62,6 +62,10 @@ dependencies:
   #cupertino_date_textbox: ^1.0.0+3
   firebase_core: ^1.4.0
   store_redirect: ^2.0.0
+<<<<<<< HEAD
+=======
+  webview_flutter: ^2.0.12
+>>>>>>> 6bb32b802f4ae384536fced97ae9c1c7e750b278
   url_launcher: ^6.0.9
   cloud_firestore: ^2.4.0
 
