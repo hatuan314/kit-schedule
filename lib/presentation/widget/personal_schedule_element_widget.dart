@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:schedule/presentation/themes/theme_border.dart';
+import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
 import 'package:schedule/models/model.dart';
 import 'package:schedule/presentation/widget/widgets_constants.dart';
@@ -28,7 +29,7 @@ class PersonalScheduleElementWidget extends StatelessWidget{
                 alignment: Alignment.center,
                 child: Text(
                   '${schedule.timer}',
-                  style: ThemeText.textStyle
+                  style: ThemeText.textStyle.copyWith(color: AppColor.signInColor)
               ),
             )),
             Expanded(
@@ -45,12 +46,17 @@ class PersonalScheduleElementWidget extends StatelessWidget{
                   children: <Widget>[
                     Text(
                       '${schedule.name}',
-                      style:  ThemeText.textStyle,
+                      maxLines: 1,
+                      softWrap: false,
+                      overflow: TextOverflow.ellipsis,
+                      style:  ThemeText.textStyle.copyWith(color: AppColor.signInColor),
                     ),
                     Text(
-                      '${schedule.note}',
-                      style:  ThemeText.textStyle.copyWith(fontWeight: FontWeight.normal),
-                      maxLines: 5,
+                      schedule.note==null?'':schedule.note as String,
+                      style:  ThemeText.textStyle.copyWith(fontWeight: FontWeight.normal, color: AppColor.signInColor),
+                      maxLines: 1,
+                      softWrap: false,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),
