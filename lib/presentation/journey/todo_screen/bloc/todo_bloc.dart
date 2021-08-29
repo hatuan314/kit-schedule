@@ -68,7 +68,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
 
   Stream<TodoState> _mapCreatePersonalScheduleToState(
       CreatePersonalScheduleOnPressEvent event) async* {
-    yield TodoLoadingState();
+    yield TodoLoadingState(selectDay: this._date,selectTimer: this._timer);
     final String now = DateTime.now().millisecondsSinceEpoch.toString();
     PersonalScheduleEntities schedule(bool isSynch) {
       PersonalScheduleEntities schedule = PersonalScheduleEntities(
@@ -110,7 +110,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
 
   Stream<TodoState> _mapUpdatePersonalScheduleToState(
       UpdatePersonalScheduleOnPressEvent event) async* {
-    yield TodoLoadingState();
+    yield TodoLoadingState(selectDay: this._date,selectTimer: this._timer);
     final String now = DateTime.now().millisecondsSinceEpoch.toString();
     PersonalScheduleEntities schedule(bool isSynch) {
       PersonalScheduleEntities schedule = PersonalScheduleEntities(
@@ -147,7 +147,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
 
   Stream<TodoState> _mapDetelePersonalScheduleToState(
       PersonalScheduleEntities personal) async* {
-    yield TodoLoadingState();
+    yield TodoLoadingState(selectDay: this._date,selectTimer: this._timer);
     personal.updateAt = "0";
     String result =
         await personalUS.syncPersonalSchoolDataFirebase(msv, personal);

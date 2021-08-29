@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:schedule/blocs/blocs.dart';
 
 import 'package:schedule/domain/entities/personal_schedule_entities.dart';
 
@@ -166,7 +168,14 @@ class PersonalScheduleWidget extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
                 Navigator.pushNamed(context, '/todo-detail',
-                    arguments: toDoItem);
+                        arguments: toDoItem)
+                    .then((value) {
+                  String result = value as String;
+                  if (result.isNotEmpty) {
+                    BlocProvider.of<CalendarBloc>(context)
+                        .add(GetAllScheduleDataEvent());
+                  }
+                });
               },
               icon: Icon(Icons.edit),
               color: AppColor.personalScheduleColor2,
@@ -174,7 +183,6 @@ class PersonalScheduleWidget extends StatelessWidget {
           )
         ]);
   }
-
 
   String getTime(PersonalScheduleEntities item) {
     String str = '';

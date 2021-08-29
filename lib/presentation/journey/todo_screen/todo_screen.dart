@@ -71,7 +71,7 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
                 _noteController.text = "";
                 _nameController.text = "";
               } else {
-                Navigator.pushReplacementNamed(context, '/home');
+                Navigator.pop(context, 'ok');
               }
             } else if (state is TodoFailureState) {}
           },
@@ -170,25 +170,33 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
         dialogType: DialogType.WARNING,
         animType: AnimType.BOTTOMSLIDE,
         body: Padding(
-          padding:
-              EdgeInsets.symmetric(vertical: ToDoConstants.paddingVertical),
-          child: RichText(
-            text: TextSpan(
-                text: ToDoConstants.confirmDeleteTxt,
-                style: ThemeText.titleStyle.copyWith(
-                    color: Colors.black54, fontWeight: FontWeight.normal),
-                children: [
-                  TextSpan(
-                      text: ToDoConstants.confirmDeleteTxt2,
-                      style: ThemeText.titleStyle.copyWith(
-                        color: AppColor.errorColor,
-                      )),
-                  TextSpan(
-                    text: '${this.widget.personalSchedule!.name}?',
+          padding: EdgeInsets.symmetric(horizontal: 10.w),
+          child: Column(
+            children: [
+              RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                    text: ToDoConstants.confirmDeleteTxt,
                     style: ThemeText.titleStyle.copyWith(
                         color: Colors.black54, fontWeight: FontWeight.normal),
-                  ),
-                ]),
+                    children: [
+                      TextSpan(
+                          text: ToDoConstants.confirmDeleteTxt2,
+                          style: ThemeText.titleStyle.copyWith(
+                            color: AppColor.errorColor,
+                          )),
+                    ]),
+              ),
+              Text(
+                '${this.widget.personalSchedule!.name}?',
+                style: ThemeText.titleStyle.copyWith(
+                  color: Colors.black54,
+                  fontWeight: FontWeight.normal,
+                ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 3,
+              )
+            ],
           ),
         ),
         btnOk: GestureDetector(
@@ -255,6 +263,7 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
   }
 
   _bntOkDialogOnPress(BuildContext context) {
+    Navigator.pop(context);
     BlocProvider.of<TodoBloc>(context)
       ..add(DetelePersonalScheduleOnPressEvent(this.widget.personalSchedule!));
   }

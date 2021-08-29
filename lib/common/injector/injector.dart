@@ -41,11 +41,14 @@ class Injector {
     getIt.registerFactory<RegisterBloc>(() => RegisterBloc(
         snackbarBloc: getIt<SnackbarBloc>(),
         scheduleUseCase: getIt<ScheduleUseCase>(),
-        personalUseCase: getIt<PersonalUseCase>()
-    ));
-    getIt.registerLazySingleton<CalendarBloc>(() => CalendarBloc(
-        scheduleUS: getIt<ScheduleUseCase>(),
-        personalUS: getIt<PersonalUseCase>()));
+        personalUseCase: getIt<PersonalUseCase>()));
+    getIt.registerLazySingleton<ScheduleBloc>(() => ScheduleBloc());
+    getIt.registerLazySingleton<CalendarBloc>(
+      () => CalendarBloc(
+          scheduleUS: getIt<ScheduleUseCase>(),
+          personalUS: getIt<PersonalUseCase>(),
+          scheduleBloc: getIt<ScheduleBloc>()),
+    );
     getIt.registerFactory<TodoBloc>(() => TodoBloc(
         snackbarBloc: getIt<SnackbarBloc>(),
         calendarBloc: getIt<CalendarBloc>(),
@@ -62,8 +65,8 @@ class Injector {
   static void _configRepository() {
     getIt.registerLazySingleton<ScheduleRepositories>(() =>
         ScheduleRepositoriesImpl(getIt<DataRemote>(), getIt<ScheduleHive>()));
-    getIt.registerLazySingleton<PersonalRepositories>(
-        () => PersonalRepositoriesImpl(getIt<PersonalHive>(),getIt<DataRemote>()));
+    getIt.registerLazySingleton<PersonalRepositories>(() =>
+        PersonalRepositoriesImpl(getIt<PersonalHive>(), getIt<DataRemote>()));
   }
 
   static void _configDataSource() {
