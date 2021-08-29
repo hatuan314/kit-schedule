@@ -2,6 +2,12 @@ part of 'todo_bloc.dart';
 
 abstract class TodoEvent extends Equatable {}
 
+class GetUserNameEvent extends TodoEvent {
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
+}
+
 class SelectDatePickerOnPressEvent extends TodoEvent {
   final DateTime? selectDay;
 
@@ -35,11 +41,12 @@ class UpdatePersonalScheduleOnPressEvent extends TodoEvent {
   final String note;
   final String? id;
   final String createAt;
-  UpdatePersonalScheduleOnPressEvent(this.id, this.name, this.note,this.createAt);
+  UpdatePersonalScheduleOnPressEvent(
+      this.id, this.name, this.note, this.createAt);
 
   @override
   // TODO: implement props
-  List<Object?> get props => [this.id, this.name, this.note,this.createAt];
+  List<Object?> get props => [this.id, this.name, this.note, this.createAt];
 }
 
 class DetelePersonalScheduleOnPressEvent extends TodoEvent {

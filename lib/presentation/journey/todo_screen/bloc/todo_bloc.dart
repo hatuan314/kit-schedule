@@ -18,7 +18,7 @@ part 'todo_state.dart';
 
 class TodoBloc extends Bloc<TodoEvent, TodoState> {
   CalendarBloc? calendarBloc;
-
+  late final String msv;
   String _date = DateTime.now().millisecondsSinceEpoch.toString();
   String _timer = '${Convert.timerConvert(TimeOfDay.now())}';
   SnackbarBloc snackbarBloc;
@@ -47,6 +47,9 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       yield* _mapUpdatePersonalScheduleToState(event);
     else if (event is DetelePersonalScheduleOnPressEvent)
       yield* _mapDetelePersonalScheduleToState(event.personal);
+    else if (event is GetUserNameEvent) {
+      msv = (await ShareService().getUsername() as String);
+    }
   }
 
   Stream<TodoState> _mapSelectDatePickerToState(
@@ -81,8 +84,8 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     }
 
     try {
-      String result = await personalUS.syncPersonalSchoolDataFirebase(
-          "AT160543", schedule(true));
+      String result =
+          await personalUS.syncPersonalSchoolDataFirebase(msv, schedule(true));
       if (result.isNotEmpty) {
         log('Not Empty');
         await personalUS.insertPersonalSchedule(schedule(true));
@@ -124,8 +127,8 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     int flag;
     try {
       log('${schedule(true).createAt}');
-      final result = await personalUS.syncPersonalSchoolDataFirebase(
-          'AT160543', schedule(true));
+      final result =
+          await personalUS.syncPersonalSchoolDataFirebase(msv, schedule(true));
       if (result.isNotEmpty) {
         flag = await personalUS.updatePersonalScheduleData(schedule(true));
       } else {
@@ -145,14 +148,16 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   Stream<TodoState> _mapDetelePersonalScheduleToState(
       PersonalScheduleEntities personal) async* {
     yield TodoLoadingState();
-    personal.updateAt="0";
-    String result =await personalUS.syncPersonalSchoolDataFirebase('AT160543',personal);
+    personal.updateAt = "0";
+    String result =
+        await personalUS.syncPersonalSchoolDataFirebase(msv, personal);
     int flag;
-    if(result.isNotEmpty){
+    if (result.isNotEmpty) {
       flag = await personalUS.deletePersonalScheduleLocal(personal);
-    }else{//nếu không thành công lưu update=0 để lần sau đồng bộ lại
-      personal.updateAt='0';
-      flag=await personalUS.updatePersonalScheduleData(personal);
+    } else {
+      //nếu không thành công lưu update=0 để lần sau đồng bộ lại
+      personal.updateAt = '0';
+      flag = await personalUS.updatePersonalScheduleData(personal);
     }
     if (flag == 1) {
       yield TodoSuccessState(true, selectTimer: _timer, selectDay: _date);

@@ -3,7 +3,6 @@ part of 'todo_bloc.dart';
 abstract class TodoState extends Equatable {
   final String? selectDay;
   final String? selectTimer;
-
   TodoState(this.selectDay, this.selectTimer);
 }
 
@@ -24,7 +23,6 @@ class TodoLoadingState extends TodoState {
   // TODO: implement props
   List<Object> get props => [];
 }
-
 class TodoSuccessState extends TodoState {
   final bool isSuccess;
   TodoSuccessState(this.isSuccess, {String? selectDay, String? selectTimer})
