@@ -4,4 +4,5 @@ class DefaultEnv{
   static const personaScheduleTable = 'PERSONAL';
   static const developDoc='develop';
   static const schoolCollection='school';
+  static const personalCollection='personal';
 }

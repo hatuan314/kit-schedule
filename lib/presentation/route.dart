@@ -51,7 +51,7 @@ RouteFactory router() {
             //       SearchBloc()..add(SearchButtonOnPress(DateTime.now())),
             // ),
             BlocProvider(
-              create: (context) => Injector.getIt<TodoBloc>(),
+              create: (context) => Injector.getIt<TodoBloc>()..add(GetUserNameEvent()),
             ),
           ], child: MainScreen());
 //            child: SchoolSchedulePageView());
@@ -63,7 +63,7 @@ RouteFactory router() {
         int minute = int.parse(schedule.timer!.split(':').elementAt(1));
         return CupertinoPageRoute(builder: (context) {
           return BlocProvider(
-              create: (context) => Injector.getIt<TodoBloc>()
+              create: (context) => Injector.getIt<TodoBloc>()..add(GetUserNameEvent())
                 ..add(SelectDatePickerOnPressEvent(
                     selectDay: DateTime.fromMillisecondsSinceEpoch(
                         int.parse(schedule.date!))))

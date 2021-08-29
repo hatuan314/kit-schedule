@@ -19,10 +19,9 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<HomeBloc, HomeState>(listener: (context, state) {
       if (state is HomeOnChangeTabState) if (state.selectIndex == 4)
-        _warningSignOutDialog(context);
+        _warningSignOutDialog(context, state.isSynch);
       if (state is SignOutFailureState) _errorSignOutDialog(context);
     }, child: BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
-
       return Scaffold(
           backgroundColor: AppColor.secondColor,
           body: IndexedStack(
@@ -36,18 +35,15 @@ class MainScreen extends StatelessWidget {
             ],
           ),
           bottomNavigationBar: Container(
-            decoration: BoxDecoration(
-                color: AppColor.secondColor,
-                boxShadow: [
-                  BoxShadow(
-                      blurRadius: 20,
-                      color: AppColor.primaryColor.withOpacity(.1))
-                ]),
+            decoration: BoxDecoration(color: AppColor.secondColor, boxShadow: [
+              BoxShadow(
+                  blurRadius: 20, color: AppColor.primaryColor.withOpacity(.1))
+            ]),
             child: SafeArea(
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: MainScreenConstants.paddingHorizontal,
-                        vertical: MainScreenConstants.paddingVertical),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: MainScreenConstants.paddingHorizontal,
+                    vertical: MainScreenConstants.paddingVertical),
                 child: Row(
                   children: [
                     Expanded(
@@ -55,7 +51,8 @@ class MainScreen extends StatelessWidget {
                         child: navBarItem(context, 0, Icons.date_range, state)),
                     Expanded(
                         flex: 1,
-                        child: navBarItem(context, 1, Icons.score_outlined, state)),
+                        child: navBarItem(
+                            context, 1, Icons.score_outlined, state)),
                     Expanded(
                         flex: 1,
                         child:
@@ -78,7 +75,7 @@ class MainScreen extends StatelessWidget {
           BlocProvider.of<HomeBloc>(context)..add(OnTabChangeEvent(index));
         },
         child: Container(
-          height:  MainScreenConstants.navBarHeight,
+          height: MainScreenConstants.navBarHeight,
           child: Icon(
             icon,
             color: state.selectIndex == index
@@ -88,41 +85,52 @@ class MainScreen extends StatelessWidget {
         ));
   }
 
-  void _warningSignOutDialog(BuildContext context) {
+  void _warningSignOutDialog(BuildContext context, bool isSynch) {
     AwesomeDialog(
-      dismissOnTouchOutside: false,
+        dismissOnTouchOutside: false,
         context: context,
         dialogType: DialogType.WARNING,
         animType: AnimType.BOTTOMSLIDE,
         body: Padding(
-          padding: const EdgeInsets.symmetric(
-              vertical: MainScreenConstants.dialogPaddingVertical),
-          child: RichText(
-            text: TextSpan(
-                text: MainScreenConstants.confirmSignOutTxt,
-                style: ThemeText.titleStyle.copyWith(
-                  color: AppColor.thirdColor,
-                ),
-                children: [
-                  TextSpan(
-                    text: MainScreenConstants.signOutTxt,
-                    style: ThemeText.titleStyle.copyWith(
-                      color: AppColor.errorColor,
-                    ),
-                  ),
-                  TextSpan(
-                    text: MainScreenConstants.punctuationMarkTxt,
-                    style: ThemeText.titleStyle.copyWith(
+            padding: const EdgeInsets.symmetric(
+                vertical: MainScreenConstants.dialogPaddingVertical),
+            child: Column(
+              children: [
+                isSynch
+                    ? SizedBox()
+                    : Text(
+                        MainScreenConstants.synchronizedTxt,
+                        style: ThemeText.titleStyle.copyWith(
+                            fontSize: MainScreenConstants.synchronizedSize),
+                      ),
+                RichText(
+                  text: TextSpan(
+                      text: MainScreenConstants.confirmSignOutTxt,
+                      style: ThemeText.titleStyle.copyWith(
                         color: AppColor.thirdColor,
-                        fontWeight: FontWeight.normal),
-                  ),
-                ]),
-          ),
-        ),
+                      ),
+                      children: [
+                        TextSpan(
+                          text: MainScreenConstants.signOutTxt,
+                          style: ThemeText.titleStyle.copyWith(
+                            color: AppColor.errorColor,
+                          ),
+                        ),
+                        TextSpan(
+                          text: MainScreenConstants.punctuationMarkTxt,
+                          style: ThemeText.titleStyle.copyWith(
+                              color: AppColor.thirdColor,
+                              fontWeight: FontWeight.normal),
+                        ),
+                      ]),
+                ),
+              ],
+            )),
         btnOk: GestureDetector(
           onTap: () => _bntOkDialogOnPress(context),
           child: Container(
-            margin: const EdgeInsets.only(bottom: MainScreenConstants.containerMarginBottom),
+            margin: const EdgeInsets.only(
+                bottom: MainScreenConstants.containerMarginBottom),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: AppColor.fourthColor,
@@ -141,9 +149,8 @@ class MainScreen extends StatelessWidget {
             alignment: Alignment.center,
             child: Padding(
               padding: const EdgeInsets.symmetric(
-                vertical: MainScreenConstants.paddingVertical,
-                horizontal: MainScreenConstants.paddingHorizontal
-              ),
+                  vertical: MainScreenConstants.paddingVertical,
+                  horizontal: MainScreenConstants.paddingHorizontal),
               child: Text(
                 MainScreenConstants.yesTxt,
                 style: ThemeText.buttonLabelStyle.copyWith(
@@ -155,7 +162,8 @@ class MainScreen extends StatelessWidget {
         btnCancel: GestureDetector(
           onTap: () => _btnCancelDialogOnPress(context),
           child: Container(
-            margin: const EdgeInsets.only(bottom: MainScreenConstants.containerMarginBottom),
+            margin: const EdgeInsets.only(
+                bottom: MainScreenConstants.containerMarginBottom),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: AppColor.errorColor,
@@ -173,10 +181,9 @@ class MainScreen extends StatelessWidget {
             ),
             alignment: Alignment.center,
             child: Padding(
-              padding:const EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                   vertical: MainScreenConstants.paddingVertical,
-                  horizontal: MainScreenConstants.paddingHorizontal
-              ),
+                  horizontal: MainScreenConstants.paddingHorizontal),
               child: Text(MainScreenConstants.noTxt,
                   style: ThemeText.buttonLabelStyle.copyWith(
                       color: AppColor.secondColor,
@@ -209,8 +216,7 @@ class MainScreen extends StatelessWidget {
             text: TextSpan(
                 text: MainScreenConstants.errorSignOutTxt1,
                 style: ThemeText.titleStyle.copyWith(
-                    color: AppColor.thirdColor,
-                    fontWeight: FontWeight.normal),
+                    color: AppColor.thirdColor, fontWeight: FontWeight.normal),
                 children: [
                   TextSpan(
                       text: MainScreenConstants.signOutTxt,
@@ -220,7 +226,8 @@ class MainScreen extends StatelessWidget {
                   TextSpan(
                     text: MainScreenConstants.errorSignOutTxt2,
                     style: ThemeText.titleStyle.copyWith(
-                        color: AppColor.thirdColor, ),
+                      color: AppColor.thirdColor,
+                    ),
                   )
                 ]),
           ),

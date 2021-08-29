@@ -64,6 +64,7 @@ dependencies:
   store_redirect: ^2.0.0
   url_launcher: ^6.0.9
   cloud_firestore: ^2.4.0
+  connectivity: ^3.0.6
 
 
 dev_dependencies:

@@ -2,8 +2,8 @@ part of "home_bloc.dart";
 
 abstract class HomeState extends Equatable {
   final int selectIndex;
-
-  HomeState(this.selectIndex);
+  final bool isSynch;
+  HomeState(this.selectIndex,[this.isSynch=true]);
 
 }
 
@@ -17,7 +17,7 @@ class HomeInitialState extends HomeState {
 }
 
 class HomeOnChangeTabState extends HomeState {
-  HomeOnChangeTabState(int selectIndex) : super(selectIndex);
+  HomeOnChangeTabState(int selectIndex,bool isSynch) : super(selectIndex,isSynch);
 
   List<Object> get props => [this.selectIndex];
 }

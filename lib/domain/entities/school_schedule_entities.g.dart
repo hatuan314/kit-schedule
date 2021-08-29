@@ -6,8 +6,7 @@ part of 'school_schedule_entities.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class SchoolScheduleEntitiesAdapter
-    extends TypeAdapter<SchoolSchedule> {
+class SchoolScheduleAdapter extends TypeAdapter<SchoolSchedule> {
   @override
   final int typeId = 0;
 
@@ -45,7 +44,7 @@ class SchoolScheduleEntitiesAdapter
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is SchoolScheduleEntitiesAdapter &&
+      other is SchoolScheduleAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

@@ -3,7 +3,9 @@ import 'package:crypto/crypto.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:schedule/domain/entities/personal_schedule_entities.dart';
 import 'package:schedule/domain/entities/school_schedule_entities.dart';
+import 'package:schedule/domain/usecase/personal_usecase.dart';
 import 'package:schedule/domain/usecase/schedule_usecase.dart';
 
 import 'package:schedule/presentation/bloc/snackbar_bloc/bloc.dart';
@@ -17,7 +19,11 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   ShareService _shareService = ShareService();
   final SnackbarBloc snackbarBloc;
   final ScheduleUseCase scheduleUseCase;
-  RegisterBloc({required this.snackbarBloc, required this.scheduleUseCase})
+  final PersonalUseCase personalUseCase;
+  RegisterBloc(
+      {required this.snackbarBloc,
+      required this.personalUseCase,
+      required this.scheduleUseCase})
       : super(RegisterInitState());
 
   @override
@@ -42,6 +48,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
               title: 'No Data. Try again', type: SnackBarType.error));
           yield RegisterNoDataState();
         } else {
+          List<PersonalScheduleEntities> list =
+              await personalUseCase.fetchPersonalSchoolDataFirebase(account);
+          await _savePersonalSchool(list, state);
           await _saveScheduleSchool(data, state);
           await _shareService.setIsSaveData(true);
           yield RegisterSuccessState();
@@ -51,6 +60,19 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
             ShowSnackbar(title: 'Connection Failed', type: SnackBarType.error));
         yield RegisterFailureState(e.toString());
       }
+    }
+  }
+
+  _savePersonalSchool(
+      List<PersonalScheduleEntities> personal, RegisterState state) async {
+    try {
+      if (personal.isNotEmpty) {
+        personal.forEach((element) async {
+          await personalUseCase.insertPersonalSchedule(element);
+        });
+      }
+    } catch (e) {
+      debugPrint('RegisterBloc - saveSchoolSchedule - error: {$e}');
     }
   }
 
