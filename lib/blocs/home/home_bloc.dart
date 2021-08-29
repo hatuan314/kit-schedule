@@ -34,6 +34,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         await shareService.setUsername('');
         await shareService.setIsSaveData(false);
         Injector.getIt.resetLazySingleton<CalendarBloc>();
+        Injector.getIt.resetLazySingleton<ScheduleBloc>();
         yield SignOutSuccessState(0);
       } catch (e) {
         debugPrint('HomeBloc - mapEventToState - Error: {$e}');

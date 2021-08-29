@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/blocs/blocs.dart';
+import 'package:schedule/common/injector/injector.dart';
 import 'package:schedule/common/utils/convert.dart';
 import 'package:schedule/presentation/journey/home/calendar_tab_constants.dart';
 import 'package:schedule/presentation/journey/home/schedule_widget.dart';
@@ -29,7 +30,7 @@ class CalendarTabScreen extends StatelessWidget {
           return Scaffold(
               backgroundColor:CalendarTabConstants.backgroundColor,
               body: BlocProvider(
-                create: (context) => ScheduleBloc()
+                create: (context) => Injector.getIt<ScheduleBloc>()
                   ..add(GetScheduleDayEvent(
                       selectDay: Convert.dateConvert(DateTime.now()),
                       allSchedulesSchoolMap: state.allSchedulesSchoolMap,

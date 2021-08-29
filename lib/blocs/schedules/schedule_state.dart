@@ -17,14 +17,14 @@ class UpdateScheduleDayLoadingState extends ScheduleState {
 class UpdateScheduleDaySuccessState extends ScheduleState {
   final List<SchoolSchedule>? schedulesSchoolOfDay;
   final List<PersonalScheduleEntities>? schedulesPersonalOfDay;
-
+ final DateTime selectDay;
   UpdateScheduleDaySuccessState(
-      this.schedulesSchoolOfDay, this.schedulesPersonalOfDay);
+      this.schedulesSchoolOfDay, this.schedulesPersonalOfDay,this.selectDay);
 
   @override
   // TODO: implement props
   List<Object?> get props =>
-      [this.schedulesSchoolOfDay, this.schedulesPersonalOfDay];
+      [this.schedulesSchoolOfDay, this.schedulesPersonalOfDay,this.selectDay];
 }
 
 class UpdateScheduleDayFailureState extends ScheduleState {

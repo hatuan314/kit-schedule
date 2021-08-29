@@ -11,7 +11,7 @@ class MainScreenConstants{
   static const navBarHeight = 50.0;
 
   static String synchronizedTxt='Some data is not synchronized';
-  static String confirmSignOutTxt='Do you want ';
+  static String confirmSignOutTxt='Do you want to ';
   static String signOutTxt ='Sign Out ';
   static String punctuationMarkTxt ='?';
   static String yesTxt ='Yes (Y)';

@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:schedule/blocs/blocs.dart';
 import 'package:schedule/common/utils/convert.dart';
 import 'package:schedule/domain/entities/personal_schedule_entities.dart';
 import 'package:schedule/domain/entities/school_schedule_entities.dart';
@@ -15,7 +16,7 @@ part 'calendar_event.dart';
 part 'calendar_state.dart';
 
 class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
-
+  final ScheduleBloc scheduleBloc;
   final PersonalUseCase personalUS;
   final ScheduleUseCase scheduleUS;
   Map<DateTime, List<dynamic>> allSchedulesCalendarMap = Map<DateTime, List>();
@@ -24,7 +25,10 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
   Map<DateTime, List<PersonalScheduleEntities>> allPersonalSchedulesMap =
       Map<DateTime, List<PersonalScheduleEntities>>();
 
-  CalendarBloc({required this.personalUS, required this.scheduleUS})
+  CalendarBloc(
+      {required this.personalUS,
+      required this.scheduleUS,
+      required this.scheduleBloc})
       : super(CalendarLoadingDataState());
 
   @override
@@ -42,6 +46,14 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
         yield* _mapGetAllPersonalScheduleToMap();
         yield CalendarLoadDataSuccessState(allSchedulesCalendarMap,
             allSchoolSchedulesMap, allPersonalSchedulesMap);
+        final scheduleState = scheduleBloc.state;
+        if (scheduleState is UpdateScheduleDaySuccessState) {
+          scheduleBloc.add(GetScheduleDayEvent(
+              selectDay: scheduleState.selectDay,
+              allSchedulePersonalMap: allPersonalSchedulesMap,
+          allSchedulesSchoolMap: allSchoolSchedulesMap
+          ));
+        }
       } catch (e) {
         yield CalendarFailureState(e.toString());
       }
@@ -68,15 +80,22 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
             allSchedulesCalendarMap[scheduleDate]!
                 .add(json.encode(schedule.toJson()));
             allSchoolSchedulesMap[scheduleDate]!.add(schedule);
-            for (int i = 0; i < allSchoolSchedulesMap[scheduleDate]!.length - 1; i++) {
+            for (int i = 0;
+                i < allSchoolSchedulesMap[scheduleDate]!.length - 1;
+                i++) {
               int lesson1 = int.parse(allSchoolSchedulesMap[scheduleDate]![i]
                   .lesson!
                   .split(',')[0]);
-              for (int j = i; j < allSchoolSchedulesMap[scheduleDate]!.length; j++) {
-                int lesson2 = int.parse(allSchoolSchedulesMap[scheduleDate]![j].lesson!.split(',')[0]);
+              for (int j = i;
+                  j < allSchoolSchedulesMap[scheduleDate]!.length;
+                  j++) {
+                int lesson2 = int.parse(allSchoolSchedulesMap[scheduleDate]![j]
+                    .lesson!
+                    .split(',')[0]);
                 if (lesson1 > lesson2) {
                   SchoolSchedule tmp = allSchoolSchedulesMap[scheduleDate]![i];
-                  allSchoolSchedulesMap[scheduleDate]![i] = allSchoolSchedulesMap[scheduleDate]![j];
+                  allSchoolSchedulesMap[scheduleDate]![i] =
+                      allSchoolSchedulesMap[scheduleDate]![j];
                   allSchoolSchedulesMap[scheduleDate]![j] = tmp;
                 }
               }
