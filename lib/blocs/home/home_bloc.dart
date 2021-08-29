@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,13 +13,19 @@ part './home_event.dart';
 part './home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-final ScheduleUseCase scheduleUS;
-final PersonalUseCase personalUS;
-  HomeBloc({required this.personalUS,required this.scheduleUS}) : super(HomeInitialState(0));
+  final ScheduleUseCase scheduleUS;
+  final PersonalUseCase personalUS;
+  HomeBloc({required this.personalUS, required this.scheduleUS})
+      : super(HomeInitialState(0));
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
     if (event is OnTabChangeEvent) {
-      yield HomeOnChangeTabState(event.selectIndex);
+      bool isSynch = true;
+      if (event.selectIndex == 4) {
+        var result = await personalUS.listPerSonIsSyncFailed();
+        isSynch = result.isEmpty;
+      }
+      yield HomeOnChangeTabState(event.selectIndex, isSynch);
     } else if (event is SignOutOnPressEvent) {
       ShareService shareService = ShareService();
       try {

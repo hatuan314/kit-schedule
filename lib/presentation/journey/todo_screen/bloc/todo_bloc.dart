@@ -7,11 +7,11 @@ import 'package:schedule/blocs/blocs.dart';
 import 'package:schedule/common/utils/convert.dart';
 import 'package:schedule/domain/entities/personal_schedule_entities.dart';
 import 'package:schedule/domain/usecase/personal_usecase.dart';
-import 'package:schedule/models/model.dart';
+
 import 'package:schedule/presentation/bloc/snackbar_bloc/snackbar_bloc.dart';
 import 'package:schedule/presentation/bloc/snackbar_bloc/snackbar_event.dart';
 import 'package:schedule/presentation/bloc/snackbar_bloc/snackbar_type.dart';
-import 'package:schedule/service/services.dart';
+import 'package:schedule/service/share_service.dart';
 
 part 'todo_event.dart';
 part 'todo_state.dart';
@@ -66,20 +66,37 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   Stream<TodoState> _mapCreatePersonalScheduleToState(
       CreatePersonalScheduleOnPressEvent event) async* {
     yield TodoLoadingState();
-    PersonalScheduleEntities schedule = PersonalScheduleEntities(
+    final String now = DateTime.now().millisecondsSinceEpoch.toString();
+    PersonalScheduleEntities schedule(bool isSynch) {
+      PersonalScheduleEntities schedule = PersonalScheduleEntities(
         date: this._date,
         name: event.name,
         timer: this._timer,
-        note: event.note);
+        note: event.note,
+        isSynchronized: isSynch,
+        updateAt: now,
+        createAt: now,
+      );
+      return schedule;
+    }
+
     try {
-      // await _repositoryOffline.addPersonalScheduleRepo(schedule);
-      await personalUS.insertPersonalSchedule(schedule);
+      String result = await personalUS.syncPersonalSchoolDataFirebase(
+          "AT160543", schedule(true));
+      if (result.isNotEmpty) {
+        log('Not Empty');
+        await personalUS.insertPersonalSchedule(schedule(true));
+      } else {
+        log('empty');
+        await personalUS.insertPersonalSchedule(schedule(false));
+      }
       _date = DateTime.now().millisecondsSinceEpoch.toString();
       _timer = '${Convert.timerConvert(TimeOfDay.now())}';
       calendarBloc!.add(GetAllScheduleDataEvent());
       snackbarBloc.add(
           ShowSnackbar(title: 'Create Success', type: SnackBarType.success));
       yield TodoSuccessState(true, selectTimer: _timer, selectDay: _date);
+      // String msv=await ShareService().getUsername() as String;
     } catch (e) {
       snackbarBloc
           .add(ShowSnackbar(title: 'Create Failed', type: SnackBarType.error));
@@ -91,19 +108,29 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   Stream<TodoState> _mapUpdatePersonalScheduleToState(
       UpdatePersonalScheduleOnPressEvent event) async* {
     yield TodoLoadingState();
-    // PersonalSchedule schedule = PersonalSchedule(
-    //     this._date, event.name, this._timer, event.note,
-    //     id: event.id);
-    PersonalScheduleEntities schedule = PersonalScheduleEntities(
-        date: this._date,
-        name: event.name,
-        timer: this._timer,
-        note: event.note,
-        id: event.id,
-      createAt: event.createAt
-    );
+    final String now = DateTime.now().millisecondsSinceEpoch.toString();
+    PersonalScheduleEntities schedule(bool isSynch) {
+      PersonalScheduleEntities schedule = PersonalScheduleEntities(
+          date: this._date,
+          name: event.name,
+          timer: this._timer,
+          note: event.note,
+          id: event.id,
+          createAt: event.createAt,
+          updateAt: now);
+      return schedule;
+    }
+
+    int flag;
     try {
-      int flag = await personalUS.updatePersonalScheduleData(schedule);
+      log('${schedule(true).createAt}');
+      final result = await personalUS.syncPersonalSchoolDataFirebase(
+          'AT160543', schedule(true));
+      if (result.isNotEmpty) {
+        flag = await personalUS.updatePersonalScheduleData(schedule(true));
+      } else {
+        flag = await personalUS.updatePersonalScheduleData(schedule(false));
+      }
       _date = DateTime.now().millisecondsSinceEpoch.toString();
       _timer = '${Convert.timerConvert(TimeOfDay.now())}';
       if (flag == 1) {
@@ -118,7 +145,15 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   Stream<TodoState> _mapDetelePersonalScheduleToState(
       PersonalScheduleEntities personal) async* {
     yield TodoLoadingState();
-    int flag = await personalUS.deletePersonalScheduleLocal(personal);
+    personal.updateAt="0";
+    String result =await personalUS.syncPersonalSchoolDataFirebase('AT160543',personal);
+    int flag;
+    if(result.isNotEmpty){
+      flag = await personalUS.deletePersonalScheduleLocal(personal);
+    }else{//nếu không thành công lưu update=0 để lần sau đồng bộ lại
+      personal.updateAt='0';
+      flag=await personalUS.updatePersonalScheduleData(personal);
+    }
     if (flag == 1) {
       yield TodoSuccessState(true, selectTimer: _timer, selectDay: _date);
     } else {

@@ -13,10 +13,18 @@ class PersonalHive {
     await hiveConfig.personalBox.add(personalScheduleEntities);
   }
 
+  Future<List<PersonalScheduleEntities>> listPerSonIsSyncFailed() async {
+    return hiveConfig.personalBox.values
+        .where((element) =>
+            element.isSynchronized == false || element.updateAt == '0')
+        .toList();
+  }
+
   Future<List<PersonalScheduleEntities>>
       fetchAllPersonalScheduleRepoLocal() async {
-    List<PersonalScheduleEntities> result =
-        hiveConfig.personalBox.values.toList();
+    List<PersonalScheduleEntities> result = hiveConfig.personalBox.values
+        .where((element) => element.updateAt != '0')
+        .toList();
     result.sort((a, b) => a.date!.compareTo(b.date!));
     return result;
   }
@@ -36,7 +44,7 @@ class PersonalHive {
     final result = hiveConfig.personalBox.values;
     for (int i = 0; i < result.length; i++) {
       if (result.elementAt(i).createAt == personal.createAt) {
-       await hiveConfig.personalBox.putAt(
+        await hiveConfig.personalBox.putAt(
             i,
             PersonalScheduleEntities(
                 date: personal.date,

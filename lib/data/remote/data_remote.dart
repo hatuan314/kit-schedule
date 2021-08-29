@@ -1,6 +1,9 @@
-
+import 'dart:async';
+import 'dart:developer';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:schedule/common/config/firebase_setup.dart';
 
@@ -42,12 +45,38 @@ class DataRemote {
       return data;
     }
   }
+  Future<Map> fetchPersonalSchoolDataFirebase(String msv) async {
+    log('>>>>>>>>>>>>');
+    final response = await firebaseSetup.personalCollection.doc(msv).get();
+    if (response.data() == null) {
+      return {};
+    } else {
+      Map data = response.data() as Map;
+      log('$data');
+      return data;
+    }
+  }
 
   Future<String> syncScheduleSchoolDataFirebase(String msv, Map data) async {
     try {
       await firebaseSetup.scheduleCollection.doc(msv).set(data);
       return 'ok';
     } on FirebaseException {
+      return '';
+    }
+  }
+
+  Future<String> syncPersonalSchoolDataFirebase(
+      String msv, Map<String, dynamic> data) async {
+    try {
+      final result = await firebaseSetup.personalCollection.doc(msv).get();
+      if (result.data() == null) {
+        await firebaseSetup.personalCollection.doc(msv).set(data);
+      } else {
+        await firebaseSetup.personalCollection.doc(msv).update(data);
+      }
+      return 'ok';
+    } catch (e) {
       return '';
     }
   }

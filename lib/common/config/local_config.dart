@@ -11,7 +11,7 @@ class LocalConfig {
         await path_provider.getApplicationDocumentsDirectory();
     Hive.init(appDocumentDirectory.path);
     Hive.registerAdapter(PersonalScheduleEntitiesAdapter());
-    Hive.registerAdapter(SchoolScheduleEntitiesAdapter());
+    Hive.registerAdapter(SchoolScheduleAdapter());
     personalBox = await Hive.openBox(DefaultEnv.personaScheduleTable);
     scheduleBox = await Hive.openBox(DefaultEnv.scheduleTable);
   }

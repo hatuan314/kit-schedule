@@ -1,11 +1,12 @@
 import 'package:schedule/data/local_data_source/personal_hive.dart';
+import 'package:schedule/data/remote/data_remote.dart';
 import 'package:schedule/domain/entities/personal_schedule_entities.dart';
 import 'package:schedule/domain/repositories/personal_repositories.dart';
 
 class PersonalRepositoriesImpl extends PersonalRepositories {
   final PersonalHive personalHive;
-
-  PersonalRepositoriesImpl(this.personalHive);
+  final DataRemote dataRemote;
+  PersonalRepositoriesImpl(this.personalHive,this.dataRemote);
   @override
   Future<List<PersonalScheduleEntities>> fetchAllPersonalScheduleOfDateLocal(
       String date) async {
@@ -32,4 +33,20 @@ class PersonalRepositoriesImpl extends PersonalRepositories {
   Future<int> updatePersonalScheduleDataLocal(PersonalScheduleEntities personal) async{
     return personalHive.updatePersonalScheduleData(personal);
   }
+
+  @override
+  Future<List<PersonalScheduleEntities>> listPerSonIsSyncFailed() {
+    return personalHive.listPerSonIsSyncFailed();
+  }
+
+  @override
+  Future<String> syncPersonalSchoolDataFirebase(String msv, Map<String,dynamic> data) {
+   return dataRemote.syncPersonalSchoolDataFirebase(msv, data);
+  }
+
+  @override
+  Future<Map> fetchPersonalSchoolDataFirebase(String msv) {
+    return dataRemote.fetchPersonalSchoolDataFirebase(msv);
+  }
+
 }

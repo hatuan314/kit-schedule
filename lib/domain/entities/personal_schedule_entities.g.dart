@@ -24,6 +24,7 @@ class PersonalScheduleEntitiesAdapter
       note: fields[4] as String?,
       createAt: fields[5] as String?,
       updateAt: fields[6] as String?,
+      isSynchronized: fields[7] as bool?,
       id: fields[0] as String?,
     );
   }
@@ -31,7 +32,7 @@ class PersonalScheduleEntitiesAdapter
   @override
   void write(BinaryWriter writer, PersonalScheduleEntities obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -45,7 +46,9 @@ class PersonalScheduleEntitiesAdapter
       ..writeByte(5)
       ..write(obj.createAt)
       ..writeByte(6)
-      ..write(obj.updateAt);
+      ..write(obj.updateAt)
+      ..writeByte(7)
+      ..write(obj.isSynchronized);
   }
 
   @override
