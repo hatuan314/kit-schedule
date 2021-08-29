@@ -23,7 +23,7 @@ class ToDoConstants{
   static String setTimeTxt ='Set time';
   static String setDateTxt ='Set date';
   static String saveTxt='Save';
-  static String confirmDeleteTxt= 'Do you want ';
+  static String confirmDeleteTxt= 'Do you want to ';
   static String confirmDeleteTxt2= 'delete ';
 
   static String punctuationMarkTxt ='?';
