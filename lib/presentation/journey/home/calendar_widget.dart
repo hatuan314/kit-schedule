@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,6 +28,7 @@ class _CalendarViewState extends State<CalendarView> {
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(30)),
           color: Color(0xffFCFAF3)),
       child: TableCalendar(
+        locale: 'en',
         currentDay: _selectedDay,
         firstDay: DateTime.utc(2010, 10, 16),
         lastDay: DateTime.utc(2030, 3, 14),
@@ -82,7 +82,6 @@ class _CalendarViewState extends State<CalendarView> {
   }
 
   List _getEventsForDay(DateTime day) {
-
     return this.widget.state!.allSchedulesCalendarMap[
             DateTime.fromMillisecondsSinceEpoch(day.millisecondsSinceEpoch)] ??
         [];
