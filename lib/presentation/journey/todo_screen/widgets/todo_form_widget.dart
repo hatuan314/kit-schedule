@@ -14,8 +14,8 @@ class TodoFormWidget extends StatelessWidget {
   final TextEditingController nameController;
   final TextEditingController noteController;
   final TodoState state;
-  final Function() setDatePicker;
-  final Function() setTimePicker;
+  final Function(TodoState) setDatePicker;
+  final Function(TodoState) setTimePicker;
 
   const TodoFormWidget({
     Key? key,
@@ -55,7 +55,7 @@ class TodoFormWidget extends StatelessWidget {
                 child: SetTimeWidget(
               state: state,
               title: ToDoConstants.setDateTxt,
-              onTap: setDatePicker,
+              onTap:()=> setDatePicker(state),
               isDate: true,
             )),
             SizedBox(
@@ -63,7 +63,7 @@ class TodoFormWidget extends StatelessWidget {
             ),
             Expanded(
                 child: SetTimeWidget(
-              onTap: setTimePicker,
+              onTap:()=> setTimePicker(state),
               state: state,
               title: ToDoConstants.setTimeTxt,
             )),
