@@ -68,7 +68,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
 
   Stream<TodoState> _mapCreatePersonalScheduleToState(
       CreatePersonalScheduleOnPressEvent event) async* {
-    yield TodoLoadingState(selectDay: this._date,selectTimer: this._timer);
+    yield TodoLoadingState(selectDay: this._date, selectTimer: this._timer);
     final String now = DateTime.now().millisecondsSinceEpoch.toString();
     PersonalScheduleEntities schedule(bool isSynch) {
       PersonalScheduleEntities schedule = PersonalScheduleEntities(
@@ -110,7 +110,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
 
   Stream<TodoState> _mapUpdatePersonalScheduleToState(
       UpdatePersonalScheduleOnPressEvent event) async* {
-    yield TodoLoadingState(selectDay: this._date,selectTimer: this._timer);
+    yield TodoLoadingState(selectDay: this._date, selectTimer: this._timer);
     final String now = DateTime.now().millisecondsSinceEpoch.toString();
     PersonalScheduleEntities schedule(bool isSynch) {
       PersonalScheduleEntities schedule = PersonalScheduleEntities(
@@ -118,20 +118,21 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
           name: event.name,
           timer: this._timer,
           note: event.note,
-          id: event.id,
           createAt: event.createAt,
-          updateAt: now);
+          updateAt: now,
+      isSynchronized: isSynch
+      );
       return schedule;
     }
 
     int flag;
     try {
-      log('${schedule(true).createAt}');
       final result =
           await personalUS.syncPersonalSchoolDataFirebase(msv, schedule(true));
       if (result.isNotEmpty) {
         flag = await personalUS.updatePersonalScheduleData(schedule(true));
       } else {
+
         flag = await personalUS.updatePersonalScheduleData(schedule(false));
       }
       _date = DateTime.now().millisecondsSinceEpoch.toString();
@@ -147,10 +148,10 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
 
   Stream<TodoState> _mapDetelePersonalScheduleToState(
       PersonalScheduleEntities personal) async* {
-    yield TodoLoadingState(selectDay: this._date,selectTimer: this._timer);
+    yield TodoLoadingState(selectDay: this._date, selectTimer: this._timer);
     personal.updateAt = "0";
-    String result =
-        await personalUS.syncPersonalSchoolDataFirebase(msv, personal);
+    String result = await personalUS.deletePersonalSchoolDataFirebase(
+        msv, personal.createAt!);
     int flag;
     if (result.isNotEmpty) {
       flag = await personalUS.deletePersonalScheduleLocal(personal);

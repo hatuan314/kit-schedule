@@ -1,18 +1,21 @@
+
+
 import 'dart:developer';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
-import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:schedule/common/constants/layout_constants.dart';
 import 'package:schedule/domain/entities/personal_schedule_entities.dart';
 
-import 'package:schedule/models/personal_schedule.dart';
+
 import 'package:schedule/presentation/journey/home/calendar_tab_constants.dart';
 import 'package:schedule/presentation/journey/todo_screen/todo_constants.dart';
 import 'package:schedule/presentation/journey/todo_screen/widgets/cupertino_rounded_datepicker_widget.dart';
@@ -28,7 +31,7 @@ import 'bloc/todo_bloc.dart';
 class TodoScreen extends StatefulWidget {
   final PersonalScheduleEntities? personalSchedule;
 
-  const TodoScreen({Key? key, this.personalSchedule}) : super(key: key);
+   TodoScreen({Key? key, this.personalSchedule}) : super(key: key);
   @override
   _CreateTodoTabViewState createState() => _CreateTodoTabViewState();
 }
@@ -50,14 +53,19 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
       isKeyboard = event;
       if (isKeyboard == false) {
         await Future.delayed(Duration(milliseconds: 110));
-        setState(() {});
+        if (mounted) setState((){});
+
       } else {
-        setState(() {});
+        if (mounted) setState((){});
       }
     });
     super.initState();
   }
+@override
+  void dispose() {
 
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -125,9 +133,6 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
                             formKey: _formKey,
                             setDatePicker: _selectDatePicker,
                             setTimePicker: _selectTimePicker,
-                            setOnBtnSave: widget.personalSchedule == null
-                                ? _setOnClickSaveButton
-                                : _setOnClickUpdateButton,
                           ),
                         ),
                       ),
@@ -193,7 +198,7 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
   }
 
   _selectDatePicker() async {
-   CupertinoRoundedDatePickerWidget.show(
+    CupertinoRoundedDatePickerWidget.show(
       context,
       initialDate: DateTime.now(),
       textColor: AppColor.personalScheduleColor,
@@ -240,7 +245,6 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
       BlocProvider.of<TodoBloc>(context)
         ..add(
           UpdatePersonalScheduleOnPressEvent(
-              this.widget.personalSchedule!.id,
               _nameController.text.trim(),
               _noteController.text.trim(),
               widget.personalSchedule!.createAt!),

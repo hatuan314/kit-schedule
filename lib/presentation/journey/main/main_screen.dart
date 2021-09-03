@@ -6,7 +6,7 @@ import 'package:schedule/presentation/journey/home/calendar_tab_screen.dart';
 import 'package:schedule/presentation/journey/profile/profile_screen.dart';
 import 'package:schedule/presentation/journey/scores/scores_screen.dart';
 
-import 'package:schedule/presentation/journey/search/search_screen.dart';
+
 import 'package:schedule/presentation/journey/todo_screen/todo_screen.dart';
 
 import 'package:schedule/presentation/themes/theme_colors.dart';

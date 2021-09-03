@@ -24,10 +24,7 @@ class DataRemote {
     };
 
     final response = await dio.post('', data: authBody);
-
     if (response.data['status'] == true) {
-//      debugPrint('fetchScheduleSchoolDataProvider ${response.data['dataJson'] is String}');
-//       String dataJson = json.encode(response.data['dataJson']);
       dio.close();
       return response.data['dataJson'];
     } else {
@@ -45,8 +42,8 @@ class DataRemote {
       return data;
     }
   }
+
   Future<Map> fetchPersonalSchoolDataFirebase(String msv) async {
-    log('>>>>>>>>>>>>');
     final response = await firebaseSetup.personalCollection.doc(msv).get();
     if (response.data() == null) {
       return {};
@@ -74,6 +71,23 @@ class DataRemote {
         await firebaseSetup.personalCollection.doc(msv).set(data);
       } else {
         await firebaseSetup.personalCollection.doc(msv).update(data);
+      }
+      return 'ok';
+    } catch (e) {
+      return '';
+    }
+  }
+
+  Future<String> deletePersonalSchoolDataFirebase(
+      String msv, String createAt) async {
+    try {
+      final result = await firebaseSetup.personalCollection.doc(msv).get();
+      if (result.data() == null) {
+        return 'ok';
+      } else {
+        await firebaseSetup.personalCollection
+            .doc(msv)
+            .update({createAt: FieldValue.delete()});
       }
       return 'ok';
     } catch (e) {

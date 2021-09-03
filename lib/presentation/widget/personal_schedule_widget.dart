@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -170,8 +172,7 @@ class PersonalScheduleWidget extends StatelessWidget {
                 Navigator.pushNamed(context, '/todo-detail',
                         arguments: toDoItem)
                     .then((value) {
-                  String result = value as String;
-                  if (result.isNotEmpty) {
+                  if (value != null) {
                     BlocProvider.of<CalendarBloc>(context)
                         .add(GetAllScheduleDataEvent());
                   }

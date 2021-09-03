@@ -49,4 +49,9 @@ class PersonalRepositoriesImpl extends PersonalRepositories {
     return dataRemote.fetchPersonalSchoolDataFirebase(msv);
   }
 
+  @override
+  Future<String> deletePersonalSchoolDataFirebase(String msv, String createAt) {
+    return dataRemote.deletePersonalSchoolDataFirebase(msv, createAt);
+  }
+
 }

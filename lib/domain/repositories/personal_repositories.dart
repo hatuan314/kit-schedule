@@ -12,4 +12,5 @@ abstract class PersonalRepositories {
       PersonalScheduleEntities personal);
   Future<List<PersonalScheduleEntities>> listPerSonIsSyncFailed();
   Future<String> syncPersonalSchoolDataFirebase(String msv, Map<String,dynamic> data);
+  Future<String> deletePersonalSchoolDataFirebase(String msv, String createAt);
 }
