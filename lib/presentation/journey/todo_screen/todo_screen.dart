@@ -15,6 +15,7 @@ import 'package:schedule/domain/entities/personal_schedule_entities.dart';
 import 'package:schedule/models/personal_schedule.dart';
 import 'package:schedule/presentation/journey/home/calendar_tab_constants.dart';
 import 'package:schedule/presentation/journey/todo_screen/todo_constants.dart';
+import 'package:schedule/presentation/journey/todo_screen/widgets/cupertino_rounded_datepicker_widget.dart';
 
 import 'package:schedule/presentation/journey/todo_screen/widgets/todo_form_widget.dart';
 
@@ -192,14 +193,29 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
   }
 
   _selectDatePicker() async {
-    DateTime? date = await showRoundedDatePicker(
-      context: context,
+    // DateTime? date = await showDialog(context: context, builder:(_)=>DiaLogDatePickerWidget() );
+    // DateTime? date = await showRoundedDatePicker(
+    //   context: context,
+    //   initialDate: DateTime.now(),
+    //   firstDate: DateTime(DateTime.now().year - 10),
+    //   lastDate: DateTime(DateTime.now().year + 10),
+    //   borderRadius: 20,
+    //   fontFamily: 'MR',
+    //   imageHeader: AssetImage("assets/images/calendar_header.jpg"),
+    // );
+    DateTime? date = await CupertinoRoundedDatePickerWidget.show(
+      context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(DateTime.now().year - 10),
-      lastDate: DateTime(DateTime.now().year + 10),
-      borderRadius: 20,
+      textColor: AppColor.personalScheduleColor,
+      initialDatePickerMode: CupertinoDatePickerMode.date,
       fontFamily: 'MR',
-      imageHeader: AssetImage("assets/images/calendar_header.jpg"),
+      onDateTimeChanged: (dataTime) {
+        BlocProvider.of<TodoBloc>(context)
+          ..add(SelectDatePickerOnPressEvent(selectDay: dataTime));
+      },
+      borderRadius: 20,
+      maximumYear: DateTime.now().year + 10,
+      minimumYear: DateTime.now().year - 10,
     );
     if (date != null) {
       BlocProvider.of<TodoBloc>(context)
@@ -208,12 +224,25 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
   }
 
   _selectTimePicker() async {
-    TimeOfDay? timer = await showRoundedTimePicker(
-        context: context, initialTime: TimeOfDay.now(), borderRadius: 20);
-    if (timer != null) {
-      BlocProvider.of<TodoBloc>(context)
-        ..add(SelectTimePickerOnPressEvent(timer: timer));
-    }
+    // TimeOfDay? timer = await showRoundedTimePicker(
+    //     context: context, initialTime: TimeOfDay.now(), borderRadius: 20);
+    // if (timer != null) {
+    //   BlocProvider.of<TodoBloc>(context)
+    //     ..add(SelectTimePickerOnPressEvent(timer: timer));
+    // }
+    CupertinoRoundedDatePickerWidget.show(
+      context,
+      initialDate: DateTime.now(),
+      textColor: AppColor.personalScheduleColor,
+      initialDatePickerMode: CupertinoDatePickerMode.time,
+      fontFamily: 'MR',
+      onDateTimeChanged: (dataTime) {
+        BlocProvider.of<TodoBloc>(context)
+          ..add(SelectTimePickerOnPressEvent(
+              timer: TimeOfDay.fromDateTime(dataTime)));
+      },
+      borderRadius: 20,
+    );
   }
 
   _setOnClickSaveButton() {
