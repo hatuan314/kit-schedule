@@ -12,7 +12,7 @@ class MainScreenConstants{
 
   static String synchronizedTxt='Some data is not synchronized';
   static String confirmSignOutTxt='Do you want to ';
-  static String signOutTxt ='Sign Out ';
+  static String signOutTxt ='Log Out';
   static String punctuationMarkTxt ='?';
   static String yesTxt ='Yes (Y)';
   static String noTxt ='No (N)';

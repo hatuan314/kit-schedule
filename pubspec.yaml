@@ -66,6 +66,8 @@ dependencies:
   cloud_firestore: ^2.4.0
   connectivity: ^3.0.6
   flutter_keyboard_visibility: ^5.0.3
+  #device_calendar: ^3.1.0
+  add_2_calendar: ^2.1.1
 
 
 
