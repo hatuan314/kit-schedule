@@ -61,9 +61,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           await _savePersonalSchool(list, state);
           await _saveScheduleSchool(data, state);
           await _shareService.setIsSaveData(true);
-          data.forEach((key, value) async{
-            await _addEventsToCalendar(value, int.parse(key));
-          });
+          // data.forEach((key, value) async{
+          //   await _addEventsToCalendar(value);
+          // });
           //   await _retrieveCalendars();
 
           //    _calendars?.forEach((element) { log(element.id);});
@@ -116,35 +116,28 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     );
   }
 
-  Future _addEventsToCalendar(List schoolList,int date) async {
+  Future _addEventsToCalendar(List schoolList,) async {
     // var fightString = new StringBuffer('');
     // SharedPreferences prefs = await SharedPreferences.getInstance();
-log('start add');
-log(date.toString());
+
     for (var schoolSchedule in schoolList) {
-      log(schoolSchedule.keys.toString());
-log(schoolSchedule['subject'] as String);
-      List lessonNumbers = schoolSchedule['lesson'].split(',');
-      log(lessonNumbers.toString());
-      log(Convert.startTimeLessonMap[lessonNumbers[0]]!.split(':')[0]);
+
+      List lessonNumbers = schoolSchedule.lesson!.split(',');
       int startLessonHour = int.parse(
           Convert.startTimeLessonMap[lessonNumbers[0]]!.split(':')[0]);
       int startLessonMinute = int.parse(
           Convert.startTimeLessonMap[lessonNumbers[0]]!.split(':')[1]);
-
       int endLessonHour = int.parse(
-          Convert.endTimeLessonMap[lessonNumbers[lessonNumbers.length - 1]]!.split(':')[0]);
+          Convert.endTimeLessonMap[lessonNumbers.length - 1]!.split(':')[0]);
       int endLessonMinute = int.parse(
-          Convert.endTimeLessonMap[lessonNumbers[lessonNumbers.length - 1]]!.split(':')[1]);
-      log(endLessonHour.toString() +'  '+ endLessonMinute.toString());
-      log(DateTime.fromMillisecondsSinceEpoch(date).toString());
-      final eventTime =  date- (7 * 3600000);
-        //  DateTime.parse(schoolSchedule.date as String).millisecondsSinceEpoch -
-
-      log('eventtime: '+eventTime.toString());
+          Convert.endTimeLessonMap[lessonNumbers.length - 1]!.split(':')[1]);
+      final eventTime =
+          DateTime.parse(schoolSchedule.date as String).millisecondsSinceEpoch -
+              7 * 3600000;
+      log(eventTime.toString());
       await Add2Calendar.addEvent2Cal(_buildEvent(
-          title: schoolSchedule['subject'] as String,
-          location: schoolSchedule['address'],
+          title: schoolSchedule.subject as String,
+          location: schoolSchedule.address,
           startDate: DateTime.fromMillisecondsSinceEpoch(eventTime +
               startLessonHour * 3600000 +
               startLessonMinute * 60000),
@@ -200,7 +193,6 @@ log(schoolSchedule['subject'] as String);
             schoolSchedule.add(SchoolSchedule.fromJsonApi(scheduleJson, date));
           });
       });
-   //   await _addEventsToCalendar(schoolSchedule);
 
       await scheduleUseCase.insertSchoolScheduleLocal(schoolSchedule);
     } catch (e) {
