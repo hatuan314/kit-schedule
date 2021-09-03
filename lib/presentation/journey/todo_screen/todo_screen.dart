@@ -193,17 +193,7 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
   }
 
   _selectDatePicker() async {
-    // DateTime? date = await showDialog(context: context, builder:(_)=>DiaLogDatePickerWidget() );
-    // DateTime? date = await showRoundedDatePicker(
-    //   context: context,
-    //   initialDate: DateTime.now(),
-    //   firstDate: DateTime(DateTime.now().year - 10),
-    //   lastDate: DateTime(DateTime.now().year + 10),
-    //   borderRadius: 20,
-    //   fontFamily: 'MR',
-    //   imageHeader: AssetImage("assets/images/calendar_header.jpg"),
-    // );
-    DateTime? date = await CupertinoRoundedDatePickerWidget.show(
+   CupertinoRoundedDatePickerWidget.show(
       context,
       initialDate: DateTime.now(),
       textColor: AppColor.personalScheduleColor,
@@ -217,19 +207,9 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
       maximumYear: DateTime.now().year + 10,
       minimumYear: DateTime.now().year - 10,
     );
-    if (date != null) {
-      BlocProvider.of<TodoBloc>(context)
-        ..add(SelectDatePickerOnPressEvent(selectDay: date));
-    }
   }
 
   _selectTimePicker() async {
-    // TimeOfDay? timer = await showRoundedTimePicker(
-    //     context: context, initialTime: TimeOfDay.now(), borderRadius: 20);
-    // if (timer != null) {
-    //   BlocProvider.of<TodoBloc>(context)
-    //     ..add(SelectTimePickerOnPressEvent(timer: timer));
-    // }
     CupertinoRoundedDatePickerWidget.show(
       context,
       initialDate: DateTime.now(),
