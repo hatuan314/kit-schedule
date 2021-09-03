@@ -15,7 +15,6 @@ import 'package:schedule/presentation/bloc/snackbar_bloc/bloc.dart';
 import 'package:schedule/presentation/bloc/snackbar_bloc/snackbar_type.dart';
 import 'package:schedule/presentation/journey/sign_in_screen.dart/bloc/register_state.dart';
 import 'package:schedule/service/services.dart';
-import 'package:add_2_calendar/add_2_calendar.dart';
 
 part 'register_event.dart';
 
@@ -24,10 +23,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final SnackbarBloc snackbarBloc;
   final ScheduleUseCase scheduleUseCase;
   final PersonalUseCase personalUseCase;
-
-  // late DeviceCalendarPlugin _deviceCalendarPlugin;
-
-  // late List<Calendar>? _calendars;
   RegisterBloc(
       {required this.snackbarBloc,
       required this.personalUseCase,
@@ -61,13 +56,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           await _savePersonalSchool(list, state);
           await _saveScheduleSchool(data, state);
           await _shareService.setIsSaveData(true);
-          data.forEach((key, value) async{
-            await _addEventsToCalendar(value, int.parse(key));
-          });
-          //   await _retrieveCalendars();
-
-          //    _calendars?.forEach((element) { log(element.id);});
-
           yield RegisterSuccessState();
         }
       } catch (e) {
@@ -78,104 +66,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     }
   }
 
-  //   _retrieveCalendars() async {
-  //   try {
-  //     var permissionsGranted = await _deviceCalendarPlugin.hasPermissions();
-  //     if (permissionsGranted.isSuccess && !permissionsGranted.data) {
-  //       permissionsGranted = await _deviceCalendarPlugin.requestPermissions();
-  //       if (!permissionsGranted.isSuccess || !permissionsGranted.data) {
-  //         return;
-  //       }
-  //     }
-  //
-  //     final calendarsResult = await _deviceCalendarPlugin.retrieveCalendars();
-  //       _calendars = calendarsResult?.data;
-  //
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
-
-  Event _buildEvent(
-      {required String title,
-      String? description,
-      String? location,
-      required DateTime startDate,
-      required DateTime endDate}) {
-    return Event(
-      title: title,
-      description: description == null ? '' : description,
-      location: location == null ? '' : location,
-      startDate: startDate,
-      endDate: endDate,
-      allDay: false,
-      iosParams: IOSParams(),
-      androidParams: AndroidParams(
-        emailInvites: [],
-      ),
-    );
-  }
-
-  Future _addEventsToCalendar(List schoolList,int date) async {
-    // var fightString = new StringBuffer('');
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
-log('start add');
-log(date.toString());
-    for (var schoolSchedule in schoolList) {
-      log(schoolSchedule.keys.toString());
-log(schoolSchedule['subject'] as String);
-      List lessonNumbers = schoolSchedule['lesson'].split(',');
-      log(lessonNumbers.toString());
-      log(Convert.startTimeLessonMap[lessonNumbers[0]]!.split(':')[0]);
-      int startLessonHour = int.parse(
-          Convert.startTimeLessonMap[lessonNumbers[0]]!.split(':')[0]);
-      int startLessonMinute = int.parse(
-          Convert.startTimeLessonMap[lessonNumbers[0]]!.split(':')[1]);
-
-      int endLessonHour = int.parse(
-          Convert.endTimeLessonMap[lessonNumbers[lessonNumbers.length - 1]]!.split(':')[0]);
-      int endLessonMinute = int.parse(
-          Convert.endTimeLessonMap[lessonNumbers[lessonNumbers.length - 1]]!.split(':')[1]);
-      log(endLessonHour.toString() +'  '+ endLessonMinute.toString());
-      log(DateTime.fromMillisecondsSinceEpoch(date).toString());
-      final eventTime =  date- (7 * 3600000);
-        //  DateTime.parse(schoolSchedule.date as String).millisecondsSinceEpoch -
-
-      log('eventtime: '+eventTime.toString());
-      await Add2Calendar.addEvent2Cal(_buildEvent(
-          title: schoolSchedule['subject'] as String,
-          location: schoolSchedule['address'],
-          startDate: DateTime.fromMillisecondsSinceEpoch(eventTime +
-              startLessonHour * 3600000 +
-              startLessonMinute * 60000),
-          endDate: DateTime.fromMillisecondsSinceEpoch(
-              eventTime + endLessonHour * 3600000 + endLessonMinute * 60000)));
-   log('add to calendar');
-    }
-
-    // for (var personalSchedule in personalList) {
-    //   List lessonNumbers = schoolSchedule.lesson!.split(',');
-    //   int startLessonHour = int.parse(
-    //       Convert.startTimeLessonMap[lessonNumbers[0]]!.split(':')[0]);
-    //   int startLessonMinute = int.parse(
-    //       Convert.startTimeLessonMap[lessonNumbers[0]]!.split(':')[1]);
-    //   int endLessonHour = int.parse(
-    //       Convert.endTimeLessonMap[lessonNumbers.length - 1]!.split(':')[0]);
-    //   int endLessonMinute = int.parse(
-    //       Convert.endTimeLessonMap[lessonNumbers.length - 1]!.split(':')[1]);
-    //   final eventTime =
-    //       DateTime.parse(schoolSchedule.date as String).millisecondsSinceEpoch -
-    //           7 * 3600000;
-    //   await Add2Calendar.addEvent2Cal(_buildEvent(
-    //       title: personalSchedule. as String,
-    //       location: schoolSchedule.address,
-    //       startDate: DateTime.fromMillisecondsSinceEpoch(eventTime +
-    //           startLessonHour * 3600000 +
-    //           startLessonMinute * 60000),
-    //       endDate: DateTime.fromMillisecondsSinceEpoch(
-    //           eventTime + endLessonHour * 3600000 + endLessonMinute * 60000)));
-    // }
-  }
 
   _savePersonalSchool(
       List<PersonalScheduleEntities> personal, RegisterState state) async {
@@ -200,7 +90,7 @@ log(schoolSchedule['subject'] as String);
             schoolSchedule.add(SchoolSchedule.fromJsonApi(scheduleJson, date));
           });
       });
-   //   await _addEventsToCalendar(schoolSchedule);
+      //   await _addEventsToCalendar(schoolSchedule);
 
       await scheduleUseCase.insertSchoolScheduleLocal(schoolSchedule);
     } catch (e) {
