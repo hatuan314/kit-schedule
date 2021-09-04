@@ -18,12 +18,8 @@ import 'package:url_launcher/url_launcher.dart';
 class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return /*BlocProvider(
-        create: (context) => ProfileBloc()..add(GetUserNameEvent()),
-        child:*/
-        BlocBuilder<ProfileBloc, ProfileState>(
-            builder: (context, profileState) {
-      log(profileState.username.length.toString());
+    return BlocBuilder<ProfileBloc, ProfileState>(
+        builder: (context, profileState) {
       return SafeArea(
         child: Scaffold(
           backgroundColor: AppColor.secondColor,
@@ -107,8 +103,8 @@ class ProfileScreen extends StatelessWidget {
         ),
       );
     }
-            //)
-            );
+        //)
+        );
   }
 
   bool isEnglish(String isEng) {
@@ -167,7 +163,8 @@ class ProfileScreen extends StatelessWidget {
               isLanguageDialog: isLanguageDialog,
               onTap: isLanguageDialog
                   ? () {
-                Injector.getIt<LanguageSelect>().changeLanguage(true);}
+                      Injector.getIt<LanguageSelect>().changeLanguage(true);
+                    }
                   : !profileState.hasNoti
                       ? () {
                           BlocProvider.of<ProfileBloc>(context)
@@ -177,7 +174,9 @@ class ProfileScreen extends StatelessWidget {
                               .add(GetUserNameInProfileEvent());
                         }
                       : () {},
-              visible: isLanguageDialog ?   isEnglish(AppLocalizations.of(context)!.localeName) : profileState.hasNoti),
+              visible: isLanguageDialog
+                  ? isEnglish(AppLocalizations.of(context)!.localeName)
+                  : profileState.hasNoti),
           _dialogItem(
               title: isLanguageDialog
                   ? ProfileConstants.vietnameseTxt
@@ -186,8 +185,8 @@ class ProfileScreen extends StatelessWidget {
               isLanguageDialog: isLanguageDialog,
               onTap: isLanguageDialog
                   ? () {
-                Injector.getIt<LanguageSelect>().changeLanguage(false);
-              }
+                      Injector.getIt<LanguageSelect>().changeLanguage(false);
+                    }
                   : profileState.hasNoti
                       ? () {
                           BlocProvider.of<ProfileBloc>(context)
@@ -197,7 +196,9 @@ class ProfileScreen extends StatelessWidget {
                               .add(GetUserNameInProfileEvent());
                         }
                       : () {},
-              visible: isLanguageDialog ?  !isEnglish(AppLocalizations.of(context)!.localeName) : !profileState.hasNoti),
+              visible: isLanguageDialog
+                  ? !isEnglish(AppLocalizations.of(context)!.localeName)
+                  : !profileState.hasNoti),
         ]);
   }
 

@@ -4,7 +4,9 @@ import 'package:schedule/presentation/journey/home/calendar_tab_constants.dart';
 import 'package:schedule/presentation/journey/scores/scores_constants.dart';
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ScoresScreen extends StatelessWidget {
@@ -13,6 +15,7 @@ class ScoresScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
         backgroundColor: AppColor.secondColor,
         body: SafeArea(
             child: Padding(
@@ -44,5 +47,5 @@ class ScoresScreen extends StatelessWidget {
         ))
         /**/
         );
-  }
+   }
 }

@@ -133,8 +133,8 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
                             nameController: _nameController,
                             noteController: _noteController,
                             formKey: _formKey,
-                            setDatePicker: _selectDatePicker,
-                            setTimePicker: _selectTimePicker,
+                            setDatePicker: _selectDatePicker(),
+                            setTimePicker: _selectTimePicker(),
                           ),
                         ),
                       ),
@@ -199,11 +199,11 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
     );
   }
 
-  _selectDatePicker(TodoState state) async {
+
+  _selectDatePicker() async {
     CupertinoRoundedDatePickerWidget.show(
       context,
-      initialDate:
-          DateTime.fromMillisecondsSinceEpoch(int.parse(state.selectDay!)),
+      initialDate: DateTime.now(),
       textColor: AppColor.personalScheduleColor,
       initialDatePickerMode: CupertinoDatePickerMode.date,
       fontFamily: 'MR',
@@ -217,14 +217,11 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
     );
   }
 
-  _selectTimePicker(TodoState state) async {
-    List<String> hourAndMinues = state.selectTimer!.split(':');
-    int time = (int.parse(hourAndMinues[0])*60*60*1000)+(int.parse(hourAndMinues[1])*60*1000);
-    DateTime a = DateTime.fromMillisecondsSinceEpoch(
-        DateTime(2021).millisecondsSinceEpoch + time);
+
+  _selectTimePicker() async {
     CupertinoRoundedDatePickerWidget.show(
       context,
-      initialDate:a,
+      initialDate: DateTime.now(),
       textColor: AppColor.personalScheduleColor,
       initialDatePickerMode: CupertinoDatePickerMode.time,
       fontFamily: 'MR',

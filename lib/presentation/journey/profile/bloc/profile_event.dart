@@ -18,12 +18,15 @@ class TurnOnNotificationEvent extends ProfileEvent{
 }
 
 class TurnOffNotificationEvent extends ProfileEvent{
+<<<<<<< HEAD
   @override
   // TODO: implement props
   List<Object?> get props => [];
 
 }
 class ChangeLanguageEvent extends ProfileEvent{
+=======
+>>>>>>> 1943361b048e8fc37b501065a3f7083f81ce4c74
   @override
   // TODO: implement props
   List<Object?> get props => [];
