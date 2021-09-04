@@ -10,8 +10,10 @@ class SchoolSchedule {
   String? subject;
   @HiveField(3)
   String? address;
+  @HiveField(4)
+  String? id;
 
-  SchoolSchedule(this.date, this.lesson, this.subject, this.address);
+  SchoolSchedule(this.date, this.lesson, this.subject, this.address,this.id);
   SchoolSchedule.fromJsonApi(Map<String, dynamic> data, this.date) {
     this.subject = data['subject'];
     this.lesson = data['lesson'];

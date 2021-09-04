@@ -37,15 +37,16 @@ class CreatePersonalScheduleOnPressEvent extends TodoEvent {
 }
 
 class UpdatePersonalScheduleOnPressEvent extends TodoEvent {
+  final String id;
   final String name;
   final String note;
   final String createAt;
-  UpdatePersonalScheduleOnPressEvent(
+  UpdatePersonalScheduleOnPressEvent(this.id,
       this.name, this.note, this.createAt);
 
   @override
   // TODO: implement props
-  List<Object?> get props => [this.name, this.note, this.createAt];
+  List<Object?> get props => [this.name, this.note, this.createAt,this.id];
 }
 
 class DetelePersonalScheduleOnPressEvent extends TodoEvent {
