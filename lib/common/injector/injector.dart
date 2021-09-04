@@ -14,6 +14,7 @@ import 'package:schedule/domain/usecase/personal_usecase.dart';
 import 'package:schedule/domain/usecase/schedule_usecase.dart';
 import 'package:schedule/presentation/bloc/loader_bloc/bloc.dart';
 import 'package:schedule/presentation/bloc/snackbar_bloc/bloc.dart';
+import 'package:schedule/presentation/journey/profile/bloc/profile_bloc.dart';
 import 'package:schedule/presentation/journey/sign_in_screen.dart/bloc/register_bloc.dart';
 import 'package:schedule/presentation/journey/todo_screen/bloc/todo_bloc.dart';
 
@@ -48,6 +49,11 @@ class Injector {
           scheduleUS: getIt<ScheduleUseCase>(),
           personalUS: getIt<PersonalUseCase>(),
           scheduleBloc: getIt<ScheduleBloc>()),
+    );
+    getIt.registerLazySingleton<ProfileBloc>(
+          () => ProfileBloc(
+          scheduleUS: getIt<ScheduleUseCase>(),
+          personalUS: getIt<PersonalUseCase>(),),
     );
     getIt.registerFactory<TodoBloc>(() => TodoBloc(
         snackbarBloc: getIt<SnackbarBloc>(),

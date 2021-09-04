@@ -33,4 +33,16 @@ class ShareService {
     prefs.setBool('data', value);
     this._isSave = value;
   }
+
+  Future<bool?> getHasNoti() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool hasNoti = prefs.getBool('noti')??false;
+    return hasNoti;
+  }
+
+
+  Future setHasNoti(bool value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('noti', value);
+  }
 }

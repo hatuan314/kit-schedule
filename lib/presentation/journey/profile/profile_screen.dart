@@ -16,9 +16,9 @@ import 'package:url_launcher/url_launcher.dart';
 class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return /*BlocProvider(
         create: (context) => ProfileBloc()..add(GetUserNameEvent()),
-        child: BlocBuilder<ProfileBloc, ProfileState>(
+        child:*/ BlocBuilder<ProfileBloc, ProfileState>(
             builder: (context, profileState) {
           log(profileState.username.length.toString());
           return SafeArea(
@@ -72,9 +72,18 @@ class ProfileScreen extends StatelessWidget {
                         showDialog(
                             context: context,
                             builder: (dialogContext) =>
-                                languageDialog(context));
+                                settingDialog(context,true,profileState));
                       },
                       title: ProfileConstants.languageTxt),
+                  _buildListTile(
+                      icon: Icons.notifications_none,
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (dialogContext) =>
+                                settingDialog(context,false,profileState));
+                      },
+                      title: ProfileConstants.notiTxt),
                   _buildListTile(
                       icon: Icons.info_outline,
                       onTap: _launchURL,
@@ -98,7 +107,9 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
           );
-        }));
+        }
+        //)
+    );
   }
 
   Widget _buildListTile(
@@ -128,24 +139,41 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget languageDialog(BuildContext context) {
+  Widget settingDialog(BuildContext context, bool isLanguageDialog, ProfileState profileState) {
     return SimpleDialog(
         contentPadding: EdgeInsets.only(
           bottom: ProfileConstants.listTilePadding,
           top: ProfileConstants.listTilePadding,
         ),
-        title: Text(ProfileConstants.languageTxt,
+        title: Text(isLanguageDialog?ProfileConstants.languageTxt:ProfileConstants.notiTxt,
             style: ThemeText.titleStyle
                 .copyWith(color: AppColor.personalScheduleColor2)),
         children: [
-          _languageItem(ProfileConstants.englishTxt, context),
-          _languageItem(ProfileConstants.vietnameseTxt, context)
+          _dialogItem(title: isLanguageDialog?ProfileConstants.englishTxt:ProfileConstants.turnOnTxt,
+              context: context,isLanguageDialog:isLanguageDialog,
+              onTap:isLanguageDialog?(){ }
+              :!profileState.hasNoti?(){
+                BlocProvider.of<ProfileBloc>(context).add(TurnOnNotificationEvent());
+                Navigator.pop(context);
+                BlocProvider.of<ProfileBloc>(context).add(GetUserNameInProfileEvent());
+              }: (){},
+          visible:isLanguageDialog?true:profileState.hasNoti),
+          _dialogItem(title: isLanguageDialog?ProfileConstants.vietnameseTxt:ProfileConstants.turnOffTxt,
+             context: context,isLanguageDialog:isLanguageDialog, onTap: isLanguageDialog?(){ }
+                  :profileState.hasNoti?(){
+                BlocProvider.of<ProfileBloc>(context).add(TurnOffNotificationEvent());
+                Navigator.pop(context);
+                BlocProvider.of<ProfileBloc>(context).add(GetUserNameInProfileEvent());
+              }: (){},
+              visible:isLanguageDialog?true:!profileState.hasNoti),
         ]);
   }
 
-  Widget _languageItem(String title, BuildContext context) {
+  Widget _dialogItem({required String title,required BuildContext context,required bool isLanguageDialog,
+    required Function()? onTap,
+  required bool visible}) {
     return GestureDetector(
-        onTap: () {},
+        onTap: onTap,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Container(
             padding: EdgeInsets.all(ProfileConstants.listTilePadding),
@@ -164,7 +192,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
                 Visibility(
-                    visible: true,
+                    visible: visible,
                     child: Icon(
                       Icons.check,
                       color: AppColor.personalScheduleColor2,

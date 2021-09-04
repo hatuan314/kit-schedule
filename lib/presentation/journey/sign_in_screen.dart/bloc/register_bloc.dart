@@ -4,7 +4,6 @@ import 'package:crypto/crypto.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:schedule/common/utils/convert.dart';
 import 'package:schedule/domain/entities/personal_schedule_entities.dart';
 import 'package:schedule/domain/entities/school_schedule_entities.dart';
@@ -15,14 +14,20 @@ import 'package:schedule/presentation/bloc/snackbar_bloc/bloc.dart';
 import 'package:schedule/presentation/bloc/snackbar_bloc/snackbar_type.dart';
 import 'package:schedule/presentation/journey/sign_in_screen.dart/bloc/register_state.dart';
 import 'package:schedule/service/services.dart';
+import 'package:device_calendar/device_calendar.dart';
 
 part 'register_event.dart';
+
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   ShareService _shareService = ShareService();
   final SnackbarBloc snackbarBloc;
   final ScheduleUseCase scheduleUseCase;
   final PersonalUseCase personalUseCase;
+
+
+
+
   RegisterBloc(
       {required this.snackbarBloc,
       required this.personalUseCase,
@@ -56,6 +61,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           await _savePersonalSchool(list, state);
           await _saveScheduleSchool(data, state);
           await _shareService.setIsSaveData(true);
+          await _shareService.setHasNoti(false);
+
           yield RegisterSuccessState();
         }
       } catch (e) {
@@ -65,7 +72,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       }
     }
   }
-
 
   _savePersonalSchool(
       List<PersonalScheduleEntities> personal, RegisterState state) async {
@@ -90,11 +96,11 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
             schoolSchedule.add(SchoolSchedule.fromJsonApi(scheduleJson, date));
           });
       });
-      //   await _addEventsToCalendar(schoolSchedule);
-
       await scheduleUseCase.insertSchoolScheduleLocal(schoolSchedule);
     } catch (e) {
       debugPrint('RegisterBloc - saveSchoolSchedule - error: {$e}');
     }
   }
+
+
 }

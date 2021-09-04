@@ -14,6 +14,9 @@ import 'package:schedule/presentation/journey/todo_screen/bloc/todo_bloc.dart';
 
 import 'package:schedule/presentation/journey/todo_screen/todo_screen.dart';
 
+import 'journey/profile/bloc/profile_bloc.dart';
+import 'journey/profile/bloc/profile_event.dart';
+
 int currentRoot = 1;
 
 RouteFactory router() {
@@ -53,6 +56,8 @@ RouteFactory router() {
             BlocProvider(
               create: (context) => Injector.getIt<TodoBloc>()..add(GetUserNameEvent()),
             ),
+          BlocProvider(
+          create: (context) => Injector.getIt<ProfileBloc>()..add(GetUserNameInProfileEvent()),),
           ], child: MainScreen());
 //            child: SchoolSchedulePageView());
         });

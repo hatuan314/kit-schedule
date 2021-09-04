@@ -237,6 +237,7 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
   _setOnClickUpdateButton() {
     FocusScope.of(context).requestFocus(new FocusNode());
     if (_formKey.currentState!.validate()) {
+      debugPrint('id: '+ (this.widget.personalSchedule!.id as String));
       BlocProvider.of<TodoBloc>(context)
         ..add(
           UpdatePersonalScheduleOnPressEvent(
