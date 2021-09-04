@@ -166,6 +166,7 @@ class PersonalScheduleWidget extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                   horizontal: WidgetsConstants.paddingHorizontal),
               onPressed: () {
+                debugPrint(toDoItem.id);
                 Navigator.pop(context);
                 Navigator.pushNamed(context, '/todo-detail',
                         arguments: toDoItem)

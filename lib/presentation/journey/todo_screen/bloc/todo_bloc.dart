@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:device_calendar/device_calendar.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/blocs/blocs.dart';
@@ -27,7 +28,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
 
   List<Calendar> _calendars = [];
 
-  String _date = DateTime.now().millisecondsSinceEpoch.toString();
+  String _date = DateTime.utc(DateTime.now().year,DateTime.now().month,DateTime.now().day,0,0,0,0).millisecondsSinceEpoch.toString();
   String _timer = '${Convert.timerConvert(TimeOfDay.now())}';
   SnackbarBloc snackbarBloc;
   final PersonalUseCase personalUS;
@@ -35,7 +36,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   TodoBloc(
       {this.calendarBloc, required this.snackbarBloc, required this.personalUS})
       : super(TodoInitState(
-            selectDay: DateTime.now().millisecondsSinceEpoch.toString(),
+            selectDay:DateTime.utc(DateTime.now().year,DateTime.now().month,DateTime.now().day,0,0,0,0).millisecondsSinceEpoch.toString(),
             selectTimer: '${Convert.timerConvert(TimeOfDay.now())}'));
 
   // @override
@@ -81,11 +82,14 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     final String now = DateTime.now().millisecondsSinceEpoch.toString();
     bool hasNoti= await shareService.getHasNoti() ?? false;
     String id='';
+    String date= DateTime.parse(DateTime.fromMillisecondsSinceEpoch(int.parse(this._date)).toString().substring(0,10)).millisecondsSinceEpoch.toString();
     if(hasNoti)
     {
+      //1630772220386
+      debugPrint(DateTime.fromMillisecondsSinceEpoch(int.parse(date)).toString());
       await _retrieveCalendars();
       id = await _addPersonalScheduleToCalendar( PersonalScheduleEntities(
-        date: this._date,
+        date:  date,
         name: event.name,
         timer: this._timer,
         note: event.note,
@@ -95,7 +99,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     PersonalScheduleEntities schedule(bool isSynch) {
       PersonalScheduleEntities schedule = PersonalScheduleEntities(
         id: id,
-        date: this._date,
+        date:  date ,
         name: event.name,
         timer: this._timer,
         note: event.note,
@@ -159,6 +163,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
           createAt: event.createAt,
           updateAt: now));
     }
+    debugPrint('update id: '+ id);
     PersonalScheduleEntities schedule(bool isSynch) {
       PersonalScheduleEntities schedule = PersonalScheduleEntities(
           date: this._date,
@@ -168,6 +173,8 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
           id: id,
           createAt: event.createAt,
           updateAt: now);
+
+      debugPrint('aaaaaaaaaaaaaaaaaaaaaaa${schedule.id}');
       return schedule;
     }
 
@@ -175,7 +182,6 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     try {
 
 
-      log('${schedule(true).createAt}');
       final result =
           await personalUS.syncPersonalSchoolDataFirebase(msv, schedule(true));
       if (result.isNotEmpty) {
@@ -250,10 +256,12 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     int personalScheduleHour = int.parse(personalSchedule.timer!.split(':')[0]);
     int personalScheduleMinute =
         int.parse(personalSchedule.timer!.split(':')[1]);
-    final int eventTime = int.parse(personalSchedule.date as String);
-
+    final int eventTime = (int.parse(personalSchedule.date as String));
     final eventToCreate = Event(4.toString());
-
+debugPrint(DateTime.fromMillisecondsSinceEpoch(eventTime +
+    personalScheduleHour * 3600000 +
+    personalScheduleMinute * 60000).toString());
+    debugPrint(DateTime.fromMillisecondsSinceEpoch(eventTime  ).toString());
     eventToCreate.title = personalSchedule.name;
     eventToCreate.start = DateTime.fromMillisecondsSinceEpoch(eventTime +
         personalScheduleHour * 3600000 +

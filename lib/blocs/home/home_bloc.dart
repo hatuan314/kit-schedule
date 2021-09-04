@@ -50,12 +50,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             yield* _mapGetAllSchoolSchedulesToMap();
             yield* _mapGetAllPersonalScheduleToMap();
             await _retrieveCalendars();
-            allSchoolSchedulesMap.forEach((key, value) {
-              _deleteSchoolSchedule(value, key.millisecondsSinceEpoch);
-            });
-            allPersonalSchedulesMap.forEach((key, value) {
-              _deletePersonalSchedule(value, key.millisecondsSinceEpoch);
-            });
+            await  _deleteSchoolSchedule( );
+
+            await  _deletePersonalSchedule( );
             await shareService.setHasNoti(false);
           }
 
@@ -94,32 +91,27 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
   }
 
-  Future _deleteSchoolSchedule(
-      List<SchoolSchedule> schoolList, int date) async {
-    for (var schoolSchedule in schoolList) {
-      List lessonNumbers = schoolSchedule.lesson!.split(',');
-      int startLessonHour = int.parse(
-          Convert.startTimeLessonMap[lessonNumbers[0]]!.split(':')[0]);
-      int startLessonMinute = int.parse(
-          Convert.startTimeLessonMap[lessonNumbers[0]]!.split(':')[1]);
-      final int eventTime = date - (7 * 3600000);
-      String eventId = DateTime.fromMillisecondsSinceEpoch(
-          eventTime + startLessonHour * 3600000 + startLessonMinute * 60000)
-          .toString();
-      final deleteResult =
-      await _deviceCalendarPlugin.deleteEvent(4.toString(), eventId);
-      debugPrint('delete school '+deleteResult.isSuccess.toString());
-    }
+
+  Future _deleteSchoolSchedule( ) async {
+    allSchoolSchedulesMap.forEach((key, value) async{
+      for (var schoolSchedule in value)  {
+
+        final deleteEventResult =
+        await _deviceCalendarPlugin.deleteEvent(4.toString(), schoolSchedule.id);
+        debugPrint('_deleteSchoolSchedule '+ deleteEventResult.isSuccess.toString());
+      }
+    });
+
   }
 
-  Future _deletePersonalSchedule(
-      List<PersonalScheduleEntities> personalList, int date) async {
-    for (var personalSchedule in personalList) {
-      final deleteResult = await _deviceCalendarPlugin.deleteEvent(
-          4.toString(), personalSchedule.createAt);
-      debugPrint('delete personal '+deleteResult.isSuccess.toString());
-      // }
-    }
+  Future _deletePersonalSchedule(  ) async {
+    allPersonalSchedulesMap.forEach((key, value)async {
+      for (var personalSchedule in value) {
+        final deleteEventResult = await _deviceCalendarPlugin.deleteEvent(
+            4.toString(), personalSchedule.id);
+        debugPrint('_deletePersonalSchedule '+deleteEventResult.isSuccess.toString());
+      }
+    });
   }
 
   Stream<HomeState> _mapGetAllSchoolSchedulesToMap() async* {
