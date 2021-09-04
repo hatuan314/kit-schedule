@@ -14,7 +14,6 @@ import 'package:schedule/presentation/bloc/snackbar_bloc/bloc.dart';
 import 'package:schedule/presentation/bloc/snackbar_bloc/snackbar_type.dart';
 import 'package:schedule/presentation/journey/sign_in_screen.dart/bloc/register_state.dart';
 import 'package:schedule/service/services.dart';
-import 'package:device_calendar/device_calendar.dart';
 
 part 'register_event.dart';
 

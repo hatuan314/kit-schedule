@@ -252,7 +252,8 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
       debugPrint('>>>>>>>>>>>.id: '+ (this.widget.personalSchedule!.id as String));
       BlocProvider.of<TodoBloc>(context)
         ..add(
-          UpdatePersonalScheduleOnPressEvent(_nameController.text.trim(),
+          UpdatePersonalScheduleOnPressEvent(this.widget.personalSchedule!.id as String,
+              _nameController.text.trim(),
               _noteController.text.trim(), widget.personalSchedule!.createAt!),
         );
     }

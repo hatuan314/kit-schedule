@@ -17,6 +17,8 @@ class PersonalScheduleEntities {
   String? updateAt;
   @HiveField(6)
   bool? isSynchronized;
+  @HiveField(7)
+  String? id;
   PersonalScheduleEntities(
       {this.date,
       this.name,
@@ -25,6 +27,7 @@ class PersonalScheduleEntities {
       this.createAt,
       this.updateAt,
       this.isSynchronized,
+        this.id
       }) {
     this.createAt = createAt ?? DateTime.now().millisecondsSinceEpoch.toString();
     this.updateAt = updateAt ?? DateTime.now().millisecondsSinceEpoch.toString();
