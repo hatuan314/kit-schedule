@@ -12,7 +12,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState>{
     if(event is GetUserNameEvent)
       //(await ShareService().getUsername() as String)
      yield state.update(username:(await ShareService().getUsername() as String) );
+   if(event is ChangeLanguageEvent){
 
+   }
   }
 
 }

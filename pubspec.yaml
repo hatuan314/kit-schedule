@@ -66,6 +66,11 @@ dependencies:
   cloud_firestore: ^2.4.0
   connectivity: ^3.0.6
   flutter_keyboard_visibility: ^5.0.3
+  #device_calendar: ^3.1.0
+  add_2_calendar: ^2.1.1
+  flutter_localizations: # Add this line
+    sdk: flutter
+
 
 
 
@@ -82,7 +87,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
+  generate: true
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

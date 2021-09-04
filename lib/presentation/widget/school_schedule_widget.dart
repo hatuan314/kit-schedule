@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/domain/entities/school_schedule_entities.dart';
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:schedule/presentation/widget/school_schedule_element_widget.dart';
 import 'package:schedule/presentation/widget/spacing_box_widget.dart';
 import 'package:schedule/presentation/widget/widgets_constants.dart';
@@ -34,7 +34,7 @@ class SchoolScheduleWidget extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text('School',
+              Text(AppLocalizations.of(context)!.school,
                   style: ThemeText.titleStyle.copyWith(
                     color: AppColor.scheduleType,
                     fontWeight: FontWeight.bold,
@@ -66,7 +66,7 @@ class SchoolScheduleWidget extends StatelessWidget {
                 )
                 : Align(
                     alignment: Alignment.center,
-                    child: Text(WidgetsConstants.noDataTxt,
+                    child: Text(AppLocalizations.of(context)!.noData,
                         style: ThemeText.textStyle
                             .copyWith(color: AppColor.scheduleType)),
                   ),

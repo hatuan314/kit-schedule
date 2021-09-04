@@ -14,6 +14,7 @@ import 'package:schedule/models/model.dart';
 import 'package:schedule/presentation/widget/personal_schedule_element_widget.dart';
 import 'package:schedule/presentation/widget/spacing_box_widget.dart';
 import 'package:schedule/presentation/widget/widgets_constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PersonalScheduleWidget extends StatelessWidget {
   final dynamic state;
@@ -39,7 +40,7 @@ class PersonalScheduleWidget extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text('Personal',
+              Text(AppLocalizations.of(context)!.personal,
                   style: ThemeText.titleStyle.copyWith(
                     fontWeight: FontWeight.bold,
                   )),
@@ -78,7 +79,7 @@ class PersonalScheduleWidget extends StatelessWidget {
                       })
                   : Align(
                       alignment: Alignment.center,
-                      child: Text(WidgetsConstants.noDataTxt,
+                      child: Text(AppLocalizations.of(context)!.noData,
                           style: ThemeText.textStyle
                               .copyWith(color: AppColor.personalScheduleColor)),
                     ))
@@ -96,7 +97,7 @@ class PersonalScheduleWidget extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           color: AppColor.personalScheduleColor2,
           child: Text(
-            WidgetsConstants.detailsTxt,
+            AppLocalizations.of(context)!.details,
             style: ThemeText.titleStyle.copyWith(color: AppColor.secondColor),
           ),
         ),
@@ -124,7 +125,7 @@ class PersonalScheduleWidget extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     child: RichText(
                       text: TextSpan(
-                        text: WidgetsConstants.timeTxt,
+                        text: '${AppLocalizations.of(context)!.time}: ',
                         style: ThemeText.titleStyle2
                             .copyWith(color: AppColor.personalScheduleColor2),
                         children: <TextSpan>[
@@ -145,7 +146,7 @@ class PersonalScheduleWidget extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     child: RichText(
                       text: TextSpan(
-                        text: WidgetsConstants.notesTxt,
+                        text: '${AppLocalizations.of(context)!.note}: ',
                         style: ThemeText.titleStyle2
                             .copyWith(color: AppColor.personalScheduleColor2),
                         children: <TextSpan>[

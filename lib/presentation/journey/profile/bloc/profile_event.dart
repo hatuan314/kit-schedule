@@ -9,3 +9,9 @@ class GetUserNameEvent extends ProfileEvent{
   List<Object?> get props => [];
 
 }
+class ChangeLanguageEvent extends ProfileEvent{
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
+
+}

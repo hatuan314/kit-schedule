@@ -11,6 +11,7 @@ import 'package:schedule/presentation/journey/todo_screen/todo_screen.dart';
 
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'main_constants.dart';
 
@@ -99,19 +100,19 @@ class MainScreen extends StatelessWidget {
                 isSynch
                     ? SizedBox()
                     : Text(
-                        MainScreenConstants.synchronizedTxt,
+                  AppLocalizations.of(context)!.synchronizedTxt,
                         style: ThemeText.titleStyle.copyWith(
                             fontSize: MainScreenConstants.synchronizedSize),
                       ),
                 RichText(
                   text: TextSpan(
-                      text: MainScreenConstants.confirmSignOutTxt,
+                      text: AppLocalizations.of(context)!.doYouWant,
                       style: ThemeText.titleStyle.copyWith(
                         color: AppColor.thirdColor,
                       ),
                       children: [
                         TextSpan(
-                          text: MainScreenConstants.signOutTxt,
+                          text: AppLocalizations.of(context)!.logOut,
                           style: ThemeText.titleStyle.copyWith(
                             color: AppColor.errorColor,
                           ),
@@ -152,7 +153,7 @@ class MainScreen extends StatelessWidget {
                   vertical: MainScreenConstants.paddingVertical,
                   horizontal: MainScreenConstants.paddingHorizontal),
               child: Text(
-                MainScreenConstants.yesTxt,
+                AppLocalizations.of(context)!.yes,
                 style: ThemeText.buttonLabelStyle.copyWith(
                     color: AppColor.secondColor, fontWeight: FontWeight.bold),
               ),
@@ -184,7 +185,7 @@ class MainScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                   vertical: MainScreenConstants.paddingVertical,
                   horizontal: MainScreenConstants.paddingHorizontal),
-              child: Text(MainScreenConstants.noTxt,
+              child: Text(AppLocalizations.of(context)!.no,
                   style: ThemeText.buttonLabelStyle.copyWith(
                       color: AppColor.secondColor,
                       fontWeight: FontWeight.bold)),

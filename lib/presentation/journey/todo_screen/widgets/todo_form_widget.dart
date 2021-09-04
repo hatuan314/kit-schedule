@@ -8,7 +8,7 @@ import 'package:schedule/presentation/themes/theme_text.dart';
 import 'package:schedule/presentation/widget/loading_widget/loading_widget.dart';
 import 'package:schedule/presentation/widget/text_field_widget/text_field_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class TodoFormWidget extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final TextEditingController nameController;
@@ -28,58 +28,61 @@ class TodoFormWidget extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Form(
-          key: formKey,
-          child: TextFieldWidget(
-            controller: nameController,
-            labelText: ToDoConstants.titleTxt,
-            textStyle:
-                ThemeText.labelStyle.copyWith(fontWeight: FontWeight.w400),
-            colorBoder: AppColor.personalScheduleColor,
-            validate: (value) {
-              if (value!.trim().isEmpty) {
-                return "Trường này không được bỏ trống";
-              }
-              return null;
-            },
-          ),
-        ),
-        SizedBox(
-          height: ToDoConstants.spacingHeight,
-        ),
-        Row(
-          children: [
-            Expanded(
-                child: SetTimeWidget(
-              state: state,
-              title: ToDoConstants.setDateTxt,
-              onTap:()=> setDatePicker(state),
-              isDate: true,
-            )),
-            SizedBox(
-              width: 10.w,
+    return Container(
+      margin: EdgeInsets.only(top: 10.h),
+      child: Column(
+        children: [
+          Form(
+            key: formKey,
+            child: TextFieldWidget(
+              controller: nameController,
+              labelText: AppLocalizations.of(context)!.title,
+              textStyle:
+                  ThemeText.labelStyle.copyWith(fontWeight: FontWeight.w400),
+              colorBoder: AppColor.personalScheduleColor,
+              validate: (value) {
+                if (value!.trim().isEmpty) {
+                  return AppLocalizations.of(context)!.isEmpty;
+                }
+                return null;
+              },
             ),
-            Expanded(
-                child: SetTimeWidget(
-              onTap:()=> setTimePicker(state),
-              state: state,
-              title: ToDoConstants.setTimeTxt,
-            )),
-          ],
-        ),
-        SizedBox(
-          height: ToDoConstants.spacingHeight,
-        ),
-        TextFieldWidget(
-          controller: noteController,
-          labelText: ToDoConstants.noteTxt,
-          textStyle: ThemeText.labelStyle.copyWith(fontWeight: FontWeight.w400),
-          colorBoder: AppColor.personalScheduleColor,
-          maxLines: 5,
-        ),
-      ],
+          ),
+          SizedBox(
+            height: ToDoConstants.spacingHeight,
+          ),
+          Row(
+            children: [
+              Expanded(
+                  child: SetTimeWidget(
+                state: state,
+                title: AppLocalizations.of(context)!.setDate,
+                onTap:()=> setDatePicker(state),
+                isDate: true,
+              )),
+              SizedBox(
+                width: 10.w,
+              ),
+              Expanded(
+                  child: SetTimeWidget(
+                onTap:()=> setTimePicker(state),
+                state: state,
+                title: AppLocalizations.of(context)!.setTime,
+              )),
+            ],
+          ),
+          SizedBox(
+            height: ToDoConstants.spacingHeight,
+          ),
+          TextFieldWidget(
+            controller: noteController,
+            labelText:AppLocalizations.of(context)!.note,
+            textStyle: ThemeText.labelStyle.copyWith(fontWeight: FontWeight.w400),
+            colorBoder: AppColor.personalScheduleColor,
+            maxLines: 5,
+          ),
+        ],
+      ),
     );
   }
 }

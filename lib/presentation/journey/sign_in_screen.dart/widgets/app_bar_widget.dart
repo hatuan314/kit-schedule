@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/presentation/journey/sign_in_screen.dart/sign_in_constants.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -17,7 +17,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  SignInConstants.loginTxt,
+                  AppLocalizations.of(context)!.login,
                   style: TextStyle(
                       fontFamily: "MR",
                       color: Colors.black,
@@ -36,13 +36,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ],
             ),
-            // Container(
-            //   height: SignInConstants.sizeIconKit,
-            //   width:  SignInConstants.sizeIconKit,
-            //   decoration: BoxDecoration(
-            //       image: DecorationImage(
-            //           image: AssetImage('assets/img/kit_schedule_logo.png'))),
-            // )
+
           ],
         ),
       ),

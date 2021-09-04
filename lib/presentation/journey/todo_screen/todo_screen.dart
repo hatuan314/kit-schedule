@@ -22,6 +22,7 @@ import 'package:schedule/presentation/journey/todo_screen/widgets/todo_form_widg
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
 import 'package:schedule/presentation/widget/loading_widget/loading_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'bloc/todo_bloc.dart';
 import 'package:schedule/common/extension/date_time_extension.dart';
@@ -42,6 +43,7 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
 
   @override
   void initState() {
+
     // TODO: implement initState
     if (widget.personalSchedule != null) {
       _nameController.text = widget.personalSchedule!.name!;
@@ -113,8 +115,8 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
                       ),
                       Text(
                         widget.personalSchedule == null
-                            ? ToDoConstants.createToDoTxt
-                            : ToDoConstants.editToDoTxt,
+                            ?   AppLocalizations.of(context)!.createTodo
+                            : AppLocalizations.of(context)!.editTodo,
                         style: ThemeText.headerStyle2.copyWith(fontSize: 18.sp),
                       ),
                       SizedBox(
@@ -178,7 +180,7 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
                                         vertical: ToDoConstants
                                             .setTimeContainerPaddingVertical),
                                     child: Text(
-                                      ToDoConstants.saveTxt,
+                                      AppLocalizations.of(context)!.save,
                                       style: ThemeText.titleStyle.copyWith(
                                         color: AppColor.secondColor,
                                       ),
@@ -265,12 +267,12 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
               RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
-                    text: ToDoConstants.confirmDeleteTxt,
+                    text: AppLocalizations.of(context)!.doYouWant,
                     style: ThemeText.titleStyle.copyWith(
                         color: Colors.black54, fontWeight: FontWeight.normal),
                     children: [
                       TextSpan(
-                          text: ToDoConstants.confirmDeleteTxt2,
+                          text: AppLocalizations.of(context)!.delete,
                           style: ThemeText.titleStyle.copyWith(
                             color: AppColor.errorColor,
                           )),
@@ -312,7 +314,7 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
                   vertical: ToDoConstants.paddingVertical,
                   horizontal: ToDoConstants.paddingHorizontal),
               child: Text(
-                ToDoConstants.yesTxt,
+                AppLocalizations.of(context)!.yes,
                 style: ThemeText.buttonLabelStyle.copyWith(
                     color: AppColor.secondColor, fontWeight: FontWeight.bold),
               ),
@@ -342,10 +344,12 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
               padding: EdgeInsets.symmetric(
                   vertical: ToDoConstants.paddingVertical,
                   horizontal: ToDoConstants.paddingHorizontal),
-              child: Text(ToDoConstants.noTxt,
-                  style: ThemeText.buttonLabelStyle.copyWith(
-                      color: AppColor.secondColor,
-                      fontWeight: FontWeight.bold)),
+              child: FittedBox(
+                child: Text(AppLocalizations.of(context)!.no,
+                    style: ThemeText.buttonLabelStyle.copyWith(
+                        color: AppColor.secondColor,
+                        fontWeight: FontWeight.bold)),
+              ),
             ),
           ),
         )).show();
