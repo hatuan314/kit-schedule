@@ -6,7 +6,7 @@ import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
 
 import 'package:table_calendar/table_calendar.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../../../blocs/blocs.dart';
 
 class CalendarView extends StatefulWidget {
@@ -28,7 +28,7 @@ class _CalendarViewState extends State<CalendarView> {
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(30)),
           color: Color(0xffFCFAF3)),
       child: TableCalendar(
-        locale: 'en',
+        locale: AppLocalizations.of(context)!.localeName,
         currentDay: _selectedDay,
         firstDay: DateTime.utc(2010, 10, 16),
         lastDay: DateTime.utc(2030, 3, 14),

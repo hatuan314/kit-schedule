@@ -97,12 +97,12 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       _timer = '${Convert.timerConvert(TimeOfDay.now())}';
       calendarBloc!.add(GetAllScheduleDataEvent());
       snackbarBloc.add(
-          ShowSnackbar(title: 'Create Success', type: SnackBarType.success));
+          ShowSnackbar(title: '${SnackBarTitle.CreateSuccess}', type: SnackBarType.success));
       yield TodoSuccessState(true, selectTimer: _timer, selectDay: _date);
       // String msv=await ShareService().getUsername() as String;
     } catch (e) {
       snackbarBloc
-          .add(ShowSnackbar(title: 'Create Failed', type: SnackBarType.error));
+          .add(ShowSnackbar(title: '${SnackBarTitle.CreateFailed}', type: SnackBarType.error));
       yield TodoFailureState(
           error: e.toString(), selectDay: this._date, selectTimer: this._timer);
     }

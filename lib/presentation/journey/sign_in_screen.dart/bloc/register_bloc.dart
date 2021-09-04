@@ -48,7 +48,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
             await scheduleUseCase.fetchScheduleSchoolData(account, password);
         if (data!.isEmpty) {
           snackbarBloc.add(ShowSnackbar(
-              title: 'No Data. Try again', type: SnackBarType.error));
+              title: '${SnackBarTitle.NoData}', type: SnackBarType.error));
           yield RegisterNoDataState();
         } else {
           List<PersonalScheduleEntities> list =
@@ -60,7 +60,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         }
       } catch (e) {
         snackbarBloc.add(
-            ShowSnackbar(title: 'Connection Failed', type: SnackBarType.error));
+            ShowSnackbar(title: '${SnackBarTitle.ConnectionFailed}', type: SnackBarType.error));
         yield RegisterFailureState(e.toString());
       }
     }

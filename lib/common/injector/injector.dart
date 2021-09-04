@@ -13,6 +13,7 @@ import 'package:schedule/domain/repositories/personal_repositories.dart';
 import 'package:schedule/domain/repositories/schedule_repositories.dart';
 import 'package:schedule/domain/usecase/personal_usecase.dart';
 import 'package:schedule/domain/usecase/schedule_usecase.dart';
+import 'package:schedule/presentation/%20language_select/%20language_select.dart';
 import 'package:schedule/presentation/bloc/loader_bloc/bloc.dart';
 import 'package:schedule/presentation/bloc/snackbar_bloc/bloc.dart';
 import 'package:schedule/presentation/journey/sign_in_screen.dart/bloc/register_bloc.dart';
@@ -84,5 +85,6 @@ class Injector {
     getIt.registerLazySingleton<KeyboardVisibilityController>(() => KeyboardVisibilityController());
     getIt.registerLazySingleton<FirebaseSetup>(() => FirebaseSetup());
     getIt.registerLazySingleton<LocalConfig>(() => LocalConfig());
+    getIt.registerLazySingleton<LanguageSelect>(() => LanguageSelect());
   }
 }

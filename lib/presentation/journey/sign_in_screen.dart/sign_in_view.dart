@@ -11,7 +11,7 @@ import 'package:schedule/presentation/themes/theme_text.dart';
 
 import 'package:schedule/presentation/widget/text_field_widget/text_field_widget.dart';
 import 'package:schedule/presentation/widget/loading_widget/loading_widget.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class SignInView extends StatefulWidget {
   @override
   _SignInViewState createState() => _SignInViewState();
@@ -52,10 +52,12 @@ class _SignInViewState extends State<SignInView> {
                     SizedBox(
                       height: 120.h,
                     ),
-                    Text(
-                      SignInConstants.welcomeTxt,
-                      style: SignInConstants.textStyleTxt
-                          .copyWith(fontSize: SignInConstants.sizeWelcomeTxt),
+                    FittedBox(
+                      child: Text(
+                        AppLocalizations.of(context)!.welcomeTo,
+                        style: SignInConstants.textStyleTxt
+                            .copyWith(fontSize: SignInConstants.sizeWelcomeTxt),
+                      ),
                     ),
                     Text(
                       SignInConstants.kitScheduleTxt,
@@ -75,11 +77,11 @@ class _SignInViewState extends State<SignInView> {
                             TextFieldWidget(
                               validate: (value) {
                                 if (value!.isEmpty) {
-                                  return "Trường này không được bỏ trống";
+                                  return AppLocalizations.of(context)!.isEmpty;
                                 }
                                 return null;
                               },
-                              labelText: SignInConstants.accountTxt,
+                              labelText: AppLocalizations.of(context)!.account,
                               controller: _accountController,
                               textStyle: ThemeText.labelStyle,
                               colorBoder: AppColor.personalScheduleColor,
@@ -90,12 +92,12 @@ class _SignInViewState extends State<SignInView> {
                             TextFieldWidget(
                               validate: (value) {
                                 if (value!.isEmpty) {
-                                  return "Trường này không được bỏ trống";
+                                  return AppLocalizations.of(context)!.isEmpty;
                                 }
                                 return null;
                               },
                               colorBoder: AppColor.personalScheduleColor,
-                              labelText: SignInConstants.passwordTxt,
+                              labelText: AppLocalizations.of(context)!.password,
                               controller: _passwordController,
                               textStyle: ThemeText.labelStyle,
                               obscureText: isShow,
