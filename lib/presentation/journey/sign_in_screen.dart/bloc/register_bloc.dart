@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:crypto/crypto.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+import 'package:schedule/common/utils/convert.dart';
 import 'package:schedule/domain/entities/personal_schedule_entities.dart';
 import 'package:schedule/domain/entities/school_schedule_entities.dart';
 import 'package:schedule/domain/usecase/personal_usecase.dart';
@@ -63,6 +66,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     }
   }
 
+
   _savePersonalSchool(
       List<PersonalScheduleEntities> personal, RegisterState state) async {
     try {
@@ -86,6 +90,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
             schoolSchedule.add(SchoolSchedule.fromJsonApi(scheduleJson, date));
           });
       });
+      //   await _addEventsToCalendar(schoolSchedule);
+
       await scheduleUseCase.insertSchoolScheduleLocal(schoolSchedule);
     } catch (e) {
       debugPrint('RegisterBloc - saveSchoolSchedule - error: {$e}');
