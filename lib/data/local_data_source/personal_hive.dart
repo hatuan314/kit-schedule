@@ -46,6 +46,7 @@ class PersonalHive {
         await hiveConfig.personalBox.putAt(
             i,
             PersonalScheduleEntities(
+              id: personal.id,
                 date: personal.date,
                 name: personal.name,
                 timer: personal.timer,

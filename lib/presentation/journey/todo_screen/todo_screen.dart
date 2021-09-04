@@ -46,6 +46,8 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
 
     // TODO: implement initState
     if (widget.personalSchedule != null) {
+      debugPrint(DateTime.utc(DateTime.now().year,DateTime.now().month,DateTime.now().day,0,0,0,0).millisecondsSinceEpoch.toString());
+      debugPrint(widget.personalSchedule!.id);
       _nameController.text = widget.personalSchedule!.name!;
       _noteController.text = widget.personalSchedule!.note!;
     }
@@ -247,7 +249,7 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
   _setOnClickUpdateButton() {
     FocusScope.of(context).requestFocus(new FocusNode());
     if (_formKey.currentState!.validate()) {
-      debugPrint('id: '+ (this.widget.personalSchedule!.id as String));
+      debugPrint('>>>>>>>>>>>.id: '+ (this.widget.personalSchedule!.id as String));
       BlocProvider.of<TodoBloc>(context)
         ..add(
           UpdatePersonalScheduleOnPressEvent(_nameController.text.trim(),
@@ -358,7 +360,8 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
 
   _bntOkDialogOnPress(BuildContext context) {
     Navigator.pop(context);
+    debugPrint( widget.personalSchedule!.id);
     BlocProvider.of<TodoBloc>(context)
-      ..add(DetelePersonalScheduleOnPressEvent(this.widget.personalSchedule!));
+      ..add(DetelePersonalScheduleOnPressEvent(widget.personalSchedule!));
   }
 }

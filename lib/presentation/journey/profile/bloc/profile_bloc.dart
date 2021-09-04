@@ -80,7 +80,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
     await  _deleteSchoolSchedule( );
 
-
     await  _deletePersonalSchedule( );
     await _shareService.setHasNoti(false);
   }
