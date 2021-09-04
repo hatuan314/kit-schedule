@@ -10,6 +10,9 @@ class ProfileConstants{
   static const myScoresTxt = 'My Scores';
   static const aboutUsTxt = 'About Us';
   static const languageTxt = 'Language';
+  static const notiTxt= 'Notification';
+  static const turnOnTxt= 'Turn On';
+  static const turnOffTxt= 'Turn Off';
   static const logOutTxt = 'Log out';
   static const englishTxt = 'English';
   static const vietnameseTxt = 'Tiếng Việt';

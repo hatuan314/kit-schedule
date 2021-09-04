@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/blocs/home/home_bloc.dart';
-import 'package:schedule/common/injector/injector.dart';
-import 'package:schedule/presentation/%20language_select/%20language_select.dart';
 import 'package:schedule/presentation/journey/profile/bloc/profile_bloc.dart';
 import 'package:schedule/presentation/journey/profile/bloc/profile_event.dart';
 import 'package:schedule/presentation/journey/profile/bloc/profile_state.dart';
@@ -14,14 +12,13 @@ import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
 import 'package:store_redirect/store_redirect.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return /*BlocProvider(
         create: (context) => ProfileBloc()..add(GetUserNameEvent()),
-        child: BlocBuilder<ProfileBloc, ProfileState>(
+        child:*/ BlocBuilder<ProfileBloc, ProfileState>(
             builder: (context, profileState) {
           log(profileState.username.length.toString());
           return SafeArea(
@@ -68,20 +65,29 @@ class ProfileScreen extends StatelessWidget {
                         BlocProvider.of<HomeBloc>(context)
                             .add(OnTabChangeEvent(1));
                       },
-                      title: AppLocalizations.of(context)!.myScores),
+                      title: ProfileConstants.myScoresTxt),
                   _buildListTile(
                       icon: Icons.language,
                       onTap: () {
                         showDialog(
                             context: context,
                             builder: (dialogContext) =>
-                                languageDialog(context));
+                                settingDialog(context,true,profileState));
                       },
-                      title: AppLocalizations.of(context)!.language),
+                      title: ProfileConstants.languageTxt),
+                  _buildListTile(
+                      icon: Icons.notifications_none,
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (dialogContext) =>
+                                settingDialog(context,false,profileState));
+                      },
+                      title: ProfileConstants.notiTxt),
                   _buildListTile(
                       icon: Icons.info_outline,
                       onTap: _launchURL,
-                      title: AppLocalizations.of(context)!.aboutUs),
+                      title: ProfileConstants.aboutUsTxt),
                   _buildListTile(
                       icon: Icons.star_rate_outlined,
                       onTap: () {
@@ -89,19 +95,21 @@ class ProfileScreen extends StatelessWidget {
                           androidAppId: ProfileConstants.androidAppId,
                         );
                       },
-                      title: AppLocalizations.of(context)!.rateMe),
+                      title: ProfileConstants.rateMeTxt),
                   _buildListTile(
                       icon: Icons.logout,
                       onTap: () {
                         BlocProvider.of<HomeBloc>(context)
                             .add(OnTabChangeEvent(4));
                       },
-                      title: AppLocalizations.of(context)!.logOut),
+                      title: ProfileConstants.logOutTxt),
                 ],
               ),
             ),
           );
-        }));
+        }
+        //)
+    );
   }
 
   Widget _buildListTile(
@@ -131,36 +139,39 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  bool isEnglish(String isEng) {
-    if (isEng == 'vi') {
-      return false;
-    }
-    return true;
-  }
-
-  Widget languageDialog(BuildContext context) {
+  Widget settingDialog(BuildContext context, bool isLanguageDialog, ProfileState profileState) {
     return SimpleDialog(
         contentPadding: EdgeInsets.only(
           bottom: ProfileConstants.listTilePadding,
           top: ProfileConstants.listTilePadding,
         ),
-        title: Text(AppLocalizations.of(context)!.language,
+        title: Text(isLanguageDialog?ProfileConstants.languageTxt:ProfileConstants.notiTxt,
             style: ThemeText.titleStyle
                 .copyWith(color: AppColor.personalScheduleColor2)),
         children: [
-          _languageItem(ProfileConstants.englishTxt, context,
-              isEnglish(AppLocalizations.of(context)!.localeName), () {
-            Injector.getIt<LanguageSelect>().changeLanguage(true);
-          }),
-          _languageItem(ProfileConstants.vietnameseTxt, context,
-              !isEnglish(AppLocalizations.of(context)!.localeName), () {
-                Injector.getIt<LanguageSelect>().changeLanguage(false);
-              })
+          _dialogItem(title: isLanguageDialog?ProfileConstants.englishTxt:ProfileConstants.turnOnTxt,
+              context: context,isLanguageDialog:isLanguageDialog,
+              onTap:isLanguageDialog?(){ }
+              :!profileState.hasNoti?(){
+                BlocProvider.of<ProfileBloc>(context).add(TurnOnNotificationEvent());
+                Navigator.pop(context);
+                BlocProvider.of<ProfileBloc>(context).add(GetUserNameInProfileEvent());
+              }: (){},
+          visible:isLanguageDialog?true:profileState.hasNoti),
+          _dialogItem(title: isLanguageDialog?ProfileConstants.vietnameseTxt:ProfileConstants.turnOffTxt,
+             context: context,isLanguageDialog:isLanguageDialog, onTap: isLanguageDialog?(){ }
+                  :profileState.hasNoti?(){
+                BlocProvider.of<ProfileBloc>(context).add(TurnOffNotificationEvent());
+                Navigator.pop(context);
+                BlocProvider.of<ProfileBloc>(context).add(GetUserNameInProfileEvent());
+              }: (){},
+              visible:isLanguageDialog?true:!profileState.hasNoti),
         ]);
   }
 
-  Widget _languageItem(
-      String title, BuildContext context, bool isEnglish, Function() onTap) {
+  Widget _dialogItem({required String title,required BuildContext context,required bool isLanguageDialog,
+    required Function()? onTap,
+  required bool visible}) {
     return GestureDetector(
         onTap: onTap,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -181,7 +192,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
                 Visibility(
-                    visible: isEnglish,
+                    visible: visible,
                     child: Icon(
                       Icons.check,
                       color: AppColor.personalScheduleColor2,

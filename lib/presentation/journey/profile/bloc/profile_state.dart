@@ -2,13 +2,15 @@ import 'package:equatable/equatable.dart';
 
 class ProfileState extends Equatable {
   final String username;
- final bool? isEnglish;
-  ProfileState({required this.username,this.isEnglish});
+  final bool hasNoti;
 
-  ProfileState update({required String username,bool? isEnglish}) =>
-      ProfileState(username: username,isEnglish: isEnglish??this.isEnglish);
+  ProfileState({required this.username, required this.hasNoti});
+
+  ProfileState update({ String? username,bool? hasNoti}) =>
+      ProfileState(username: username?? this.username,
+      hasNoti: hasNoti?? this.hasNoti);
 
   @override
   // TODO: implement props
-  List<Object?> get props => [this.username,this.isEnglish];
+  List<Object?> get props => [this.username, this.hasNoti];
 }

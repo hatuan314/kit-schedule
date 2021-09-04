@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:device_calendar/device_calendar.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,15 +15,23 @@ import 'package:schedule/presentation/bloc/snackbar_bloc/snackbar_type.dart';
 import 'package:schedule/service/share_service.dart';
 
 part 'todo_event.dart';
+
 part 'todo_state.dart';
 
 class TodoBloc extends Bloc<TodoEvent, TodoState> {
   CalendarBloc? calendarBloc;
   late final String msv;
+
+  ShareService shareService= ShareService();
+  DeviceCalendarPlugin _deviceCalendarPlugin = DeviceCalendarPlugin();
+
+  List<Calendar> _calendars = [];
+
   String _date = DateTime.now().millisecondsSinceEpoch.toString();
   String _timer = '${Convert.timerConvert(TimeOfDay.now())}';
   SnackbarBloc snackbarBloc;
   final PersonalUseCase personalUS;
+
   TodoBloc(
       {this.calendarBloc, required this.snackbarBloc, required this.personalUS})
       : super(TodoInitState(
@@ -70,8 +79,22 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       CreatePersonalScheduleOnPressEvent event) async* {
     yield TodoLoadingState(selectDay: this._date, selectTimer: this._timer);
     final String now = DateTime.now().millisecondsSinceEpoch.toString();
+    bool hasNoti= await shareService.getHasNoti() ?? false;
+    String id='';
+    if(hasNoti)
+    {
+      await _retrieveCalendars();
+      id = await _addPersonalScheduleToCalendar( PersonalScheduleEntities(
+        date: this._date,
+        name: event.name,
+        timer: this._timer,
+        note: event.note,
+        updateAt: now,
+        createAt: now,));
+    }
     PersonalScheduleEntities schedule(bool isSynch) {
       PersonalScheduleEntities schedule = PersonalScheduleEntities(
+        id: id,
         date: this._date,
         name: event.name,
         timer: this._timer,
@@ -80,10 +103,17 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
         updateAt: now,
         createAt: now,
       );
+      debugPrint('todo id: '+(schedule.id ??''));
       return schedule;
     }
 
     try {
+      // bool hasNoti= await shareService.getHasNoti() ?? false;
+      // if(hasNoti)
+      //   {
+      //     await _retrieveCalendars();
+      //     await _addPersonalScheduleToCalendar(schedule(true));
+      //   }
       String result =
           await personalUS.syncPersonalSchoolDataFirebase(msv, schedule(true));
       if (result.isNotEmpty) {
@@ -97,12 +127,12 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       _timer = '${Convert.timerConvert(TimeOfDay.now())}';
       calendarBloc!.add(GetAllScheduleDataEvent());
       snackbarBloc.add(
-          ShowSnackbar(title: '${SnackBarTitle.CreateSuccess}', type: SnackBarType.success));
+          ShowSnackbar(title: 'Create Success', type: SnackBarType.success));
       yield TodoSuccessState(true, selectTimer: _timer, selectDay: _date);
       // String msv=await ShareService().getUsername() as String;
     } catch (e) {
       snackbarBloc
-          .add(ShowSnackbar(title: '${SnackBarTitle.CreateFailed}', type: SnackBarType.error));
+          .add(ShowSnackbar(title: 'Create Failed', type: SnackBarType.error));
       yield TodoFailureState(
           error: e.toString(), selectDay: this._date, selectTimer: this._timer);
     }
@@ -112,27 +142,45 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       UpdatePersonalScheduleOnPressEvent event) async* {
     yield TodoLoadingState(selectDay: this._date, selectTimer: this._timer);
     final String now = DateTime.now().millisecondsSinceEpoch.toString();
+    bool hasNoti= await shareService.getHasNoti() ?? false;
+    String id='';
+    if(hasNoti)
+    {
+      await _retrieveCalendars();
+      debugPrint('delete  id : ' + (event.id as String));
+      final deleteEventResult = await _deviceCalendarPlugin.deleteEvent(
+          4.toString(), event.id);
+      debugPrint('delete' + deleteEventResult.isSuccess.toString());
+      id = await _addPersonalScheduleToCalendar( PersonalScheduleEntities(
+          date: this._date,
+          name: event.name,
+          timer: this._timer,
+          note: event.note,
+          createAt: event.createAt,
+          updateAt: now));
+    }
     PersonalScheduleEntities schedule(bool isSynch) {
       PersonalScheduleEntities schedule = PersonalScheduleEntities(
           date: this._date,
           name: event.name,
           timer: this._timer,
           note: event.note,
+          id: id,
           createAt: event.createAt,
-          updateAt: now,
-      isSynchronized: isSynch
-      );
+          updateAt: now);
       return schedule;
     }
 
     int flag;
     try {
+
+
+      log('${schedule(true).createAt}');
       final result =
           await personalUS.syncPersonalSchoolDataFirebase(msv, schedule(true));
       if (result.isNotEmpty) {
         flag = await personalUS.updatePersonalScheduleData(schedule(true));
       } else {
-
         flag = await personalUS.updatePersonalScheduleData(schedule(false));
       }
       _date = DateTime.now().millisecondsSinceEpoch.toString();
@@ -149,9 +197,19 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   Stream<TodoState> _mapDetelePersonalScheduleToState(
       PersonalScheduleEntities personal) async* {
     yield TodoLoadingState(selectDay: this._date, selectTimer: this._timer);
+    debugPrint('delete  id : ' + (personal.id as String));
+    bool hasNoti= await shareService.getHasNoti() ?? false;
+    if(hasNoti)
+    {
+      await _retrieveCalendars();
+      debugPrint('delete  id : ' + (personal.id as String));
+      final deleteEventResult = await _deviceCalendarPlugin.deleteEvent(
+          4.toString(), personal.id);
+      debugPrint('delete' + deleteEventResult.isSuccess.toString());
+    }
     personal.updateAt = "0";
-    String result = await personalUS.deletePersonalSchoolDataFirebase(
-        msv, personal.createAt!);
+    String result =
+        await personalUS.syncPersonalSchoolDataFirebase(msv, personal);
     int flag;
     if (result.isNotEmpty) {
       flag = await personalUS.deletePersonalScheduleLocal(personal);
@@ -168,5 +226,43 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
           selectDay: this._date,
           selectTimer: this._timer);
     }
+  }
+
+  _retrieveCalendars() async {
+    try {
+      var permissionsGranted = await _deviceCalendarPlugin.hasPermissions();
+      if (permissionsGranted.isSuccess && !permissionsGranted.data) {
+        permissionsGranted = await _deviceCalendarPlugin.requestPermissions();
+        if (!permissionsGranted.isSuccess || !permissionsGranted.data) {
+          return;
+        }
+      }
+      final calendarsResult = await _deviceCalendarPlugin.retrieveCalendars();
+
+      _calendars = calendarsResult.data as List<Calendar>;
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<String> _addPersonalScheduleToCalendar(
+      PersonalScheduleEntities personalSchedule) async {
+    int personalScheduleHour = int.parse(personalSchedule.timer!.split(':')[0]);
+    int personalScheduleMinute =
+        int.parse(personalSchedule.timer!.split(':')[1]);
+    final int eventTime = int.parse(personalSchedule.date as String);
+
+    final eventToCreate = Event(4.toString());
+
+    eventToCreate.title = personalSchedule.name;
+    eventToCreate.start = DateTime.fromMillisecondsSinceEpoch(eventTime +
+        personalScheduleHour * 3600000 +
+        personalScheduleMinute * 60000);
+    eventToCreate.description = personalSchedule.note;
+    eventToCreate.end = eventToCreate.start;
+    final createEventResult =
+        await _deviceCalendarPlugin.createOrUpdateEvent(eventToCreate);
+    debugPrint('createEventResult: ' + createEventResult.isSuccess.toString());
+    return createEventResult.data;
   }
 }
