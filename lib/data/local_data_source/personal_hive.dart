@@ -40,7 +40,6 @@ class PersonalHive {
 
   Future<int> updatePersonalScheduleData(
       PersonalScheduleEntities personal) async {
-    log('${personal.createAt}');
     final result = hiveConfig.personalBox.values;
     for (int i = 0; i < result.length; i++) {
       if (result.elementAt(i).createAt == personal.createAt) {
@@ -52,7 +51,9 @@ class PersonalHive {
                 timer: personal.timer,
                 note: personal.note,
                 createAt: personal.createAt,
-                updateAt: personal.updateAt));
+                updateAt: personal.updateAt,
+            isSynchronized: personal.isSynchronized
+            ));
         return 1;
       }
     }

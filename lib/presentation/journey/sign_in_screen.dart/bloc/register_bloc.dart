@@ -72,7 +72,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     try {
       if (personal.isNotEmpty) {
         personal.forEach((element) async {
-          await personalUseCase.insertPersonalSchedule(element);
+          PersonalScheduleEntities personalScheduleEntities=element;
+          personalScheduleEntities.isSynchronized=true;
+          await personalUseCase.insertPersonalSchedule(personalScheduleEntities);
         });
       }
     } catch (e) {

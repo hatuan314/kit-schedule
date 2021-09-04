@@ -1,3 +1,4 @@
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get_it/get_it.dart';
 import 'package:schedule/blocs/blocs.dart';
 import 'package:schedule/blocs/calendar/calendar_bloc.dart';
@@ -80,6 +81,7 @@ class Injector {
 
   static void _configNetwork() {}
   static void _configCommon() {
+    getIt.registerLazySingleton<KeyboardVisibilityController>(() => KeyboardVisibilityController());
     getIt.registerLazySingleton<FirebaseSetup>(() => FirebaseSetup());
     getIt.registerLazySingleton<LocalConfig>(() => LocalConfig());
   }

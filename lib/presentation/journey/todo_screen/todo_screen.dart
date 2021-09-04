@@ -1,18 +1,18 @@
 import 'dart:developer';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
-import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 import 'package:schedule/common/constants/layout_constants.dart';
 import 'package:schedule/domain/entities/personal_schedule_entities.dart';
 
-import 'package:schedule/models/personal_schedule.dart';
 import 'package:schedule/presentation/journey/home/calendar_tab_constants.dart';
 import 'package:schedule/presentation/journey/todo_screen/todo_constants.dart';
 import 'package:schedule/presentation/journey/todo_screen/widgets/cupertino_rounded_datepicker_widget.dart';
@@ -24,11 +24,12 @@ import 'package:schedule/presentation/themes/theme_text.dart';
 import 'package:schedule/presentation/widget/loading_widget/loading_widget.dart';
 
 import 'bloc/todo_bloc.dart';
+import 'package:schedule/common/extension/date_time_extension.dart';
 
 class TodoScreen extends StatefulWidget {
   final PersonalScheduleEntities? personalSchedule;
 
-  const TodoScreen({Key? key, this.personalSchedule}) : super(key: key);
+  TodoScreen({Key? key, this.personalSchedule}) : super(key: key);
   @override
   _CreateTodoTabViewState createState() => _CreateTodoTabViewState();
 }
@@ -50,12 +51,17 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
       isKeyboard = event;
       if (isKeyboard == false) {
         await Future.delayed(Duration(milliseconds: 110));
-        setState(() {});
+        if (mounted) setState(() {});
       } else {
-        setState(() {});
+        if (mounted) setState(() {});
       }
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -125,9 +131,6 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
                             formKey: _formKey,
                             setDatePicker: _selectDatePicker,
                             setTimePicker: _selectTimePicker,
-                            setOnBtnSave: widget.personalSchedule == null
-                                ? _setOnClickSaveButton
-                                : _setOnClickUpdateButton,
                           ),
                         ),
                       ),
@@ -192,10 +195,11 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
     );
   }
 
-  _selectDatePicker() async {
-   CupertinoRoundedDatePickerWidget.show(
+  _selectDatePicker(TodoState state) async {
+    CupertinoRoundedDatePickerWidget.show(
       context,
-      initialDate: DateTime.now(),
+      initialDate:
+          DateTime.fromMillisecondsSinceEpoch(int.parse(state.selectDay!)),
       textColor: AppColor.personalScheduleColor,
       initialDatePickerMode: CupertinoDatePickerMode.date,
       fontFamily: 'MR',
@@ -209,10 +213,14 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
     );
   }
 
-  _selectTimePicker() async {
+  _selectTimePicker(TodoState state) async {
+    List<String> hourAndMinues = state.selectTimer!.split(':');
+    int time = (int.parse(hourAndMinues[0])*60*60*1000)+(int.parse(hourAndMinues[1])*60*1000);
+    DateTime a = DateTime.fromMillisecondsSinceEpoch(
+        DateTime(2021).millisecondsSinceEpoch + time);
     CupertinoRoundedDatePickerWidget.show(
       context,
-      initialDate: DateTime.now(),
+      initialDate:a,
       textColor: AppColor.personalScheduleColor,
       initialDatePickerMode: CupertinoDatePickerMode.time,
       fontFamily: 'MR',
@@ -239,11 +247,8 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
     if (_formKey.currentState!.validate()) {
       BlocProvider.of<TodoBloc>(context)
         ..add(
-          UpdatePersonalScheduleOnPressEvent(
-              this.widget.personalSchedule!.id,
-              _nameController.text.trim(),
-              _noteController.text.trim(),
-              widget.personalSchedule!.createAt!),
+          UpdatePersonalScheduleOnPressEvent(_nameController.text.trim(),
+              _noteController.text.trim(), widget.personalSchedule!.createAt!),
         );
     }
   }

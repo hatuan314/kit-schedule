@@ -18,36 +18,33 @@ class PersonalScheduleEntitiesAdapter
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return PersonalScheduleEntities(
-      date: fields[1] as String?,
-      name: fields[2] as String?,
-      timer: fields[3] as String?,
-      note: fields[4] as String?,
-      createAt: fields[5] as String?,
-      updateAt: fields[6] as String?,
-      isSynchronized: fields[7] as bool?,
-      id: fields[0] as String?,
+      date: fields[0] as String?,
+      name: fields[1] as String?,
+      timer: fields[2] as String?,
+      note: fields[3] as String?,
+      createAt: fields[4] as String?,
+      updateAt: fields[5] as String?,
+      isSynchronized: fields[6] as bool?,
     );
   }
 
   @override
   void write(BinaryWriter writer, PersonalScheduleEntities obj) {
     writer
-      ..writeByte(8)
-      ..writeByte(0)
-      ..write(obj.id)
-      ..writeByte(1)
-      ..write(obj.date)
-      ..writeByte(2)
-      ..write(obj.name)
-      ..writeByte(3)
-      ..write(obj.timer)
-      ..writeByte(4)
-      ..write(obj.note)
-      ..writeByte(5)
-      ..write(obj.createAt)
-      ..writeByte(6)
-      ..write(obj.updateAt)
       ..writeByte(7)
+      ..writeByte(0)
+      ..write(obj.date)
+      ..writeByte(1)
+      ..write(obj.name)
+      ..writeByte(2)
+      ..write(obj.timer)
+      ..writeByte(3)
+      ..write(obj.note)
+      ..writeByte(4)
+      ..write(obj.createAt)
+      ..writeByte(5)
+      ..write(obj.updateAt)
+      ..writeByte(6)
       ..write(obj.isSynchronized);
   }
 

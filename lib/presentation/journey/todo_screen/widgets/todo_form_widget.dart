@@ -14,21 +14,18 @@ class TodoFormWidget extends StatelessWidget {
   final TextEditingController nameController;
   final TextEditingController noteController;
   final TodoState state;
-  final Function() setDatePicker;
-  final Function() setTimePicker;
-  final Function() setOnBtnSave;
+  final Function(TodoState) setDatePicker;
+  final Function(TodoState) setTimePicker;
 
-  const TodoFormWidget(
-      {Key? key,
-
-      required this.formKey,
-      required this.nameController,
-      required this.noteController,
-      required this.state,
-      required this.setDatePicker,
-      required this.setTimePicker,
-      required this.setOnBtnSave})
-      : super(key: key);
+  const TodoFormWidget({
+    Key? key,
+    required this.formKey,
+    required this.nameController,
+    required this.noteController,
+    required this.state,
+    required this.setDatePicker,
+    required this.setTimePicker,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -36,11 +33,10 @@ class TodoFormWidget extends StatelessWidget {
         Form(
           key: formKey,
           child: TextFieldWidget(
-
             controller: nameController,
             labelText: ToDoConstants.titleTxt,
-            textStyle: ThemeText.labelStyle
-                .copyWith(fontWeight: FontWeight.w400),
+            textStyle:
+                ThemeText.labelStyle.copyWith(fontWeight: FontWeight.w400),
             colorBoder: AppColor.personalScheduleColor,
             validate: (value) {
               if (value!.trim().isEmpty) {
@@ -59,7 +55,7 @@ class TodoFormWidget extends StatelessWidget {
                 child: SetTimeWidget(
               state: state,
               title: ToDoConstants.setDateTxt,
-              onTap: setDatePicker,
+              onTap:()=> setDatePicker(state),
               isDate: true,
             )),
             SizedBox(
@@ -67,7 +63,7 @@ class TodoFormWidget extends StatelessWidget {
             ),
             Expanded(
                 child: SetTimeWidget(
-              onTap: setTimePicker,
+              onTap:()=> setTimePicker(state),
               state: state,
               title: ToDoConstants.setTimeTxt,
             )),
@@ -79,8 +75,7 @@ class TodoFormWidget extends StatelessWidget {
         TextFieldWidget(
           controller: noteController,
           labelText: ToDoConstants.noteTxt,
-          textStyle:
-              ThemeText.labelStyle.copyWith(fontWeight: FontWeight.w400),
+          textStyle: ThemeText.labelStyle.copyWith(fontWeight: FontWeight.w400),
           colorBoder: AppColor.personalScheduleColor,
           maxLines: 5,
         ),
