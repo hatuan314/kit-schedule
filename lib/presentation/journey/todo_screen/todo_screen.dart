@@ -126,15 +126,13 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
                       ),
                       Expanded(
                         child: SingleChildScrollView(
-                          keyboardDismissBehavior:
-                              ScrollViewKeyboardDismissBehavior.onDrag,
                           child: TodoFormWidget(
                             state: state,
                             nameController: _nameController,
                             noteController: _noteController,
                             formKey: _formKey,
-                            setDatePicker: _selectDatePicker(),
-                            setTimePicker: _selectTimePicker(),
+                            setTimePicker: _selectTimePicker,
+                            setDatePicker: _selectDatePicker,
                           ),
                         ),
                       ),
@@ -200,10 +198,11 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
   }
 
 
-  _selectDatePicker() async {
+  _selectDatePicker(TodoState state) async {
     CupertinoRoundedDatePickerWidget.show(
       context,
-      initialDate: DateTime.now(),
+      initialDate:
+      DateTime.fromMillisecondsSinceEpoch(int.parse(state.selectDay!)),
       textColor: AppColor.personalScheduleColor,
       initialDatePickerMode: CupertinoDatePickerMode.date,
       fontFamily: 'MR',
@@ -217,11 +216,14 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
     );
   }
 
-
-  _selectTimePicker() async {
+  _selectTimePicker(TodoState state) async {
+    List<String> hourAndMinues = state.selectTimer!.split(':');
+    int time = (int.parse(hourAndMinues[0])*60*60*1000)+(int.parse(hourAndMinues[1])*60*1000);
+    DateTime a = DateTime.fromMillisecondsSinceEpoch(
+        DateTime(2021).millisecondsSinceEpoch + time);
     CupertinoRoundedDatePickerWidget.show(
       context,
-      initialDate: DateTime.now(),
+      initialDate:a,
       textColor: AppColor.personalScheduleColor,
       initialDatePickerMode: CupertinoDatePickerMode.time,
       fontFamily: 'MR',
