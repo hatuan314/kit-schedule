@@ -67,13 +67,9 @@ dependencies:
   connectivity: ^3.0.6
   flutter_keyboard_visibility: ^5.0.3
   device_calendar: ^3.1.0
-<<<<<<< HEAD
 
   flutter_localizations: # Add this line
     sdk: flutter
-
-=======
->>>>>>> 1943361b048e8fc37b501065a3f7083f81ce4c74
 
 
 
