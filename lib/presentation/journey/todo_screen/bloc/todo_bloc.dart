@@ -95,6 +95,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
         note: event.note,
         updateAt: now,
         createAt: now,));
+      log('$id');
     }
     PersonalScheduleEntities schedule(bool isSynch) {
       PersonalScheduleEntities schedule = PersonalScheduleEntities(
@@ -214,8 +215,8 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       debugPrint('delete' + deleteEventResult.isSuccess.toString());
     }
     personal.updateAt = "0";
-    String result =
-        await personalUS.syncPersonalSchoolDataFirebase(msv, personal);
+    String result = await personalUS.deletePersonalSchoolDataFirebase(
+        msv, personal.createAt!);
     int flag;
     if (result.isNotEmpty) {
       flag = await personalUS.deletePersonalScheduleLocal(personal);
