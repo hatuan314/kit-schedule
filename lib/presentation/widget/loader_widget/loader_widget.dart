@@ -44,7 +44,7 @@ class LoadingContainer extends StatelessWidget {
                             alignment: Alignment.center,
                             child: const CircularProgressIndicator(
                               key: ValueKey(LoaderConstants.loaderImageKey),
-                              color: AppColor.primaryColor,
+                              backgroundColor: AppColor.primaryColor,
                             ),
                           ),
                         ),

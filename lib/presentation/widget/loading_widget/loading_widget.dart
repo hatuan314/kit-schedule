@@ -17,7 +17,8 @@ class LoadingWidget extends StatelessWidget {
       alignment: Alignment.center,
       child:  CircularProgressIndicator(
         key: ValueKey(LoaderConstants.loaderImageKey),
-        color: color,
+        backgroundColor: color,
+
       ),
     );
   }
