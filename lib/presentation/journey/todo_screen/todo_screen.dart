@@ -23,6 +23,7 @@ import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
 import 'package:schedule/presentation/widget/loading_widget/loading_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:schedule/presentation/widget/warning_dialog/warning_dialog.dart';
 
 import 'bloc/todo_bloc.dart';
 import 'package:schedule/common/extension/date_time_extension.dart';
@@ -43,10 +44,12 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
 
   @override
   void initState() {
-
     // TODO: implement initState
     if (widget.personalSchedule != null) {
-      debugPrint(DateTime.utc(DateTime.now().year,DateTime.now().month,DateTime.now().day,0,0,0,0).millisecondsSinceEpoch.toString());
+      debugPrint(DateTime.utc(DateTime.now().year, DateTime.now().month,
+              DateTime.now().day, 0, 0, 0, 0)
+          .millisecondsSinceEpoch
+          .toString());
       debugPrint(widget.personalSchedule!.id);
       _nameController.text = widget.personalSchedule!.name!;
       _noteController.text = widget.personalSchedule!.note!;
@@ -82,7 +85,14 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
               ),
               actions: <Widget>[
                 IconButton(
-                    onPressed: () => _waitingDeleteDialog(),
+                    onPressed: () => warningDialog(
+                      name: widget.personalSchedule!.name,
+                        context: context,
+                        isSynch: true,
+                        btnOk: _bntOkDialogOnPress,
+                        btnCancel: (context) {
+                          Navigator.pop(context);
+                        }),
                     icon: Icon(
                       Icons.delete,
                       color: AppColor.personalScheduleColor2,
@@ -117,7 +127,7 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
                       ),
                       Text(
                         widget.personalSchedule == null
-                            ?   AppLocalizations.of(context)!.createTodo
+                            ? AppLocalizations.of(context)!.createTodo
                             : AppLocalizations.of(context)!.editTodo,
                         style: ThemeText.headerStyle2.copyWith(fontSize: 18.sp),
                       ),
@@ -197,12 +207,11 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
     );
   }
 
-
   _selectDatePicker(TodoState state) async {
     CupertinoRoundedDatePickerWidget.show(
       context,
       initialDate:
-      DateTime.fromMillisecondsSinceEpoch(int.parse(state.selectDay!)),
+          DateTime.fromMillisecondsSinceEpoch(int.parse(state.selectDay!)),
       textColor: AppColor.personalScheduleColor,
       initialDatePickerMode: CupertinoDatePickerMode.date,
       fontFamily: 'MR',
@@ -218,12 +227,13 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
 
   _selectTimePicker(TodoState state) async {
     List<String> hourAndMinues = state.selectTimer!.split(':');
-    int time = (int.parse(hourAndMinues[0])*60*60*1000)+(int.parse(hourAndMinues[1])*60*1000);
+    int time = (int.parse(hourAndMinues[0]) * 60 * 60 * 1000) +
+        (int.parse(hourAndMinues[1]) * 60 * 1000);
     DateTime a = DateTime.fromMillisecondsSinceEpoch(
         DateTime(2021).millisecondsSinceEpoch + time);
     CupertinoRoundedDatePickerWidget.show(
       context,
-      initialDate:a,
+      initialDate: a,
       textColor: AppColor.personalScheduleColor,
       initialDatePickerMode: CupertinoDatePickerMode.time,
       fontFamily: 'MR',
@@ -248,119 +258,122 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
   _setOnClickUpdateButton() {
     FocusScope.of(context).requestFocus(new FocusNode());
     if (_formKey.currentState!.validate()) {
-      debugPrint('>>>>>>>>>>>.id: '+ (this.widget.personalSchedule!.id as String));
+      debugPrint(
+          '>>>>>>>>>>>.id: ' + (this.widget.personalSchedule!.id as String));
       BlocProvider.of<TodoBloc>(context)
         ..add(
-          UpdatePersonalScheduleOnPressEvent(this.widget.personalSchedule!.id as String,
+          UpdatePersonalScheduleOnPressEvent(
+              this.widget.personalSchedule!.id as String,
               _nameController.text.trim(),
-              _noteController.text.trim(), widget.personalSchedule!.createAt!),
+              _noteController.text.trim(),
+              widget.personalSchedule!.createAt!),
         );
     }
   }
 
-  _waitingDeleteDialog() {
-    AwesomeDialog(
-        context: context,
-        dialogType: DialogType.WARNING,
-        animType: AnimType.BOTTOMSLIDE,
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.w),
-          child: Column(
-            children: [
-              RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                    text: AppLocalizations.of(context)!.doYouWant,
-                    style: ThemeText.titleStyle.copyWith(
-                        color: Colors.black54, fontWeight: FontWeight.normal),
-                    children: [
-                      TextSpan(
-                          text: AppLocalizations.of(context)!.delete,
-                          style: ThemeText.titleStyle.copyWith(
-                            color: AppColor.errorColor,
-                          )),
-                    ]),
-              ),
-              Text(
-                '${this.widget.personalSchedule!.name}?',
-                style: ThemeText.titleStyle.copyWith(
-                  color: Colors.black54,
-                  fontWeight: FontWeight.normal,
-                ),
-                overflow: TextOverflow.ellipsis,
-                maxLines: 3,
-              )
-            ],
-          ),
-        ),
-        btnOk: GestureDetector(
-          onTap: () => _bntOkDialogOnPress(context),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: AppColor.fourthColor,
-              boxShadow: [
-                BoxShadow(
-                  color: AppColor.primaryColor.withOpacity(0.3),
-                  blurRadius: 5,
-                  spreadRadius: 1,
-                  offset: Offset(
-                    0,
-                    3,
-                  ),
-                )
-              ],
-            ),
-            alignment: Alignment.center,
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: ToDoConstants.paddingVertical,
-                  horizontal: ToDoConstants.paddingHorizontal),
-              child: Text(
-                AppLocalizations.of(context)!.yes,
-                style: ThemeText.buttonLabelStyle.copyWith(
-                    color: AppColor.secondColor, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-        ),
-        btnCancel: GestureDetector(
-          onTap: () => Navigator.of(context).pop(),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: AppColor.errorColor,
-              boxShadow: [
-                BoxShadow(
-                  color: AppColor.primaryColor.withOpacity(0.3),
-                  blurRadius: 5,
-                  spreadRadius: 1,
-                  offset: Offset(
-                    0,
-                    3,
-                  ),
-                )
-              ],
-            ),
-            alignment: Alignment.center,
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: ToDoConstants.paddingVertical,
-                  horizontal: ToDoConstants.paddingHorizontal),
-              child: FittedBox(
-                child: Text(AppLocalizations.of(context)!.no,
-                    style: ThemeText.buttonLabelStyle.copyWith(
-                        color: AppColor.secondColor,
-                        fontWeight: FontWeight.bold)),
-              ),
-            ),
-          ),
-        )).show();
-  }
+  // _waitingDeleteDialog() {
+  //   AwesomeDialog(
+  //       context: context,
+  //       dialogType: DialogType.WARNING,
+  //       animType: AnimType.BOTTOMSLIDE,
+  //       body: Padding(
+  //         padding: EdgeInsets.symmetric(horizontal: 10.w),
+  //         child: Column(
+  //           children: [
+  //             RichText(
+  //               textAlign: TextAlign.center,
+  //               text: TextSpan(
+  //                   text: AppLocalizations.of(context)!.doYouWant,
+  //                   style: ThemeText.titleStyle.copyWith(
+  //                       color: Colors.black54, fontWeight: FontWeight.normal),
+  //                   children: [
+  //                     TextSpan(
+  //                         text: AppLocalizations.of(context)!.delete,
+  //                         style: ThemeText.titleStyle.copyWith(
+  //                           color: AppColor.errorColor,
+  //                         )),
+  //                   ]),
+  //             ),
+  //             Text(
+  //               '${this.widget.personalSchedule!.name}?',
+  //               style: ThemeText.titleStyle.copyWith(
+  //                 color: Colors.black54,
+  //                 fontWeight: FontWeight.normal,
+  //               ),
+  //               overflow: TextOverflow.ellipsis,
+  //               maxLines: 3,
+  //             )
+  //           ],
+  //         ),
+  //       ),
+  //       btnOk: GestureDetector(
+  //         onTap: () => _bntOkDialogOnPress(context),
+  //         child: Container(
+  //           decoration: BoxDecoration(
+  //             borderRadius: BorderRadius.circular(20),
+  //             color: AppColor.fourthColor,
+  //             boxShadow: [
+  //               BoxShadow(
+  //                 color: AppColor.primaryColor.withOpacity(0.3),
+  //                 blurRadius: 5,
+  //                 spreadRadius: 1,
+  //                 offset: Offset(
+  //                   0,
+  //                   3,
+  //                 ),
+  //               )
+  //             ],
+  //           ),
+  //           alignment: Alignment.center,
+  //           child: Padding(
+  //             padding: EdgeInsets.symmetric(
+  //                 vertical: ToDoConstants.paddingVertical,
+  //                 horizontal: ToDoConstants.paddingHorizontal),
+  //             child: Text(
+  //               AppLocalizations.of(context)!.yes,
+  //               style: ThemeText.buttonLabelStyle.copyWith(
+  //                   color: AppColor.secondColor, fontWeight: FontWeight.bold),
+  //             ),
+  //           ),
+  //         ),
+  //       ),
+  //       btnCancel: GestureDetector(
+  //         onTap: () => Navigator.of(context).pop(),
+  //         child: Container(
+  //           decoration: BoxDecoration(
+  //             borderRadius: BorderRadius.circular(20),
+  //             color: AppColor.errorColor,
+  //             boxShadow: [
+  //               BoxShadow(
+  //                 color: AppColor.primaryColor.withOpacity(0.3),
+  //                 blurRadius: 5,
+  //                 spreadRadius: 1,
+  //                 offset: Offset(
+  //                   0,
+  //                   3,
+  //                 ),
+  //               )
+  //             ],
+  //           ),
+  //           alignment: Alignment.center,
+  //           child: Padding(
+  //             padding: EdgeInsets.symmetric(
+  //                 vertical: ToDoConstants.paddingVertical,
+  //                 horizontal: ToDoConstants.paddingHorizontal),
+  //             child: FittedBox(
+  //               child: Text(AppLocalizations.of(context)!.no,
+  //                   style: ThemeText.buttonLabelStyle.copyWith(
+  //                       color: AppColor.secondColor,
+  //                       fontWeight: FontWeight.bold)),
+  //             ),
+  //           ),
+  //         ),
+  //       )).show();
+  // }
 
   _bntOkDialogOnPress(BuildContext context) {
     Navigator.pop(context);
-    debugPrint( widget.personalSchedule!.id);
+    debugPrint(widget.personalSchedule!.id);
     BlocProvider.of<TodoBloc>(context)
       ..add(DetelePersonalScheduleOnPressEvent(widget.personalSchedule!));
   }

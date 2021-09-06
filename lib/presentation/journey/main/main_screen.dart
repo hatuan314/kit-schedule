@@ -6,12 +6,12 @@ import 'package:schedule/presentation/journey/home/calendar_tab_screen.dart';
 import 'package:schedule/presentation/journey/profile/profile_screen.dart';
 import 'package:schedule/presentation/journey/scores/scores_screen.dart';
 
-
 import 'package:schedule/presentation/journey/todo_screen/todo_screen.dart';
 
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:schedule/presentation/widget/warning_dialog/warning_dialog.dart';
 
 import 'main_constants.dart';
 
@@ -20,7 +20,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<HomeBloc, HomeState>(listener: (context, state) {
       if (state is HomeOnChangeTabState) if (state.selectIndex == 4)
-        _warningSignOutDialog(context, state.isSynch);
+        warningDialog(context: context,isSynch: state.isSynch,btnOk: _bntOkDialogOnPress,btnCancel: _btnCancelDialogOnPress);
       if (state is SignOutFailureState) _errorSignOutDialog(context);
     }, child: BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
       return Scaffold(
@@ -86,113 +86,7 @@ class MainScreen extends StatelessWidget {
         ));
   }
 
-  void _warningSignOutDialog(BuildContext context, bool isSynch) {
-    AwesomeDialog(
-        dismissOnTouchOutside: false,
-        context: context,
-        dialogType: DialogType.WARNING,
-        animType: AnimType.BOTTOMSLIDE,
-        body: Padding(
-            padding: const EdgeInsets.symmetric(
-                vertical: MainScreenConstants.dialogPaddingVertical),
-            child: Column(
-              children: [
-                isSynch
-                    ? SizedBox()
-                    : Text(
-                  AppLocalizations.of(context)!.synchronizedTxt,
-                        style: ThemeText.titleStyle.copyWith(
-                            fontSize: MainScreenConstants.synchronizedSize),
-                      ),
-                RichText(
-                  text: TextSpan(
-                      text: AppLocalizations.of(context)!.doYouWant,
-                      style: ThemeText.titleStyle.copyWith(
-                        color: AppColor.thirdColor,
-                      ),
-                      children: [
-                        TextSpan(
-                          text: AppLocalizations.of(context)!.logOut,
-                          style: ThemeText.titleStyle.copyWith(
-                            color: AppColor.errorColor,
-                          ),
-                        ),
-                        TextSpan(
-                          text: MainScreenConstants.punctuationMarkTxt,
-                          style: ThemeText.titleStyle.copyWith(
-                              color: AppColor.thirdColor,
-                              fontWeight: FontWeight.normal),
-                        ),
-                      ]),
-                ),
-              ],
-            )),
-        btnOk: GestureDetector(
-          onTap: () => _bntOkDialogOnPress(context),
-          child: Container(
-            margin: const EdgeInsets.only(
-                bottom: MainScreenConstants.containerMarginBottom),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: AppColor.fourthColor,
-              boxShadow: [
-                BoxShadow(
-                  color: AppColor.primaryColor.withOpacity(0.3),
-                  blurRadius: 5,
-                  spreadRadius: 1,
-                  offset: Offset(
-                    0,
-                    3,
-                  ),
-                )
-              ],
-            ),
-            alignment: Alignment.center,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                  vertical: MainScreenConstants.paddingVertical,
-                  horizontal: MainScreenConstants.paddingHorizontal),
-              child: Text(
-                AppLocalizations.of(context)!.yes,
-                style: ThemeText.buttonLabelStyle.copyWith(
-                    color: AppColor.secondColor, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-        ),
-        btnCancel: GestureDetector(
-          onTap: () => _btnCancelDialogOnPress(context),
-          child: Container(
-            margin: const EdgeInsets.only(
-                bottom: MainScreenConstants.containerMarginBottom),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: AppColor.errorColor,
-              boxShadow: [
-                BoxShadow(
-                  color: AppColor.primaryColor.withOpacity(0.3),
-                  blurRadius: 5,
-                  spreadRadius: 1,
-                  offset: Offset(
-                    0,
-                    3,
-                  ),
-                )
-              ],
-            ),
-            alignment: Alignment.center,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                  vertical: MainScreenConstants.paddingVertical,
-                  horizontal: MainScreenConstants.paddingHorizontal),
-              child: Text(AppLocalizations.of(context)!.no,
-                  style: ThemeText.buttonLabelStyle.copyWith(
-                      color: AppColor.secondColor,
-                      fontWeight: FontWeight.bold)),
-            ),
-          ),
-        )).show();
-  }
+
 
   _btnCancelDialogOnPress(BuildContext context) {
     BlocProvider.of<HomeBloc>(context)..add(OnTabChangeEvent(3));

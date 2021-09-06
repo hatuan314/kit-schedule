@@ -35,7 +35,7 @@ dependencies:
   # sqlite
   #sqflite: ^1.2.0
   hive: ^2.0.4
-  sqflite: ^2.0.0+3
+#  sqflite: ^2.0.0+3
   # Simple Animation
   simple_animations: ^3.1.1
   # Bloc

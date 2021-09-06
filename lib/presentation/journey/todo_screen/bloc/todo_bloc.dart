@@ -95,7 +95,6 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
         note: event.note,
         updateAt: now,
         createAt: now,));
-      log('$id');
     }
     PersonalScheduleEntities schedule(bool isSynch) {
       PersonalScheduleEntities schedule = PersonalScheduleEntities(
