@@ -27,10 +27,11 @@ class PersonalScheduleEntities {
       this.createAt,
       this.updateAt,
       this.isSynchronized,
-        this.id
-      }) {
-    this.createAt = createAt ?? DateTime.now().millisecondsSinceEpoch.toString();
-    this.updateAt = updateAt ?? DateTime.now().millisecondsSinceEpoch.toString();
+      this.id}) {
+    this.createAt =
+        createAt ?? DateTime.now().millisecondsSinceEpoch.toString();
+    this.updateAt =
+        updateAt ?? DateTime.now().millisecondsSinceEpoch.toString();
   }
   PersonalScheduleEntities.fromJson(Map<dynamic, dynamic> data, this.createAt) {
     this.date = data['date'];

@@ -6,6 +6,7 @@ class MainScreenConstants{
   static const errorDialogPaddingVertical= 20.0;
   static const containerMarginBottom = 20.0;
   static const dialogPaddingVertical = 20.0;
+  static const dialogPaddingHorizontal = 10.0;
   static const paddingHorizontal= 15.0;
   static const paddingVertical= 8.0;
   static const navBarHeight = 50.0;
