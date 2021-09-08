@@ -360,6 +360,7 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
 
   _bntOkDialogOnPress(BuildContext context) {
     Navigator.pop(context);
+    debugPrint( widget.personalSchedule!.id);
     BlocProvider.of<TodoBloc>(context)
       ..add(DetelePersonalScheduleOnPressEvent(widget.personalSchedule!));
     debugPrint('delete to do');
