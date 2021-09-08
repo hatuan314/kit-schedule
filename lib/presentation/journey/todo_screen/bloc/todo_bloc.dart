@@ -153,7 +153,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       await _retrieveCalendars();
       debugPrint('delete  id : ' + (event.id as String));
       final deleteEventResult = await _deviceCalendarPlugin.deleteEvent(
-          4.toString(), event.id);
+          _calendars[0].id, event.id);
       debugPrint('delete' + deleteEventResult.isSuccess.toString());
       id = await _addPersonalScheduleToCalendar( PersonalScheduleEntities(
           date: this._date,
@@ -203,14 +203,14 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   Stream<TodoState> _mapDetelePersonalScheduleToState(
       PersonalScheduleEntities personal) async* {
     yield TodoLoadingState(selectDay: this._date, selectTimer: this._timer);
-    debugPrint('delete  id : ' + (personal.id as String));
+  //  debugPrint('delete  id : ' + (personal.id as String));
     bool hasNoti= await shareService.getHasNoti() ?? false;
     if(hasNoti)
     {
       await _retrieveCalendars();
       debugPrint('delete  id : ' + (personal.id as String));
       final deleteEventResult = await _deviceCalendarPlugin.deleteEvent(
-          4.toString(), personal.id);
+          _calendars[0].id, personal.id);
       debugPrint('delete' + deleteEventResult.isSuccess.toString());
     }
     personal.updateAt = "0";
@@ -257,7 +257,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     int personalScheduleMinute =
         int.parse(personalSchedule.timer!.split(':')[1]);
     final int eventTime = (int.parse(personalSchedule.date as String));
-    final eventToCreate = Event(4.toString());
+    final eventToCreate = Event(_calendars[0].id);
 debugPrint(DateTime.fromMillisecondsSinceEpoch(eventTime +
     personalScheduleHour * 3600000 +
     personalScheduleMinute * 60000).toString());

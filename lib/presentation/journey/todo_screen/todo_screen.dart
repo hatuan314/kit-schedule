@@ -376,5 +376,6 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
     debugPrint(widget.personalSchedule!.id);
     BlocProvider.of<TodoBloc>(context)
       ..add(DetelePersonalScheduleOnPressEvent(widget.personalSchedule!));
+    debugPrint('delete to do');
   }
 }

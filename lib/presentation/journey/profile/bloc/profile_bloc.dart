@@ -45,21 +45,20 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   Stream<ProfileState> _mapTurnOnNotificationEventToState(
       TurnOnNotificationEvent event) async* {
+    allSchoolSchedulesMap.clear();
+    allPersonalSchedulesMap.clear();
     yield* _mapGetAllSchoolSchedulesToMap();
     yield* _mapGetAllPersonalScheduleToMap();
     await _retrieveCalendars();
-    await scheduleUS.deleteAllSchoolSchedulesLocal();
-  //  await personalUS.deleteAllSchoolPersonal();
 
-//    allSchoolSchedulesMap.forEach((key, value) {
-  //    _addSchoolScheduleToCalendar(value, key.millisecondsSinceEpoch);
-    //});
+
     await _addSchoolScheduleToCalendar();
     await   _addPersonalScheduleToCalendar();
-
+ //   await scheduleUS.deleteAllSchoolSchedulesLocal();
        allSchoolSchedulesMap.forEach((key, value) async {
-      await scheduleUS.insertSchoolScheduleLocal(value);
+         await scheduleUS.updateAllSchoolSchedulesLocal(value);
     });
+
 
        allPersonalSchedulesMap.forEach((key, value) async{
          for(var x in value)
@@ -74,6 +73,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   Stream<ProfileState> _mapTurnOffNotificationEventToState(
       TurnOffNotificationEvent event) async* {
+      allSchoolSchedulesMap.clear();
+    allPersonalSchedulesMap.clear();
     yield* _mapGetAllSchoolSchedulesToMap();
     yield* _mapGetAllPersonalScheduleToMap();
     await _retrieveCalendars();
@@ -121,7 +122,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
               final eventTime = key.millisecondsSinceEpoch - (7 * 3600000);
 
-              final eventToCreate = Event(4.toString());
+              final eventToCreate = Event(_calendars[0].id);
 
               eventToCreate.title = schoolSchedule.subject;
 
@@ -149,7 +150,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           int personalScheduleMinute =
           int.parse(personalSchedule.timer!.split(':')[1]);
 
-          final eventToCreate = Event(4.toString());
+          final eventToCreate = Event(_calendars[0].id);
 
           eventToCreate.title = personalSchedule.name;
 
@@ -175,7 +176,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       for (var schoolSchedule in value)  {
 
         final deleteEventResult =
-            await _deviceCalendarPlugin.deleteEvent(4.toString(), schoolSchedule.id);
+            await _deviceCalendarPlugin.deleteEvent(_calendars[0].id, schoolSchedule.id);
         debugPrint('_deleteSchoolSchedule '+ deleteEventResult.isSuccess.toString());
       }
     });
@@ -186,7 +187,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     allPersonalSchedulesMap.forEach((key, value)async {
     for (var personalSchedule in value) {
       final deleteEventResult = await _deviceCalendarPlugin.deleteEvent(
-          4.toString(), personalSchedule.id);
+          _calendars[0].id, personalSchedule.id);
       debugPrint('_deletePersonalSchedule '+deleteEventResult.isSuccess.toString());
         }
     });

@@ -17,6 +17,11 @@ class ScheduleUseCase {
   Future<void> deleteAllSchoolSchedulesLocal() async {
    await scheduleRepositories.deleteAllSchoolSchedulesLocal();
   }
+
+  Future<void> updateAllSchoolSchedulesLocal(List<SchoolSchedule> data) async {
+    await scheduleRepositories.updateAllSchoolSchedulesLocal(data);
+  }
+  
   Future<Map?> fetchScheduleSchoolData(String account, String password) async {
     try {
       Map? result = await scheduleRepositories

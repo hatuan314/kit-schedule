@@ -7,4 +7,5 @@ abstract class ScheduleRepositories{
   Future<void> insertSchoolScheduleLocal(List<SchoolSchedule> data);
   Future<List<SchoolSchedule>> fetchScheduleSchoolLocal();
   Future<void> deleteAllSchoolSchedulesLocal();
+  Future<void> updateAllSchoolSchedulesLocal(List<SchoolSchedule> data) ;
 }

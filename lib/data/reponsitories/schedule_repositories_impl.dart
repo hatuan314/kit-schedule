@@ -38,4 +38,9 @@ class ScheduleRepositoriesImpl extends ScheduleRepositories {
   Future<void> deleteAllSchoolSchedulesLocal() async {
   await scheduleHive.deleteAllSchoolSchedulesRepo();
   }
+
+
+  Future<void> updateAllSchoolSchedulesLocal(List<SchoolSchedule> data) async {
+    await scheduleHive.updateAllSchoolSchedulesRepo(data);
+  }
 }
