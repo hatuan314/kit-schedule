@@ -78,7 +78,7 @@ class PersonalUseCase {
       }
       final result = personalRepositories
           .syncPersonalSchoolDataFirebase(msv, data)
-          .timeout(Duration(seconds: 2))
+          .timeout(Duration(seconds: 10))
           .onError((error, stackTrace) => '');
       return result;
     }

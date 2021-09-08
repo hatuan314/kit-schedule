@@ -97,7 +97,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       for (var schoolSchedule in value)  {
 
         final deleteEventResult =
-        await _deviceCalendarPlugin.deleteEvent(4.toString(), schoolSchedule.id);
+        await _deviceCalendarPlugin.deleteEvent(_calendars[0].id, schoolSchedule.id);
         debugPrint('_deleteSchoolSchedule '+ deleteEventResult.isSuccess.toString());
       }
     });
@@ -108,7 +108,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     allPersonalSchedulesMap.forEach((key, value)async {
       for (var personalSchedule in value) {
         final deleteEventResult = await _deviceCalendarPlugin.deleteEvent(
-            4.toString(), personalSchedule.id);
+            _calendars[0].id, personalSchedule.id);
         debugPrint('_deletePersonalSchedule '+deleteEventResult.isSuccess.toString());
       }
     });

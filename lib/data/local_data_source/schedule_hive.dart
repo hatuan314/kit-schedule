@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:schedule/common/config/local_config.dart';
 import 'package:schedule/domain/entities/school_schedule_entities.dart';
 
@@ -16,5 +17,19 @@ class ScheduleHive {
   }
   Future<void> deleteAllSchoolSchedulesRepo() async {
     await hiveConfig.scheduleBox.clear();
+    debugPrint('Empty ? '+hiveConfig.scheduleBox.isEmpty.toString());
+  }
+
+  Future<void> updateAllSchoolSchedulesRepo(List<SchoolSchedule> data) async {
+    await hiveConfig.scheduleBox.addAll(data);
+    debugPrint('Schedule box length: '+hiveConfig.scheduleBox.length.toString());
+    int length= data.length;
+    debugPrint('  length: '+ length.toString());
+    while(length>0)
+      {
+        await hiveConfig.scheduleBox.deleteAt(0);
+        length--;
+      }
+    debugPrint('>>>Schedule box length: '+hiveConfig.scheduleBox.length.toString());
   }
 }
