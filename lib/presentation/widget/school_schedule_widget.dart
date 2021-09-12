@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/domain/entities/school_schedule_entities.dart';
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:schedule/presentation/widget/school_schedule_element_widget.dart';
 import 'package:schedule/presentation/widget/spacing_box_widget.dart';
 import 'package:schedule/presentation/widget/widgets_constants.dart';
@@ -20,8 +20,8 @@ class SchoolScheduleWidget extends StatelessWidget {
     return Card(
       semanticContainer: true,
 //      color: Color(0xffFCFAF3),
-   //   margin: EdgeInsets.symmetric(
-     //     vertical: WidgetsConstants.cardMargin),
+      //   margin: EdgeInsets.symmetric(
+      //     vertical: WidgetsConstants.cardMargin),
       color: AppColor.scheduleBackgroundColor,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -55,15 +55,17 @@ class SchoolScheduleWidget extends StatelessWidget {
           Expanded(
             child: schoolSchedulesOfDay != null
                 ? Padding(
-                  padding: const EdgeInsets.only(bottom: WidgetsConstants.cardMargin),
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: schoolSchedulesOfDay.length,
-                      itemBuilder: (context, index) {
-                        SchoolSchedule schedule = schoolSchedulesOfDay[index];
-                        return SchoolScheduleElementWidget(schedule: schedule);
-                      }),
-                )
+                    padding: const EdgeInsets.only(
+                        bottom: WidgetsConstants.cardMargin),
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: schoolSchedulesOfDay.length,
+                        itemBuilder: (context, index) {
+                          SchoolSchedule schedule = schoolSchedulesOfDay[index];
+                          return SchoolScheduleElementWidget(
+                              schedule: schedule);
+                        }),
+                  )
                 : Align(
                     alignment: Alignment.center,
                     child: Text(AppLocalizations.of(context)!.noData,

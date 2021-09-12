@@ -1,10 +1,11 @@
 import 'dart:developer';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:schedule/common/injector/injector.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/blocs/home/home_bloc.dart';
+import 'package:schedule/common/injector/injector.dart';
 import 'package:schedule/presentation/%20language_select/%20language_select.dart';
 import 'package:schedule/presentation/journey/profile/bloc/profile_bloc.dart';
 import 'package:schedule/presentation/journey/profile/bloc/profile_event.dart';

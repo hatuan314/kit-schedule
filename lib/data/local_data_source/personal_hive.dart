@@ -7,6 +7,7 @@ class PersonalHive {
   final LocalConfig hiveConfig;
 
   PersonalHive({required this.hiveConfig});
+
   Future<void> insertPersonalSchedule(
       PersonalScheduleEntities personalScheduleEntities) async {
     log('${personalScheduleEntities.createAt}');
@@ -46,15 +47,14 @@ class PersonalHive {
         await hiveConfig.personalBox.putAt(
             i,
             PersonalScheduleEntities(
-              id: personal.id,
+                id: personal.id,
                 date: personal.date,
                 name: personal.name,
                 timer: personal.timer,
                 note: personal.note,
                 createAt: personal.createAt,
                 updateAt: personal.updateAt,
-            isSynchronized: personal.isSynchronized
-            ));
+                isSynchronized: personal.isSynchronized));
         return 1;
       }
     }

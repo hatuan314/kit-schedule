@@ -7,6 +7,7 @@ import 'snackbar_widget.dart';
 
 class TopSnackBarRoute<T> extends OverlayRoute<T> {
   final ThemeData? theme;
+
   Future<T> get completed => _transitionCompleter.future;
   final Completer<T> _transitionCompleter = Completer<T>();
 

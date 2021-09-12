@@ -6,7 +6,8 @@ import 'package:schedule/domain/repositories/schedule_repositories.dart';
 class ScheduleRepositoriesImpl extends ScheduleRepositories {
   final DataRemote dataRemote;
   final ScheduleHive scheduleHive;
-  ScheduleRepositoriesImpl(this.dataRemote,this.scheduleHive);
+
+  ScheduleRepositoriesImpl(this.dataRemote, this.scheduleHive);
 
   @override
   Future<Map<String, dynamic>?> fetchScheduleSchoolDataDioRepo(
@@ -20,25 +21,24 @@ class ScheduleRepositoriesImpl extends ScheduleRepositories {
   }
 
   @override
-  Future<String> syncScheduleSchoolDataFirebaseRepo(String msv,Map data) {
-    return dataRemote.syncScheduleSchoolDataFirebase(msv,data);
+  Future<String> syncScheduleSchoolDataFirebaseRepo(String msv, Map data) {
+    return dataRemote.syncScheduleSchoolDataFirebase(msv, data);
   }
 
   @override
   Future<void> insertSchoolScheduleLocal(List<SchoolSchedule> data) async {
-   await scheduleHive.insertSchoolScheduleProvider(data);
+    await scheduleHive.insertSchoolScheduleProvider(data);
   }
 
   @override
   Future<List<SchoolSchedule>> fetchScheduleSchoolLocal() {
-   return scheduleHive.selectAllScheduleLessonProvider();
+    return scheduleHive.selectAllScheduleLessonProvider();
   }
 
   @override
   Future<void> deleteAllSchoolSchedulesLocal() async {
-  await scheduleHive.deleteAllSchoolSchedulesRepo();
+    await scheduleHive.deleteAllSchoolSchedulesRepo();
   }
-
 
   Future<void> updateAllSchoolSchedulesLocal(List<SchoolSchedule> data) async {
     await scheduleHive.updateAllSchoolSchedulesRepo(data);

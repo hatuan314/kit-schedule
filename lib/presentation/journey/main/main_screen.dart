@@ -5,12 +5,9 @@ import 'package:schedule/blocs/home/home_bloc.dart';
 import 'package:schedule/presentation/journey/home/calendar_tab_screen.dart';
 import 'package:schedule/presentation/journey/profile/profile_screen.dart';
 import 'package:schedule/presentation/journey/scores/scores_screen.dart';
-
 import 'package:schedule/presentation/journey/todo_screen/todo_screen.dart';
-
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:schedule/presentation/widget/warning_dialog/warning_dialog.dart';
 
 import 'main_constants.dart';
@@ -20,7 +17,11 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<HomeBloc, HomeState>(listener: (context, state) {
       if (state is HomeOnChangeTabState) if (state.selectIndex == 4)
-        warningDialog(context: context,isSynch: state.isSynch,btnOk: _bntOkDialogOnPress,btnCancel: _btnCancelDialogOnPress);
+        warningDialog(
+            context: context,
+            isSynch: state.isSynch,
+            btnOk: _bntOkDialogOnPress,
+            btnCancel: _btnCancelDialogOnPress);
       if (state is SignOutFailureState) _errorSignOutDialog(context);
     }, child: BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
       return Scaffold(
@@ -85,8 +86,6 @@ class MainScreen extends StatelessWidget {
           ),
         ));
   }
-
-
 
   _btnCancelDialogOnPress(BuildContext context) {
     BlocProvider.of<HomeBloc>(context)..add(OnTabChangeEvent(3));

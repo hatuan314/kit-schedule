@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/presentation/journey/todo_screen/bloc/todo_bloc.dart';
 import 'package:schedule/presentation/journey/todo_screen/todo_constants.dart';
 import 'package:schedule/presentation/journey/todo_screen/widgets/set_time_widget.dart';
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
-import 'package:schedule/presentation/widget/loading_widget/loading_widget.dart';
 import 'package:schedule/presentation/widget/text_field_widget/text_field_widget.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class TodoFormWidget extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final TextEditingController nameController;
@@ -26,6 +26,7 @@ class TodoFormWidget extends StatelessWidget {
     required this.setDatePicker,
     required this.setTimePicker,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -57,7 +58,7 @@ class TodoFormWidget extends StatelessWidget {
                   child: SetTimeWidget(
                 state: state,
                 title: AppLocalizations.of(context)!.setDate,
-                onTap:()=> setDatePicker(state),
+                onTap: () => setDatePicker(state),
                 isDate: true,
               )),
               SizedBox(
@@ -65,7 +66,7 @@ class TodoFormWidget extends StatelessWidget {
               ),
               Expanded(
                   child: SetTimeWidget(
-                onTap:()=> setTimePicker(state),
+                onTap: () => setTimePicker(state),
                 state: state,
                 title: AppLocalizations.of(context)!.setTime,
               )),
@@ -76,8 +77,9 @@ class TodoFormWidget extends StatelessWidget {
           ),
           TextFieldWidget(
             controller: noteController,
-            labelText:AppLocalizations.of(context)!.note,
-            textStyle: ThemeText.labelStyle.copyWith(fontWeight: FontWeight.w400),
+            labelText: AppLocalizations.of(context)!.note,
+            textStyle:
+                ThemeText.labelStyle.copyWith(fontWeight: FontWeight.w400),
             colorBoder: AppColor.personalScheduleColor,
             maxLines: 5,
           ),

@@ -1,32 +1,25 @@
 import 'dart:convert';
-import 'dart:developer';
+
 import 'package:crypto/crypto.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:schedule/common/utils/convert.dart';
 import 'package:schedule/domain/entities/personal_schedule_entities.dart';
 import 'package:schedule/domain/entities/school_schedule_entities.dart';
 import 'package:schedule/domain/usecase/personal_usecase.dart';
 import 'package:schedule/domain/usecase/schedule_usecase.dart';
-
 import 'package:schedule/presentation/bloc/snackbar_bloc/bloc.dart';
 import 'package:schedule/presentation/bloc/snackbar_bloc/snackbar_type.dart';
 import 'package:schedule/presentation/journey/sign_in_screen.dart/bloc/register_state.dart';
 import 'package:schedule/service/services.dart';
-import 'package:device_calendar/device_calendar.dart';
 
 part 'register_event.dart';
-
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   ShareService _shareService = ShareService();
   final SnackbarBloc snackbarBloc;
   final ScheduleUseCase scheduleUseCase;
   final PersonalUseCase personalUseCase;
-
-
-
 
   RegisterBloc(
       {required this.snackbarBloc,
@@ -47,7 +40,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       yield RegisterLoadingState();
       String account = event.account;
       String password = md5.convert(utf8.encode(event.password)).toString();
-      bool isSaveUsername = await ShareService().setUsername(event.account);
+      /*bool isSaveUsername = */await ShareService().setUsername(event.account);
       try {
         var data =
             await scheduleUseCase.fetchScheduleSchoolData(account, password);
@@ -66,8 +59,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           yield RegisterSuccessState();
         }
       } catch (e) {
-        snackbarBloc.add(
-            ShowSnackbar(title: '${SnackBarTitle.ConnectionFailed}', type: SnackBarType.error));
+        snackbarBloc.add(ShowSnackbar(
+            title: '${SnackBarTitle.ConnectionFailed}',
+            type: SnackBarType.error));
         yield RegisterFailureState(e.toString());
       }
     }
@@ -78,10 +72,11 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     try {
       if (personal.isNotEmpty) {
         personal.forEach((element) async {
-          PersonalScheduleEntities personalScheduleEntities=element;
-          personalScheduleEntities.isSynchronized=true;
-          personalScheduleEntities.id='';
-          await personalUseCase.insertPersonalSchedule(personalScheduleEntities);
+          PersonalScheduleEntities personalScheduleEntities = element;
+          personalScheduleEntities.isSynchronized = true;
+          personalScheduleEntities.id = '';
+          await personalUseCase
+              .insertPersonalSchedule(personalScheduleEntities);
         });
       }
     } catch (e) {
@@ -104,6 +99,4 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       debugPrint('RegisterBloc - saveSchoolSchedule - error: {$e}');
     }
   }
-
-
 }

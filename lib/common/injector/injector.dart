@@ -22,6 +22,7 @@ import 'package:schedule/presentation/journey/todo_screen/bloc/todo_bloc.dart';
 
 class Injector {
   static final getIt = GetIt.instance;
+
   static void setup() {
     _configuration();
   }
@@ -53,9 +54,10 @@ class Injector {
           scheduleBloc: getIt<ScheduleBloc>()),
     );
     getIt.registerLazySingleton<ProfileBloc>(
-          () => ProfileBloc(
-          scheduleUS: getIt<ScheduleUseCase>(),
-          personalUS: getIt<PersonalUseCase>(),),
+      () => ProfileBloc(
+        scheduleUS: getIt<ScheduleUseCase>(),
+        personalUS: getIt<PersonalUseCase>(),
+      ),
     );
     getIt.registerFactory<TodoBloc>(() => TodoBloc(
         snackbarBloc: getIt<SnackbarBloc>(),
@@ -87,8 +89,10 @@ class Injector {
   }
 
   static void _configNetwork() {}
+
   static void _configCommon() {
-    getIt.registerLazySingleton<KeyboardVisibilityController>(() => KeyboardVisibilityController());
+    getIt.registerLazySingleton<KeyboardVisibilityController>(
+        () => KeyboardVisibilityController());
     getIt.registerLazySingleton<FirebaseSetup>(() => FirebaseSetup());
     getIt.registerLazySingleton<LocalConfig>(() => LocalConfig());
     getIt.registerLazySingleton<LanguageSelect>(() => LanguageSelect());

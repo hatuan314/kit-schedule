@@ -12,7 +12,7 @@ class ScheduleWidget extends StatelessWidget {
 
   Widget buildPageView() {
     return Container(
-      padding:const EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
           horizontal: CalendarTabConstants.paddingHorizontal,
           vertical: CalendarTabConstants.paddingVertical),
       alignment: Alignment.center,
@@ -76,11 +76,4 @@ class ScheduleWidget extends StatelessWidget {
       ),
     );
   }
-
-
-
-
-
-
-
 }

@@ -1,4 +1,3 @@
-class ScoresConstants{
-
-  static String myScoresTxt= 'My Scores';
+class ScoresConstants {
+  static String myScoresTxt = 'My Scores';
 }

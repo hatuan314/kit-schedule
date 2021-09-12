@@ -1,20 +1,16 @@
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:schedule/blocs/blocs.dart';
-
 import 'package:schedule/domain/entities/personal_schedule_entities.dart';
-
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
-import 'package:schedule/models/model.dart';
 import 'package:schedule/presentation/widget/personal_schedule_element_widget.dart';
 import 'package:schedule/presentation/widget/spacing_box_widget.dart';
 import 'package:schedule/presentation/widget/widgets_constants.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PersonalScheduleWidget extends StatelessWidget {
   final dynamic state;

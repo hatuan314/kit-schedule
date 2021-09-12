@@ -7,7 +7,6 @@ class PersonalSchedule {
 
   PersonalSchedule(this.date, this.name, this.timer, this.note, {this.id});
 
-
   PersonalSchedule.fromJson(Map<String, dynamic> data) {
     this.id = data['id'].toString();
     this.date = data['date'];

@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+
 part 'personal_schedule_entities.g.dart';
 
 @HiveType(typeId: 1)
@@ -19,6 +20,7 @@ class PersonalScheduleEntities {
   bool? isSynchronized;
   @HiveField(7)
   String? id;
+
   PersonalScheduleEntities(
       {this.date,
       this.name,
@@ -33,6 +35,7 @@ class PersonalScheduleEntities {
     this.updateAt =
         updateAt ?? DateTime.now().millisecondsSinceEpoch.toString();
   }
+
   PersonalScheduleEntities.fromJson(Map<dynamic, dynamic> data, this.createAt) {
     this.date = data['date'];
     this.name = data['name'];
@@ -40,6 +43,7 @@ class PersonalScheduleEntities {
     this.note = data['note'];
     this.updateAt = data['updateAt'];
   }
+
   toJson() {
     Map<String, dynamic> data = <String, dynamic>{};
     data['date'] = this.date;

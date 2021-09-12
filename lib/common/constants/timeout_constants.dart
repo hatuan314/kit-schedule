@@ -1,3 +1,3 @@
-class TimOutConstants{
-  static const timeOutConstants=Duration(seconds: 30);
+class TimOutConstants {
+  static const timeOutConstants = Duration(seconds: 30);
 }

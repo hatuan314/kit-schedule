@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,7 +9,6 @@ import 'package:schedule/domain/entities/personal_schedule_entities.dart';
 import 'package:schedule/domain/entities/school_schedule_entities.dart';
 import 'package:schedule/domain/usecase/personal_usecase.dart';
 import 'package:schedule/domain/usecase/schedule_usecase.dart';
-import 'package:schedule/service/services.dart';
 
 part 'calendar_event.dart';
 part 'calendar_state.dart';
@@ -51,8 +49,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
           scheduleBloc.add(GetScheduleDayEvent(
               selectDay: scheduleState.selectDay,
               allSchedulePersonalMap: allPersonalSchedulesMap,
-          allSchedulesSchoolMap: allSchoolSchedulesMap
-          ));
+              allSchedulesSchoolMap: allSchoolSchedulesMap));
         }
       } catch (e) {
         yield CalendarFailureState(e.toString());
@@ -134,6 +131,4 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       }
     }
   }
-
-
 }

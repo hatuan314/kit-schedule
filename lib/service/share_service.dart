@@ -11,12 +11,13 @@ class ShareService {
 
   bool? _isSave = false;
 
-  Future<String?> getUsername()async{
+  Future<String?> getUsername() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String username = await prefs.getString('username') ??'';
-    return username ;
+    String username = prefs.getString('username') ?? '';
+    return username;
   }
-  Future<bool>  setUsername(String username)async{
+
+  Future<bool> setUsername(String username) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return await prefs.setString('username', username);
   }
@@ -27,7 +28,6 @@ class ShareService {
     return this._isSave;
   }
 
-
   Future setIsSaveData(bool value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('data', value);
@@ -36,10 +36,9 @@ class ShareService {
 
   Future<bool?> getHasNoti() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool hasNoti = prefs.getBool('noti')??false;
+    bool hasNoti = prefs.getBool('noti') ?? false;
     return hasNoti;
   }
-
 
   Future setHasNoti(bool value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

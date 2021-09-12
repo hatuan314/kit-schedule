@@ -1,10 +1,10 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:schedule/presentation/journey/main/main_constants.dart';
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void warningDialog(
     {required BuildContext context,
@@ -19,7 +19,8 @@ void warningDialog(
       animType: AnimType.BOTTOMSLIDE,
       body: Padding(
           padding: const EdgeInsets.symmetric(
-              vertical: MainScreenConstants.dialogPaddingVertical,horizontal: MainScreenConstants.dialogPaddingHorizontal),
+              vertical: MainScreenConstants.dialogPaddingVertical,
+              horizontal: MainScreenConstants.dialogPaddingHorizontal),
           child: Column(
             children: [
               isSynch

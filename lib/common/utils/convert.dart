@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class Convert {
   static Map<String, String> startTimeLessonMap = {
@@ -46,5 +48,10 @@ class Convert {
     if (timer.hour < 10) happyHour = '0${timer.hour}';
     if (timer.minute < 10) happyMinite = '0${timer.minute}';
     return '$happyHour:$happyMinite';
+  }
+
+  static tz.TZDateTime getTz(DateTime dateTime) {
+    tz.Location zone = tz.getLocation('Asia/Ho_Chi_Minh');
+    return tz.TZDateTime.from(dateTime, zone);
   }
 }

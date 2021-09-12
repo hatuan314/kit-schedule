@@ -1,6 +1,7 @@
 abstract class LoaderState {
   final bool? loading;
   final bool? isTopLoading;
+
   LoaderState({this.loading, this.isTopLoading = false});
 }
 
