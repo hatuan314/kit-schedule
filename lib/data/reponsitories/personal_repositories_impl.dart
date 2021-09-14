@@ -6,18 +6,24 @@ import 'package:schedule/domain/repositories/personal_repositories.dart';
 class PersonalRepositoriesImpl extends PersonalRepositories {
   final PersonalHive personalHive;
   final DataRemote dataRemote;
-  PersonalRepositoriesImpl(this.personalHive,this.dataRemote);
+
+  PersonalRepositoriesImpl(this.personalHive, this.dataRemote);
+
   @override
   Future<List<PersonalScheduleEntities>> fetchAllPersonalScheduleOfDateLocal(
       String date) async {
     return personalHive.fetchAllPersonalScheduleOfDate(date);
   }
-  Future<void> deleteAllSchoolPersonalLocal()async{
+
+  Future<void> deleteAllSchoolPersonalLocal() async {
     await personalHive.deleteAllSchoolPersonal();
   }
-  Future<int> deletePersonalScheduleLocal(PersonalScheduleEntities personal)async{
+
+  Future<int> deletePersonalScheduleLocal(
+      PersonalScheduleEntities personal) async {
     return personalHive.deletePersonalSchedule(personal);
   }
+
   @override
   Future<List<PersonalScheduleEntities>> fetchAllPersonalScheduleRepoLocal() {
     return personalHive.fetchAllPersonalScheduleRepoLocal();
@@ -30,7 +36,8 @@ class PersonalRepositoriesImpl extends PersonalRepositories {
   }
 
   @override
-  Future<int> updatePersonalScheduleDataLocal(PersonalScheduleEntities personal) async{
+  Future<int> updatePersonalScheduleDataLocal(
+      PersonalScheduleEntities personal) async {
     return personalHive.updatePersonalScheduleData(personal);
   }
 
@@ -40,8 +47,9 @@ class PersonalRepositoriesImpl extends PersonalRepositories {
   }
 
   @override
-  Future<String> syncPersonalSchoolDataFirebase(String msv, Map<String,dynamic> data) {
-   return dataRemote.syncPersonalSchoolDataFirebase(msv, data);
+  Future<String> syncPersonalSchoolDataFirebase(
+      String msv, Map<String, dynamic> data) {
+    return dataRemote.syncPersonalSchoolDataFirebase(msv, data);
   }
 
   @override
@@ -53,5 +61,4 @@ class PersonalRepositoriesImpl extends PersonalRepositories {
   Future<String> deletePersonalSchoolDataFirebase(String msv, String createAt) {
     return dataRemote.deletePersonalSchoolDataFirebase(msv, createAt);
   }
-
 }

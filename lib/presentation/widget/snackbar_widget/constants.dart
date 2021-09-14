@@ -1,4 +1,3 @@
-
 /// Indicates the animation status
 /// [TopSnackBarStatus.showing] TopStatusBar has stopped and the user
 /// can see it

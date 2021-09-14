@@ -29,7 +29,8 @@ class TextFieldWidget extends StatelessWidget {
   final Function()? onEditingComplete;
   final Widget? seffixIcon;
   final Widget? prefixIcon;
-  static final double paddingContent=18.w;
+  static final double paddingContent = 18.w;
+
   const TextFieldWidget(
       {Key? key,
       this.controller,

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:device_calendar/device_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +9,8 @@ import 'package:schedule/domain/usecase/schedule_usecase.dart';
 import 'package:schedule/presentation/journey/profile/bloc/profile_event.dart';
 import 'package:schedule/presentation/journey/profile/bloc/profile_state.dart';
 import 'package:schedule/service/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final PersonalUseCase personalUS;
@@ -51,46 +50,42 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     yield* _mapGetAllPersonalScheduleToMap();
     await _retrieveCalendars();
 
-
     await _addSchoolScheduleToCalendar();
-    await   _addPersonalScheduleToCalendar();
- //   await scheduleUS.deleteAllSchoolSchedulesLocal();
-       allSchoolSchedulesMap.forEach((key, value) async {
-         await scheduleUS.updateAllSchoolSchedulesLocal(value);
+    await _addPersonalScheduleToCalendar();
+    //   await scheduleUS.deleteAllSchoolSchedulesLocal();
+    allSchoolSchedulesMap.forEach((key, value) async {
+      await scheduleUS.updateAllSchoolSchedulesLocal(value);
     });
 
-
-       allPersonalSchedulesMap.forEach((key, value) async{
-         for(var x in value)
-           {
-             await personalUS.updatePersonalScheduleData(x);
-           }
-       });
-
+    allPersonalSchedulesMap.forEach((key, value) async {
+      for (var x in value) {
+        await personalUS.updatePersonalScheduleData(x);
+      }
+    });
 
     await _shareService.setHasNoti(true);
   }
 
   Stream<ProfileState> _mapTurnOffNotificationEventToState(
       TurnOffNotificationEvent event) async* {
-      allSchoolSchedulesMap.clear();
+    allSchoolSchedulesMap.clear();
     allPersonalSchedulesMap.clear();
     yield* _mapGetAllSchoolSchedulesToMap();
     yield* _mapGetAllPersonalScheduleToMap();
     await _retrieveCalendars();
 
-    await  _deleteSchoolSchedule( );
+    await _deleteSchoolSchedule();
 
-    await  _deletePersonalSchedule( );
+    await _deletePersonalSchedule();
     await _shareService.setHasNoti(false);
   }
 
   _retrieveCalendars() async {
     try {
       var permissionsGranted = await _deviceCalendarPlugin.hasPermissions();
-      if (permissionsGranted.isSuccess && !permissionsGranted.data) {
+      if (permissionsGranted.isSuccess && !permissionsGranted.data!) {
         permissionsGranted = await _deviceCalendarPlugin.requestPermissions();
-        if (!permissionsGranted.isSuccess || !permissionsGranted.data) {
+        if (!permissionsGranted.isSuccess || !permissionsGranted.data!) {
           return;
         }
       }
@@ -103,93 +98,98 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   Future _addSchoolScheduleToCalendar() async {
-       allSchoolSchedulesMap.forEach((key, value) async{
-        for(var schoolSchedule in value)
-          {
-              List lessonNumbers = schoolSchedule.lesson!.split(',');
+    allSchoolSchedulesMap.forEach((key, value) async {
+      for (var schoolSchedule in value) {
+        List lessonNumbers = schoolSchedule.lesson!.split(',');
 
-              int startLessonHour = int.parse(
-                  Convert.startTimeLessonMap[lessonNumbers[0]]!.split(':')[0]);
-              int startLessonMinute = int.parse(
-                  Convert.startTimeLessonMap[lessonNumbers[0]]!.split(':')[1]);
+        int startLessonHour = int.parse(
+            Convert.startTimeLessonMap[lessonNumbers[0]]!.split(':')[0]);
+        int startLessonMinute = int.parse(
+            Convert.startTimeLessonMap[lessonNumbers[0]]!.split(':')[1]);
 
-              int endLessonHour = int.parse(Convert
-                  .endTimeLessonMap[lessonNumbers[lessonNumbers.length - 1]]!
-                  .split(':')[0]);
-              int endLessonMinute = int.parse(Convert
-                  .endTimeLessonMap[lessonNumbers[lessonNumbers.length - 1]]!
-                  .split(':')[1]);
+        int endLessonHour = int.parse(Convert
+            .endTimeLessonMap[lessonNumbers[lessonNumbers.length - 1]]!
+            .split(':')[0]);
+        int endLessonMinute = int.parse(Convert
+            .endTimeLessonMap[lessonNumbers[lessonNumbers.length - 1]]!
+            .split(':')[1]);
 
-              final eventTime = key.millisecondsSinceEpoch - (7 * 3600000);
+        final eventTime = key.millisecondsSinceEpoch - (7 * 3600000);
 
-              final eventToCreate = Event(_calendars[0].id);
+        final eventToCreate =
+            Event(_calendars[0].id, availability: Availability.Busy);
 
-              eventToCreate.title = schoolSchedule.subject;
+        eventToCreate.title = schoolSchedule.subject;
 
-              eventToCreate.start = DateTime.fromMillisecondsSinceEpoch(
-                  eventTime + startLessonHour * 3600000 + startLessonMinute * 60000);
-              eventToCreate.description = schoolSchedule.address;
+        eventToCreate.start = Convert.getTz(DateTime.fromMillisecondsSinceEpoch(
+            eventTime + startLessonHour * 3600000 + startLessonMinute * 60000));
+        eventToCreate.description = schoolSchedule.address;
 
-              eventToCreate.end = DateTime.fromMillisecondsSinceEpoch(
-                  eventTime + endLessonHour * 3600000 + endLessonMinute * 60000);
+        eventToCreate.end = Convert.getTz(DateTime.fromMillisecondsSinceEpoch(
+            eventTime + endLessonHour * 3600000 + endLessonMinute * 60000));
 
-              final createEventResult =
-                  await _deviceCalendarPlugin.createOrUpdateEvent(eventToCreate);
-              schoolSchedule.id=createEventResult.data;
-            }
-          });
-
-  }
-
-  Future _addPersonalScheduleToCalendar( ) async {
-      allPersonalSchedulesMap.forEach((key, value)async {
-        for (var personalSchedule in value) {
-          final int eventTime = key.millisecondsSinceEpoch - (7 * 3600000) ;
-          int personalScheduleHour =
-          int.parse(personalSchedule.timer!.split(':')[0]);
-          int personalScheduleMinute =
-          int.parse(personalSchedule.timer!.split(':')[1]);
-
-          final eventToCreate = Event(_calendars[0].id);
-
-          eventToCreate.title = personalSchedule.name;
-
-          eventToCreate.start = DateTime.fromMillisecondsSinceEpoch(eventTime + personalScheduleHour * 3600000 +
-              personalScheduleMinute * 60000);
-          debugPrint(DateTime.fromMillisecondsSinceEpoch(eventTime).toString());
-          eventToCreate.description = personalSchedule.note;
-
-          eventToCreate.end = DateTime.fromMillisecondsSinceEpoch(eventTime + personalScheduleHour * 3600000 +
-              personalScheduleMinute * 60000 );
-          final createEventResult =
-          await _deviceCalendarPlugin.createOrUpdateEvent(eventToCreate);
-          debugPrint('createEventResult '+createEventResult.isSuccess.toString()+'  '+createEventResult.data.toString());
-
-        personalSchedule.id=createEventResult.data;
-        }
-
-      });
-  }
-
-  Future _deleteSchoolSchedule( ) async {
-    allSchoolSchedulesMap.forEach((key, value) async{
-      for (var schoolSchedule in value)  {
-
-        final deleteEventResult =
-            await _deviceCalendarPlugin.deleteEvent(_calendars[0].id, schoolSchedule.id);
-        debugPrint('_deleteSchoolSchedule '+ deleteEventResult.isSuccess.toString());
+        final createEventResult =
+            await _deviceCalendarPlugin.createOrUpdateEvent(eventToCreate);
+        schoolSchedule.id = createEventResult!.data;
       }
     });
-
   }
 
-  Future _deletePersonalSchedule(  ) async {
-    allPersonalSchedulesMap.forEach((key, value)async {
-    for (var personalSchedule in value) {
-      final deleteEventResult = await _deviceCalendarPlugin.deleteEvent(
-          _calendars[0].id, personalSchedule.id);
-      debugPrint('_deletePersonalSchedule '+deleteEventResult.isSuccess.toString());
-        }
+  Future _addPersonalScheduleToCalendar() async {
+    allPersonalSchedulesMap.forEach((key, value) async {
+      for (var personalSchedule in value) {
+        final int eventTime = key.millisecondsSinceEpoch - (7 * 3600000);
+        int personalScheduleHour =
+            int.parse(personalSchedule.timer!.split(':')[0]);
+        int personalScheduleMinute =
+            int.parse(personalSchedule.timer!.split(':')[1]);
+
+        final eventToCreate =
+            Event(_calendars[0].id, availability: Availability.Busy);
+
+        eventToCreate.title = personalSchedule.name;
+
+        eventToCreate.start = Convert.getTz(DateTime.fromMillisecondsSinceEpoch(
+            (eventTime + personalScheduleHour * 3600000) +
+                personalScheduleMinute * 60000));
+        debugPrint(DateTime.fromMillisecondsSinceEpoch(eventTime).toString());
+        eventToCreate.description = personalSchedule.note;
+
+        eventToCreate.end = Convert.getTz(DateTime.fromMillisecondsSinceEpoch(
+            eventTime +
+                personalScheduleHour * 3600000 +
+                personalScheduleMinute * 60000));
+        final createEventResult =
+            await _deviceCalendarPlugin.createOrUpdateEvent(eventToCreate);
+        debugPrint('createEventResult ' +
+            createEventResult!.isSuccess.toString() +
+            '  ' +
+            createEventResult.data.toString());
+
+        personalSchedule.id = createEventResult.data;
+      }
+    });
+  }
+
+  Future _deleteSchoolSchedule() async {
+    allSchoolSchedulesMap.forEach((key, value) async {
+      for (var schoolSchedule in value) {
+        final deleteEventResult = await _deviceCalendarPlugin.deleteEvent(
+            _calendars[0].id, schoolSchedule.id);
+        debugPrint(
+            '_deleteSchoolSchedule ' + deleteEventResult.isSuccess.toString());
+      }
+    });
+  }
+
+  Future _deletePersonalSchedule() async {
+    allPersonalSchedulesMap.forEach((key, value) async {
+      for (var personalSchedule in value) {
+        final deleteEventResult = await _deviceCalendarPlugin.deleteEvent(
+            _calendars[0].id, personalSchedule.id);
+        debugPrint('_deletePersonalSchedule ' +
+            deleteEventResult.isSuccess.toString());
+      }
     });
   }
 

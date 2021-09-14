@@ -10,6 +10,7 @@ class PersonalUseCase {
   final PersonalRepositories personalRepositories;
 
   PersonalUseCase({required this.personalRepositories});
+
   Future<void> insertPersonalSchedule(
       PersonalScheduleEntities personalScheduleEntities) async {
     log('${personalScheduleEntities.isSynchronized}');

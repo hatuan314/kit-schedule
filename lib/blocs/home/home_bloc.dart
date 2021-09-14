@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:device_calendar/device_calendar.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,13 +19,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final ScheduleUseCase scheduleUS;
   final PersonalUseCase personalUS;
   Map<DateTime, List<SchoolSchedule>> allSchoolSchedulesMap =
-  Map<DateTime, List<SchoolSchedule>>();
+      Map<DateTime, List<SchoolSchedule>>();
   Map<DateTime, List<PersonalScheduleEntities>> allPersonalSchedulesMap =
-  Map<DateTime, List<PersonalScheduleEntities>>();
-  DeviceCalendarPlugin _deviceCalendarPlugin=DeviceCalendarPlugin();
-  List<Calendar> _calendars=[];
+      Map<DateTime, List<PersonalScheduleEntities>>();
+  DeviceCalendarPlugin _deviceCalendarPlugin = DeviceCalendarPlugin();
+  List<Calendar> _calendars = [];
+
   HomeBloc({required this.personalUS, required this.scheduleUS})
       : super(HomeInitialState(0));
+
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
     if (event is OnTabChangeEvent) {
@@ -44,18 +44,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     } else if (event is SignOutOnPressEvent) {
       ShareService shareService = ShareService();
       try {
-        bool hasNoti= await shareService.getHasNoti() as bool;
-        if(hasNoti)
-          {
-            yield* _mapGetAllSchoolSchedulesToMap();
-            yield* _mapGetAllPersonalScheduleToMap();
-            await _retrieveCalendars();
-            await  _deleteSchoolSchedule( );
+        bool hasNoti = await shareService.getHasNoti() as bool;
+        if (hasNoti) {
+          yield* _mapGetAllSchoolSchedulesToMap();
+          yield* _mapGetAllPersonalScheduleToMap();
+          await _retrieveCalendars();
+          await _deleteSchoolSchedule();
 
-            await  _deletePersonalSchedule( );
-            await shareService.setHasNoti(false);
-          }
-
+          await _deletePersonalSchedule();
+          await shareService.setHasNoti(false);
+        }
 
         await scheduleUS.deleteAllSchoolSchedulesLocal();
         await personalUS.deleteAllSchoolPersonal();
@@ -76,40 +74,38 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   _retrieveCalendars() async {
     try {
       var permissionsGranted = await _deviceCalendarPlugin.hasPermissions();
-      if (permissionsGranted.isSuccess && !permissionsGranted.data) {
+      if (permissionsGranted.isSuccess && !permissionsGranted.data!) {
         permissionsGranted = await _deviceCalendarPlugin.requestPermissions();
-        if (!permissionsGranted.isSuccess || !permissionsGranted.data) {
+        if (!permissionsGranted.isSuccess || !permissionsGranted.data!) {
           return;
         }
       }
       final calendarsResult = await _deviceCalendarPlugin.retrieveCalendars();
 
       _calendars = calendarsResult.data as List<Calendar>;
-
     } catch (e) {
       print(e);
     }
   }
 
-
-  Future _deleteSchoolSchedule( ) async {
-    allSchoolSchedulesMap.forEach((key, value) async{
-      for (var schoolSchedule in value)  {
-
-        final deleteEventResult =
-        await _deviceCalendarPlugin.deleteEvent(_calendars[0].id, schoolSchedule.id);
-        debugPrint('_deleteSchoolSchedule '+ deleteEventResult.isSuccess.toString());
+  Future _deleteSchoolSchedule() async {
+    allSchoolSchedulesMap.forEach((key, value) async {
+      for (var schoolSchedule in value) {
+        final deleteEventResult = await _deviceCalendarPlugin.deleteEvent(
+            _calendars[0].id, schoolSchedule.id);
+        debugPrint(
+            '_deleteSchoolSchedule ' + deleteEventResult.isSuccess.toString());
       }
     });
-
   }
 
-  Future _deletePersonalSchedule(  ) async {
-    allPersonalSchedulesMap.forEach((key, value)async {
+  Future _deletePersonalSchedule() async {
+    allPersonalSchedulesMap.forEach((key, value) async {
       for (var personalSchedule in value) {
         final deleteEventResult = await _deviceCalendarPlugin.deleteEvent(
             _calendars[0].id, personalSchedule.id);
-        debugPrint('_deletePersonalSchedule '+deleteEventResult.isSuccess.toString());
+        debugPrint('_deletePersonalSchedule ' +
+            deleteEventResult.isSuccess.toString());
       }
     });
   }
@@ -155,5 +151,4 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       debugPrint('CalendarBloc - mapGetAllSchoolScheduleToMap - error: {$e}');
     }
   }
-
 }

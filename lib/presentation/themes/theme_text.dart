@@ -65,7 +65,8 @@ class ThemeText {
       fontFamily: 'MR',
       fontWeight: FontWeight.w600);
 
-  static TextStyle dayOfWeekStyle=TextStyle(fontFamily: 'MR', fontWeight: FontWeight.w400);
+  static TextStyle dayOfWeekStyle =
+      TextStyle(fontFamily: 'MR', fontWeight: FontWeight.w400);
 
   /*static TextStyle errorTextStyle = TextStyle(
       color: AppColor.errorColor,

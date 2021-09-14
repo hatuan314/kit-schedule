@@ -1,37 +1,27 @@
-import 'dart:developer';
-
-import 'package:awesome_dialog/awesome_dialog.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
-
 import 'package:schedule/common/constants/layout_constants.dart';
 import 'package:schedule/domain/entities/personal_schedule_entities.dart';
-
 import 'package:schedule/presentation/journey/home/calendar_tab_constants.dart';
 import 'package:schedule/presentation/journey/todo_screen/todo_constants.dart';
 import 'package:schedule/presentation/journey/todo_screen/widgets/cupertino_rounded_datepicker_widget.dart';
-
 import 'package:schedule/presentation/journey/todo_screen/widgets/todo_form_widget.dart';
-
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
 import 'package:schedule/presentation/widget/loading_widget/loading_widget.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:schedule/presentation/widget/warning_dialog/warning_dialog.dart';
 
 import 'bloc/todo_bloc.dart';
-import 'package:schedule/common/extension/date_time_extension.dart';
 
 class TodoScreen extends StatefulWidget {
   final PersonalScheduleEntities? personalSchedule;
 
   TodoScreen({Key? key, this.personalSchedule}) : super(key: key);
+
   @override
   _CreateTodoTabViewState createState() => _CreateTodoTabViewState();
 }
@@ -86,7 +76,7 @@ class _CreateTodoTabViewState extends State<TodoScreen> {
               actions: <Widget>[
                 IconButton(
                     onPressed: () => warningDialog(
-                      name: widget.personalSchedule!.name,
+                        name: widget.personalSchedule!.name,
                         context: context,
                         isSynch: true,
                         btnOk: _bntOkDialogOnPress,

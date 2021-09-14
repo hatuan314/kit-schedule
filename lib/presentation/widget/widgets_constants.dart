@@ -9,15 +9,14 @@ class WidgetsConstants {
     width: ScreenUtil().setWidth(50),
   );
 
-  static const cardMargin=8.0;
-  static const detailColumnPaddingHorizontal= 20.0;
+  static const cardMargin = 8.0;
+  static const detailColumnPaddingHorizontal = 20.0;
   static const paddingHorizontal = 20.0;
   static const paddingVertical = 20.0;
   static const contentPadding = 10.0;
 
-  static String noDataTxt= 'No Data';
-  static String timeTxt= 'Time: ';
-  static String notesTxt= 'Notes: ';
-  static String detailsTxt= 'Details';
-
+  static String noDataTxt = 'No Data';
+  static String timeTxt = 'Time: ';
+  static String notesTxt = 'Notes: ';
+  static String detailsTxt = 'Details';
 }

@@ -18,15 +18,14 @@ class PersonalScheduleEntitiesAdapter
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return PersonalScheduleEntities(
-      date: fields[0] as String?,
-      name: fields[1] as String?,
-      timer: fields[2] as String?,
-      note: fields[3] as String?,
-      createAt: fields[4] as String?,
-      updateAt: fields[5] as String?,
-      isSynchronized: fields[6] as bool?,
-      id: fields[7] as String?
-    );
+        date: fields[0] as String?,
+        name: fields[1] as String?,
+        timer: fields[2] as String?,
+        note: fields[3] as String?,
+        createAt: fields[4] as String?,
+        updateAt: fields[5] as String?,
+        isSynchronized: fields[6] as bool?,
+        id: fields[7] as String?);
   }
 
   @override

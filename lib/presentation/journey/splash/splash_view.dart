@@ -2,9 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:schedule/presentation/themes/theme_colors.dart';
-
 import 'package:schedule/service/services.dart';
 
 class SplashView extends StatefulWidget {
@@ -20,7 +18,7 @@ class _SplashViewState extends State<SplashView> {
     // TODO: implement initState
     super.initState();
 //    _checkIfDarkModeEnabled();
-      navigateToScreen();
+    navigateToScreen();
   }
 
   /* void _checkIfDarkModeEnabled() {
@@ -39,7 +37,7 @@ class _SplashViewState extends State<SplashView> {
         color: AppColor.secondColor,
       ),
     )
-    /*return Scaffold(
+        /*return Scaffold(
       backgroundColor:
           brightness == Brightness.dark ? Colors.black : AppColor.secondColor,
       body: Center(
@@ -64,7 +62,8 @@ class _SplashViewState extends State<SplashView> {
           ],
         ),
       ),
-    )*/;
+    )*/
+        ;
   }
 
   Future initData() async {
@@ -77,7 +76,7 @@ class _SplashViewState extends State<SplashView> {
       final flag1 = await _shareService.getIsSaveData();
       final flag2 = await _shareService.getUsername();
       log(flag2.toString());
-      if (flag1 == true && flag2!='')
+      if (flag1 == true && flag2 != '')
         Navigator.pushReplacementNamed(context, '/home');
       else
         Navigator.pushReplacementNamed(context, '/sign-in');

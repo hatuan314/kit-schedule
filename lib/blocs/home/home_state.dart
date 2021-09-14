@@ -3,8 +3,8 @@ part of "home_bloc.dart";
 abstract class HomeState extends Equatable {
   final int selectIndex;
   final bool isSynch;
-  HomeState(this.selectIndex,[this.isSynch=true]);
 
+  HomeState(this.selectIndex, [this.isSynch = true]);
 }
 
 class HomeInitialState extends HomeState {
@@ -13,11 +13,11 @@ class HomeInitialState extends HomeState {
   @override
   // TODO: implement props
   List<Object?> get props => throw UnimplementedError();
-
 }
 
 class HomeOnChangeTabState extends HomeState {
-  HomeOnChangeTabState(int selectIndex,bool isSynch) : super(selectIndex,isSynch);
+  HomeOnChangeTabState(int selectIndex, bool isSynch)
+      : super(selectIndex, isSynch);
 
   List<Object> get props => [this.selectIndex];
 }

@@ -20,22 +20,21 @@ class CalendarTabScreen extends StatelessWidget {
             backgroundColor: CalendarTabConstants.backgroundColor,
             body: Center(
               child: Container(
-                margin:const
-                    EdgeInsets.only(top: CalendarTabConstants.marginLoading ),
+                margin: const EdgeInsets.only(
+                    top: CalendarTabConstants.marginLoading),
                 child: LoadingWidget(),
               ),
             ),
           );
         else if (state is CalendarLoadDataSuccessState) {
           return Scaffold(
-              backgroundColor:CalendarTabConstants.backgroundColor,
+              backgroundColor: CalendarTabConstants.backgroundColor,
               body: BlocProvider(
                 create: (context) => Injector.getIt<ScheduleBloc>()
                   ..add(GetScheduleDayEvent(
                       selectDay: Convert.dateConvert(DateTime.now()),
                       allSchedulesSchoolMap: state.allSchedulesSchoolMap,
-                      allSchedulePersonalMap: state.allSchedulePersonalMap)
-                  ),
+                      allSchedulePersonalMap: state.allSchedulePersonalMap)),
                 child: _mBody(context, state),
               ));
         } else

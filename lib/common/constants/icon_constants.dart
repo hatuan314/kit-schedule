@@ -1,5 +1,5 @@
-class IconConstants{
-  static const String _path ='assets/icons';
+class IconConstants {
+  static const String _path = 'assets/icons';
   static const String calendarIcon = '$_path/ic_calendar.svg';
   static const String circleIcon = '$_path/ic_circle.svg';
   static const String kitLogoIcon = '$_path/kit-logo.svg';
