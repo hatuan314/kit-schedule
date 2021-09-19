@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:device_calendar/device_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,7 +24,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   DeviceCalendarPlugin _deviceCalendarPlugin = DeviceCalendarPlugin();
   ShareService _shareService = ShareService();
-  List<Calendar> _calendars = [];
 
   ProfileBloc({
     required this.personalUS,
@@ -48,11 +49,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     allPersonalSchedulesMap.clear();
     yield* _mapGetAllSchoolSchedulesToMap();
     yield* _mapGetAllPersonalScheduleToMap();
-    await _retrieveCalendars();
 
+  var   permissionsGranted = await _deviceCalendarPlugin.hasPermissions();
+
+  if(permissionsGranted.isSuccess) {
+    log('xxxxxxxxxxxx');
     await _addSchoolScheduleToCalendar();
     await _addPersonalScheduleToCalendar();
-    //   await scheduleUS.deleteAllSchoolSchedulesLocal();
+    await _shareService.setHasNoti(true);
     allSchoolSchedulesMap.forEach((key, value) async {
       await scheduleUS.updateAllSchoolSchedulesLocal(value);
     });
@@ -62,36 +66,60 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         await personalUS.updatePersonalScheduleData(x);
       }
     });
+    await _retrieveCalendars();
+  }
+    //   await scheduleUS.deleteAllSchoolSchedulesLocal();
+  
 
-    await _shareService.setHasNoti(true);
   }
 
   Stream<ProfileState> _mapTurnOffNotificationEventToState(
       TurnOffNotificationEvent event) async* {
-    allSchoolSchedulesMap.clear();
-    allPersonalSchedulesMap.clear();
-    yield* _mapGetAllSchoolSchedulesToMap();
-    yield* _mapGetAllPersonalScheduleToMap();
-    await _retrieveCalendars();
+   if(state.hasNoti)
+     {
+       allSchoolSchedulesMap.clear();
+       allPersonalSchedulesMap.clear();
+       yield* _mapGetAllSchoolSchedulesToMap();
+       yield* _mapGetAllPersonalScheduleToMap();
+       // await _retrieveCalendars();
 
-    await _deleteSchoolSchedule();
+       await _deleteSchoolSchedule();
 
-    await _deletePersonalSchedule();
-    await _shareService.setHasNoti(false);
+       await _deletePersonalSchedule();
+       await _shareService.setHasNoti(false);
+     }
   }
 
   _retrieveCalendars() async {
     try {
+
       var permissionsGranted = await _deviceCalendarPlugin.hasPermissions();
       if (permissionsGranted.isSuccess && !permissionsGranted.data!) {
-        permissionsGranted = await _deviceCalendarPlugin.requestPermissions();
-        if (!permissionsGranted.isSuccess || !permissionsGranted.data!) {
-          return;
-        }
-      }
-      final calendarsResult = await _deviceCalendarPlugin.retrieveCalendars();
+       do {
+         permissionsGranted = await _deviceCalendarPlugin.requestPermissions();
+       }
+        while (!permissionsGranted.isSuccess || !permissionsGranted.data!);
+       if(permissionsGranted.isSuccess)
+         {
+           log('xxxxxxxxxxxx');
+           await _addSchoolScheduleToCalendar();
+           await _addPersonalScheduleToCalendar();
+           await _shareService.setHasNoti(true);
+           allSchoolSchedulesMap.forEach((key, value) async {
+             await scheduleUS.updateAllSchoolSchedulesLocal(value);
+           });
 
-      _calendars = calendarsResult.data as List<Calendar>;
+           allPersonalSchedulesMap.forEach((key, value) async {
+             for (var x in value) {
+               await personalUS.updatePersonalScheduleData(x);
+             }
+           });
+           
+         }
+
+       }
+ 
+
     } catch (e) {
       print(e);
     }
@@ -117,7 +145,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         final eventTime = key.millisecondsSinceEpoch - (7 * 3600000);
 
         final eventToCreate =
-            Event(_calendars[0].id, availability: Availability.Busy);
+            Event(1.toString(), availability: Availability.Busy);
 
         eventToCreate.title = schoolSchedule.subject;
 
@@ -145,7 +173,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
             int.parse(personalSchedule.timer!.split(':')[1]);
 
         final eventToCreate =
-            Event(_calendars[0].id, availability: Availability.Busy);
+            Event(1.toString(), availability: Availability.Busy);
 
         eventToCreate.title = personalSchedule.name;
 
@@ -175,7 +203,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     allSchoolSchedulesMap.forEach((key, value) async {
       for (var schoolSchedule in value) {
         final deleteEventResult = await _deviceCalendarPlugin.deleteEvent(
-            _calendars[0].id, schoolSchedule.id);
+            1.toString(), schoolSchedule.id);
         debugPrint(
             '_deleteSchoolSchedule ' + deleteEventResult.isSuccess.toString());
       }
@@ -186,7 +214,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     allPersonalSchedulesMap.forEach((key, value) async {
       for (var personalSchedule in value) {
         final deleteEventResult = await _deviceCalendarPlugin.deleteEvent(
-            _calendars[0].id, personalSchedule.id);
+            1.toString(), personalSchedule.id);
         debugPrint('_deletePersonalSchedule ' +
             deleteEventResult.isSuccess.toString());
       }

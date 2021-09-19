@@ -165,7 +165,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       await _retrieveCalendars();
       debugPrint('delete  id : ' + event.id);
       final deleteEventResult =
-          await _deviceCalendarPlugin.deleteEvent(_calendars[0].id, event.id);
+          await _deviceCalendarPlugin.deleteEvent(1.toString(), event.id);
       debugPrint('delete' + deleteEventResult.isSuccess.toString());
       id = await _addPersonalScheduleToCalendar(PersonalScheduleEntities(
           date: this._date,
@@ -219,7 +219,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       await _retrieveCalendars();
       debugPrint('delete  id : ' + (personal.id as String));
       final deleteEventResult = await _deviceCalendarPlugin.deleteEvent(
-          _calendars[0].id, personal.id);
+          1.toString(), personal.id);
       debugPrint('delete' + deleteEventResult.isSuccess.toString());
     }
     personal.updateAt = "0";
@@ -267,7 +267,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
         int.parse(personalSchedule.timer!.split(':')[1]);
     final int eventTime = (int.parse(personalSchedule.date as String));
     final eventToCreate =
-        Event(_calendars[0].id, availability: Availability.Busy);
+        Event(1.toString(), availability: Availability.Busy);
     debugPrint(DateTime.fromMillisecondsSinceEpoch(eventTime +
             personalScheduleHour * 3600000 +
             personalScheduleMinute * 60000)
