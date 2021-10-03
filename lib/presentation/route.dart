@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/blocs/blocs.dart';
+import 'package:schedule/common/constants/route_constants.dart';
 import 'package:schedule/common/injector/injector.dart';
 import 'package:schedule/domain/entities/personal_schedule_entities.dart';
+import 'package:schedule/presentation/journey/add_scores/add_scores_screen.dart';
 import 'package:schedule/presentation/journey/main/main_screen.dart';
 import 'package:schedule/presentation/journey/sign_in_screen.dart/bloc/register_bloc.dart';
 import 'package:schedule/presentation/journey/sign_in_screen.dart/sign_in_view.dart';
@@ -77,6 +79,12 @@ RouteFactory router() {
                     timer: TimeOfDay(hour: hour, minute: minute))),
               child: TodoScreen(personalSchedule: schedule));
         });
+      case RouteList.addScores:
+        return CupertinoPageRoute(
+          builder: (context){
+            return AddScoresScreen();
+          }
+        );
     }
 
     return MaterialPageRoute(
