@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/blocs/blocs.dart';
 import 'package:schedule/common/injector/injector.dart';
 import 'package:schedule/domain/entities/personal_schedule_entities.dart';
+import 'package:schedule/presentation/journey/introduction/introduction_screen.dart';
 import 'package:schedule/presentation/journey/main/main_screen.dart';
 import 'package:schedule/presentation/journey/sign_in_screen.dart/bloc/register_bloc.dart';
 import 'package:schedule/presentation/journey/sign_in_screen.dart/sign_in_view.dart';
@@ -76,6 +77,10 @@ RouteFactory router() {
                 ..add(SelectTimePickerOnPressEvent(
                     timer: TimeOfDay(hour: hour, minute: minute))),
               child: TodoScreen(personalSchedule: schedule));
+        });
+      case '/introduction':
+        return CupertinoPageRoute( builder: (context){
+          return IntroductionScreen();
         });
     }
 

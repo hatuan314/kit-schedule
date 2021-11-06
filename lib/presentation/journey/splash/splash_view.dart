@@ -75,11 +75,17 @@ class _SplashViewState extends State<SplashView> {
     try {
       final flag1 = await _shareService.getIsSaveData();
       final flag2 = await _shareService.getUsername();
+      final isFirstRun = await _shareService.getIsFirstRun();
       log(flag2.toString());
-      if (flag1 == true && flag2 != '')
+      if(isFirstRun)
+        {
+          Navigator.pushReplacementNamed(context, '/introduction');
+        }
+     else
+       //if (flag1 == true && flag2 != '')
         Navigator.pushReplacementNamed(context, '/home');
-      else
-        Navigator.pushReplacementNamed(context, '/sign-in');
+      //else
+       // Navigator.pushReplacementNamed(context, '/sign-in');
     } catch (e) {
       debugPrint('SplashView - navigateToScreen - error: {$e}');
     }
