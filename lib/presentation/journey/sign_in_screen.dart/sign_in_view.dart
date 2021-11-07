@@ -28,7 +28,7 @@ class _SignInViewState extends State<SignInView> {
     return BlocConsumer<RegisterBloc, RegisterState>(
       listener: (context, state) {
         if (state is RegisterSuccessState) {
-          Navigator.pushReplacementNamed(context, '/home');
+          Navigator.pop(context,true);
         }
         if (state is RegisterFailureState) {}
         if (state is RegisterNoDataState) {}
@@ -44,7 +44,7 @@ class _SignInViewState extends State<SignInView> {
               child: Container(
                 margin: EdgeInsets.symmetric(
                     horizontal: SignInConstants
-                        .horizontalScreen), //sẽ bị lỗi do chưa có thư viện /// fix xong, chỉ cần làm lần đầu với các file
+                        .horizontalScreen),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -68,7 +68,6 @@ class _SignInViewState extends State<SignInView> {
                     SizedBox(
                       height: SignInConstants.paddingTextToTextFiled,
 
-                      /// chỉ cần gõ 65.h
                     ),
                     Form(
                         key: _textFormKey,

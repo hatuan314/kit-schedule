@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/blocs/home/home_bloc.dart';
 import 'package:schedule/presentation/journey/home/calendar_tab_screen.dart';
+import 'package:schedule/presentation/journey/main/main_item.dart';
 import 'package:schedule/presentation/journey/profile/profile_screen.dart';
 import 'package:schedule/presentation/journey/scores/scores_screen.dart';
 import 'package:schedule/presentation/journey/todo_screen/todo_screen.dart';
@@ -16,25 +17,16 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<HomeBloc, HomeState>(listener: (context, state) {
-      if (state is HomeOnChangeTabState) if (state.selectIndex == 4)
-        warningDialog(
-            context: context,
-            isSynch: state.isSynch,
-            btnOk: _bntOkDialogOnPress,
-            btnCancel: _btnCancelDialogOnPress);
+      if (state is HomeOnChangeTabState)
       if (state is SignOutFailureState) _errorSignOutDialog(context);
+      if(state is SignOutSuccessState) Navigator.pushReplacementNamed(context, '/home');
     }, child: BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
       return Scaffold(
           backgroundColor: AppColor.secondColor,
           body: IndexedStack(
-            index: state.selectIndex,
-            children: [
-              CalendarTabScreen(),
-              ScoresScreen(),
-              TodoScreen(),
-              ProfileScreen(),
-              ProfileScreen(),
-            ],
+            index: state.item.getIndex(),
+            children: List.generate(MainItem.values.length,
+                (index) => MainItem.values.elementAt(index).getScreen()),
           ),
           bottomNavigationBar: Container(
             decoration: BoxDecoration(color: AppColor.secondColor, boxShadow: [
@@ -47,22 +39,12 @@ class MainScreen extends StatelessWidget {
                     horizontal: MainScreenConstants.paddingHorizontal,
                     vertical: MainScreenConstants.paddingVertical),
                 child: Row(
-                  children: [
-                    Expanded(
-                        flex: 1,
-                        child: navBarItem(context, 0, Icons.date_range, state)),
-                    Expanded(
+                  children: List.generate(MainItem.values.length, (index) {
+                    return Expanded(
                         flex: 1,
                         child: navBarItem(
-                            context, 1, Icons.score_outlined, state)),
-                    Expanded(
-                        flex: 1,
-                        child:
-                            navBarItem(context, 2, Icons.content_paste, state)),
-                    Expanded(
-                        flex: 1,
-                        child: navBarItem(context, 3, Icons.person, state)),
-                  ],
+                            context, MainItem.values.elementAt(index), state));
+                  }),
                 ),
               ),
             ),
@@ -70,32 +52,20 @@ class MainScreen extends StatelessWidget {
     }));
   }
 
-  Widget navBarItem(
-      BuildContext context, int index, IconData icon, HomeState state) {
+  Widget navBarItem(BuildContext context, MainItem mainItem, HomeState state) {
     return GestureDetector(
         onTap: () {
-          BlocProvider.of<HomeBloc>(context)..add(OnTabChangeEvent(index));
+          BlocProvider.of<HomeBloc>(context)..add(OnTabChangeEvent(mainItem));
         },
         child: Container(
           height: MainScreenConstants.navBarHeight,
           child: Icon(
-            icon,
-            color: state.selectIndex == index
+            mainItem.getIcon(),
+            color: state.item == mainItem
                 ? AppColor.fourthColor
                 : AppColor.primaryColor,
           ),
         ));
-  }
-
-  _btnCancelDialogOnPress(BuildContext context) {
-    BlocProvider.of<HomeBloc>(context)..add(OnTabChangeEvent(3));
-    Navigator.of(context).pop();
-  }
-
-  _bntOkDialogOnPress(BuildContext context) {
-    BlocProvider.of<HomeBloc>(context)..add(SignOutOnPressEvent());
-    Navigator.of(context).pop();
-    Navigator.pushReplacementNamed(context, '/sign-in');
   }
 
   void _errorSignOutDialog(BuildContext context) {

@@ -18,7 +18,9 @@ class _SplashViewState extends State<SplashView> {
     // TODO: implement initState
     super.initState();
 //    _checkIfDarkModeEnabled();
+  WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
     navigateToScreen();
+  });
   }
 
   /* void _checkIfDarkModeEnabled() {
@@ -66,24 +68,14 @@ class _SplashViewState extends State<SplashView> {
         ;
   }
 
-  Future initData() async {
-    await Future.delayed(Duration(seconds: 3));
-  }
 
-  Future navigateToScreen() async {
-    ShareService _shareService = ShareService();
+
+  void navigateToScreen() async {
+
     try {
-      final flag1 = await _shareService.getIsSaveData();
-      final flag2 = await _shareService.getUsername();
-      log(flag2.toString());
-      if (flag1 == true && flag2 != '')
-        Navigator.pushReplacementNamed(context, '/home');
-      else
-        Navigator.pushReplacementNamed(context, '/sign-in');
+      Navigator.pushReplacementNamed(context, '/home');
     } catch (e) {
       debugPrint('SplashView - navigateToScreen - error: {$e}');
     }
-
-//    Navigator.pushReplacementNamed(context, '/signIn');
   }
 }

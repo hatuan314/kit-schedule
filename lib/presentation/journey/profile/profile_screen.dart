@@ -4,15 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:schedule/blocs/calendar/calendar_bloc.dart';
 import 'package:schedule/blocs/home/home_bloc.dart';
 import 'package:schedule/common/injector/injector.dart';
 import 'package:schedule/presentation/%20language_select/%20language_select.dart';
+import 'package:schedule/presentation/journey/main/main_item.dart';
 import 'package:schedule/presentation/journey/profile/bloc/profile_bloc.dart';
 import 'package:schedule/presentation/journey/profile/bloc/profile_event.dart';
 import 'package:schedule/presentation/journey/profile/bloc/profile_state.dart';
 import 'package:schedule/presentation/journey/profile/profile_constants.dart';
+import 'package:schedule/presentation/journey/todo_screen/bloc/todo_bloc.dart';
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
+import 'package:schedule/presentation/widget/warning_dialog/warning_dialog.dart';
 import 'package:store_redirect/store_redirect.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -60,7 +64,8 @@ class ProfileScreen extends StatelessWidget {
               _buildListTile(
                   icon: Icons.score_outlined,
                   onTap: () {
-                    BlocProvider.of<HomeBloc>(context).add(OnTabChangeEvent(1));
+                    BlocProvider.of<HomeBloc>(context)
+                        .add(OnTabChangeEvent(MainItem.ScoresScreenItem));
                   },
                   title: AppLocalizations.of(context)!.myScores),
               _buildListTile(
@@ -94,11 +99,14 @@ class ProfileScreen extends StatelessWidget {
                   },
                   title: AppLocalizations.of(context)!.rateMe),
               _buildListTile(
-                  icon: Icons.logout,
+                  icon: profileState.isLogIn ? Icons.logout : Icons.login,
                   onTap: () {
-                    BlocProvider.of<HomeBloc>(context).add(OnTabChangeEvent(4));
+                    // BlocProvider.of<HomeBloc>(context).add(OnTabChangeEvent(3));
+                    actionLogIn(context, profileState.isLogIn);
                   },
-                  title: AppLocalizations.of(context)!.logOut),
+                  title: profileState.isLogIn
+                      ? AppLocalizations.of(context)!.logOut
+                      : AppLocalizations.of(context)!.login),
             ],
           ),
         ),
@@ -106,6 +114,37 @@ class ProfileScreen extends StatelessWidget {
     }
         //)
         );
+  }
+
+  void actionLogIn(BuildContext context, bool isLogIn) {
+    if (isLogIn) {
+      warningDialog(
+          context: context,
+          isSynch: true,
+          btnOk: _bntOkDialogOnPress,
+          btnCancel: _btnCancelDialogOnPress);
+    } else {
+
+      Navigator.pushNamed(context, '/sign-in').then((value) {
+        if (value is bool && value) {
+          BlocProvider.of<HomeBloc>(context)
+              .add(OnTabChangeEvent(MainItem.CalendarTabScreenItem));
+          BlocProvider.of<CalendarBloc>(context).add(GetAllScheduleDataEvent());
+          BlocProvider.of<TodoBloc>(context).add(GetUserNameEvent());
+          BlocProvider.of<ProfileBloc>(context)
+              .add(GetUserNameInProfileEvent());
+        }
+      });
+    }
+  }
+
+  _btnCancelDialogOnPress(BuildContext context) {
+    Navigator.of(context).pop();
+  }
+
+  _bntOkDialogOnPress(BuildContext context) {
+    BlocProvider.of<HomeBloc>(context)..add(SignOutOnPressEvent());
+    Navigator.of(context).pop();
   }
 
   bool isEnglish(String isEng) {
