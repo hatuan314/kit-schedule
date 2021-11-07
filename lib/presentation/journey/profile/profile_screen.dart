@@ -38,25 +38,26 @@ class ProfileScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: ProfileConstants.margin),
-                      padding: EdgeInsets.all(ProfileConstants.iconPadding),
-                      decoration: BoxDecoration(
-                          color: Colors.blue.shade100, shape: BoxShape.circle),
-                      child: Text(
-                        profileState.username.length != 0
-                            ? profileState.username.substring(0, 2)
-                            : '',
-                        style: ThemeText.headerStyle2.copyWith(fontSize: 35),
-                      ),
-                    ),
+                        margin: EdgeInsets.only(top: ProfileConstants.margin),
+                        padding: EdgeInsets.all(ProfileConstants.iconPadding),
+                        decoration: BoxDecoration(
+                            color: Colors.blue.shade100,
+                            shape: BoxShape.circle),
+                        child: Icon(
+                          Icons.person,
+                          color: AppColor.personalScheduleColor2,
+                          size: ProfileConstants.iconSize,
+                        )),
                     Padding(
                       padding: EdgeInsets.symmetric(
                           vertical: ProfileConstants.paddingVertical),
-                      child: Text(
-                        profileState.username,
-                        textAlign: TextAlign.center,
-                        style: ThemeText.headerStyle2,
-                      ),
+                      child: profileState.username.isNotEmpty
+                          ? Text(
+                              profileState.username,
+                              textAlign: TextAlign.center,
+                              style: ThemeText.headerStyle2,
+                            )
+                          : SizedBox(),
                     )
                   ],
                 ),

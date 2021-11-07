@@ -4,6 +4,7 @@ class ProfileConstants {
   static const paddingVertical = 20.0;
   static const listTilePadding = 15.0;
   static const iconPadding = 15.0;
+  static const iconSize= 40.0;
 
   static const rateMeTxt = 'Rate me';
   static const myScoresTxt = 'My Scores';
