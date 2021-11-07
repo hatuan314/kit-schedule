@@ -44,4 +44,15 @@ class ShareService {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('noti', value);
   }
+
+  Future<bool> getIsFirstRun() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isFirstRun = prefs.getBool('isFirstRun') ??true;
+    return  isFirstRun;
+  }
+
+  Future setIsFirstRun(bool value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isFirstRun', value);
+  }
 }
