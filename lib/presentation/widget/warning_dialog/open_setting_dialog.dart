@@ -19,7 +19,7 @@ void openSettingDiaLog(
           padding: const EdgeInsets.symmetric(
               vertical: MainScreenConstants.dialogPaddingVertical,
               horizontal: MainScreenConstants.dialogPaddingHorizontal),
-          child:     Text('Bạn cần cấp quyền cho ứng dụng!!',
+          child:     Text(AppLocalizations.of(context)!.permissonApp,
             style: ThemeText.titleStyle.copyWith(
                 color: AppColor.thirdColor,
                 fontWeight: FontWeight.normal,
