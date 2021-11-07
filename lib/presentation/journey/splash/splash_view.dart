@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/service/services.dart';
 
@@ -76,6 +77,7 @@ class _SplashViewState extends State<SplashView> {
       final isFirstRun = await _shareService.getIsFirstRun();
       if(isFirstRun)
         {
+          await Permission.calendar.request();
           Navigator.pushReplacementNamed(context, '/introduction');
         }
      else
