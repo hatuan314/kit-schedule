@@ -25,4 +25,12 @@ class ThemeBorder {
       borderSide: BorderSide(
           color: AppColor.errorColor, width: ScreenUtil().setWidth(3)),
       borderRadius: BorderRadius.all(Radius.circular(8.0)));
+
+  // static OutlineInputBorder textFieldBorder = OutlineInputBorder(
+  //     borderSide: BorderSide(color: Colors.black, width: 1.0),
+  //     borderRadius: BorderRadius.all(Radius.circular(8.0)));
+  //
+  // static BoxDecoration containerBorder = BoxDecoration(
+  //     border: Border.all(color: Colors.black, width: 1.0),
+  //     borderRadius: BorderRadius.all(Radius.circular(8.0)));
 }

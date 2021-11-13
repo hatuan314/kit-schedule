@@ -4,6 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/blocs/blocs.dart';
 import 'package:schedule/common/injector/injector.dart';
 import 'package:schedule/domain/entities/personal_schedule_entities.dart';
+import 'package:schedule/presentation/journey/add_scores/add_scores_screen.dart';
+import 'package:schedule/presentation/journey/add_scores/bloc/add_score_bloc.dart';
+import 'package:schedule/presentation/journey/add_scores/bloc/add_score_event.dart';
 import 'package:schedule/presentation/journey/introduction/introduction_screen.dart';
 import 'package:schedule/presentation/journey/main/main_screen.dart';
 import 'package:schedule/presentation/journey/sign_in_screen.dart/bloc/register_bloc.dart';
@@ -79,8 +82,15 @@ RouteFactory router() {
               child: TodoScreen(personalSchedule: schedule));
         });
       case '/introduction':
-        return CupertinoPageRoute( builder: (context){
+        return CupertinoPageRoute(builder: (context) {
           return IntroductionScreen();
+        });
+      case '/addScore':
+        return CupertinoPageRoute(builder: (context) {
+          return BlocProvider(
+            create: (context) => Injector.getIt<AddScoreBloc>()..add(SetUpEvent()),
+            child: AddScoresScreen(),
+          );
         });
     }
 

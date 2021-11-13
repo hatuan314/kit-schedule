@@ -11,7 +11,7 @@ class ShareService {
 
   bool? _isSave = false;
 
-  Future<String?> getUsername() async {
+  Future<String> getUsername() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String username = prefs.getString('username') ?? '';
     return username;

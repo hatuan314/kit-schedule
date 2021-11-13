@@ -36,6 +36,15 @@
  "dataTryAgain": "No Data. Try again",
  "connectionFailed": "Connection Failed",
  "ok": "OK",
- "introduction":"If you have a KMA student account, please log in at the profile screen to update your schedule"
+ "introduction":"If you have a KMA student account, please log in at the profile screen to update your schedule",
+ "componentScore1": "Component Score 1",
+ "componentScore2": "Component Score 2",
+ "finalTermScore": "Final Term Score",
+ "grade": "Class: ",
+ "subject": "Subject: ",
+ "credits": "Credits: ",
+ "addScore": "Add New Score",
+ "updateSubject": "Update New Subjects",
+ "calculateScore": "Calculate your score"
 }
 
