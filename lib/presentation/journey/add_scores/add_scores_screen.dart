@@ -226,6 +226,7 @@ class AddScoresScreen extends StatelessWidget {
                 fontFamily: 'MR',
                 fontWeight: FontWeight.w600),
           )),
+
     );
   }
 }
