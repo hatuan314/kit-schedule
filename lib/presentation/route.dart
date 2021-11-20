@@ -6,7 +6,6 @@ import 'package:schedule/common/constants/route_constants.dart';
 import 'package:schedule/common/injector/injector.dart';
 import 'package:schedule/domain/entities/personal_schedule_entities.dart';
 import 'package:schedule/presentation/journey/add_scores/add_scores_screen.dart';
-
 import 'package:schedule/presentation/journey/add_scores/bloc/add_score_bloc.dart';
 import 'package:schedule/presentation/journey/add_scores/bloc/add_score_event.dart';
 import 'package:schedule/presentation/journey/introduction/introduction_screen.dart';

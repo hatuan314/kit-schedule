@@ -44,7 +44,8 @@
  "subject": "Subject: ",
  "credits": "Credits: ",
  "addScore": "Add New Score",
- "updateSubject": "Update New Subjects",
- "calculateScore": "Calculate your score"
+ "updateSubject": "(Update New Subjects)",
+ "calculateScore": "Calculate your score",
+ "chooseSubject": "Choose Subject"
 }
 

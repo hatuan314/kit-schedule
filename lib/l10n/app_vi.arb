@@ -44,6 +44,7 @@
   "subject": "Môn học: ",
   "credits": "Số tín chỉ: ",
   "addScore": "Thêm điểm",
-  "updateSubject": "Cập nhật môn học mới",
-  "calculateScore": "Tính điểm của bạn"
+  "updateSubject": "(Cập nhật môn học mới)",
+  "calculateScore": "Tính điểm của bạn",
+  "chooseSubject": "Chọn môn học"
 }

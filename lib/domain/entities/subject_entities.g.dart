@@ -17,9 +17,10 @@ class SubjectEntitiesAdapter extends TypeAdapter<SubjectEntities> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return SubjectEntities(
-      fields[0] as int?,
-      fields[1] as String?,
-      fields[2] as int?,
+      subjectId: fields[0] as int?,
+      subjectName: fields[1] as String?,
+      credits: fields[2] as int?,
+      isAdded: fields[3] as bool?,
     );
   }
 
@@ -32,7 +33,9 @@ class SubjectEntitiesAdapter extends TypeAdapter<SubjectEntities> {
       ..writeByte(1)
       ..write(obj.subjectName)
       ..writeByte(2)
-      ..write(obj.credits);
+      ..write(obj.credits)
+      ..writeByte(3)
+      ..write(obj.isAdded);
   }
 
   @override
