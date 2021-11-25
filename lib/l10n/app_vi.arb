@@ -46,5 +46,6 @@
   "addScore": "Thêm điểm",
   "updateSubject": "(Cập nhật môn học mới)",
   "calculateScore": "Tính điểm của bạn",
-  "chooseSubject": "Chọn môn học"
+  "chooseSubject": "Chọn môn học",
+  "permissonApp": "Bạn cần cấp quyền cho ứng dụng!!"
 }

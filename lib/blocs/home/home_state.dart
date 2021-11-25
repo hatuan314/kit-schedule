@@ -1,14 +1,14 @@
 part of "home_bloc.dart";
 
 abstract class HomeState extends Equatable {
-  final int selectIndex;
+  final MainItem item;
   final bool isSynch;
 
-  HomeState(this.selectIndex, [this.isSynch = true]);
+  HomeState(this.item, [this.isSynch = true]);
 }
 
 class HomeInitialState extends HomeState {
-  HomeInitialState(int selectIndex) : super(selectIndex);
+  HomeInitialState(MainItem mainItem) : super(mainItem);
 
   @override
   // TODO: implement props
@@ -16,14 +16,14 @@ class HomeInitialState extends HomeState {
 }
 
 class HomeOnChangeTabState extends HomeState {
-  HomeOnChangeTabState(int selectIndex, bool isSynch)
-      : super(selectIndex, isSynch);
+  HomeOnChangeTabState(MainItem mainItem, bool isSynch)
+      : super(mainItem, isSynch);
 
-  List<Object> get props => [this.selectIndex];
+  List<Object> get props => [this.item];
 }
 
 class SignOutSuccessState extends HomeState {
-  SignOutSuccessState(int selectIndex) : super(selectIndex);
+  SignOutSuccessState(MainItem mainItem) : super(mainItem);
 
   @override
   // TODO: implement props
@@ -31,7 +31,7 @@ class SignOutSuccessState extends HomeState {
 }
 
 class SignOutFailureState extends HomeState {
-  SignOutFailureState(int selectIndex) : super(selectIndex);
+  SignOutFailureState(MainItem mainItem) : super(mainItem);
 
   @override
   // TODO: implement props

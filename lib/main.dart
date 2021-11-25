@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:schedule/common/config/firebase_setup.dart';
 import 'package:schedule/common/config/local_config.dart';
 import 'package:schedule/common/injector/injector.dart';
@@ -20,6 +21,7 @@ Future main() async {
   await hiveSetUp.init();
   final firebaseSetup = Injector.getIt<FirebaseSetup>();
   await firebaseSetup.setUp();
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
@@ -28,3 +30,4 @@ Future main() async {
     prefs: prefs,
   ));
 }
+

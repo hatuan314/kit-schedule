@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/service/services.dart';
 
@@ -73,19 +74,16 @@ class _SplashViewState extends State<SplashView> {
   Future navigateToScreen() async {
     ShareService _shareService = ShareService();
     try {
-      final flag1 = await _shareService.getIsSaveData();
-      final flag2 = await _shareService.getUsername();
       final isFirstRun = await _shareService.getIsFirstRun();
-      log(flag2.toString());
       if(isFirstRun)
         {
+          await Permission.calendar.request();
           Navigator.pushReplacementNamed(context, '/introduction');
         }
      else
-       //if (flag1 == true && flag2 != '')
+
         Navigator.pushReplacementNamed(context, '/home');
-      //else
-       // Navigator.pushReplacementNamed(context, '/sign-in');
+
     } catch (e) {
       debugPrint('SplashView - navigateToScreen - error: {$e}');
     }
