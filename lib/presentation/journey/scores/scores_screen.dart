@@ -76,24 +76,19 @@ class ScoresScreen extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: Container(
-                  margin: EdgeInsets.symmetric(vertical: 10),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: AppColor.personalScheduleColor),
-                      borderRadius: BorderRadius.all(Radius.circular(8))),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      HeaderScoresWidget(),
-                      Expanded(
-                        child: ListView.builder(
-                            itemCount: 100,
-                            itemBuilder: (context, index) {
-                              return ScoresCell();
-                            }),
-                      ),
-                    ],
-                  ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+
+                    HeaderScoresWidget(),
+                    Expanded(
+                      child: ListView.builder(
+                          itemCount: 1,
+                          itemBuilder: (context, index) {
+                            return ScoresCell();
+                          }),
+                    ),
+                  ],
                 ),
               )
             ],

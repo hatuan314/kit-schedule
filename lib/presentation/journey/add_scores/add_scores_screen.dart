@@ -7,6 +7,7 @@ import 'package:schedule/presentation/journey/add_scores/add_score_constants.dar
 import 'package:schedule/presentation/journey/add_scores/bloc/add_score_bloc.dart';
 import 'package:schedule/presentation/journey/add_scores/bloc/add_score_event.dart';
 import 'package:schedule/presentation/journey/add_scores/bloc/add_score_state.dart';
+import 'package:schedule/presentation/journey/add_scores/widgets/custom_select_item.dart';
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -39,11 +40,9 @@ class AddScoresScreen extends StatelessWidget {
                     Visibility(
                       visible: addScoreState.avgScore >= 0,
                       child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: AddScoreConstants.padding,
-                            horizontal: AddScoreConstants.padding / 2),
+                        padding:  EdgeInsets.only(top: AddScoreConstants.padding),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             _buildScoreContainer(
                                 addScoreState.avgScore.toString()),
@@ -57,13 +56,17 @@ class AddScoresScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+
                     Row(
                       children: [
                         _buildTitle(AppLocalizations.of(context)!.grade),
                         _buildTitle(addScoreState.grade),
                       ],
                     ),
-                    _buildTitle(AppLocalizations.of(context)!.subject),
+                     SizedBox(
+                      height: AddScoreConstants.padding,
+                    ),
+                    // _buildTitle(AppLocalizations.of(context)!.subject),
                     _buildSubjectButton(context, addScoreState),
                     Form(
                         key: _textFormKey,
@@ -186,69 +189,72 @@ class AddScoresScreen extends StatelessWidget {
 
   Widget _buildSubjectButton(
       BuildContext context, AddScoreState addScoreState) {
-    return Autocomplete<SubjectEntities>(
-      //  initialValue: _value,
-      optionsBuilder: (TextEditingValue value) {
-        BlocProvider.of<AddScoreBloc>(context)
-            .add(SearchSubjectEvent(keyword: value.text));
-        return addScoreState.subjectsList;
-      },
-      displayStringForOption: (value) => value.subjectName == ''
-          ? AppLocalizations.of(context)!.updateSubject
-          : value.subjectName!,
-      fieldViewBuilder: (BuildContext context,
-          TextEditingController fieldTextEditingController,
-          FocusNode fieldFocusNode,
-          VoidCallback onFieldSubmitted) {
-        return TextFieldWidget(
-          controller: fieldTextEditingController,
-          focusNode: fieldFocusNode,
-          textStyle: ThemeText.labelStyle,
-          colorBoder: AppColor.personalScheduleColor,
-          seffixIcon: IconButton(
-              onPressed: () {
-                BlocProvider.of<AddScoreBloc>(context)
-                    .add(UpdateSubjectFromFirebaseEvent());
-              },
-              icon: Icon(
-                Icons.update,
-                color: AppColor.personalScheduleColor,
-              )),
-        );
-      },
-      optionsViewBuilder: (BuildContext context,
-          AutocompleteOnSelected<SubjectEntities> onSelected,
-          Iterable<SubjectEntities> options) {
-        return Material(
-          child: Container(
-            margin: EdgeInsets.only(
-                right: AddScoreConstants.padding,
-                bottom: AddScoreConstants.padding),
-            // height: 300,
-            color: AppColor.secondColor,
-            child: ListView.builder(
-                itemCount: addScoreState.subjectsList.length,
-                itemBuilder: (context, index) {
-                  //log(addScoreState.subjectsList[index].subjectName! +'nnnnnnn');
-                  return GestureDetector(
-                    onTap: () {
-                      onSelected(addScoreState.subjectsList[index]);
-                    },
-                    child: Container(
-                      child: Padding(
-                        padding: EdgeInsets.all(AddScoreConstants.padding),
-                        child: Text(
-                          addScoreState.subjectsList[index].subjectName!,
-                          style: ThemeText.labelStyle,
-                        ),
-                      ),
-                    ),
-                  );
-                }),
-          ),
-        );
-      },
-    );
+    return CustomSelectMultiItem(context: context,items: ['qưeioqw'],onChange: (value){
+
+    },);
+    // return Autocomplete<SubjectEntities>(
+    //   //  initialValue: _value,
+    //   optionsBuilder: (TextEditingValue value) {
+    //     BlocProvider.of<AddScoreBloc>(context)
+    //         .add(SearchSubjectEvent(keyword: value.text));
+    //     return addScoreState.subjectsList;
+    //   },
+    //   displayStringForOption: (value) => value.subjectName == ''
+    //       ? AppLocalizations.of(context)!.updateSubject
+    //       : value.subjectName!,
+    //   fieldViewBuilder: (BuildContext context,
+    //       TextEditingController fieldTextEditingController,
+    //       FocusNode fieldFocusNode,
+    //       VoidCallback onFieldSubmitted) {
+    //     return TextFieldWidget(
+    //       controller: fieldTextEditingController,
+    //       focusNode: fieldFocusNode,
+    //       textStyle: ThemeText.labelStyle,
+    //       colorBoder: AppColor.personalScheduleColor,
+    //       seffixIcon: IconButton(
+    //           onPressed: () {
+    //             BlocProvider.of<AddScoreBloc>(context)
+    //                 .add(UpdateSubjectFromFirebaseEvent());
+    //           },
+    //           icon: Icon(
+    //             Icons.update,
+    //             color: AppColor.personalScheduleColor,
+    //           )),
+    //     );
+    //   },
+    //   optionsViewBuilder: (BuildContext context,
+    //       AutocompleteOnSelected<SubjectEntities> onSelected,
+    //       Iterable<SubjectEntities> options) {
+    //     return Material(
+    //       child: Container(
+    //         margin: EdgeInsets.only(
+    //             right: AddScoreConstants.padding,
+    //             bottom: AddScoreConstants.padding),
+    //         // height: 300,
+    //         color: AppColor.secondColor,
+    //         child: ListView.builder(
+    //             itemCount: addScoreState.subjectsList.length,
+    //             itemBuilder: (context, index) {
+    //               //log(addScoreState.subjectsList[index].subjectName! +'nnnnnnn');
+    //               return GestureDetector(
+    //                 onTap: () {
+    //                   onSelected(addScoreState.subjectsList[index]);
+    //                 },
+    //                 child: Container(
+    //                   child: Padding(
+    //                     padding: EdgeInsets.all(AddScoreConstants.padding),
+    //                     child: Text(
+    //                       addScoreState.subjectsList[index].subjectName!,
+    //                       style: ThemeText.labelStyle,
+    //                     ),
+    //                   ),
+    //                 ),
+    //               );
+    //             }),
+    //       ),
+    //     );
+    //   },
+    // );
   }
 
 
@@ -268,8 +274,6 @@ class AddScoresScreen extends StatelessWidget {
     return Container(
       height: AddScoreConstants.scoreContainerSize,
       width: AddScoreConstants.scoreContainerSize,
-      margin: EdgeInsets.all(AddScoreConstants.padding),
-      padding: EdgeInsets.all(AddScoreConstants.padding / 2),
       decoration: BoxDecoration(
           color: AppColor.personalScheduleBackgroundColor,
           shape: BoxShape.circle),

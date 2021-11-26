@@ -11,8 +11,9 @@ class HeaderScoresWidget extends StatelessWidget {
       height: 80,
       width: double.maxFinite,
       decoration: BoxDecoration(
-          border: Border(
-              bottom: BorderSide(color: AppColor.personalScheduleColor))),
+        border: Border.all(color: AppColor.personalScheduleColor),
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(8),topRight: Radius.circular(8))
+      ),
       child: Row(
         children: [
           nameBoard('Môn học'),
