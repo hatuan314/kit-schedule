@@ -28,15 +28,16 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc({
     required this.personalUS,
     required this.scheduleUS,
-  }) : super(ProfileState(username: '', hasNoti: false));
+  }) : super(ProfileState(username: '', hasNoti: false, isLogIn: false));
 
   @override
   Stream<ProfileState> mapEventToState(ProfileEvent event) async* {
-    if (event is GetUserNameInProfileEvent)
+    if (event is GetUserNameInProfileEvent) {
       yield state.update(
           username: (await ShareService().getUsername() as String),
-          hasNoti: (await ShareService().getHasNoti() as bool));
-
+          hasNoti: (await ShareService().getHasNoti() as bool),
+          isLogin: await _shareService.getIsSaveData());
+    }
     if (event is TurnOnNotificationEvent)
       yield* _mapTurnOnNotificationEventToState(event);
     if (event is TurnOffNotificationEvent)
@@ -50,76 +51,66 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     yield* _mapGetAllSchoolSchedulesToMap();
     yield* _mapGetAllPersonalScheduleToMap();
 
-  var   permissionsGranted = await _deviceCalendarPlugin.hasPermissions();
+    var permissionsGranted = await _deviceCalendarPlugin.hasPermissions();
 
-  if(permissionsGranted.isSuccess) {
-    log('xxxxxxxxxxxx');
-    await _addSchoolScheduleToCalendar();
-    await _addPersonalScheduleToCalendar();
-    await _shareService.setHasNoti(true);
-    allSchoolSchedulesMap.forEach((key, value) async {
-      await scheduleUS.updateAllSchoolSchedulesLocal(value);
-    });
+    if (permissionsGranted.isSuccess) {
+      log('xxxxxxxxxxxx');
+      await _addSchoolScheduleToCalendar();
+      await _addPersonalScheduleToCalendar();
+      await _shareService.setHasNoti(true);
+      allSchoolSchedulesMap.forEach((key, value) async {
+        await scheduleUS.updateAllSchoolSchedulesLocal(value);
+      });
 
-    allPersonalSchedulesMap.forEach((key, value) async {
-      for (var x in value) {
-        await personalUS.updatePersonalScheduleData(x);
-      }
-    });
-    await _retrieveCalendars();
-  }
+      allPersonalSchedulesMap.forEach((key, value) async {
+        for (var x in value) {
+          await personalUS.updatePersonalScheduleData(x);
+        }
+      });
+      await _retrieveCalendars();
+    }
     //   await scheduleUS.deleteAllSchoolSchedulesLocal();
-  
-
   }
 
   Stream<ProfileState> _mapTurnOffNotificationEventToState(
       TurnOffNotificationEvent event) async* {
-   if(state.hasNoti)
-     {
-       allSchoolSchedulesMap.clear();
-       allPersonalSchedulesMap.clear();
-       yield* _mapGetAllSchoolSchedulesToMap();
-       yield* _mapGetAllPersonalScheduleToMap();
-       // await _retrieveCalendars();
+    if (state.hasNoti) {
+      allSchoolSchedulesMap.clear();
+      allPersonalSchedulesMap.clear();
+      yield* _mapGetAllSchoolSchedulesToMap();
+      yield* _mapGetAllPersonalScheduleToMap();
+      // await _retrieveCalendars();
 
-       await _deleteSchoolSchedule();
+      await _deleteSchoolSchedule();
 
-       await _deletePersonalSchedule();
-       await _shareService.setHasNoti(false);
-     }
+      await _deletePersonalSchedule();
+      await _shareService.setHasNoti(false);
+    }
   }
 
   _retrieveCalendars() async {
     try {
-
       var permissionsGranted = await _deviceCalendarPlugin.hasPermissions();
       if (permissionsGranted.isSuccess && !permissionsGranted.data!) {
-       do {
-         permissionsGranted = await _deviceCalendarPlugin.requestPermissions();
-       }
-        while (!permissionsGranted.isSuccess || !permissionsGranted.data!);
-       if(permissionsGranted.isSuccess)
-         {
-           log('xxxxxxxxxxxx');
-           await _addSchoolScheduleToCalendar();
-           await _addPersonalScheduleToCalendar();
-           await _shareService.setHasNoti(true);
-           allSchoolSchedulesMap.forEach((key, value) async {
-             await scheduleUS.updateAllSchoolSchedulesLocal(value);
-           });
+        do {
+          permissionsGranted = await _deviceCalendarPlugin.requestPermissions();
+        } while (!permissionsGranted.isSuccess || !permissionsGranted.data!);
+        if (permissionsGranted.isSuccess) {
+          log('xxxxxxxxxxxx');
+          await _addSchoolScheduleToCalendar();
+          await _addPersonalScheduleToCalendar();
+          await _shareService.setHasNoti(true);
+          allSchoolSchedulesMap.forEach((key, value) async {
+            await scheduleUS.updateAllSchoolSchedulesLocal(value);
+          });
 
-           allPersonalSchedulesMap.forEach((key, value) async {
-             for (var x in value) {
-               await personalUS.updatePersonalScheduleData(x);
-             }
-           });
-           
-         }
-
-       }
- 
-
+          allPersonalSchedulesMap.forEach((key, value) async {
+            for (var x in value) {
+              await personalUS.updatePersonalScheduleData(x);
+            }
+          });
+        }
+      }
     } catch (e) {
       print(e);
     }

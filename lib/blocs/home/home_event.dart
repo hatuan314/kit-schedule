@@ -9,11 +9,11 @@ abstract class HomeEvent extends Equatable {
 }
 
 class OnTabChangeEvent extends HomeEvent {
-  final int selectIndex;
+  final MainItem mainItem;
 
-  OnTabChangeEvent(this.selectIndex);
+  OnTabChangeEvent(this.mainItem);
 
-  List<Object> get props => [this.selectIndex];
+  List<Object> get props => [this.mainItem];
 }
 
 class SignOutOnPressEvent extends HomeEvent {}

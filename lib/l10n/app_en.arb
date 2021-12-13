@@ -1,6 +1,6 @@
 {
  "@locale": "en_US",
- "login":"Login",
+ "login":"Log in",
  "welcomeTo":"Welcome to",
  "account":"Account",
  "password":"Password",
@@ -36,6 +36,7 @@
  "dataTryAgain": "No Data. Try again",
  "connectionFailed": "Connection Failed",
  "ok": "OK",
- "introduction":"If you have a KMA student account, please log in at the profile screen to update your schedule"
+ "introduction":"If you have a KMA student account, please log in at the profile screen to update your schedule",
+ "permissonApp": "You need to grant permission to the app!!"
 }
 

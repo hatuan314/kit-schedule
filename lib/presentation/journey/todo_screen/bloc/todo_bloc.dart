@@ -21,7 +21,7 @@ part 'todo_state.dart';
 
 class TodoBloc extends Bloc<TodoEvent, TodoState> {
   CalendarBloc? calendarBloc;
-  late final String msv;
+  String msv='';
 
   ShareService shareService = ShareService();
   DeviceCalendarPlugin _deviceCalendarPlugin = DeviceCalendarPlugin();

@@ -36,5 +36,6 @@
   "dataTryAgain": "Không có dữ liệu. Thử lại",
   "connectionFailed": "Kết nối thất bại",
   "ok": "OK",
-  "introduction":"Nếu bạn có tài khoản sinh viên KMA, hãy đăng nhập tại màn hình profile để cập nhật lịch học của bạn"
+  "introduction":"Nếu bạn có tài khoản sinh viên KMA, hãy đăng nhập tại màn hình profile để cập nhật lịch học của bạn",
+  "permissonApp": "Bạn cần cấp quyền cho ứng dụng!!"
 }
