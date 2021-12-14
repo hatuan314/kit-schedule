@@ -9,6 +9,7 @@ import 'package:schedule/domain/entities/personal_schedule_entities.dart';
 import 'package:schedule/domain/entities/school_schedule_entities.dart';
 import 'package:schedule/domain/usecase/personal_usecase.dart';
 import 'package:schedule/domain/usecase/schedule_usecase.dart';
+import 'package:schedule/presentation/journey/main/main_item.dart';
 import 'package:schedule/presentation/journey/profile/bloc/profile_bloc.dart';
 import 'package:schedule/service/services.dart';
 
@@ -26,7 +27,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   List<Calendar> _calendars = [];
 
   HomeBloc({required this.personalUS, required this.scheduleUS})
-      : super(HomeInitialState(0));
+      : super(HomeInitialState(MainItem.CalendarTabScreenItem));
 
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
@@ -36,11 +37,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       //   debugPrint(element.id+'  '+element.name);
       // });
       bool isSynch = true;
-      if (event.selectIndex == 4) {
+      if (event.mainItem == MainItem.ProfileScreenItem) {
         var result = await personalUS.listPerSonIsSyncFailed();
         isSynch = result.isEmpty;
       }
-      yield HomeOnChangeTabState(event.selectIndex, isSynch);
+      yield HomeOnChangeTabState(event.mainItem, isSynch);
     } else if (event is SignOutOnPressEvent) {
       ShareService shareService = ShareService();
       try {
@@ -63,10 +64,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         Injector.getIt.resetLazySingleton<CalendarBloc>();
         Injector.getIt.resetLazySingleton<ScheduleBloc>();
         Injector.getIt.resetLazySingleton<ProfileBloc>();
-        yield SignOutSuccessState(0);
+        yield SignOutSuccessState(MainItem.CalendarTabScreenItem);
       } catch (e) {
         debugPrint('HomeBloc - mapEventToState - Error: {$e}');
-        yield SignOutFailureState(0);
+        yield SignOutFailureState(MainItem.CalendarTabScreenItem);
       }
     }
   }

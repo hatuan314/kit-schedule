@@ -8,11 +8,9 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        margin:
-        EdgeInsets.symmetric(horizontal: SignInConstants.horizontalScreen),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            BackButton(color: SignInConstants.colorDefault,),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -20,7 +18,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                   AppLocalizations.of(context)!.login,
                   style: TextStyle(
                       fontFamily: "MR",
-                      color: Colors.black,
+                      color: SignInConstants.colorDefault,
                       fontWeight: FontWeight.w600,
                       fontSize: SignInConstants.sizeLoginTxt),
                 ),

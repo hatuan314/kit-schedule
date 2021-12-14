@@ -37,6 +37,7 @@
   "connectionFailed": "Kết nối thất bại",
   "ok": "OK",
   "introduction":"Nếu bạn có tài khoản sinh viên KMA, hãy đăng nhập tại màn hình profile để cập nhật lịch học của bạn",
+  "permissonApp": "Bạn cần cấp quyền cho ứng dụng!!",
   "componentScore1": "Điểm thành phần 1",
   "componentScore2": "Điểm thành phần 2",
   "finalTermScore": "Điểm cuối kì",

@@ -65,7 +65,6 @@ RouteFactory router() {
                 ..add(GetUserNameInProfileEvent()),
             ),
           ], child: MainScreen());
-//            child: SchoolSchedulePageView());
         });
       case '/todo-detail':
         PersonalScheduleEntities schedule =

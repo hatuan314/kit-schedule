@@ -1,6 +1,6 @@
 {
  "@locale": "en_US",
- "login":"Login",
+ "login":"Log in",
  "welcomeTo":"Welcome to",
  "account":"Account",
  "password":"Password",
@@ -37,6 +37,7 @@
  "connectionFailed": "Connection Failed",
  "ok": "OK",
  "introduction":"If you have a KMA student account, please log in at the profile screen to update your schedule",
+ "permissonApp": "You need to grant permission to the app!!",
  "componentScore1": "Component Score 1",
  "componentScore2": "Component Score 2",
  "finalTermScore": "Final Term Score",
