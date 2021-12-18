@@ -78,7 +78,7 @@ class Convert {
       return 'B';
     } else if (score <= 6.9 && score >= 6.3) {
       return 'C+';
-    } else if (score <= 5.5 && score >= 6.2) {
+    } else if (score <= 6.2 && score >= 5.5) {
       return 'C';
     } else if (score <= 5.4 && score >= 4.8) {
       return 'D+';

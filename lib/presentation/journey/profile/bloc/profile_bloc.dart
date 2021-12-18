@@ -54,7 +54,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     var permissionsGranted = await _deviceCalendarPlugin.hasPermissions();
 
     if (permissionsGranted.isSuccess) {
-      log('xxxxxxxxxxxx');
       await _addSchoolScheduleToCalendar();
       await _addPersonalScheduleToCalendar();
       await _shareService.setHasNoti(true);
@@ -96,7 +95,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           permissionsGranted = await _deviceCalendarPlugin.requestPermissions();
         } while (!permissionsGranted.isSuccess || !permissionsGranted.data!);
         if (permissionsGranted.isSuccess) {
-          log('xxxxxxxxxxxx');
           await _addSchoolScheduleToCalendar();
           await _addPersonalScheduleToCalendar();
           await _shareService.setHasNoti(true);

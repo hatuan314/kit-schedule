@@ -14,6 +14,8 @@ import 'package:schedule/presentation/journey/profile/bloc/profile_bloc.dart';
 import 'package:schedule/presentation/journey/profile/bloc/profile_event.dart';
 import 'package:schedule/presentation/journey/profile/bloc/profile_state.dart';
 import 'package:schedule/presentation/journey/profile/profile_constants.dart';
+import 'package:schedule/presentation/journey/scores/bloc/scores_bloc.dart';
+import 'package:schedule/presentation/journey/scores/bloc/scores_event.dart';
 import 'package:schedule/presentation/journey/todo_screen/bloc/todo_bloc.dart';
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
@@ -134,6 +136,7 @@ class ProfileScreen extends StatelessWidget {
           BlocProvider.of<TodoBloc>(context).add(GetUserNameEvent());
           BlocProvider.of<ProfileBloc>(context)
               .add(GetUserNameInProfileEvent());
+          BlocProvider.of<ScoresBloc>(context)..add(InitEvent())..add(LoadScoresEvent());
         }
       });
     }

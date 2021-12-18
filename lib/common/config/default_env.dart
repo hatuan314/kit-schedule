@@ -6,4 +6,5 @@ class DefaultEnv {
   static const developDoc = 'develop';
   static const schoolCollection = 'school';
   static const personalCollection = 'personal';
+  static const scoresTable = 'SCORES';
 }

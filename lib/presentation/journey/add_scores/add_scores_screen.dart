@@ -1,5 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:schedule/common/enums/view_state.dart';
 import 'package:schedule/common/utils/convert.dart';
 import 'package:schedule/domain/entities/subject_entities.dart';
@@ -22,7 +24,13 @@ class AddScoresScreen extends StatelessWidget {
   GlobalKey<FormState> _textFormKey = GlobalKey<FormState>();
 
   Widget build(BuildContext context) {
-    return BlocBuilder<AddScoreBloc, AddScoreState>(
+    return BlocConsumer<AddScoreBloc, AddScoreState>(
+      listener: (context, addScoreState){
+        if(addScoreState.viewState == ViewState.success)
+          {
+            Navigator.pop(context, true);
+          }
+      },
         builder: (context, addScoreState) {
       return Scaffold(
         backgroundColor: AppColor.secondColor,
@@ -41,7 +49,7 @@ class AddScoresScreen extends StatelessWidget {
                       child: Padding(
                         padding: EdgeInsets.symmetric(
                             vertical: AddScoreConstants.padding,
-                            horizontal: AddScoreConstants.padding / 2),
+                            horizontal: AddScoreConstants.padding / 3),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -119,7 +127,7 @@ class AddScoresScreen extends StatelessWidget {
                           ),
                           width: double.infinity,
                           alignment: Alignment.center,
-                          padding: EdgeInsets.symmetric(vertical: 10.0),
+                          padding: EdgeInsets.symmetric(vertical: 10.h),
                           child: Text(
                             AppLocalizations.of(context)!.calculateScore,
                             style: ThemeText.titleStyle.copyWith(
@@ -141,7 +149,7 @@ class AddScoresScreen extends StatelessWidget {
       backgroundColor: AppColor.secondColor,
       elevation: 0,
       leading: IconButton(
-        onPressed: () => Navigator.pop(context),
+        onPressed: () => Navigator.pop(context, false),
         icon: Icon(
           Icons.close,
           color: AppColor.personalScheduleColor,
@@ -154,7 +162,7 @@ class AddScoresScreen extends StatelessWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => BlocProvider.of<AddScoreBloc>(context).add(SaveNewScoreEvent()),
           icon: Icon(
             Icons.check,
             color: AppColor.personalScheduleColor,
@@ -187,7 +195,6 @@ class AddScoresScreen extends StatelessWidget {
   Widget _buildSubjectButton(
       BuildContext context, AddScoreState addScoreState) {
     return Autocomplete<SubjectEntities>(
-      //  initialValue: _value,
       optionsBuilder: (TextEditingValue value) {
         BlocProvider.of<AddScoreBloc>(context)
             .add(SearchSubjectEvent(keyword: value.text));
@@ -197,11 +204,11 @@ class AddScoresScreen extends StatelessWidget {
           ? AppLocalizations.of(context)!.updateSubject
           : value.subjectName!,
       fieldViewBuilder: (BuildContext context,
-          TextEditingController fieldTextEditingController,
+          TextEditingController textEditingController,
           FocusNode fieldFocusNode,
           VoidCallback onFieldSubmitted) {
         return TextFieldWidget(
-          controller: fieldTextEditingController,
+          controller: textEditingController,
           focusNode: fieldFocusNode,
           textStyle: ThemeText.labelStyle,
           colorBoder: AppColor.personalScheduleColor,
@@ -216,6 +223,9 @@ class AddScoresScreen extends StatelessWidget {
               )),
         );
       },
+        onSelected: (subject){
+          BlocProvider.of<AddScoreBloc>(context).add(EditSubjectEvent(subject: subject));
+        },
       optionsViewBuilder: (BuildContext context,
           AutocompleteOnSelected<SubjectEntities> onSelected,
           Iterable<SubjectEntities> options) {
@@ -229,7 +239,7 @@ class AddScoresScreen extends StatelessWidget {
             child: ListView.builder(
                 itemCount: addScoreState.subjectsList.length,
                 itemBuilder: (context, index) {
-                  //log(addScoreState.subjectsList[index].subjectName! +'nnnnnnn');
+                  //
                   return GestureDetector(
                     onTap: () {
                       onSelected(addScoreState.subjectsList[index]);
@@ -277,11 +287,8 @@ class AddScoresScreen extends StatelessWidget {
           fit: BoxFit.scaleDown,
           child: Text(
             data,
-            style: TextStyle(
-                fontSize: AddScoreConstants.scoreContainerFontSize,
-                color: AppColor.signInColor,
-                fontFamily: 'MR',
-                fontWeight: FontWeight.w600),
+            style: ThemeText.headerStyle2
+                .copyWith(fontSize: 25.sp),
           )),
     );
   }
