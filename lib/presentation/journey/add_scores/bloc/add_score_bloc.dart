@@ -44,10 +44,6 @@ class AddScoreBloc extends Bloc<AddScoreEvent, AddScoreState> {
   Stream<AddScoreState> mapEventToState(AddScoreEvent event) async* {
     if (event is SetUpEvent) {
       yield* _mapSetUpEventToState(event);
-    } else if (event is UpdateSubjectFromFirebaseEvent) {
-      yield* _mapUpdateSubjectFromFirebaseEventToState(event);
-    } else if (event is SearchSubjectEvent) {
-      yield* _mapSearchSubjectEventToState(event);
     } else if (event is EditSubjectEvent) {
       yield* _mapEditSubjectEventToState(event);
     } else if (event is CalculateScoreEvent) {
@@ -101,17 +97,9 @@ class AddScoreBloc extends Bloc<AddScoreEvent, AddScoreState> {
     yield state.update(avgScore: double.parse((avgScore.toStringAsFixed(1))));
   }
 
-  Stream<AddScoreState> _mapSearchSubjectEventToState(
-      SearchSubjectEvent event) async* {
-    yield state.update(viewState: ViewState.searching);
-    final result = await subjectUsecase.searchSubjectDataLocal(event.keyword);
-
-    yield state.update(viewState: ViewState.idle, subjectsList: result);
-  }
-
   Stream<AddScoreState> _mapSaveNewScoreEventToState(
       SaveNewScoreEvent event) async* {
-    if (state.subject.subjectName != '' &&  state.avgScore>=0) {
+    if (state.subject.subjectName != '' && state.avgScore >= 0) {
       log(state.subject.subjectName.toString());
       ScoreEntities newScore = ScoreEntities(
           id: state.subject.subjectId,
@@ -133,33 +121,6 @@ class AddScoreBloc extends Bloc<AddScoreEvent, AddScoreState> {
         yield state.update(viewState: ViewState.idle);
       }
     }
-  }
-
-
-  Stream<AddScoreState> _mapUpdateSubjectFromFirebaseEventToState(
-      UpdateSubjectFromFirebaseEvent event) async* {
-    yield state.update(viewState: ViewState.busy);
-    //cập nhật ds môn học từ firebase
-    List<SubjectEntities> list = [];
-    final result =
-        await subjectUsecase.fetchSubjectDataFirebaseRepo(state.grade);
-    if (result.isNotEmpty) {
-      result.forEach((key, value) {
-        list.add(
-          SubjectEntities(
-            subjectId: int.parse(key),
-            subjectName: value['name'],
-            credits: value['credits'],
-          ),
-        );
-      });
-    }
-    await subjectUsecase.insertSubjectDataLocal(list);
-
-    yield state.update(
-      viewState: ViewState.idle,
-      subjectsList: list,
-    );
   }
 
   Stream<AddScoreState> _mapEditSubjectEventToState(

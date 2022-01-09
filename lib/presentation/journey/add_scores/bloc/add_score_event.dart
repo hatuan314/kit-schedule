@@ -32,19 +32,19 @@ class CalculateScoreEvent extends AddScoreEvent {
       [this.finalTermScore, this.componentScore1, this.componentScore2];
 }
 
-class SearchSubjectEvent extends AddScoreEvent {
-  final String keyword;
-
-  SearchSubjectEvent({required this.keyword});
-  @override
-  List<Object?> get props => [this.keyword];
-}
-
-class UpdateSubjectFromFirebaseEvent extends AddScoreEvent {
-  @override
-  // TODO: implement props
-  List<Object?> get props => [];
-}
+// class SearchSubjectEvent extends AddScoreEvent {
+//   final String keyword;
+//
+//   SearchSubjectEvent({required this.keyword});
+//   @override
+//   List<Object?> get props => [this.keyword];
+// }
+//
+// class UpdateSubjectFromFirebaseEvent extends AddScoreEvent {
+//   @override
+//   // TODO: implement props
+//   List<Object?> get props => [];
+// }
 
 class SaveNewScoreEvent extends AddScoreEvent {
   @override

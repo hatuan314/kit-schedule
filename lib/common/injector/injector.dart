@@ -27,6 +27,7 @@ import 'package:schedule/presentation/bloc/snackbar_bloc/bloc.dart';
 import 'package:schedule/presentation/journey/add_scores/bloc/add_score_bloc.dart';
 import 'package:schedule/presentation/journey/profile/bloc/profile_bloc.dart';
 import 'package:schedule/presentation/journey/scores/bloc/scores_bloc.dart';
+import 'package:schedule/presentation/journey/search_subject/bloc/search_subject_bloc.dart';
 import 'package:schedule/presentation/journey/sign_in_screen.dart/bloc/register_bloc.dart';
 import 'package:schedule/presentation/journey/todo_screen/bloc/todo_bloc.dart';
 
@@ -79,6 +80,8 @@ class Injector {
         snackbarBloc: getIt<SnackbarBloc>()));
     getIt.registerFactory<ScoresBloc>(
         () => ScoresBloc(scoresUsecase: getIt<ScoresUsecase>()));
+    getIt.registerFactory<SearchSubjectBloc>(() => SearchSubjectBloc(
+        subjectUsecase: getIt<SubjectUsecase>(),));
   }
 
   static void _configUseCase() {

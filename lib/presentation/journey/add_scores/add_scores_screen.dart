@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +8,7 @@ import 'package:schedule/presentation/journey/add_scores/add_score_constants.dar
 import 'package:schedule/presentation/journey/add_scores/bloc/add_score_bloc.dart';
 import 'package:schedule/presentation/journey/add_scores/bloc/add_score_event.dart';
 import 'package:schedule/presentation/journey/add_scores/bloc/add_score_state.dart';
+import 'package:schedule/presentation/journey/search_subject/search_subject_dialog.dart';
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/presentation/themes/theme_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -25,13 +25,11 @@ class AddScoresScreen extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return BlocConsumer<AddScoreBloc, AddScoreState>(
-      listener: (context, addScoreState){
-        if(addScoreState.viewState == ViewState.success)
-          {
-            Navigator.pop(context, true);
-          }
-      },
-        builder: (context, addScoreState) {
+        listener: (context, addScoreState) {
+      if (addScoreState.viewState == ViewState.success) {
+        Navigator.pop(context, true);
+      }
+    }, builder: (context, addScoreState) {
       return Scaffold(
         backgroundColor: AppColor.secondColor,
         body: addScoreState.viewState == ViewState.busy
@@ -72,7 +70,40 @@ class AddScoresScreen extends StatelessWidget {
                       ],
                     ),
                     _buildTitle(AppLocalizations.of(context)!.subject),
-                    _buildSubjectButton(context, addScoreState),
+                    Padding(
+                      padding: EdgeInsets.only(top: AddScoreConstants.padding),
+                      child: GestureDetector(
+                          onTap: () async {
+                            final result = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    fullscreenDialog: true,
+                                    builder: (_) => SearchSubjectDialog(
+                                          grade: addScoreState.grade,
+                                        )));
+                            if (result != null) {
+                              BlocProvider.of<AddScoreBloc>(context).add(
+                                  EditSubjectEvent(
+                                      subject: result as SubjectEntities));
+                            }
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: AppColor.personalScheduleColor,
+                                    width: 0.5),
+                                borderRadius: BorderRadius.circular(8)),
+                            child: Padding(
+                              padding: EdgeInsets.all(18.sp),
+                              child: Text(
+                                addScoreState.subject.subjectName ==''?
+                                    AppLocalizations.of(context)!.chooseSubject: addScoreState.subject.subjectName!,
+                                style: ThemeText.labelStyle
+                                    .copyWith(fontSize: 14.sp),
+                              ),
+                            ),
+                          )),
+                    ),
                     Form(
                         key: _textFormKey,
                         child: Column(
@@ -127,12 +158,11 @@ class AddScoresScreen extends StatelessWidget {
                           ),
                           width: double.infinity,
                           alignment: Alignment.center,
-                          padding: EdgeInsets.symmetric(vertical: 10.h),
+                          padding: EdgeInsets.symmetric(vertical: 15.h),
                           child: Text(
                             AppLocalizations.of(context)!.calculateScore,
                             style: ThemeText.titleStyle.copyWith(
-                              color: AppColor.secondColor,
-                            ),
+                                color: AppColor.secondColor, fontSize: 14.sp),
                           ),
                         ),
                       ),
@@ -162,7 +192,8 @@ class AddScoresScreen extends StatelessWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () => BlocProvider.of<AddScoreBloc>(context).add(SaveNewScoreEvent()),
+          onPressed: () =>
+              BlocProvider.of<AddScoreBloc>(context).add(SaveNewScoreEvent()),
           icon: Icon(
             Icons.check,
             color: AppColor.personalScheduleColor,
@@ -179,7 +210,7 @@ class AddScoresScreen extends StatelessWidget {
       child: TextFieldWidget(
         controller: controller,
         labelText: title,
-        textStyle: ThemeText.labelStyle,
+        textStyle: ThemeText.labelStyle.copyWith(fontSize: 14.sp),
         colorBoder: AppColor.personalScheduleColor,
         inputType: TextInputType.number,
         validate: (value) {
@@ -192,84 +223,12 @@ class AddScoresScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSubjectButton(
-      BuildContext context, AddScoreState addScoreState) {
-    return Autocomplete<SubjectEntities>(
-      optionsBuilder: (TextEditingValue value) {
-        BlocProvider.of<AddScoreBloc>(context)
-            .add(SearchSubjectEvent(keyword: value.text));
-        return addScoreState.subjectsList;
-      },
-      displayStringForOption: (value) => value.subjectName == ''
-          ? AppLocalizations.of(context)!.updateSubject
-          : value.subjectName!,
-      fieldViewBuilder: (BuildContext context,
-          TextEditingController textEditingController,
-          FocusNode fieldFocusNode,
-          VoidCallback onFieldSubmitted) {
-        return TextFieldWidget(
-          controller: textEditingController,
-          focusNode: fieldFocusNode,
-          textStyle: ThemeText.labelStyle,
-          colorBoder: AppColor.personalScheduleColor,
-          seffixIcon: IconButton(
-              onPressed: () {
-                BlocProvider.of<AddScoreBloc>(context)
-                    .add(UpdateSubjectFromFirebaseEvent());
-              },
-              icon: Icon(
-                Icons.update,
-                color: AppColor.personalScheduleColor,
-              )),
-        );
-      },
-        onSelected: (subject){
-          BlocProvider.of<AddScoreBloc>(context).add(EditSubjectEvent(subject: subject));
-        },
-      optionsViewBuilder: (BuildContext context,
-          AutocompleteOnSelected<SubjectEntities> onSelected,
-          Iterable<SubjectEntities> options) {
-        return Material(
-          child: Container(
-            margin: EdgeInsets.only(
-                right: AddScoreConstants.padding,
-                bottom: AddScoreConstants.padding),
-            // height: 300,
-            color: AppColor.secondColor,
-            child: ListView.builder(
-                itemCount: addScoreState.subjectsList.length,
-                itemBuilder: (context, index) {
-                  //
-                  return GestureDetector(
-                    onTap: () {
-                      onSelected(addScoreState.subjectsList[index]);
-                    },
-                    child: Container(
-                      child: Padding(
-                        padding: EdgeInsets.all(AddScoreConstants.padding),
-                        child: Text(
-                          addScoreState.subjectsList[index].subjectName!,
-                          style: ThemeText.labelStyle,
-                        ),
-                      ),
-                    ),
-                  );
-                }),
-          ),
-        );
-      },
-    );
-  }
-
-
-
   Widget _buildTitle(String title) {
     return Padding(
       padding: EdgeInsets.only(top: AddScoreConstants.padding),
       child: Text(
         title,
-        style:
-            ThemeText.titleStyle.copyWith(fontSize: AddScoreConstants.fontSize),
+        style: ThemeText.titleStyle.copyWith(fontSize: 14.sp),
       ),
     );
   }
@@ -287,8 +246,7 @@ class AddScoresScreen extends StatelessWidget {
           fit: BoxFit.scaleDown,
           child: Text(
             data,
-            style: ThemeText.headerStyle2
-                .copyWith(fontSize: 25.sp),
+            style: ThemeText.headerStyle2.copyWith(fontSize: 25.sp),
           )),
     );
   }
