@@ -1,13 +1,11 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=/Users/hatuan/Projects/flutter 1.22.4"
-export "FLUTTER_APPLICATION_PATH=/Users/hatuan/Projects/MyProjects/kit-schedule"
+export "FLUTTER_ROOT=/Users/tuanha/fvm/versions/2.8.0"
+export "FLUTTER_APPLICATION_PATH=/Users/tuanha/Work/My Project/kit-schedule"
+export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_TARGET=lib/main.dart"
 export "FLUTTER_BUILD_DIR=build"
-export "SYMROOT=${SOURCE_ROOT}/../build/ios"
-export "OTHER_LDFLAGS=$(inherited) -framework Flutter"
-export "FLUTTER_FRAMEWORK_DIR=/Users/hatuan/Projects/flutter 1.22.4/bin/cache/artifacts/engine/ios"
-export "FLUTTER_BUILD_NAME=1.0.0"
+export "FLUTTER_BUILD_NAME=6.0.3"
 export "FLUTTER_BUILD_NUMBER=1"
 export "DART_OBFUSCATION=false"
 export "TRACK_WIDGET_CREATION=false"
