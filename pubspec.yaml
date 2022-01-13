@@ -11,7 +11,7 @@ description: A new Flutter application.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 6.0.3+2
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
@@ -24,52 +24,52 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.3
   # DateFormat
-  intl: ^0.17.0
+  intl: any
   # Table Calendar
-  table_calendar: ^3.0.1
+  table_calendar: any
   # shared_preferences
-  shared_preferences: ^2.0.6
+  shared_preferences: any
   # Date Format
-  date_format: ^2.0.2
+  date_format: any
   #toast: ^0.1.5
   # sqlite
   #sqflite: ^1.2.0
-  hive: ^2.0.4
+  hive: any
 #  sqflite: ^2.0.0+3
   # Simple Animation
-  simple_animations: ^3.1.1
+  simple_animations: any
   # Bloc
   flutter_bloc: ^7.0.1
   # Equatable
-  equatable: ^2.0.3
+  equatable: any
   # Dio
-  dio: ^4.0.0
+  dio: any
   # Svg image
   #flutter_svg: ^0.17.4
-  flutter_svg: ^0.22.0
+  flutter_svg: any
   # Worm indicator
   #worm_indicator: 0.2.1
   # Bottom Navigator
-  google_nav_bar: ^5.0.5
+  google_nav_bar: any
   # DatePicker
-  flutter_rounded_date_picker: ^2.0.2
+  flutter_rounded_date_picker: any
   # Dialog
-  awesome_dialog: ^2.1.0
-  get_it:
-  path_provider: ^2.0.2
-  crypto: ^3.0.1
-  flutter_screenutil: ^5.0.0+2
+  awesome_dialog: any
+  get_it: any
+  path_provider: any
+  crypto: any
+  flutter_screenutil: any
   #cupertino_date_textbox: ^1.0.0+3
-  firebase_core: ^1.4.0
-  store_redirect: ^2.0.0
-  url_launcher: ^6.0.9
-  cloud_firestore: ^2.4.0
-  connectivity: ^3.0.6
-  flutter_keyboard_visibility: ^5.0.3
+  firebase_core: any
+  store_redirect: any
+  url_launcher: any
+  cloud_firestore: any
+  connectivity: any
+  flutter_keyboard_visibility: any
   flutter_localizations: # Add this line
     sdk: flutter
   device_calendar: ^4.0.1-dev.13167
-  permission_handler: ^8.1.4+2
+  permission_handler: any
 
 dev_dependencies:
   flutter_test:
