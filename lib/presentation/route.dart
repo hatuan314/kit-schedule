@@ -2,10 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/blocs/blocs.dart';
+import 'package:schedule/common/constants/route_constants.dart';
 import 'package:schedule/common/injector/injector.dart';
 import 'package:schedule/domain/entities/personal_schedule_entities.dart';
+import 'package:schedule/presentation/journey/add_scores/add_scores_screen.dart';
+import 'package:schedule/presentation/journey/add_scores/bloc/add_score_bloc.dart';
+import 'package:schedule/presentation/journey/add_scores/bloc/add_score_event.dart';
 import 'package:schedule/presentation/journey/introduction/introduction_screen.dart';
+
 import 'package:schedule/presentation/journey/main/main_screen.dart';
+import 'package:schedule/presentation/journey/scores/bloc/scores_bloc.dart';
+import 'package:schedule/presentation/journey/scores/scores_screen.dart';
 import 'package:schedule/presentation/journey/sign_in_screen.dart/bloc/register_bloc.dart';
 import 'package:schedule/presentation/journey/sign_in_screen.dart/sign_in_view.dart';
 import 'package:schedule/presentation/journey/splash/splash_view.dart';
@@ -14,6 +21,7 @@ import 'package:schedule/presentation/journey/todo_screen/todo_screen.dart';
 
 import 'journey/profile/bloc/profile_bloc.dart';
 import 'journey/profile/bloc/profile_event.dart';
+import 'journey/scores/bloc/scores_event.dart';
 
 int currentRoot = 1;
 
@@ -51,10 +59,16 @@ RouteFactory router() {
             //   create: (context) =>
             //       SearchBloc()..add(SearchButtonOnPress(DateTime.now())),
             // ),
+            BlocProvider<ScoresBloc>(
+              create: (context) =>Injector.getIt<ScoresBloc>()
+                ..add(InitEvent())
+              ..add(LoadScoresEvent()),
+            ),
             BlocProvider(
               create: (context) =>
                   Injector.getIt<TodoBloc>()..add(GetUserNameEvent()),
             ),
+
             BlocProvider(
               create: (context) => Injector.getIt<ProfileBloc>()
                 ..add(GetUserNameInProfileEvent()),
@@ -77,10 +91,19 @@ RouteFactory router() {
                     timer: TimeOfDay(hour: hour, minute: minute))),
               child: TodoScreen(personalSchedule: schedule));
         });
+
       case '/introduction':
-        return CupertinoPageRoute( builder: (context){
+        return CupertinoPageRoute(builder: (context) {
           return IntroductionScreen();
         });
+      case '/addScore':
+        return CupertinoPageRoute(builder: (context) {
+          return BlocProvider(
+            create: (context) => Injector.getIt<AddScoreBloc>()..add(SetUpEvent()),
+            child: AddScoresScreen(),
+          );
+        });
+
     }
 
     return MaterialPageRoute(

@@ -39,6 +39,16 @@ class DataRemote {
     }
   }
 
+  Future<Map> fetchSubjectDataFirebase(String grade) async {
+    final response = await firebaseSetup.subjectCollection.doc(grade).get();
+    if (response.data() == null) {
+      return {};
+    } else {
+      Map data = response.data() as Map;
+      return data;
+    }
+  }
+
   Future<Map> fetchPersonalSchoolDataFirebase(String msv) async {
     final response = await firebaseSetup.personalCollection.doc(msv).get();
     if (response.data() == null) {

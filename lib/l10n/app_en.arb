@@ -37,6 +37,21 @@
  "connectionFailed": "Connection Failed",
  "ok": "OK",
  "introduction":"If you have a KMA student account, please log in at the profile screen to update your schedule",
- "permissonApp": "You need to grant permission to the app!!"
+ "permissonApp": "You need to grant permission to the app!!",
+ "componentScore1": "Component Score 1",
+ "componentScore2": "Component Score 2",
+ "finalTermScore": "Final Term Score",
+ "grade": "Class: ",
+ "subject": "Subject",
+ "credits": "Credits",
+ "addScore": "Add New Score",
+ "updateSubject": "(Update New Subjects)",
+ "calculateScore": "Calculate your score",
+ "chooseSubject": "Choose Subject",
+ "score": "Score",
+ "p10PointGradingScale": "10-point Grading Scale",
+ "p4PointGradingScale": "4-point Grading Scale",
+ "letterGrade": "Letter Grade",
+ "introInScoreScreen": "If you have a KMA student account, please log in at the profile screen to use this feature"
 }
 

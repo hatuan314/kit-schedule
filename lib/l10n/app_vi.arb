@@ -37,5 +37,20 @@
   "connectionFailed": "Kết nối thất bại",
   "ok": "OK",
   "introduction":"Nếu bạn có tài khoản sinh viên KMA, hãy đăng nhập tại màn hình profile để cập nhật lịch học của bạn",
-  "permissonApp": "Bạn cần cấp quyền cho ứng dụng!!"
+  "permissonApp": "Bạn cần cấp quyền cho ứng dụng!!",
+  "componentScore1": "Điểm thành phần 1",
+  "componentScore2": "Điểm thành phần 2",
+  "finalTermScore": "Điểm cuối kì",
+  "grade": "Lớp: ",
+  "subject": "Môn học",
+  "credits": "Số tín chỉ",
+  "addScore": "Thêm điểm",
+  "updateSubject": "(Cập nhật môn học mới)",
+  "calculateScore": "Tính điểm của bạn",
+  "chooseSubject": "Chọn môn học",
+  "score": "Điểm",
+  "p10PointGradingScale": "Điểm hệ 10",
+  "p4PointGradingScale": "Điểm hệ 4",
+  "letterGrade": "Điểm chữ",
+  "introInScoreScreen":"Nếu bạn có tài khoản sinh viên KMA, hãy đăng nhập tại màn hình profile để sử dụng chức năng này"
 }

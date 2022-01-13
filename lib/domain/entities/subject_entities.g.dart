@@ -1,44 +1,38 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'school_schedule_entities.dart';
+part of 'subject_entities.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class SchoolScheduleAdapter extends TypeAdapter<SchoolSchedule> {
+class SubjectEntitiesAdapter extends TypeAdapter<SubjectEntities> {
   @override
-  final int typeId = 0;
+  final int typeId = 2;
 
   @override
-  SchoolSchedule read(BinaryReader reader) {
+  SubjectEntities read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return SchoolSchedule(
-      fields[0] as String?,
-      fields[1] as String?,
-      fields[2] as String?,
-      fields[3] as String?,
-      fields[4] as String?,
+    return SubjectEntities(
+      subjectId: fields[0] as int?,
+      subjectName: fields[1] as String?,
+      credits: fields[2] as int?,
     );
   }
 
   @override
-  void write(BinaryWriter writer, SchoolSchedule obj) {
+  void write(BinaryWriter writer, SubjectEntities obj) {
     writer
-      ..writeByte(5)
-      ..writeByte(0)
-      ..write(obj.date)
-      ..writeByte(1)
-      ..write(obj.lesson)
-      ..writeByte(2)
-      ..write(obj.subject)
-      ..writeByte(3)
-      ..write(obj.address)
       ..writeByte(4)
-      ..write(obj.id);
+      ..writeByte(0)
+      ..write(obj.subjectId)
+      ..writeByte(1)
+      ..write(obj.subjectName)
+      ..writeByte(2)
+      ..write(obj.credits);
   }
 
   @override
@@ -47,7 +41,7 @@ class SchoolScheduleAdapter extends TypeAdapter<SchoolSchedule> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is SchoolScheduleAdapter &&
+      other is SubjectEntitiesAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

@@ -218,8 +218,8 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     if (hasNoti) {
       await _retrieveCalendars();
       debugPrint('delete  id : ' + (personal.id as String));
-      final deleteEventResult = await _deviceCalendarPlugin.deleteEvent(
-          1.toString(), personal.id);
+      final deleteEventResult =
+          await _deviceCalendarPlugin.deleteEvent(1.toString(), personal.id);
       debugPrint('delete' + deleteEventResult.isSuccess.toString());
     }
     personal.updateAt = "0";
@@ -262,17 +262,19 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
 
   Future<String> _addPersonalScheduleToCalendar(
       PersonalScheduleEntities personalSchedule) async {
+    final eventToCreate= _createEventCalendar(personalSchedule);
+    final createEventResult =
+        await _deviceCalendarPlugin.createOrUpdateEvent(eventToCreate);
+    debugPrint('createEventResult: ' + createEventResult!.isSuccess.toString());
+    return createEventResult.data!;
+  }
+
+  Event _createEventCalendar(PersonalScheduleEntities personalSchedule) {
     int personalScheduleHour = int.parse(personalSchedule.timer!.split(':')[0]);
     int personalScheduleMinute =
         int.parse(personalSchedule.timer!.split(':')[1]);
     final int eventTime = (int.parse(personalSchedule.date as String));
-    final eventToCreate =
-        Event(1.toString(), availability: Availability.Busy);
-    debugPrint(DateTime.fromMillisecondsSinceEpoch(eventTime +
-            personalScheduleHour * 3600000 +
-            personalScheduleMinute * 60000)
-        .toString());
-    debugPrint(DateTime.fromMillisecondsSinceEpoch(eventTime).toString());
+    final eventToCreate = Event(1.toString(), availability: Availability.Busy);
     eventToCreate.title = personalSchedule.name;
     eventToCreate.start = Convert.getTz(DateTime.fromMillisecondsSinceEpoch(
         eventTime +
@@ -280,9 +282,6 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
             personalScheduleMinute * 60000));
     eventToCreate.description = personalSchedule.note;
     eventToCreate.end = eventToCreate.start;
-    final createEventResult =
-        await _deviceCalendarPlugin.createOrUpdateEvent(eventToCreate);
-    debugPrint('createEventResult: ' + createEventResult!.isSuccess.toString());
-    return createEventResult.data!;
+    return eventToCreate;
   }
 }

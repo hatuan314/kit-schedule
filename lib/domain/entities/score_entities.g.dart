@@ -1,44 +1,47 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'school_schedule_entities.dart';
+part of 'score_entities.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class SchoolScheduleAdapter extends TypeAdapter<SchoolSchedule> {
+class ScoreEntitiesAdapter extends TypeAdapter<ScoreEntities> {
   @override
-  final int typeId = 0;
+  final int typeId = 3;
 
   @override
-  SchoolSchedule read(BinaryReader reader) {
+  ScoreEntities read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return SchoolSchedule(
-      fields[0] as String?,
-      fields[1] as String?,
-      fields[2] as String?,
-      fields[3] as String?,
-      fields[4] as String?,
+    return ScoreEntities(
+      id: fields[0] as int?,
+      credits: fields[5] as int?,
+      subject: fields[1] as String?,
+      scoreIn4: fields[2] as double?,
+      scoreIn10: fields[3] as double?,
+      letter: fields[4] as String?,
     );
   }
 
   @override
-  void write(BinaryWriter writer, SchoolSchedule obj) {
+  void write(BinaryWriter writer, ScoreEntities obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
-      ..write(obj.date)
+      ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.lesson)
-      ..writeByte(2)
       ..write(obj.subject)
+      ..writeByte(2)
+      ..write(obj.scoreIn4)
       ..writeByte(3)
-      ..write(obj.address)
+      ..write(obj.scoreIn10)
       ..writeByte(4)
-      ..write(obj.id);
+      ..write(obj.letter)
+      ..writeByte(5)
+      ..write(obj.credits);
   }
 
   @override
@@ -47,7 +50,7 @@ class SchoolScheduleAdapter extends TypeAdapter<SchoolSchedule> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is SchoolScheduleAdapter &&
+      other is ScoreEntitiesAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
