@@ -17,3 +17,5 @@ class OnTabChangeEvent extends HomeEvent {
 }
 
 class SignOutOnPressEvent extends HomeEvent {}
+
+class DeleteAccountEvent extends HomeEvent {}

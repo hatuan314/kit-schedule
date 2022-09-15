@@ -24,4 +24,6 @@ abstract class PersonalRepositories {
       String msv, Map<String, dynamic> data);
 
   Future<String> deletePersonalSchoolDataFirebase(String msv, String createAt);
+
+  Future<void> deleteAllPersonalFirebase(String username);
 }

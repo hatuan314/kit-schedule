@@ -102,4 +102,10 @@ class PersonalUseCase {
   Future<void> deleteAllSchoolPersonal() async {
     await personalRepositories.deleteAllSchoolPersonalLocal();
   }
+
+  Future<void> deleteAllPersonalFirebase(String username) async {
+    await personalRepositories.deleteAllPersonalFirebase(username);
+  }
+
+  Future<void> deleteAllSchoolFirebase(String username) async {}
 }
