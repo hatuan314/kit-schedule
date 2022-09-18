@@ -115,7 +115,7 @@ class ProfileScreen extends StatelessWidget {
               if (profileState.isLogIn)
                 _buildListTile(
                   onTap: () => _actionDeleteAccount(context),
-                  title: "Delete Account",
+                  title: AppLocalizations.of(context)!.deleteAccount,
                   icon: Icons.no_accounts_rounded,
                 )
             ],
@@ -131,7 +131,7 @@ class ProfileScreen extends StatelessWidget {
     warningDialog(
       context: context,
       isSynch: true,
-      name: "Delete Account?",
+      name: AppLocalizations.of(context)!.deleteAccount,
       btnCancel: (context) => Navigator.pop(context),
       btnOk: (context) {
         BlocProvider.of<HomeBloc>(context)..add(DeleteAccountEvent());
