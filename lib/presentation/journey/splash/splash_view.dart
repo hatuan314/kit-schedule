@@ -1,8 +1,7 @@
-import 'dart:developer';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:schedule/common/injector/injector.dart';
+import 'package:schedule/domain/usecase/feature_usecase.dart';
 import 'package:schedule/presentation/themes/theme_colors.dart';
 import 'package:schedule/service/services.dart';
 
@@ -73,17 +72,21 @@ class _SplashViewState extends State<SplashView> {
 
   Future navigateToScreen() async {
     ShareService _shareService = ShareService();
+    FeatureUsecase _featureUsecase = Injector.getIt<FeatureUsecase>();
     try {
       final isFirstRun = await _shareService.getIsFirstRun();
-      if(isFirstRun)
-        {
-          await Permission.calendar.request();
-          Navigator.pushReplacementNamed(context, '/introduction');
-        }
-     else
 
+      final isEnabled = await _featureUsecase.getIsAccountFeaturesEnabled();
+
+      if (isEnabled != null) {
+        _shareService.setIsAccountFeaturesEnabled(isEnabled);
+      }
+
+      if (isFirstRun && await _shareService.getIsAccountFeaturesEnabled()) {
+        await Permission.calendar.request();
+        Navigator.pushReplacementNamed(context, '/introduction');
+      } else
         Navigator.pushReplacementNamed(context, '/home');
-
     } catch (e) {
       debugPrint('SplashView - navigateToScreen - error: {$e}');
     }

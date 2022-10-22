@@ -24,3 +24,9 @@ class ChangeLanguageEvent extends ProfileEvent {
   // TODO: implement props
   List<Object?> get props => [];
 }
+
+class GetAccountEnabledFlagEvent extends ProfileEvent {
+  @override
+  // TODO: implement props
+  List<Object?> get props => [""];
+}

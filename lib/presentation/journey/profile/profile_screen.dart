@@ -103,14 +103,15 @@ class ProfileScreen extends StatelessWidget {
                     );
                   },
                   title: AppLocalizations.of(context)!.rateMe),
-              _buildListTile(
-                  icon: profileState.isLogIn ? Icons.logout : Icons.login,
-                  onTap: () {
-                    actionLogIn(context, profileState.isLogIn);
-                  },
-                  title: profileState.isLogIn
-                      ? AppLocalizations.of(context)!.logOut
-                      : AppLocalizations.of(context)!.login),
+              if (profileState.isAccountFeaturesEnabled!)
+                _buildListTile(
+                    icon: profileState.isLogIn ? Icons.logout : Icons.login,
+                    onTap: () {
+                      actionLogIn(context, profileState.isLogIn);
+                    },
+                    title: profileState.isLogIn
+                        ? AppLocalizations.of(context)!.logOut
+                        : AppLocalizations.of(context)!.login),
             ],
           ),
         ),
@@ -136,7 +137,9 @@ class ProfileScreen extends StatelessWidget {
           BlocProvider.of<TodoBloc>(context).add(GetUserNameEvent());
           BlocProvider.of<ProfileBloc>(context)
               .add(GetUserNameInProfileEvent());
-          BlocProvider.of<ScoresBloc>(context)..add(InitEvent())..add(LoadScoresEvent());
+          BlocProvider.of<ScoresBloc>(context)
+            ..add(InitEvent())
+            ..add(LoadScoresEvent());
         }
       });
     }
@@ -214,8 +217,8 @@ class ProfileScreen extends StatelessWidget {
                           if (await Permission.calendar.isDenied) {
                             Navigator.pop(context);
                             openSettingDiaLog(
-                                context: context,
-                                );
+                              context: context,
+                            );
                             return;
                           } else {
                             BlocProvider.of<ProfileBloc>(context)

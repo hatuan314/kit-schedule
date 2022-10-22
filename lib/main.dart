@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:schedule/common/config/firebase_setup.dart';
 import 'package:schedule/common/config/local_config.dart';
 import 'package:schedule/common/injector/injector.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
 
 import 'presentation/app.dart';
 
@@ -30,4 +27,3 @@ Future main() async {
     prefs: prefs,
   ));
 }
-
