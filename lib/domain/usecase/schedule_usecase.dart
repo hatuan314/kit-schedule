@@ -49,4 +49,8 @@ class ScheduleUseCase {
       return result;
     }
   }
+
+  Future<void> deleteAllSchedulesFirebase(String username) async {
+    await scheduleRepositories.deleteAllSchedulesFirebase(username);
+  }
 }

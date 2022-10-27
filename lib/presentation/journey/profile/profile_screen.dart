@@ -104,13 +104,20 @@ class ProfileScreen extends StatelessWidget {
                   },
                   title: AppLocalizations.of(context)!.rateMe),
               _buildListTile(
-                  icon: profileState.isLogIn ? Icons.logout : Icons.login,
-                  onTap: () {
-                    actionLogIn(context, profileState.isLogIn);
-                  },
-                  title: profileState.isLogIn
-                      ? AppLocalizations.of(context)!.logOut
-                      : AppLocalizations.of(context)!.login),
+                icon: profileState.isLogIn ? Icons.logout : Icons.login,
+                onTap: () {
+                  actionLogIn(context, profileState.isLogIn);
+                },
+                title: profileState.isLogIn
+                    ? AppLocalizations.of(context)!.logOut
+                    : AppLocalizations.of(context)!.login,
+              ),
+              if (profileState.isLogIn)
+                _buildListTile(
+                  onTap: () => _actionDeleteAccount(context),
+                  title: AppLocalizations.of(context)!.deleteAccount,
+                  icon: Icons.no_accounts_rounded,
+                )
             ],
           ),
         ),
@@ -118,6 +125,19 @@ class ProfileScreen extends StatelessWidget {
     }
         //)
         );
+  }
+
+  void _actionDeleteAccount(BuildContext context) {
+    warningDialog(
+      context: context,
+      isSynch: true,
+      name: AppLocalizations.of(context)!.deleteAccount,
+      btnCancel: (context) => Navigator.pop(context),
+      btnOk: (context) {
+        BlocProvider.of<HomeBloc>(context)..add(DeleteAccountEvent());
+        Navigator.of(context).pop();
+      },
+    );
   }
 
   void actionLogIn(BuildContext context, bool isLogIn) {
@@ -136,7 +156,9 @@ class ProfileScreen extends StatelessWidget {
           BlocProvider.of<TodoBloc>(context).add(GetUserNameEvent());
           BlocProvider.of<ProfileBloc>(context)
               .add(GetUserNameInProfileEvent());
-          BlocProvider.of<ScoresBloc>(context)..add(InitEvent())..add(LoadScoresEvent());
+          BlocProvider.of<ScoresBloc>(context)
+            ..add(InitEvent())
+            ..add(LoadScoresEvent());
         }
       });
     }
@@ -200,35 +222,36 @@ class ProfileScreen extends StatelessWidget {
                 .copyWith(color: AppColor.personalScheduleColor2)),
         children: [
           _dialogItem(
-              title: isLanguageDialog
-                  ? ProfileConstants.englishTxt
-                  : AppLocalizations.of(context)!.turnOn,
-              context: context,
-              isLanguageDialog: isLanguageDialog,
-              onTap: isLanguageDialog
-                  ? () {
-                      Injector.getIt<LanguageSelect>().changeLanguage(true);
-                    }
-                  : !profileState.hasNoti
-                      ? () async {
-                          if (await Permission.calendar.isDenied) {
-                            Navigator.pop(context);
-                            openSettingDiaLog(
-                                context: context,
-                                );
-                            return;
-                          } else {
-                            BlocProvider.of<ProfileBloc>(context)
-                                .add(TurnOnNotificationEvent());
-                            Navigator.pop(context);
-                            BlocProvider.of<ProfileBloc>(context)
-                                .add(GetUserNameInProfileEvent());
-                          }
+            title: isLanguageDialog
+                ? ProfileConstants.englishTxt
+                : AppLocalizations.of(context)!.turnOn,
+            context: context,
+            isLanguageDialog: isLanguageDialog,
+            onTap: isLanguageDialog
+                ? () {
+                    Injector.getIt<LanguageSelect>().changeLanguage(true);
+                  }
+                : !profileState.hasNoti
+                    ? () async {
+                        if (await Permission.calendar.isDenied) {
+                          Navigator.pop(context);
+                          openSettingDiaLog(
+                            context: context,
+                          );
+                          return;
+                        } else {
+                          BlocProvider.of<ProfileBloc>(context)
+                              .add(TurnOnNotificationEvent());
+                          Navigator.pop(context);
+                          BlocProvider.of<ProfileBloc>(context)
+                              .add(GetUserNameInProfileEvent());
                         }
-                      : () {},
-              visible: isLanguageDialog
-                  ? isEnglish(AppLocalizations.of(context)!.localeName)
-                  : profileState.hasNoti),
+                      }
+                    : () {},
+            visible: isLanguageDialog
+                ? isEnglish(AppLocalizations.of(context)!.localeName)
+                : profileState.hasNoti,
+          ),
           _dialogItem(
               title: isLanguageDialog
                   ? ProfileConstants.vietnameseTxt
