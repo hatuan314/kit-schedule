@@ -8,7 +8,7 @@ class WebService {
   Dio setupDio() {
     Dio dio = Dio(BaseOptions(
       headers: {'header': 'tkbkma.herokuapp.com'},
-      baseUrl: 'https://tkbkma.herokuapp.com/api/schedule/guest',
+      baseUrl: 'http://35.86.164.35:5000/api/schedule/guest',
       contentType: 'application/json; charset=utf-8',
       connectTimeout: 30000,
       receiveTimeout: 30000,
