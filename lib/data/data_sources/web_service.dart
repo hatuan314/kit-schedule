@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:schedule/src/service/services.dart';
@@ -6,8 +7,8 @@ import 'package:schedule/src/service/services.dart';
 class WebService {
   Dio setupDio({String accessToken, String contentType}) {
     Dio dio = Dio(BaseOptions(
-      headers: {'header': '167.179.115.162:5000'},
-      baseUrl: 'http://167.179.115.162:5000/api/schedule/guest',
+      headers: {'header': 'tkbkma.herokuapp.com'},
+      baseUrl: 'http://35.86.164.35:5000/api/schedule/guest',
       contentType: contentType,
       connectTimeout: 50000,
       receiveTimeout: 50000,
@@ -84,7 +85,7 @@ class WebService {
             String errorOut = errorJson['error'];
 
             throw UnAuthorizedException(errorOut);
-          } on Exception catch (e, b) {
+          } on Exception catch (e) {
             throw UnAuthorizedException(e.toString());
           }
         }
