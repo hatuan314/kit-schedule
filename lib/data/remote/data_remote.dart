@@ -49,6 +49,19 @@ class DataRemote {
     }
   }
 
+  Future<Map> fetchDevelopDocumentFirebase() async {
+    try {
+      final response = await firebaseSetup.developDocument.get().timeout(
+            const Duration(
+              seconds: 5,
+            ),
+          );
+      return response.data() as Map? ?? {};
+    } on Exception {
+      return {};
+    }
+  }
+
   Future<Map> fetchPersonalSchoolDataFirebase(String msv) async {
     final response = await firebaseSetup.personalCollection.doc(msv).get();
     if (response.data() == null) {

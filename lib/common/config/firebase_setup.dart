@@ -6,6 +6,7 @@ class FirebaseSetup {
   late CollectionReference personalCollection;
   late CollectionReference scheduleCollection;
   late CollectionReference subjectCollection;
+  late DocumentReference developDocument;
 
   Future<void> setUp() async {
     await Firebase.initializeApp();
@@ -19,5 +20,8 @@ class FirebaseSetup {
         .collection(DefaultEnv.personalCollection);
     subjectCollection =
         FirebaseFirestore.instance.collection(DefaultEnv.subjectTable);
+    developDocument = FirebaseFirestore.instance
+        .collection(DefaultEnv.scheduleTable)
+        .doc(DefaultEnv.developDoc);
   }
 }

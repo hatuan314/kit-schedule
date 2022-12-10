@@ -70,7 +70,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
         designSize: Size(375, 812), //iPhone X size
-        builder: (context, child) => MultiBlocProvider(
+        builder: (_, __) => MultiBlocProvider(
             providers: _getProviders(),
             child: GestureDetector(
               onTap: () {

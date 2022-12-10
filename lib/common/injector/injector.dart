@@ -1,7 +1,6 @@
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get_it/get_it.dart';
 import 'package:schedule/blocs/blocs.dart';
-import 'package:schedule/blocs/calendar/calendar_bloc.dart';
 import 'package:schedule/common/config/firebase_setup.dart';
 import 'package:schedule/common/config/local_config.dart';
 import 'package:schedule/data/local_data_source/personal_hive.dart';
@@ -9,14 +8,17 @@ import 'package:schedule/data/local_data_source/schedule_hive.dart';
 import 'package:schedule/data/local_data_source/scores_hive.dart';
 import 'package:schedule/data/local_data_source/subject_hive.dart';
 import 'package:schedule/data/remote/data_remote.dart';
+import 'package:schedule/data/reponsitories/features_repository_impl.dart';
 import 'package:schedule/data/reponsitories/personal_repositories_impl.dart';
 import 'package:schedule/data/reponsitories/schedule_repositories_impl.dart';
 import 'package:schedule/data/reponsitories/scores_repositories_impl.dart';
 import 'package:schedule/data/reponsitories/subject_repositories_impl.dart';
+import 'package:schedule/domain/repositories/features_repository.dart';
 import 'package:schedule/domain/repositories/personal_repositories.dart';
 import 'package:schedule/domain/repositories/schedule_repositories.dart';
 import 'package:schedule/domain/repositories/scores_repositories.dart';
 import 'package:schedule/domain/repositories/subject_repositories.dart';
+import 'package:schedule/domain/usecase/feature_usecase.dart';
 import 'package:schedule/domain/usecase/personal_usecase.dart';
 import 'package:schedule/domain/usecase/schedule_usecase.dart';
 import 'package:schedule/domain/usecase/scores_usecase.dart';
@@ -39,10 +41,10 @@ class Injector {
   }
 
   static void _configuration() {
-    _configBloc();
-    _configUseCase();
-    _configRepository();
     _configDataSource();
+    _configRepository();
+    _configUseCase();
+    _configBloc();
     _configNetwork();
     _configCommon();
   }
@@ -66,6 +68,7 @@ class Injector {
     );
     getIt.registerLazySingleton<ProfileBloc>(
       () => ProfileBloc(
+        featureUsecase: getIt<FeatureUsecase>(),
         scheduleUS: getIt<ScheduleUseCase>(),
         personalUS: getIt<PersonalUseCase>(),
       ),
@@ -81,7 +84,8 @@ class Injector {
     getIt.registerFactory<ScoresBloc>(
         () => ScoresBloc(scoresUsecase: getIt<ScoresUsecase>()));
     getIt.registerFactory<SearchSubjectBloc>(() => SearchSubjectBloc(
-        subjectUsecase: getIt<SubjectUsecase>(),));
+          subjectUsecase: getIt<SubjectUsecase>(),
+        ));
   }
 
   static void _configUseCase() {
@@ -93,6 +97,9 @@ class Injector {
         () => SubjectUsecase(getIt<SubjectRepositories>()));
     getIt.registerFactory<ScoresUsecase>(
         () => ScoresUsecase(scoresRepositories: getIt<ScoresRepositories>()));
+
+    getIt.registerFactory<FeatureUsecase>(
+        () => FeatureUsecase(featureRepository: getIt<FeatureRepository>()));
   }
 
   static void _configRepository() {
@@ -107,6 +114,8 @@ class Injector {
             ));
     getIt.registerLazySingleton<ScoresRepositories>(
         () => ScoresRepositoriesImpl(scoresHive: getIt<ScoresHive>()));
+    getIt.registerLazySingleton<FeatureRepository>(
+        () => FeatureRepositoryImpl(dataRemote: getIt<DataRemote>()));
   }
 
   static void _configDataSource() {

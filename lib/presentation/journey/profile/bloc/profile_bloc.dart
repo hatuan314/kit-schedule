@@ -1,22 +1,21 @@
-import 'dart:developer';
-
 import 'package:device_calendar/device_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:schedule/common/utils/convert.dart';
 import 'package:schedule/domain/entities/personal_schedule_entities.dart';
 import 'package:schedule/domain/entities/school_schedule_entities.dart';
+import 'package:schedule/domain/usecase/feature_usecase.dart';
 import 'package:schedule/domain/usecase/personal_usecase.dart';
 import 'package:schedule/domain/usecase/schedule_usecase.dart';
 import 'package:schedule/presentation/journey/profile/bloc/profile_event.dart';
 import 'package:schedule/presentation/journey/profile/bloc/profile_state.dart';
 import 'package:schedule/service/services.dart';
-import 'package:timezone/data/latest.dart' as tz;
-import 'package:timezone/timezone.dart' as tz;
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final PersonalUseCase personalUS;
   final ScheduleUseCase scheduleUS;
+  final FeatureUsecase featureUsecase;
+
   Map<DateTime, List<SchoolSchedule>> allSchoolSchedulesMap =
       Map<DateTime, List<SchoolSchedule>>();
   Map<DateTime, List<PersonalScheduleEntities>> allPersonalSchedulesMap =
@@ -28,15 +27,20 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc({
     required this.personalUS,
     required this.scheduleUS,
+    required this.featureUsecase,
   }) : super(ProfileState(username: '', hasNoti: false, isLogIn: false));
 
   @override
   Stream<ProfileState> mapEventToState(ProfileEvent event) async* {
+    final isEnabled = await _shareService.getIsAccountFeaturesEnabled();
     if (event is GetUserNameInProfileEvent) {
       yield state.update(
-          username: (await ShareService().getUsername() as String),
-          hasNoti: (await ShareService().getHasNoti() as bool),
-          isLogin: await _shareService.getIsSaveData());
+        username: await ShareService().getUsername(),
+        hasNoti: (await ShareService().getHasNoti() as bool),
+        isLogin: await _shareService.getIsSaveData(),
+        isAccountFeaturesEnabled:
+            await _shareService.getIsAccountFeaturesEnabled(),
+      );
     }
     if (event is TurnOnNotificationEvent)
       yield* _mapTurnOnNotificationEventToState(event);
