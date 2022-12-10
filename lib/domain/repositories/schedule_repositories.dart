@@ -15,4 +15,6 @@ abstract class ScheduleRepositories {
   Future<void> deleteAllSchoolSchedulesLocal();
 
   Future<void> updateAllSchoolSchedulesLocal(List<SchoolSchedule> data);
+
+  Future<void> deleteAllSchedulesFirebase(String username);
 }

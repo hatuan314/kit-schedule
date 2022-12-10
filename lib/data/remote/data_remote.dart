@@ -113,4 +113,20 @@ class DataRemote {
       return '';
     }
   }
+
+  Future<void> deleteAllSchedulesFirebase(String username) async {
+    try {
+      await firebaseSetup.scheduleCollection.doc(username).delete();
+    } catch (e) {
+      // TODO: handle error deleting data
+    }
+  }
+
+  Future<void> deleteAllPersonalFirebase(String username) async {
+    try {
+      await firebaseSetup.personalCollection.doc(username).delete();
+    } catch (e) {
+      // TODO: handle error deleting personal data
+    }
+  }
 }

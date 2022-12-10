@@ -69,6 +69,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         debugPrint('HomeBloc - mapEventToState - Error: {$e}');
         yield SignOutFailureState(MainItem.CalendarTabScreenItem);
       }
+    } else if (event is DeleteAccountEvent) {
+      final sharedService = ShareService();
+      final username = await sharedService.getUsername();
+
+      /// delete remote schedule
+      await scheduleUS.deleteAllSchedulesFirebase(username);
+
+      /// delete remote personal
+      await personalUS.deleteAllPersonalFirebase(username);
+
+      /// delete remote school
+      await personalUS.deleteAllSchoolFirebase(username);
+      add(SignOutOnPressEvent());
     }
   }
 
